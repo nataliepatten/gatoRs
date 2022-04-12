@@ -49,19 +49,7 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)
   for (i in 1:length(colNames)) {
-    if (colNames[i] == "geopoint") {
-      if (!("geopoint.lon" %in% colnames(query_gbif))) {
-        temp <- data.frame(matrix(NA, ncol = NCOL(temp) + 1, nrow = 0))
-        colnames(temp) <- c(tempColNames, "geopoint.lon")
-        tempColNames <- colnames(temp)
-      }
-      if (!("geopoint.lat" %in% colnames(query_gbif))) {
-        temp <- data.frame(matrix(NA, ncol = NCOL(temp) + 1, nrow = 0))
-        colnames(temp) <- c(tempColNames, "geopoint.at")
-        tempColNames <- colnames(temp)
-      }
-    }
-    else if (!(colNames[i] %in% colnames(query_gbif))) {
+    if (!(colNames[i] %in% colnames(query_gbif))) {
       temp <- data.frame(matrix(NA, ncol = NCOL(temp) + 1, nrow = 0))
       colnames(temp) <- c(tempColNames, colNames[i])
       tempColNames <- colnames(temp)
