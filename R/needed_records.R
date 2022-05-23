@@ -1,9 +1,13 @@
 #' @title needed_records
 #'
+#' @description
 #' This function identifies records with flags
 #'
 #' @param occurrence_records is a data frame downloaded with spocc_combine
+#'
 #' @return a data frame with rows that locality was flagged
+#'
+#' @export
 
 needed_records <- function(occurrence_records){
 

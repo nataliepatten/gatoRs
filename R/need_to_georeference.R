@@ -12,12 +12,7 @@
 #'
 #' @return for_georeferencing_all is a dataframe of the points that need to be georeferenced
 #'
-#' @importFrom dplyr coalesce
-#' @importFrom dplyr filter
-#' @importFrom dplyr rename
-#' @importFrom dplyr bind_rows
-#' @importFrom  dplyr left_join
-#'
+#' @export
 
 
 need_to_georeference <- function(occurrence_records){

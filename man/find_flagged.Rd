@@ -7,12 +7,14 @@
 find_flagged(df)
 }
 \arguments{
-\item{df}{is a dataframe of occurrence records}
+\item{df}{is a dataframe of occurrence records.}
 }
 \value{
-newdf is a copy of the original dataframe provided as input but without any points the user chose to remove
+Return a copy of the original dataframe provided as input but without any points the user chose to remove.
 }
 \description{
 This function allows you to find and map possible problematic points and remove these points, if desired.
+}
+\details{
 This function requires packages dplyr, CoordinateCleaner, base, leaflet, magrittr. This function requires user input.
 }

@@ -2,12 +2,7 @@
 % Please edit documentation in R/getidigbio.R
 \name{getidigbio}
 \alias{getidigbio}
-\title{getidigbio
-
-This function queries iDigBio for your desired species.
-This function is used in the gators_download function.
-This function uses the correct_class function.
-This function requires the packages ridigbio, magrittr, base, dplyr.}
+\title{getidigbio}
 \usage{
 getidigbio(synonyms_list)
 }
@@ -16,12 +11,12 @@ getidigbio(synonyms_list)
 }
 \value{
 a data frame with desired columns from iDigBio.
-Limited to 100000 record downloads.
 }
 \description{
-getidigbio
-
 This function queries iDigBio for your desired species.
+Limited to 100000 record downloads.
+}
+\details{
 This function is used in the gators_download function.
 This function uses the correct_class function.
 This function requires the packages ridigbio, magrittr, base, dplyr.

@@ -14,11 +14,7 @@
 #'
 #' @return a data frame with desired columns from GBIF.
 #'
-#' @importFrom rgbif name_backbone
-#' @importFrom rgbif occ_data
-#' @importFrom dplyr bind_rows
-#' @importFrom dplyr rename
-#' @importFrom dplyr select
+#' @export
 
 
 getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
@@ -66,7 +62,7 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
       tempColNames <- colnames(temp)
      }
   }
-  query_gbif <- dplyr::bind_rows(temp, query_gbif) #
+  query_gbif <- dplyr::bind_rows(temp, query_gbif)
 
   query_gbif <- query_gbif %>%
                 dplyr::rename(scientificName = "data.scientificName",

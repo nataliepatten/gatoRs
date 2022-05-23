@@ -2,12 +2,7 @@
 % Please edit documentation in R/getgbif.R
 \name{getgbif}
 \alias{getgbif}
-\title{getgbif
-
-This function queries GBIF for your desired species.
-This function is used in the gators_download function.
-This function uses the correct_class function.
-This function requires the packages rgbif, base, magrittr, dplyr.}
+\title{getgbif}
 \usage{
 getgbif(synonyms_list, gbif_match = "fuzzy")
 }
@@ -18,12 +13,12 @@ getgbif(synonyms_list, gbif_match = "fuzzy")
 }
 \value{
 a data frame with desired columns from GBIF.
-Limited to 100000 record downloads.
 }
 \description{
-getgbif
-
-This function queries GBIF for your desired species.
+This function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+Limited to 100000 record downloads.
+}
+\details{
 This function is used in the gators_download function.
 This function uses the correct_class function.
 This function requires the packages rgbif, base, magrittr, dplyr.

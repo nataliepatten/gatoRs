@@ -7,13 +7,15 @@
 fix_columns(df)
 }
 \arguments{
-\item{df}{is a dataframe of occurrence records}
+\item{df}{is a data frame of occurrence records}
 }
 \value{
-df is the original dataframe with the specified columns
+Returns the original data frame with the specified columns
 }
 \description{
 This function selects columns to keep and corrects the class of each.
-This function requires packages dplyr, base, lubridate, magrittr, stringr.
+}
+\details{
+This function requires packages dplyr, base, magrittr, stringr.
 This function uses the correct_class function.
 }

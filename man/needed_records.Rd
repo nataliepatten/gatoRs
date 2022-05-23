@@ -2,9 +2,7 @@
 % Please edit documentation in R/needed_records.R
 \name{needed_records}
 \alias{needed_records}
-\title{needed_records
-
-This function identifies records with flags}
+\title{needed_records}
 \usage{
 needed_records(occurrence_records)
 }
@@ -15,7 +13,5 @@ needed_records(occurrence_records)
 a data frame with rows that locality was flagged
 }
 \description{
-needed_records
-
 This function identifies records with flags
 }

@@ -2,10 +2,7 @@
 % Please edit documentation in R/fix_names.R
 \name{fix_names}
 \alias{fix_names}
-\title{fix_names
-
-This function fixes the capitalization of species names.
-This function requires packages base and stringr. This function does not require user input.}
+\title{fix_names}
 \usage{
 fix_names(df)
 }
@@ -16,8 +13,8 @@ fix_names(df)
 returns df with fixed capitalization in name column
 }
 \description{
-fix_names
-
 This function fixes the capitalization of species names.
+}
+\details{
 This function requires packages base and stringr. This function does not require user input.
 }

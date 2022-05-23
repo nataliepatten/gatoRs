@@ -11,10 +11,7 @@
 #'
 #' @return df is a dataframe with the cleaned data
 #'
-#' @importFrom spatstat nndist
-#' @importFrom CoordinateCleaner cc_inst
-#' @importFrom dplyr distinct
-#'
+#' @export
 
 final_clean <- function(df) {
   # one point per pixel

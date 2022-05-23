@@ -1,15 +1,17 @@
-#' fix_columns
+#' @title fix_columns
 #'
 #' @description
 #' This function selects columns to keep and corrects the class of each.
 #'
 #' @details
-#' This function requires packages dplyr, base, lubridate, magrittr, stringr.
+#' This function requires packages dplyr, base, magrittr, stringr.
 #' This function uses the correct_class function.
 #'
-#' @param df is a dataframe of occurrence records
-#' @return df is the original dataframe with the specified columns
+#' @param df is a data frame of occurrence records
 #'
+#' @return Returns the original data frame with the specified columns
+#'
+#' @importFrom stringr str_length
 
 fix_columns <- function(df) {
   for (i in 1: nrow(df)) {

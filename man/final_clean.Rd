@@ -13,6 +13,10 @@ final_clean(df)
 df is a dataframe with the cleaned data
 }
 \description{
-This function performs final cleaning steps, including: removing duplicate data points, checking locality precision, and retaining only one collection point
+This function performs final cleaning steps, including: removing
+duplicate data points, checking locality precision, and
+retaining only one collection point.
+}
+\details{
 This function requires packages dplyr, base, raster, spatstat, CoordinateCleaner
 }

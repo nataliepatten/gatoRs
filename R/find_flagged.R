@@ -1,9 +1,16 @@
-#' find_flagged
+#' @title find_flagged
 #'
+#' @description
 #' This function allows you to find and map possible problematic points and remove these points, if desired.
+#'
+#' @details
 #' This function requires packages dplyr, CoordinateCleaner, base, leaflet, magrittr. This function requires user input.
-#' @param df is a dataframe of occurrence records
-#' @return newdf is a copy of the original dataframe provided as input but without any points the user chose to remove
+#'
+#' @param df is a dataframe of occurrence records.
+#'
+#' @return Return a copy of the original dataframe provided as input but without any points the user chose to remove.
+#'
+#' @export
 
 find_flagged <- function(df) {
   # filter for points that have lat/long within a range and that are not 0

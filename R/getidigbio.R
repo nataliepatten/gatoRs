@@ -13,11 +13,7 @@
 #'
 #' @return a data frame with desired columns from iDigBio.
 #'
-#' @importFrom idigbio idig_search_records
-#' @importFrom dplyr bind_rows
-#' @importFrom dplyr rename
-#' @importFrom dplyr select
-#'
+#' @export
 
 
 getidigbio <- function(synonyms_list){
