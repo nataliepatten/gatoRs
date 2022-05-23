@@ -1,0 +1,39 @@
+#' @title final_clean
+#'
+#' @description
+#' This function performs final cleaning steps, including: removing
+#' duplicate data points, checking locality precision, and
+#' retaining only one collection point.
+#' @details
+#' This function requires packages dplyr, base, raster, spatstat, CoordinateCleaner
+#'
+#' @param df is a dataframe of occurrence records
+#'
+#' @return df is a dataframe with the cleaned data
+#'
+#' @importFrom spatstat nndist
+#' @importFrom CoordinateCleaner cc_inst
+#' @importFrom dplyr distinct
+#'
+
+final_clean <- function(df) {
+  # one point per pixel
+  bio1 <- raster::raster("data/CLIMATE/bio1.bil")
+  rasterResolution <- max(res(bio1))
+  while(min(spatstat::nndist(df[,2:3])) < rasterResolution){
+    nnD <- spatstat::nndist(df[,2:3])
+    df <- df[-(which(min(nnD) == nnD)[1]),]
+  }
+
+  # round for precision
+  df$Latitude <- round(df$Latitude, digits = 2)
+  df$Longitude <- round(df$Longitude, digits = 2)
+  # remove institution points
+  df <- CoordinateCleaner::cc_inst(df,
+                                    lon = "Longitude",
+                                    lat = "Latitude",
+                                    species = "name")
+  # remove duplicates
+  df <- dplyr::distinct(df, Longitude, Latitude, .keep_all = TRUE)
+  return(df)
+}

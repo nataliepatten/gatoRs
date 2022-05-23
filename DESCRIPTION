@@ -1,0 +1,20 @@
+Package: gatoRs
+Type: Package
+Title: gatoRs
+Version: 0.1.0
+Date: 2021-11-10
+Author: Natalie Patten and ML Gaynor
+Imports:
+    ridigbio,
+    spocc,
+    dplyr,
+    tidyselect, 
+    data.table
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat
+License: GPL (>= 2)
+Description: A package to aid in downloading and cleaning biodiversity data. 
+Maintainer: ML Gaynor <shellyleegaynor@gmail.com> Natalie Patten <natalienpatten@gmail.com>
