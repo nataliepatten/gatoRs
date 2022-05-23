@@ -69,5 +69,5 @@ To remove duplicate points and reduce the clustering of points, use our final_cl
 
 Example: 
 ```
-occurrence_records <- find_flagged(occurrence_records)
+occurrence_records <- final_clean(occurrence_records)
 ```
