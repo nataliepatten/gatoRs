@@ -1,4 +1,5 @@
 # gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing
+<img align="right" src="gators_hex_sticker.png" width=150> 
 ## Suggested Workflow
 ### Download data
 To download data using gators_download(), you will need a list of possible names for your species (including synonyms), with the first name in the list the accepted name if using the species code option for GBIF search. You will also need the path and name of your file, including the ".csv" ending.
