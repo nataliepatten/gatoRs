@@ -1,4 +1,5 @@
 <img align="right" src="gators_hex_sticker.png" width=200>
+
 # gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing
 **Natalie N. Patten, Michelle L. Gaynor, Douglas E. Soltis, and Pamela S. Soltis** 
 
