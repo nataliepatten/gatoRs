@@ -11,7 +11,7 @@ To download data using gators_download(), you will need a list of possible names
 
 Example:
 ```
-gators_download(synonyms_list = c("Asclepias curtissi", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), newFileName = "base_folder/other_folder/my_file.csv")
+gators_download(synonyms_list = c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), newFileName = "base_folder/other_folder/my_file.csv")
 ```
 
 Optional parameters include gbif_match and idigbio_filter. gbif_match allows you to search by fuzzy matching records to the scientific name (default, gbif_match = "fuzzy") or to search for the associated species key using GBIF’s backbone taxonomy system (gbif_match = "code").
