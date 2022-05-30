@@ -47,17 +47,5 @@ fix_columns <- function(df) {
                                            str_length(df$name[i]))
     }
   }
-
-  print("Types of basis of records: ")
-  print(unique(df$basisOfRecord))
-
-  input <- readline(prompt = "Would you like to remove any types of basis of records? Enter Y for yes or N for no. ")
-
-  while (input == "Y" | input == "y") {
-    type <- readline(prompt = "Enter the type to remove exactly as it is written. ")
-    df <- df %>%
-      dplyr::filter(basisOfRecord != type)
-    input <- readline(prompt = "Would you like to remove any additional types of basis of records? Enter Y for yes or N for no. ")
-  }
   return(df)
 }
