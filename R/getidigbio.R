@@ -61,7 +61,7 @@ getidigbio <- function(synonyms_list){
       }
       if (!("geopoint.lat" %in% colnames(query_idigbio))) {
         temp <- data.frame(matrix(NA, ncol = NCOL(temp) + 1, nrow = 0))
-        colnames(temp) <- c(tempColNames, "geopoint.at")
+        colnames(temp) <- c(tempColNames, "geopoint.lat")
         tempColNames <- colnames(temp)
       }
     }
