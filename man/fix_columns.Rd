@@ -13,7 +13,7 @@ fix_columns(df)
 Returns the original data frame with the specified columns
 }
 \description{
-This function selects columns to keep and corrects the class of each.
+This function fills out the taxonomic name columns based on available information.
 }
 \details{
 This function requires packages dplyr, base, magrittr, stringr.

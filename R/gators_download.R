@@ -11,7 +11,7 @@
 #' This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, lubridate and stringr.
 #'
 #'
-#' @param synonyms_list is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissi","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+#' @param synonyms_list is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
 #' This parameter is required.
 #'
 #' @param newFileName is the path and file name for the retrieved data. Note that this parameter should include the ".csv"
@@ -43,6 +43,9 @@ gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", id
 
   query_idigbio <- getidigbio(synonyms_list)
   query_gbif <- getgbif(synonyms_list, gbif_match)
+
+  query_gbif <- fix_names(query_gbif)
+  query_idigbio <- fix_names(query_idigbio)
 
   query_gbif <- fix_names(fix_columns(query_gbif))
   query_idigbio <- fix_names(fix_columns(query_idigbio))

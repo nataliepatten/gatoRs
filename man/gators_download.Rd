@@ -12,7 +12,7 @@ gators_download(
 )
 }
 \arguments{
-\item{synonyms_list}{is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissi","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+\item{synonyms_list}{is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
 This parameter is required.}
 
 \item{newFileName}{is the path and file name for the retrieved data. Note that this parameter should include the ".csv"

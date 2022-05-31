@@ -48,10 +48,14 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
     query_gbif <- rgbif::occ_data(taxonKey = key, limit = 100000)
   }
   else if (gbif_match == "fuzzy") {
-    query_gbif <- rgbif::occ_data(scientificName = synonyms_list[1], limit = 100000)
+    query_gbif <- data.frame(matrix(ncol = length(colNames), nrow = 0))
+    colnames(query_gbif) <- colNames
+    for (i in 1:length(synonyms_list)) {
+      temp <- rgbif::occ_data(scientificName = synonyms_list[i], limit = 100000)
+      temp <- data.frame(temp[2])
+      query_gbif <- rbind(query_gbif, temp)
+    }
   }
-
-  query_gbif <- data.frame(query_gbif[2])
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)
@@ -91,7 +95,7 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
                               geodeticDatum = "data.geodeticDatum")
 
   # Add occurrenceRemarks, verbatimLocality to locality column
-  query_gbif$locality <-paste0("Locality: ", query_gbif$locality)
+  query_gbif$locality <- paste("Locality: ", query_gbif$locality)
   query_gbif$locality <- paste(query_gbif$locality, query_gbif$occurrenceRemarks, sep = " Occurrence Remarks: ")
   query_gbif$locality <- paste(query_gbif$locality, query_gbif$verbatimLocality, sep = " Verbatim Locality: ")
 
