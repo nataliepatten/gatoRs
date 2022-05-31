@@ -12,9 +12,9 @@
 needed_records <- function(occurrence_records){
 
   information_needed <- occurrence_records %>%
-                        dplyr::filter(informationWithheld != "NA") %>%
-                        dplyr::filter(prov == "idigbio")
-  uuid_list <- information_needed$ID
-  idigbio_info <- dplyr::bind_rows(lapply(uuid_list, function(x) ridigbio::idig_search_records(rq = list(uuid = x), fields=c("uuid", "data.dwc:catalogNumber", "scientificname", "collectionname", "data.dwc:datasetName",  "data.dwc:institutionCode"))))
-  return(idigbio_info)
+                        dplyr::filter(informationWithheld != "NA") # %>%
+                        # dplyr::filter(prov == "idigbio")
+  # uuid_list <- information_needed$ID
+  # idigbio_info <- dplyr::bind_rows(lapply(uuid_list, function(x) ridigbio::idig_search_records(rq = list(uuid = x), fields=c("uuid", "data.dwc:catalogNumber", "scientificname", "collectionname", "data.dwc:datasetName",  "data.dwc:institutionCode"))))
+  return(information_needed)
 }
