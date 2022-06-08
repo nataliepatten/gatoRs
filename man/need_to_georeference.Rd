@@ -13,8 +13,7 @@ need_to_georeference(occurrence_records)
 for_georeferencing_all is a dataframe of the points that need to be georeferenced
 }
 \description{
-This function allows you to find the points that are missing coordinates
-but have a locality.
+This function allows you to find records that are missing coordinates but have locality information.
 }
 \details{
 This function requires packages dplyr, base, magrittr.

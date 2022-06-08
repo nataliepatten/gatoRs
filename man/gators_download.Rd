@@ -40,7 +40,7 @@ collectionID, country, county, stateProvince, locality, latitude, longitude, ide
 coordinateUncertaintyInMeters, informationWithheld, and habitat.
 }
 \details{
-This function uses the getidigbio, getgbif, fix_columns, and filter_fix_names functions.
+This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_fix_names functions.
 This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, lubridate and stringr.
 }
 \examples{

@@ -2,10 +2,7 @@
 % Please edit documentation in R/check_columns.R
 \name{check_columns}
 \alias{check_columns}
-\title{check_columns
-
-This function query BISON for your desired species.
-This function requires package base.}
+\title{check_columns}
 \usage{
 check_columns(spocc_name, fields)
 }
@@ -18,8 +15,6 @@ check_columns(spocc_name, fields)
 a data frame with desired columns
 }
 \description{
-check_columns
-
 This function query BISON for your desired species.
 This function requires package base.
 }

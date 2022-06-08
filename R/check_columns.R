@@ -1,9 +1,12 @@
 #' @title check_columns
 #'
+#' @description
 #' This function query BISON for your desired species.
 #' This function requires package base.
+#'
 #' @param spocc_name is a list of columns from the query
 #' @param fields is a list of fields
+#'
 #' @return a data frame with desired columns
 
 
