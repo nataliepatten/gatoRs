@@ -3,7 +3,10 @@
 #' @description
 #' This function identifies records with flags
 #'
-#' @param occurrence_records is a data frame downloaded with spocc_combine
+#' @details
+#' This function requires packages dplyr, magrittr, base.
+#'
+#' @param occurrence_records is a data frame downloaded with gators_download
 #'
 #' @return a data frame with rows that locality was flagged
 #'

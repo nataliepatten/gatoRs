@@ -9,7 +9,7 @@
 #'
 #' @param occurrence_records is a dataframe of occurrence records
 #'
-#' @return for_georeferencing_all is a dataframe of the points that need to be georeferenced
+#' @return for_georeferencing is a dataframe of the points that need to be georeferenced
 #'
 #' @export
 

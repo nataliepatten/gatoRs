@@ -5,7 +5,7 @@
 #' duplicate data points, checking locality precision, and
 #' retaining only one collection point.
 #' @details
-#' This function requires packages dplyr, base, raster, spatstat, CoordinateCleaner
+#' This function requires packages dplyr, base, raster, spatstat
 #'
 #' @param df is a dataframe of occurrence records
 #'
@@ -25,11 +25,7 @@ final_clean <- function(df) {
   # round for precision
   df$Latitude <- round(df$Latitude, digits = 2)
   df$Longitude <- round(df$Longitude, digits = 2)
-  # remove institution points
-  df <- CoordinateCleaner::cc_inst(df,
-                                    lon = "Longitude",
-                                    lat = "Latitude",
-                                    species = "name")
+
   # remove duplicates
   df <- dplyr::distinct(df, Longitude, Latitude, .keep_all = TRUE)
 

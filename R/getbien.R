@@ -17,14 +17,16 @@
 
 getbien <- function(synonyms_list){
   query_bien <- BIEN::BIEN_occurrence_species(synonyms_list[1])
-  
-  for (i in 2:length(synonyms_list)) {
-     query_bien <- rbind(query_bien, BIEN::BIEN_occurrence_species(synonyms_list[i]))
+
+  if (length(synonyms_list > 1)) {
+    for (i in 2:length(synonyms_list)) {
+       query_bien <- rbind(query_bien, BIEN::BIEN_occurrence_species(synonyms_list[i]))
+    }
   }
-  
+
   query_bien <- query_bien %>%
     dplyr::rename(scientificName = "scrubbed_species_binomial",
                   eventDate = "date_collected")
-      
+
   return(query_bien)
 }

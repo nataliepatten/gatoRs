@@ -8,7 +8,7 @@
 #'
 #' @details
 #' This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_fix_names functions.
-#' This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, lubridate and stringr.
+#' This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, and stringr.
 #'
 #'
 #' @param synonyms_list is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
