@@ -28,5 +28,22 @@ getbien <- function(synonyms_list){
     dplyr::rename(scientificName = "scrubbed_species_binomial",
                   eventDate = "date_collected")
 
+  query_bien$genus <- NA
+  query_bien$specificEpithet <- NA
+  query_bien$infraspecificEpithet <- NA
+  query_bien$basisOfRecord <- NA
+  query_bien$eventDate <- NA
+  query_bien$institutionCode <- NA
+  query_bien$collectionCode <- NA
+  query_bien$collectionID <- NA
+  query_bien$country <- NA
+  query_bien$county <- NA
+  query_bien$stateProvince <- NA
+  query_bien$locality <- NA
+  query_bien$identificationID <- NA
+  query_bien$coordinateUncertaintyInMeters <- NA
+  query_bien$informationWithheld <- NA
+  query_bien$habitat <- NA
+
   return(query_bien)
 }

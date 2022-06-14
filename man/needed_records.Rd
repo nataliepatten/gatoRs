@@ -7,11 +7,14 @@
 needed_records(occurrence_records)
 }
 \arguments{
-\item{occurrence_records}{is a data frame downloaded with spocc_combine}
+\item{occurrence_records}{is a data frame downloaded with gators_download}
 }
 \value{
 a data frame with rows that locality was flagged
 }
 \description{
 This function identifies records with flags
+}
+\details{
+This function requires packages dplyr, magrittr, base.
 }

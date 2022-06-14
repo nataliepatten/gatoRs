@@ -18,5 +18,5 @@ duplicate data points, checking locality precision, and
 retaining only one collection point.
 }
 \details{
-This function requires packages dplyr, base, raster, spatstat, CoordinateCleaner
+This function requires packages dplyr, base, raster, spatstat
 }

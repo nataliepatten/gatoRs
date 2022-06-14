@@ -15,19 +15,19 @@
 
 final_clean <- function(df) {
   # one point per pixel
-  bio1 <- raster::raster("data/CLIMATE/bio1.bil")
-  rasterResolution <- max(res(bio1))
-  while(min(spatstat::nndist(df[,2:3])) < rasterResolution){
-    nnD <- spatstat::nndist(df[,2:3])
-    df <- df[-(which(min(nnD) == nnD)[1]),]
-  }
+  # bio1 <- raster::raster("data/CLIMATE/bio1.bil")
+  # rasterResolution <- max(res(bio1))
+  # while(min(spatstat::nndist(df[,2:3])) < rasterResolution){
+  #   nnD <- spatstat::nndist(df[,2:3])
+  #   df <- df[-(which(min(nnD) == nnD)[1]),]
+  # }
 
   # round for precision
-  df$Latitude <- round(df$Latitude, digits = 2)
-  df$Longitude <- round(df$Longitude, digits = 2)
+  df$latitude <- round(df$latitude, digits = 2)
+  df$longitude <- round(df$longitude, digits = 2)
 
   # remove duplicates
-  df <- dplyr::distinct(df, Longitude, Latitude, .keep_all = TRUE)
+  df <- dplyr::distinct(df, longitude, latitude, .keep_all = TRUE)
 
   # interactive method for removal of basis of records
   print("Types of basis of records: ")

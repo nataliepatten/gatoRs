@@ -41,7 +41,7 @@ coordinateUncertaintyInMeters, informationWithheld, and habitat.
 }
 \details{
 This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_fix_names functions.
-This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, lubridate and stringr.
+This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
 gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "base/newFile.csv", gbif_match = "code")
