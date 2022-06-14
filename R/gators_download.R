@@ -41,14 +41,15 @@
 
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
 
-  query_idigbio <- getidigbio(synonyms_list)
-  query_gbif <- getgbif(synonyms_list, gbif_match)
+  # initial download, fix capitalization
+  query_idigbio <- fixnames(getidigbio(synonyms_list))
+  query_gbif <- fixnames(getgbif(synonyms_list, gbif_match))
+  query_bien <- fixnames(getbien(synonyms_list))
 
-  query_gbif <- fix_names(query_gbif)
-  query_idigbio <- fix_names(query_idigbio)
-
+  # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))
   query_idigbio <- fix_names(fix_columns(query_idigbio))
+  query_bien <- fixnames(fix_columns(query_bien))
 
   if (idigbio_filter == TRUE) {
     query_idigbio <- filter_fix_names(query_idigbio, synonyms_list)
@@ -58,12 +59,28 @@ gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", id
     print("Warning: iDigBio search will return all records where any column has a matching string to the provided scientific names")
   }
 
-  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0)
-    write.csv(bind_rows(query_idigbio, query_gbif), newFileName, row.names = FALSE)
-  else if (NROW(query_gbif) > 0)
-    write.csv(query_gbif, newFileName, row.names = FALSE)
+  # all queries contain records
+  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0 & NROW(query_bien) > 0)
+    write.csv(bind_rows(query_idigbio, query_gbif, query_bien), newFileName, row.names = FALSE)
+  # GBIF and BIEN contain records
+  else if (NROW(query_gbif) > 0 & query_bien > 0)
+    write.csv(bind_rows(query_gbif, query_bien), newFileName, row.names = FALSE)
+  # GBIF and iDigBio contain records
+  else if (NROW(query_gbif) > 0 & query_idigbio > 0)
+    write.csv(bind_rows(query_gbif, query_idigbio), newFileName, row.names = FALSE)
+  # BIEN and iDigBio contain records
+  else if (NROW(query_bien) > 0 & query_idigbio > 0)
+    write.csv(bind_rows(query_bien, query_idigbio), newFileName, row.names = FALSE)
+  #iDigBio contains records
   else if (NROW(query_idigbio) > 0)
     write.csv(query_idigbio, newFileName, row.names = FALSE)
+  # BIEN contains records
+  else if (NROW(query_bien) > 0)
+    write.csv(query_bien, newFileName, row.names = FALSE)
+  #GBIF contains records
+  else if (NROW(query_gbif) > 0)
+    write.csv(query_gbif, newFileName, row.names = FALSE)
+  # no queries contain records
   else
     print("No records found.")
 }
