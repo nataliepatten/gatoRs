@@ -4,10 +4,17 @@
 \alias{final_clean}
 \title{final_clean}
 \usage{
-final_clean(df)
+final_clean(df, cluster = TRUE, precision = 2, recordBasis = TRUE)
 }
 \arguments{
 \item{df}{is a dataframe of occurrence records}
+
+\item{cluster}{is an option (TRUE/FALSE) to cluster geographically close occurrence records. This option is turned on by default.}
+
+\item{precision}{in an option to round coordinates to the specified number of digits. This option is set to 2 by default. To
+not use any rounding, choose `precision = NA`.}
+
+\item{recordBasis}{is an option (TRUE/FALSE) to interactively remove types of basis of record. This option is turned on by default.}
 }
 \value{
 df is a dataframe with the cleaned data
