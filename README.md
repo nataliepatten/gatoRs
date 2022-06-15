@@ -57,6 +57,13 @@ Example:
 ```
 to_georeference <- need_to_georeference(occurrence_records)
 ```
+### Filter for applicable taxonomic names
+To find data containing scientific names corresponding to your desired species, use filter_select_name(). Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).
+
+Example:
+```
+occurrence_records <- filter_select_name(occurrence_records, synonyms_list = c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "interactive", accepted_name = "Asclepias curtissii")
+```
 ### Find and remove flagged points
 To find records that may have problematic coordinates, use find_flagged(). This will let you interactively manually remove points deemed improper by viewing the points on a graph. Use your downloaded data from the previous step as input.
 
