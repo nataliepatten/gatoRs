@@ -12,7 +12,7 @@
 
 
 check_columns <- function(spocc_name, fields){
-  diff1 <- setdiff(fields,colnames(spocc_name))
+  diff1 <- setdiff(fields, colnames(spocc_name))
   newframe <- data.frame(matrix(, nrow = 1 , ncol= as.numeric(length(diff1))))
   colnames(newframe) <- diff1
   spocc_name_new <- cbind(spocc_name, newframe)

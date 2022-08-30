@@ -7,10 +7,10 @@
 correct_class(df)
 }
 \arguments{
-\item{df}{is a data frame.}
+\item{df}{Data frame returned by `gator_download()`.}
 }
 \value{
-a data frame with corrected classes of each column.
+Returns data frame with corrected classes of each column.
 }
 \description{
 This function corrects the classes of each column in a data frame of your queried species.

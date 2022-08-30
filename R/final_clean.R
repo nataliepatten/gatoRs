@@ -18,8 +18,11 @@
 #'
 #' @importFrom raster raster
 #' @importFrom dismo gridSample
+#' @importFrom
 #'
 #' @export
+#@importFrom raster raster
+# @importFrom dismo gridSample
 
 final_clean <- function(df, cluster = TRUE, precision = 2, recordBasis = TRUE) {
 
@@ -47,7 +50,7 @@ final_clean <- function(df, cluster = TRUE, precision = 2, recordBasis = TRUE) {
     while (input == "Y" | input == "y") {
       type <- readline(prompt = "Enter the type to remove exactly as it is written. ")
       df <- df %>%
-        dplyr::filter(basisOfRecord != type)
+            dplyr::filter(basisOfRecord != type)
       input <- readline(prompt = "Would you like to remove any additional types of basis of records? Enter Y for yes or N for no. ")
     }
   }

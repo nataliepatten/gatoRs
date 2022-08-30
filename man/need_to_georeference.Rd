@@ -10,12 +10,12 @@ need_to_georeference(occurrence_records)
 \item{occurrence_records}{A data frame of occurrence records.}
 }
 \value{
-for_georeferencing is a data frame of the points that need to be georeferenced.
+for_georeferencing is a data frame of the points that need to be georeferenced. For more information about this data frame, see `gators_download()`.
 }
 \description{
 This function allows you to find records that are missing coordinates but have locality information.
 }
 \details{
-This function requires packages dplyr, base, magrittr.
+This function requires packages dplyr.
 This function does not require user input.
 }

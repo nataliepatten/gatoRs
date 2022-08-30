@@ -145,7 +145,7 @@ find_flagged <- function(df) {
       # remove any points with the same lat/long as the flagged points in the region
       for(i in 1:NROW(flaggedFiltered)) {
         newdf <- newdf %>%
-          dplyr::filter(Longitude != flaggedFiltered$Longitude[i] & Latitude != flaggedFiltered$Latitude[i])
+                 dplyr::filter(Longitude != flaggedFiltered$Longitude[i] & Latitude != flaggedFiltered$Latitude[i])
       }
       # find the number of points removed and display it
       pointsRemoved = current - NROW(newdf)
@@ -156,10 +156,10 @@ find_flagged <- function(df) {
   while (input == "Y" | input == 'y') {
     point_num <- readline(prompt = "Enter the point number: ")
     map <- map %>%
-      removeMarker(point_num)
+           removeMarker(point_num)
     print(map)
     newdf <- newdf %>%
-      dplyr::filter(Longitude != flagged$Longitude[as.integer(point_num)] & Latitude != flagged$Latitude[as.integer(point_num)])
+             dplyr::filter(Longitude != flagged$Longitude[as.integer(point_num)] & Latitude != flagged$Latitude[as.integer(point_num)])
     input <- readline(prompt = "Would you like to remove additional individual points? Enter Y for yes or N for no. ")
   }
   # return the new dataframe with the removed points
