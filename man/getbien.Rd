@@ -7,7 +7,7 @@
 getbien(synonyms_list)
 }
 \arguments{
-\item{synonyms_list}{is a list of affiliated names for your query.}
+\item{synonyms_list}{A list of affiliated names for your query.}
 }
 \value{
 a data frame with desired columns from BIEN.

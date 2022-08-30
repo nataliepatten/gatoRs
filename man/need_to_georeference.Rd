@@ -7,10 +7,10 @@
 need_to_georeference(occurrence_records)
 }
 \arguments{
-\item{occurrence_records}{is a dataframe of occurrence records}
+\item{occurrence_records}{A data frame of occurrence records.}
 }
 \value{
-for_georeferencing is a dataframe of the points that need to be georeferenced
+for_georeferencing is a data frame of the points that need to be georeferenced.
 }
 \description{
 This function allows you to find records that are missing coordinates but have locality information.

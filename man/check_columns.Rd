@@ -7,12 +7,12 @@
 check_columns(spocc_name, fields)
 }
 \arguments{
-\item{spocc_name}{is a list of columns from the query}
+\item{spocc_name}{A list of columns from the query.}
 
-\item{fields}{is a list of fields}
+\item{fields}{A list of fields.}
 }
 \value{
-a data frame with desired columns
+Returns a data frame with desired columns.
 }
 \description{
 This function query BISON for your desired species.

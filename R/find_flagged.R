@@ -6,9 +6,13 @@
 #' @details
 #' This function requires packages dplyr, CoordinateCleaner, base, leaflet, magrittr. This function requires user input.
 #'
-#' @param df is a dataframe of occurrence records.
+#' @param df Data frame of occurrence records.
 #'
 #' @return Return a copy of the original dataframe provided as input but without any points the user chose to remove.
+#'
+#' @importFrom dplyr filter
+#' @importFrom CoordinateCleaner clean_coordinates
+#' @importFrom leaflet leaflet addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker
 #'
 #' @export
 

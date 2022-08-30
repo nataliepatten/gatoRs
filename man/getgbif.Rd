@@ -7,12 +7,12 @@
 getgbif(synonyms_list, gbif_match = "fuzzy")
 }
 \arguments{
-\item{synonyms_list}{is a list of affiliated names for your query.}
+\item{synonyms_list}{A list of affiliated names for your query.}
 
-\item{gbif_match}{is either "f" for fuzzy matching of name or "s" to search by species code.}
+\item{gbif_match}{Either "f" for fuzzy matching of name or "s" to search by species code.}
 }
 \value{
-a data frame with desired columns from GBIF.
+Returns a data frame with desired columns from GBIF.
 }
 \description{
 This function queries the Global Biodiversity Information Facility (GBIF) for your desired species.

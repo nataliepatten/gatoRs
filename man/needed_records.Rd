@@ -7,7 +7,7 @@
 needed_records(occurrence_records)
 }
 \arguments{
-\item{occurrence_records}{is a data frame downloaded with gators_download}
+\item{occurrence_records}{A data frame downloaded with gators_download.}
 }
 \value{
 a data frame with rows that locality was flagged

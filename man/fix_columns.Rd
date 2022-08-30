@@ -7,10 +7,10 @@
 fix_columns(df)
 }
 \arguments{
-\item{df}{is a data frame of occurrence records}
+\item{df}{Data frame of occurrence records.}
 }
 \value{
-Returns the original data frame with the specified columns
+Returns the original data frame with the specified columns.
 }
 \description{
 This function fills out the taxonomic name columns based on available information.

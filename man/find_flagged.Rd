@@ -7,7 +7,7 @@
 find_flagged(df)
 }
 \arguments{
-\item{df}{is a dataframe of occurrence records.}
+\item{df}{Data frame of occurrence records.}
 }
 \value{
 Return a copy of the original dataframe provided as input but without any points the user chose to remove.

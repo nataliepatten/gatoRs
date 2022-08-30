@@ -9,10 +9,12 @@
 #' This function uses the correct_class function.
 #' This function requires the packages ridigbio, magrittr, base, dplyr.
 #'
-#' @param synonyms_list is a list of affiliated names for your query.
+#' @param synonyms_list A list of affiliated names for your query.
 #'
-#' @return a data frame with desired columns from iDigBio.
+#' @return A data frame with desired columns from iDigBio.
 #'
+#' @importFrom dplyr bind_rows rename select
+#' @importFrom ridigbio idig_search_records
 #' @export
 
 
@@ -99,7 +101,7 @@ getidigbio <- function(synonyms_list){
                 habitat = "data.dwc:habitat")
 
   # Add occurrenceRemarks, verbatimLocality to locality column
-  query_idigbio$locality <-paste0("Locality: ", query_idigbio$locality)
+  query_idigbio$locality <- paste0("Locality: ", query_idigbio$locality)
   query_idigbio$locality <- paste(query_idigbio$locality, query_idigbio$occurrenceRemarks, sep = " Occurrence Remarks: ")
   query_idigbio$locality <- paste(query_idigbio$locality, query_idigbio$verbatimLocality, sep = " Verbatim Locality: ")
 

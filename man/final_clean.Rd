@@ -7,17 +7,17 @@
 final_clean(df, cluster = TRUE, precision = 2, recordBasis = TRUE)
 }
 \arguments{
-\item{df}{is a dataframe of occurrence records}
+\item{df}{Data frame of occurrence records.}
 
-\item{cluster}{is an option (TRUE/FALSE) to cluster geographically close occurrence records. This option is turned on by default.}
+\item{cluster}{An option (TRUE/FALSE) to cluster geographically close occurrence records. This option is turned on by default.}
 
-\item{precision}{in an option to round coordinates to the specified number of digits. This option is set to 2 by default. To
+\item{precision}{An option to round coordinates to the specified number of digits. This option is set to 2 by default. To
 not use any rounding, choose `precision = NA`.}
 
-\item{recordBasis}{is an option (TRUE/FALSE) to interactively remove types of basis of record. This option is turned on by default.}
+\item{recordBasis}{An option (TRUE/FALSE) to interactively remove types of basis of record. This option is turned on by default.}
 }
 \value{
-df is a dataframe with the cleaned data
+df is a data frame with the cleaned data.
 }
 \description{
 This function performs final cleaning steps, including: removing
@@ -25,5 +25,5 @@ duplicate data points, checking locality precision, and
 retaining only one collection point.
 }
 \details{
-This function requires packages dplyr, base, raster, spatstat
+This function requires packages dplyr, base, raster, dismo
 }

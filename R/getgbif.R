@@ -9,10 +9,13 @@
 #' This function uses the correct_class function.
 #' This function requires the packages rgbif, base, magrittr, dplyr.
 #'
-#' @param synonyms_list is a list of affiliated names for your query.
-#' @param gbif_match is either "f" for fuzzy matching of name or "s" to search by species code.
+#' @param synonyms_list A list of affiliated names for your query.
+#' @param gbif_match Either "f" for fuzzy matching of name or "s" to search by species code.
 #'
-#' @return a data frame with desired columns from GBIF.
+#' @return Returns a data frame with desired columns from GBIF.
+#'
+#' @importFrom dplyr bind_rows rename select
+#' @importFrom rgbif occ_data
 #'
 #' @export
 

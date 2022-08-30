@@ -6,9 +6,10 @@
 #' @details
 #' This function requires packages dplyr, magrittr, base.
 #'
-#' @param occurrence_records is a data frame downloaded with gators_download
+#' @param occurrence_records A data frame downloaded with gators_download.
 #'
 #' @return a data frame with rows that locality was flagged
+#' @importFrom dplyr filter
 #'
 #' @export
 

@@ -7,9 +7,9 @@
 #' This function requires packages dplyr, base, magrittr, stringr.
 #' This function uses the correct_class function.
 #'
-#' @param df is a data frame of occurrence records
+#' @param df Data frame of occurrence records.
 #'
-#' @return Returns the original data frame with the specified columns
+#' @return Returns the original data frame with the specified columns.
 #'
 #' @importFrom stringr str_length
 

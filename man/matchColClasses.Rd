@@ -7,9 +7,9 @@
 matchColClasses(df1, df2)
 }
 \arguments{
-\item{df1}{is a data frame}
+\item{df1}{A data frame}
 
-\item{df2}{is a data frame}
+\item{df2}{A data frame}
 }
 \value{
 df2 with corrected column classes

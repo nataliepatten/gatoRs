@@ -8,9 +8,11 @@
 #' This function uses the correct_class function.
 #' This function requires the packages BIEN, magrittr, base, dplyr.
 #'
-#' @param synonyms_list is a list of affiliated names for your query.
+#' @param synonyms_list A list of affiliated names for your query.
 #'
 #' @return a data frame with desired columns from BIEN.
+#'
+#' @importFrom BIEN BIEN_occurrence_species
 #'
 #' @export
 

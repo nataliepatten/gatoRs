@@ -12,19 +12,19 @@ gators_download(
 )
 }
 \arguments{
-\item{synonyms_list}{is a list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+\item{synonyms_list}{A list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
 This parameter is required.}
 
-\item{newFileName}{is the path and file name for the retrieved data. Note that this parameter should include the ".csv"
+\item{newFileName}{The path and file name for the retrieved data. Note that this parameter should include the ".csv"
 extension as well. For example, `newFileName = "base_folder/other_folder/my_file.csv"`. The file path can be entered
 either as relative to the current working directory (example: "../my_file.csv") or as a full path. This parameter is
 required.}
 
-\item{gbif_match}{is a parameter to select either search by fuzzy matching of scientific name or to search by species code.
+\item{gbif_match}{A parameter to select either search by fuzzy matching of scientific name or to search by species code.
 For example, `gbif_match = "fuzzy"` will search by fuzzy match and `gbif_match = "code"` will search by code. This parameter
 is not required and is assigned "fuzzy" by default.}
 
-\item{idigbio_filter}{is a parameter to remove less relevant search results from iDigBio. Based on the search input, results may
+\item{idigbio_filter}{A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 include data points for a different species that mention the desired species in the locality information, for example.
 Choosing `idigbio_filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}

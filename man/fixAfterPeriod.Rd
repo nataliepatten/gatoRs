@@ -7,10 +7,10 @@
 fixAfterPeriod(substring)
 }
 \arguments{
-\item{substring}{is a substring from the name column of the dataframe to be fixed}
+\item{substring}{A substring from the name column of the data frame to be fixed.}
 }
 \value{
-returns the substring with fixed capitalization
+Returns the substring with fixed capitalization.
 }
 \description{
 This function fixes capitalization of species names when there are periods in the name.

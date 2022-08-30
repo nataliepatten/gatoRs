@@ -4,10 +4,10 @@
 #' This function query BISON for your desired species.
 #' This function requires package base.
 #'
-#' @param spocc_name is a list of columns from the query
-#' @param fields is a list of fields
+#' @param spocc_name A list of columns from the query.
+#' @param fields A list of fields.
 #'
-#' @return a data frame with desired columns
+#' @return Returns a data frame with desired columns.
 
 
 

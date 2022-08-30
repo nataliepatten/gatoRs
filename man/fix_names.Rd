@@ -7,10 +7,10 @@
 fix_names(df)
 }
 \arguments{
-\item{df}{is a dataframe with name column to be fixed}
+\item{df}{Data frame with name column to be fixed.}
 }
 \value{
-returns df with fixed capitalization in name column
+Returns df with fixed capitalization in name column.
 }
 \description{
 This function fixes the capitalization of species names.

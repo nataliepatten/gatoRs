@@ -6,12 +6,11 @@
 #' @details
 #' Requires packages base and stringr. Does not require user input.
 #'
-#' @param substring is a substring from the name column of the dataframe to be fixed
+#' @param substring A substring from the name column of the data frame to be fixed.
 #'
-#' @return returns the substring with fixed capitalization
+#' @return Returns the substring with fixed capitalization.
 #'
-#' @importFrom stringr str_to_title
-#' @importFrom stringr str_length
+#' @importFrom stringr str_to_title str_length
 #'
 
 fixAfterPeriod <- function(substring) {

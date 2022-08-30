@@ -6,14 +6,16 @@
 #' @details
 #' This function requires packages base and dplyr.
 #'
-#' @param df is a data frame with name column to be fixed
-#' @param synonyms_list is a list of synonyms for a species
-#' @param filter is the type of filter to be used--either "exact", "fuzzy", or "interactive"
-#' @param accepted_name is the accepted scientific name for the species
+#' @param df Data frame with name column to be fixed.
+#' @param synonyms_list A list of synonyms for a species.
+#' @param filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
+#' @param accepted_name The accepted scientific name for the species.
 #'
 #' @return Returns data frame with filtered results.
 #'
 #' @export
+#'
+#' @importFrom dplyr filter mutate
 
 filter_select_name <- function(df, synonyms_list, filter, accepted_name) {
   print(paste0("Current scientific names ", unique(df$scientificName)))

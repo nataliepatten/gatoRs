@@ -7,9 +7,11 @@
 #' This function requires packages dplyr, base, magrittr.
 #' This function does not require user input.
 #'
-#' @param occurrence_records is a dataframe of occurrence records
+#' @param occurrence_records A data frame of occurrence records.
 #'
-#' @return for_georeferencing is a dataframe of the points that need to be georeferenced
+#' @return for_georeferencing is a data frame of the points that need to be georeferenced.
+#'
+#' @importFrom dplyr filter
 #'
 #' @export
 

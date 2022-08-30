@@ -7,13 +7,13 @@
 filter_fix_names(df, synonyms_list, filter = "fuzzy", accepted_name)
 }
 \arguments{
-\item{df}{is a data frame with name column to be fixed}
+\item{df}{Data frame with name column to be fixed.}
 
-\item{synonyms_list}{is a list of synonyms for a species}
+\item{synonyms_list}{A list of synonyms for a species.}
 
-\item{filter}{is the type of filter to be used--either "exact" or "fuzzy"}
+\item{filter}{The type of filter to be used--either "exact" or "fuzzy".}
 
-\item{accepted_name}{is the accepted scientific name for the species}
+\item{accepted_name}{The accepted scientific name for the species.}
 }
 \value{
 Returns data frame with filtered results.

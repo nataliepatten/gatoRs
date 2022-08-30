@@ -3,7 +3,10 @@ Type: Package
 Title: gatoRs
 Version: 0.1.0
 Date: 2021-11-10
-Author: Natalie Patten and ML Gaynor
+Author: c(person("Natalie", "Patten", "natalienpatten@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8090-1324")),
+           person("Michelle", "Gaynor", , "shellyleegaynor@gmail.com", role = "ctb",
+           comment = c(ORCID = "0000-0002-3912-6079")))
 Imports:
     ridigbio,
     dplyr,
@@ -16,7 +19,7 @@ Imports:
     BIEN
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Suggests: 
     testthat
 License: GPL (>= 2)

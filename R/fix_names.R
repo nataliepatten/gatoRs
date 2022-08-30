@@ -6,14 +6,11 @@
 #' @details
 #' This function requires packages base and stringr. This function does not require user input.
 #'
-#' @param df is a dataframe with name column to be fixed
+#' @param df Data frame with name column to be fixed.
 #'
-#' @return returns df with fixed capitalization in name column
+#' @return Returns df with fixed capitalization in name column.
 #'
-#' @importFrom stringr str_to_sentence
-#' @importFrom stringr str_length
-#' @importFrom stringr str_to_lower
-#' @importFrom stringr str_to_title
+#' @importFrom stringr str_to_sentence str_length str_to_lower str_to_title
 #'
 
 fix_names <- function(df) {
