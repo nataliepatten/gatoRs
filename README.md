@@ -25,27 +25,29 @@ The function also generates scientificName, genus, specificEpithet, and infraspe
 
 An overview of the returned data is summarized in the table below.
 
-Data returned | Category
----| ---
-scientificName | Taxonomic information
-genus | Taxonomic information
-specificEpithet | Taxonomic information
-infraspecificEpithet | Taxonomic information
-basisOfRecord | Event information
-eventDate | Event information
-institutionCode | Current record storage information
-collectionCode | Current record storage information
-collectionID | Current record storage information
-identificationID | Current record storage information
-informationWithheld | Current record storage information
-country | Original record location information
-county | Original record location information
-stateProvince | Original record location information
-locality | Original record location information
-latitude | Original record location information
-longitude | Original record location information
-coordinateUncertaintyInMeters | Original record location information
-habitat | Original record location information
+Data returned | Category | Darwin Core Link |
+---| --- | --- |
+scientificName | Taxonomic information | [http://rs.tdwg.org/dwc/terms/scientificName](http://rs.tdwg.org/dwc/terms/scientificName) |
+genus | Taxonomic information |[https://dwc.tdwg.org/list/#dwc_genus](https://dwc.tdwg.org/list/#dwc_genus)|
+specificEpithet | Taxonomic information |[https://dwc.tdwg.org/list/#dwc_specificEpithet](https://dwc.tdwg.org/list/#dwc_specificEpithet)|
+infraspecificEpithet | Taxonomic information |[http://rs.tdwg.org/dwc/terms/infraspecificEpithet](http://rs.tdwg.org/dwc/terms/infraspecificEpithet)|
+basisOfRecord | Event information |[http://rs.tdwg.org/dwc/terms/basisOfRecord](http://rs.tdwg.org/dwc/terms/basisOfRecord)|
+eventDate | Event information |[http://rs.tdwg.org/dwc/terms/eventDate](http://rs.tdwg.org/dwc/terms/eventDate)|
+institutionCode | Current record storage information |[http://rs.tdwg.org/dwc/terms/institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode)|
+collectionCode | Current record storage information |[http://rs.tdwg.org/dwc/terms/collectionCode](http://rs.tdwg.org/dwc/terms/collectionCode)|
+collectionID | Current record storage information |[http://rs.tdwg.org/dwc/terms/collectionID](http://rs.tdwg.org/dwc/terms/collectionID)|
+identificationID | Current record storage information |[http://rs.tdwg.org/dwc/terms/identificationID](http://rs.tdwg.org/dwc/terms/identificationID)|
+informationWithheld | Current record storage information |[http://rs.tdwg.org/dwc/terms/informationWithheld](http://rs.tdwg.org/dwc/terms/informationWithheld) |
+country | Original record location information |[http://rs.tdwg.org/dwc/terms/country](http://rs.tdwg.org/dwc/terms/country)|
+county | Original record location information |[http://rs.tdwg.org/dwc/terms/county](http://rs.tdwg.org/dwc/terms/county)|
+stateProvince | Original record location information |[http://rs.tdwg.org/dwc/terms/stateProvince](http://rs.tdwg.org/dwc/terms/stateProvince)|
+locality | Original record location information |[http://rs.tdwg.org/dwc/terms/locality](http://rs.tdwg.org/dwc/terms/locality)|
+latitude | Original record location information |[http://rs.tdwg.org/dwc/terms/decimalLatitude](http://rs.tdwg.org/dwc/terms/decimalLatitude)|
+longitude | Original record location information |[http://rs.tdwg.org/dwc/terms/decimalLongitude](http://rs.tdwg.org/dwc/terms/decimalLongitude)|
+coordinateUncertaintyInMeters | Original record location information |[http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters](	http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters)|
+habitat | Original record location information |[http://rs.tdwg.org/dwc/terms/habitat](	http://rs.tdwg.org/dwc/terms/habitat)|
+
+
 ### Find redacted data
 To find data that needs to be manually received by an institution via a permit (or removed from the dataset), use needed_records(). Use your downloaded data from the previous step as input. After receiving the data from herbaria, manually enter into the original dataset.
 
