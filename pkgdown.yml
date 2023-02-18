@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-02-18T21:07Z
+last_built: 2023-02-18T22:33Z
 urls:
   reference: https://nataliepatten.github.io/gatoRs/reference
   article: https://nataliepatten.github.io/gatoRs/articles
