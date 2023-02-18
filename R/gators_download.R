@@ -42,14 +42,14 @@
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
 
   # initial download, fix capitalization
-  query_idigbio <- fixnames(getidigbio(synonyms_list))
-  query_gbif <- fixnames(getgbif(synonyms_list, gbif_match))
-  query_bien <- fixnames(getbien(synonyms_list))
+  query_idigbio <- fix_names(getidigbio(synonyms_list))
+  query_gbif <- fix_names(getgbif(synonyms_list, gbif_match))
+  query_bien <- fix_names(getbien(synonyms_list))
 
   # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))
   query_idigbio <- fix_names(fix_columns(query_idigbio))
-  query_bien <- fixnames(fix_columns(query_bien))
+  query_bien <- fix_names(fix_columns(query_bien))
 
   if (idigbio_filter == TRUE) {
     query_idigbio <- filter_fix_names(query_idigbio, synonyms_list)
