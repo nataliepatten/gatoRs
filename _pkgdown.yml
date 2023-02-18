@@ -1,0 +1,7 @@
+url: https://nataliepatten.github.io/gatoRs/
+template:
+  bootstrap: 5
+navbar:
+  structure:
+    left: [reference]
+    right: [search]
