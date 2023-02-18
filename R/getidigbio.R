@@ -15,6 +15,7 @@
 #'
 #' @importFrom dplyr bind_rows rename select
 #' @importFrom ridigbio idig_search_records
+#' @importFrom magritter %>%
 #' @export
 
 
