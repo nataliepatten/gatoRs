@@ -15,7 +15,7 @@ getgbif(synonyms_list, gbif_match = "fuzzy")
 Returns a data frame with desired columns from GBIF.
 }
 \description{
-The `filter()`  function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+The `getgbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
 Limited to 100000 record downloads.
 }
 \details{
