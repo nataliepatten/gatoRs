@@ -1,7 +1,7 @@
-#' @title getgbif
+#' @title Download data from the Global Biodiversity Information Facility
 #'
 #' @description
-#' This function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+#' The `getgbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
 #' Limited to 100000 record downloads.
 #'
 #' @details

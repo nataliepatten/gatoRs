@@ -1,4 +1,4 @@
-# gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing <a href="https://nataliepatten.github.io/gatoRs/"><img src="man/figures/logo.png" align="right"/></a>
+# gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing <a href="https://nataliepatten.github.io/gatoRs/"><img src="../man/figures/logo.png" align="right"/></a>
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->

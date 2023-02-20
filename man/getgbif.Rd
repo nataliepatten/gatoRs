@@ -2,7 +2,7 @@
 % Please edit documentation in R/getgbif.R
 \name{getgbif}
 \alias{getgbif}
-\title{getgbif}
+\title{Download data from the Global Biodiversity Information Facility}
 \usage{
 getgbif(synonyms_list, gbif_match = "fuzzy")
 }
@@ -15,7 +15,7 @@ getgbif(synonyms_list, gbif_match = "fuzzy")
 Returns a data frame with desired columns from GBIF.
 }
 \description{
-This function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+The `filter()`  function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
 Limited to 100000 record downloads.
 }
 \details{
