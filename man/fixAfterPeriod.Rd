@@ -2,7 +2,7 @@
 % Please edit documentation in R/fixAfterPeriod.R
 \name{fixAfterPeriod}
 \alias{fixAfterPeriod}
-\title{fixAfterPeriod}
+\title{Fix taxonomic capitalization of a species name when there are periods involved}
 \usage{
 fixAfterPeriod(substring)
 }
@@ -13,8 +13,9 @@ fixAfterPeriod(substring)
 Returns the substring with fixed capitalization.
 }
 \description{
-This function fixes capitalization of species names when there are periods in the name.
+The \code{fixAfterPeriod()} function fixes taxonomic capitalization of a string when there are periods in the species name.
 }
 \details{
-Requires packages base and stringr. Does not require user input.
+Requires package stringr.
 }
+\keyword{internal}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_flagged.R
 \name{find_flagged}
 \alias{find_flagged}
-\title{find_flagged}
+\title{Find possibly problematic occurrence records}
 \usage{
 find_flagged(df)
 }
@@ -13,8 +13,10 @@ find_flagged(df)
 Return a copy of the original dataframe provided as input but without any points the user chose to remove.
 }
 \description{
-This function allows you to find and map possible problematic points and remove these points, if desired.
+The \code{find_flagged()} function allows you to find and map possible problematic points and
+manually inspect and remove these points, if desired.
 }
 \details{
-This function requires packages dplyr, CoordinateCleaner, base, leaflet, magrittr. This function requires user input.
+This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
+This function requires interactive user input.
 }

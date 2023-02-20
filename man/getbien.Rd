@@ -20,3 +20,4 @@ This function is used in the gators_download function.
 This function uses the correct_class function.
 This function requires the packages BIEN, magrittr, base, dplyr.
 }
+\keyword{internal}

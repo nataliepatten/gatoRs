@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_fix_names.R
 \name{filter_fix_names}
 \alias{filter_fix_names}
-\title{filter_fix_names}
+\title{Filter iDigBio results by scientific name}
 \usage{
 filter_fix_names(df, synonyms_list, filter = "fuzzy", accepted_name)
 }
@@ -19,8 +19,11 @@ filter_fix_names(df, synonyms_list, filter = "fuzzy", accepted_name)
 Returns data frame with filtered results.
 }
 \description{
-This function filters a data frame for relevant results, based on the scientific name given.
+The \code{filter_fix_names()} function filters a data frame for relevant results, based on the scientific name given.
+Some downloaded results from iDigBio might contain occurrences of other species that have "notes" mentioning
+the desired species. Hence, this function looks for relevant results that are actually occurrences of the
+desired species.
 }
 \details{
-This function requires the base package.
+This function requires no additional packages.
 }

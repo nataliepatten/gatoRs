@@ -1,10 +1,12 @@
-#' @title find_flagged
+#' @title Find possibly problematic occurrence records
 #'
 #' @description
-#' This function allows you to find and map possible problematic points and remove these points, if desired.
+#' The `find_flagged()` function allows you to find and map possible problematic points and
+#' manually inspect and remove these points, if desired.
 #'
 #' @details
-#' This function requires packages dplyr, CoordinateCleaner, base, leaflet, magrittr. This function requires user input.
+#' This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
+#' This function requires interactive user input.
 #'
 #' @param df Data frame of occurrence records.
 #'
@@ -13,6 +15,7 @@
 #' @importFrom dplyr filter
 #' @importFrom CoordinateCleaner clean_coordinates
 #' @importFrom leaflet leaflet addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 
@@ -68,7 +71,7 @@ find_flagged <- function(df) {
     highlat <- as.numeric(highlat)
     # print the map of the world with the flagged points in the region
     map <- map %>%
-      fitBounds(lowlong, lowlat, highlong, highlat)
+      leaflet::fitBounds(lowlong, lowlat, highlong, highlat)
     print(map)
   }
   if (input == "N" | input == 'n') {
@@ -156,7 +159,7 @@ find_flagged <- function(df) {
   while (input == "Y" | input == 'y') {
     point_num <- readline(prompt = "Enter the point number: ")
     map <- map %>%
-           removeMarker(point_num)
+           leaflet::removeMarker(point_num)
     print(map)
     newdf <- newdf %>%
              dplyr::filter(Longitude != flagged$Longitude[as.integer(point_num)] & Latitude != flagged$Latitude[as.integer(point_num)])

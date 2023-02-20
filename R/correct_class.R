@@ -1,10 +1,12 @@
-#' correct_class
+#' @title Correct classes of data frame columns
 #'
-#' This function corrects the classes of each column in a data frame of your queried species.
-#' This function requires the package base.
+#' @description
+#' The `correct_class()` function corrects the classes of each column in a data frame of your queried species.
+#' This function requires no additional packages.
 #'
 #' @param df Data frame returned by `gator_download()`.
 #'
+#' @keywords internal
 #' @return Returns data frame with corrected classes of each column.
 
 correct_class <- function(df){

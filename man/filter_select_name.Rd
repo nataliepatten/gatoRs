@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_select_name.R
 \name{filter_select_name}
 \alias{filter_select_name}
-\title{filter_select_name}
+\title{Filter data frame for relevant results}
 \usage{
 filter_select_name(df, synonyms_list, filter, accepted_name)
 }
@@ -19,8 +19,11 @@ filter_select_name(df, synonyms_list, filter, accepted_name)
 Returns data frame with filtered results.
 }
 \description{
-This function filters a data frame for relevant results, based on the scientific name given.
+The \code{filter_select_name()} function filters a data frame for relevant results, based on the scientific name given.
+Filtering can be done with scripts by exact or fuzzy match. Or, for a more controlled approach, this function
+provides interactive filtering by providing the user with prompts. The interactive method allows the user
+to manually determine whether they wish to keep results containing certain scientific names.
 }
 \details{
-This function requires packages base and dplyr.
+This function requires packages dplyr and magrittr.
 }

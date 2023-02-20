@@ -1,10 +1,13 @@
-#' @title filter_fix_names
+#' @title Filter iDigBio results by scientific name
 #'
 #' @description
-#' This function filters a data frame for relevant results, based on the scientific name given.
+#' The `filter_fix_names()` function filters a data frame for relevant results, based on the scientific name given.
+#' Some downloaded results from iDigBio might contain occurrences of other species that have "notes" mentioning
+#' the desired species. Hence, this function looks for relevant results that are actually occurrences of the
+#' desired species.
 #'
 #' @details
-#' This function requires the base package.
+#' This function requires no additional packages.
 #'
 #' @param df Data frame with name column to be fixed.
 #' @param synonyms_list A list of synonyms for a species.

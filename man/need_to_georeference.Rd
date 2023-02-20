@@ -2,7 +2,7 @@
 % Please edit documentation in R/need_to_georeference.R
 \name{need_to_georeference}
 \alias{need_to_georeference}
-\title{need_to_georeference}
+\title{Find occurrence records which lack coordinate information}
 \usage{
 need_to_georeference(occurrence_records)
 }
@@ -10,12 +10,13 @@ need_to_georeference(occurrence_records)
 \item{occurrence_records}{A data frame of occurrence records.}
 }
 \value{
-for_georeferencing is a data frame of the points that need to be georeferenced. For more information about this data frame, see `gators_download()`.
+Returns a data frame of the points that need to be georeferenced.
+For more information about this data frame, see \code{gators_download()}.
 }
 \description{
-This function allows you to find records that are missing coordinates but have locality information.
+The \code{need_to_georeference()} function allows you to find records that are missing coordinates
+but contain locality information. These records can then be manually georeferenced.
 }
 \details{
-This function requires packages dplyr.
-This function does not require user input.
+This function requires packages dplyr and magrittr.
 }

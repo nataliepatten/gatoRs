@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_columns.R
 \name{fix_columns}
 \alias{fix_columns}
-\title{fix_columns}
+\title{Fill out taxonomic name columns}
 \usage{
 fix_columns(df)
 }
@@ -13,9 +13,10 @@ fix_columns(df)
 Returns the original data frame with the specified columns.
 }
 \description{
-This function fills out the taxonomic name columns based on available information.
+The \code{fix_columns()} function fills out the taxonomic name columns based on available information in the data set.
+For example, if a row has a name provided for the scientificName column, this information will be used
+to generate the respective genus, species, and infraspecificEpithet columns for that row.
 }
 \details{
-This function requires packages dplyr, base, magrittr, stringr.
-This function uses the correct_class function.
+This function requires package stringr.
 }

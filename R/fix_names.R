@@ -1,17 +1,18 @@
-#' @title fix_names
+#' @title Fix taxonomic name capitalization
 #'
 #' @description
-#' This function fixes the capitalization of species names.
+#' The `fix_names()` function fixes the capitalization of species names in the data frame provided to align
+#' with accepted capitalization standards.
 #'
 #' @details
-#' This function requires packages base and stringr. This function does not require user input.
+#' This function uses the `fixAfterPeriod()` function. This function requires package stringr.
 #'
 #' @param df Data frame with name column to be fixed.
 #'
 #' @return Returns df with fixed capitalization in name column.
 #'
 #' @importFrom stringr str_to_sentence str_length str_to_lower str_to_title
-#'
+#' @export
 
 fix_names <- function(df) {
   for (i in 1:NROW(df)) {

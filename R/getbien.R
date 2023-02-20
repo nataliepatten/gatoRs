@@ -13,7 +13,7 @@
 #' @return a data frame with desired columns from BIEN.
 #'
 #' @importFrom BIEN BIEN_occurrence_species
-#'
+#' @keywords internal
 #' @export
 
 

@@ -1,14 +1,14 @@
-#' @title gators_download
+#' @title Download data from both iDigBio and GBIF
 #'
 #' @description
-#' This function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
+#' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
 #' scientificName, genus, specificEpithet, infraspecificEpithet, basisOfRecord, eventDate, institutionCode, collectionCode,
 #' collectionID, country, county, stateProvince, locality, latitude, longitude, identificationID,
 #' coordinateUncertaintyInMeters, informationWithheld, and habitat.
 #'
 #' @details
-#' This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_fix_names functions.
-#' This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, and stringr.
+#' This function uses the `getidigbio()`, `getgbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
+#' This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 #'
 #'
 #' @param synonyms_list A list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.

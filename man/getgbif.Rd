@@ -15,11 +15,10 @@ getgbif(synonyms_list, gbif_match = "fuzzy")
 Returns a data frame with desired columns from GBIF.
 }
 \description{
-The `getgbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
-Limited to 100000 record downloads.
+The \code{getgbif()} function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+Limited to 100,000 record downloads.
 }
 \details{
-This function is used in the gators_download function.
-This function uses the correct_class function.
-This function requires the packages rgbif, base, magrittr, dplyr.
+This function uses the \code{correct_class()} function.
+This function requires the packages rgbif, magrittr, and dplyr.
 }

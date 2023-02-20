@@ -7,6 +7,7 @@
 #' @param df1 A data frame
 #' @param df2 A data frame
 #' @return df2 with corrected column classes
+#' @keywords internal
 matchColClasses <- function(df1, df2) {
   sharedColNames <- names(df1)[names(df1) %in% names(df2)]
   sharedColTypes <- sapply(df1[,sharedColNames], class)

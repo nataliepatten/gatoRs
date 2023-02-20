@@ -1,17 +1,17 @@
-#' @title fixAfterPeriod
+#' @title Fix taxonomic capitalization of a species name when there are periods involved
 #'
 #' @description
-#' This function fixes capitalization of species names when there are periods in the name.
+#' The `fixAfterPeriod()` function fixes taxonomic capitalization of a string when there are periods in the species name.
 #'
 #' @details
-#' Requires packages base and stringr. Does not require user input.
+#' Requires package stringr.
 #'
 #' @param substring A substring from the name column of the data frame to be fixed.
 #'
 #' @return Returns the substring with fixed capitalization.
 #'
+#' @keywords internal
 #' @importFrom stringr str_to_title str_length
-#'
 
 fixAfterPeriod <- function(substring) {
   index <- unlist(gregexpr(".", substring, fixed = TRUE))

@@ -1,17 +1,19 @@
-#' @title fix_columns
+#' @title Fill out taxonomic name columns
 #'
 #' @description
-#' This function fills out the taxonomic name columns based on available information.
+#' The `fix_columns()` function fills out the taxonomic name columns based on available information in the data set.
+#' For example, if a row has a name provided for the scientificName column, this information will be used
+#' to generate the respective genus, species, and infraspecificEpithet columns for that row.
 #'
 #' @details
-#' This function requires packages dplyr, base, magrittr, stringr.
-#' This function uses the correct_class function.
+#' This function requires package stringr.
 #'
 #' @param df Data frame of occurrence records.
 #'
 #' @return Returns the original data frame with the specified columns.
 #'
 #' @importFrom stringr str_length
+#' @export
 
 fix_columns <- function(df) {
   for (i in 1: nrow(df)) {
@@ -40,11 +42,11 @@ fix_columns <- function(df) {
       if (!is.null(index2))
         df$species[i] <- substr(df$scientificName[i], index1 + 1, index2 - 1)
       else
-        df$species[i] <- substr(df$scientificName[i], index1 + 1, str_length(df$scientificName[i]))
+        df$species[i] <- substr(df$scientificName[i], index1 + 1, stringr::str_length(df$scientificName[i]))
     }
     if (is.na(df$infraspecificEpithet[i]) & !is.null(index2))
       df$infraspecificEpithet[i] <- substr(df$scientificName[i], index2 + 1,
-                                           str_length(df$scientificName[i]))
+                                           stringr::str_length(df$scientificName[i]))
     }
   }
   return(df)

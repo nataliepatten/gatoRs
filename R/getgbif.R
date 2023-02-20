@@ -2,12 +2,11 @@
 #'
 #' @description
 #' The `getgbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
-#' Limited to 100000 record downloads.
+#' Limited to 100,000 record downloads.
 #'
 #' @details
-#' This function is used in the gators_download function.
-#' This function uses the correct_class function.
-#' This function requires the packages rgbif, base, magrittr, dplyr.
+#' This function uses the `correct_class()` function.
+#' This function requires the packages rgbif, magrittr, and dplyr.
 #'
 #' @param synonyms_list A list of affiliated names for your query.
 #' @param gbif_match Either "f" for fuzzy matching of name or "s" to search by species code.

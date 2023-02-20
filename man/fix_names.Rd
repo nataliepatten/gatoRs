@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_names.R
 \name{fix_names}
 \alias{fix_names}
-\title{fix_names}
+\title{Fix taxonomic name capitalization}
 \usage{
 fix_names(df)
 }
@@ -13,8 +13,9 @@ fix_names(df)
 Returns df with fixed capitalization in name column.
 }
 \description{
-This function fixes the capitalization of species names.
+The \code{fix_names()} function fixes the capitalization of species names in the data frame provided to align
+with accepted capitalization standards.
 }
 \details{
-This function requires packages base and stringr. This function does not require user input.
+This function uses the \code{fixAfterPeriod()} function. This function requires package stringr.
 }

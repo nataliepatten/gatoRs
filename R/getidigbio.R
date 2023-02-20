@@ -1,19 +1,18 @@
-#' @title getidigbio
+#' @title Download data from Integrated Digitized Biocollections
 #'
 #' @description
-#' This function queries iDigBio for your desired species.
-#' Limited to 100000 record downloads.
+#' The `getidigbio()` function queries iDigBio for your desired species.
+#' Limited to 100,000 record downloads.
 #'
 #' @details
-#' This function is used in the gators_download function.
-#' This function uses the correct_class function.
-#' This function requires the packages ridigbio, magrittr, base, dplyr.
+#' This function uses the `correct_class()` function.
+#' This function requires the packages ridigbio, magrittr, and dplyr.
 #'
 #' @param synonyms_list A list of affiliated names for your query.
 #'
 #' @return A data frame with desired columns from iDigBio.
 #'
-#' @importFrom dplyr bind_rows rename select
+#' @importFrom dplyr bind_rows rename
 #' @importFrom ridigbio idig_search_records
 #' @importFrom magrittr "%>%"
 #'

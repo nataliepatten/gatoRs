@@ -1,15 +1,18 @@
-#' @title needed_records
+#' @title Find records with redacted or missing data
 #'
 #' @description
-#' This function identifies records with flags
+#' The `needed_records()` function identifies records with flags. This indicates that information
+#' is withheld from these records due to endangered species status, for example. Accessing this information may
+#' require a permit. Or, these records can be removed from the data set.
 #'
 #' @details
-#' This function requires packages dplyr, magrittr, base.
+#' This function requires packages dplyr, and magrittr.
 #'
-#' @param occurrence_records A data frame downloaded with gators_download.
+#' @param occurrence_records A data frame downloaded with `gators_download()`.
 #'
 #' @return a data frame with rows that locality was flagged
 #' @importFrom dplyr filter
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 

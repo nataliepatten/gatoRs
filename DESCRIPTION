@@ -29,3 +29,4 @@ Description: A package to aid in downloading and cleaning biodiversity data.
 Maintainer: ML Gaynor <shellyleegaynor@gmail.com>, Natalie Patten <natalienpatten@gmail.com>
 URL: https://nataliepatten.github.io/gatoRs/, https://github.com/nataliepatten/gatoRs
 BugReports: https://github.com/nataliepatten/gatoRs/issues
+Roxygen: list(markdown=TRUE)

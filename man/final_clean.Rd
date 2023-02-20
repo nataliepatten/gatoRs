@@ -2,28 +2,30 @@
 % Please edit documentation in R/final_clean.R
 \name{final_clean}
 \alias{final_clean}
-\title{final_clean}
+\title{Perform final cleaning of data}
 \usage{
 final_clean(df, cluster = TRUE, precision = 2, recordBasis = TRUE)
 }
 \arguments{
 \item{df}{Data frame of occurrence records.}
 
-\item{cluster}{An option (TRUE/FALSE) to cluster geographically close occurrence records. This option is turned on by default.}
+\item{cluster}{An option (TRUE/FALSE) to cluster geographically close occurrence records.
+This option is turned on by default.}
 
-\item{precision}{An option to round coordinates to the specified number of digits. This option is set to 2 by default. To
-not use any rounding, choose `precision = NA`.}
+\item{precision}{An option to round coordinates to the specified number of digits.
+This option is set to 2 by default. To not use any rounding, choose \code{precision = NA}.}
 
-\item{recordBasis}{An option (TRUE/FALSE) to interactively remove types of basis of record. This option is turned on by default.}
+\item{recordBasis}{An option (TRUE/FALSE) to interactively remove types of basis of record.
+This option is turned on by default.}
 }
 \value{
 df is a data frame with the cleaned data.
 }
 \description{
-This function performs final cleaning steps, including: removing
-duplicate data points, checking locality precision, and
-retaining only one collection point.
+The \code{final_clean()} function performs final cleaning steps, including: removing
+duplicate data points, checking locality precision, and retaining only one collection point.
+This function also provides the option to interactively inspect and remove types of basis of record.
 }
 \details{
-This function requires packages dplyr, base, raster, dismo
+This function requires packages dplyr, magrittr, raster, and dismo.
 }

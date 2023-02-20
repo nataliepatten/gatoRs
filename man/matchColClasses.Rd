@@ -19,3 +19,4 @@ This function allows you to match the column classes of two data frames.
 This function requires package base. This function does not require user input.
 Source: https://stackoverflow.com/questions/49215193/r-error-cant-join-on-because-of-incompatible-types
 }
+\keyword{internal}

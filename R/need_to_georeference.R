@@ -1,17 +1,19 @@
-#' @title need_to_georeference
+#' @title Find occurrence records which lack coordinate information
 #'
 #' @description
-#' This function allows you to find records that are missing coordinates but have locality information.
+#' The `need_to_georeference()` function allows you to find records that are missing coordinates
+#' but contain locality information. These records can then be manually georeferenced.
 #'
 #' @details
-#' This function requires packages dplyr.
-#' This function does not require user input.
+#' This function requires packages dplyr and magrittr.
 #'
 #' @param occurrence_records A data frame of occurrence records.
 #'
-#' @return for_georeferencing is a data frame of the points that need to be georeferenced. For more information about this data frame, see `gators_download()`.
+#' @return Returns a data frame of the points that need to be georeferenced.
+#' For more information about this data frame, see `gators_download()`.
 #'
 #' @importFrom dplyr filter
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 

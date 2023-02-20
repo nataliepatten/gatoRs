@@ -1,10 +1,13 @@
-#' @title filter_select_name
+#' @title Filter data frame for relevant results
 #'
 #' @description
-#' This function filters a data frame for relevant results, based on the scientific name given.
+#' The `filter_select_name()` function filters a data frame for relevant results, based on the scientific name given.
+#' Filtering can be done with scripts by exact or fuzzy match. Or, for a more controlled approach, this function
+#' provides interactive filtering by providing the user with prompts. The interactive method allows the user
+#' to manually determine whether they wish to keep results containing certain scientific names.
 #'
 #' @details
-#' This function requires packages base and dplyr.
+#' This function requires packages dplyr and magrittr.
 #'
 #' @param df Data frame with name column to be fixed.
 #' @param synonyms_list A list of synonyms for a species.
@@ -16,6 +19,7 @@
 #' @export
 #'
 #' @importFrom dplyr filter mutate
+#' @importFrom magrittr "%>%"
 
 filter_select_name <- function(df, synonyms_list, filter, accepted_name) {
   print(paste0("Current scientific names ", unique(df$scientificName)))

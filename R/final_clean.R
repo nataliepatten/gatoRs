@@ -1,23 +1,27 @@
-#' @title final_clean
+#' @title Perform final cleaning of data
 #'
 #' @description
-#' This function performs final cleaning steps, including: removing
-#' duplicate data points, checking locality precision, and
-#' retaining only one collection point.
+#' The `final_clean()` function performs final cleaning steps, including: removing
+#' duplicate data points, checking locality precision, and retaining only one collection point.
+#' This function also provides the option to interactively inspect and remove types of basis of record.
+#'
 #' @details
-#' This function requires packages dplyr, base, raster, dismo
+#' This function requires packages dplyr, magrittr, raster, and dismo.
 #'
 #' @param df Data frame of occurrence records.
-#' @param cluster An option (TRUE/FALSE) to cluster geographically close occurrence records. This option is turned on by default.
-#' @param precision An option to round coordinates to the specified number of digits. This option is set to 2 by default. To
-#' not use any rounding, choose `precision = NA`.
-#' @param recordBasis An option (TRUE/FALSE) to interactively remove types of basis of record. This option is turned on by default.
+#' @param cluster An option (TRUE/FALSE) to cluster geographically close occurrence records.
+#' This option is turned on by default.
+#' @param precision An option to round coordinates to the specified number of digits.
+#' This option is set to 2 by default. To not use any rounding, choose `precision = NA`.
+#' @param recordBasis An option (TRUE/FALSE) to interactively remove types of basis of record.
+#' This option is turned on by default.
 #'
 #' @return df is a data frame with the cleaned data.
 #'
 #'
 #' @importFrom raster raster
 #' @importFrom dismo gridSample
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 

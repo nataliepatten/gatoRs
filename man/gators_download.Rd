@@ -2,7 +2,7 @@
 % Please edit documentation in R/gators_download.R
 \name{gators_download}
 \alias{gators_download}
-\title{gators_download}
+\title{Download data from both iDigBio and GBIF}
 \usage{
 gators_download(
   synonyms_list,
@@ -12,21 +12,21 @@ gators_download(
 )
 }
 \arguments{
-\item{synonyms_list}{A list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+\item{synonyms_list}{A list of synonyms for your desired species. For example, \code{synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")}.
 This parameter is required.}
 
 \item{newFileName}{The path and file name for the retrieved data. Note that this parameter should include the ".csv"
-extension as well. For example, `newFileName = "base_folder/other_folder/my_file.csv"`. The file path can be entered
+extension as well. For example, \code{newFileName = "base_folder/other_folder/my_file.csv"}. The file path can be entered
 either as relative to the current working directory (example: "../my_file.csv") or as a full path. This parameter is
 required.}
 
 \item{gbif_match}{A parameter to select either search by fuzzy matching of scientific name or to search by species code.
-For example, `gbif_match = "fuzzy"` will search by fuzzy match and `gbif_match = "code"` will search by code. This parameter
+For example, \code{gbif_match = "fuzzy"} will search by fuzzy match and \code{gbif_match = "code"} will search by code. This parameter
 is not required and is assigned "fuzzy" by default.}
 
 \item{idigbio_filter}{A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 include data points for a different species that mention the desired species in the locality information, for example.
-Choosing `idigbio_filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
+Choosing \code{idigbio_filter = TRUE} will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}
 }
 \value{
@@ -34,14 +34,14 @@ Writes a csv file as specified in the input. This csv file will contain search r
 from the GBIF and iDigBio databases.
 }
 \description{
-This function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
+The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
 scientificName, genus, specificEpithet, infraspecificEpithet, basisOfRecord, eventDate, institutionCode, collectionCode,
 collectionID, country, county, stateProvince, locality, latitude, longitude, identificationID,
 coordinateUncertaintyInMeters, informationWithheld, and habitat.
 }
 \details{
-This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_fix_names functions.
-This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, and stringr.
+This function uses the \code{getidigbio()}, \code{getgbif()}, \code{fix_columns()}, \code{fix_names()}, and \code{filter_fix_names()} functions.
+This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
 gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "newFile.csv", gbif_match = "code")

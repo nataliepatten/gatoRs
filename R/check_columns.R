@@ -1,12 +1,13 @@
-#' @title check_columns
+#' @title Check columns of data frame
 #'
 #' @description
-#' This function query BISON for your desired species.
-#' This function requires package base.
+#' The `check_columns()` function provides the columns requested.
+#' This function requires no additional packages.
 #'
 #' @param spocc_name A list of columns from the query.
 #' @param fields A list of fields.
 #'
+#' @keywords internal
 #' @return Returns a data frame with desired columns.
 
 

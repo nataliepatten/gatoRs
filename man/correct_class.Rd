@@ -2,17 +2,18 @@
 % Please edit documentation in R/correct_class.R
 \name{correct_class}
 \alias{correct_class}
-\title{correct_class}
+\title{Correct classes of data frame columns}
 \usage{
 correct_class(df)
 }
 \arguments{
-\item{df}{Data frame returned by `gator_download()`.}
+\item{df}{Data frame returned by \code{gator_download()}.}
 }
 \value{
 Returns data frame with corrected classes of each column.
 }
 \description{
-This function corrects the classes of each column in a data frame of your queried species.
-This function requires the package base.
+The \code{correct_class()} function corrects the classes of each column in a data frame of your queried species.
+This function requires no additional packages.
 }
+\keyword{internal}
