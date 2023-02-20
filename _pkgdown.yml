@@ -1,6 +1,8 @@
 url: https://nataliepatten.github.io/gatoRs/
 template:
   bootstrap: 5
+  bootswatch: superhero
+  theme: atom-one-dark
   navbar:
     structure:
       left: [reference]

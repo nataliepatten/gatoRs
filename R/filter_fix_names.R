@@ -13,8 +13,6 @@
 #'
 #' @return Returns data frame with filtered results.
 #'
-#' @importFrom base agrepl
-#'
 #' @export
 
 filter_fix_names <- function(df, synonyms_list, filter = "fuzzy", accepted_name) {

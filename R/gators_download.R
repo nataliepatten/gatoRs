@@ -30,8 +30,8 @@
 #'
 #'
 #' @examples
-#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "base/newFile.csv", gbif_match = "code")
-#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "base/other/my_new_file.csv", idigbio_filter = FALSE)
+#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "newFile.csv", gbif_match = "code")
+#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "my_new_file.csv", idigbio_filter = FALSE)
 #'
 #' @return Writes a csv file as specified in the input. This csv file will contain search results for the desired species
 #' from the GBIF and iDigBio databases.

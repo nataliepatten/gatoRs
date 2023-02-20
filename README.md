@@ -1,16 +1,15 @@
+#   gatoRs <a href="https://nataliepatten.github.io/gatoRs/"><img src="man/figures/logo.png" align="right" /></a>
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-<img align="right" src="man/figures/gators_hex_sticker.png" width=250>
-
-# gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing
 **Natalie N. Patten, Michelle L. Gaynor, Douglas E. Soltis, and Pamela S. Soltis** 
 
+## Overview
+gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools for downloading and processing biodiversity data.
 
-
-## Suggested Workflow
-### Download data
+### Suggested Workflow
+#### Download data
 To download data using gators_download(), you will need a list of possible names for your species (including synonyms), with the first name in the list the accepted name if using the species code option for GBIF search. You will also need the path and name of your file, including the ".csv" ending.
 
 Example:

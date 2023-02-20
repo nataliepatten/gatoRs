@@ -15,7 +15,8 @@
 #' @return Returns a data frame with desired columns from GBIF.
 #'
 #' @importFrom dplyr bind_rows rename select
-#' @importFrom rgbif occ_data
+#' @importFrom rgbif occ_data name_backbone
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 

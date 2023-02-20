@@ -44,7 +44,7 @@ This function uses the getidigbio, getgbif, fix_columns, fix_names, and filter_f
 This function requires packages base, magrittr, utils, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
-gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "base/newFile.csv", gbif_match = "code")
-gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "base/other/my_new_file.csv", idigbio_filter = FALSE)
+gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "newFile.csv", gbif_match = "code")
+gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "my_new_file.csv", idigbio_filter = FALSE)
 
 }

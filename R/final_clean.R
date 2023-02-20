@@ -18,11 +18,8 @@
 #'
 #' @importFrom raster raster
 #' @importFrom dismo gridSample
-#' @importFrom
 #'
 #' @export
-#@importFrom raster raster
-# @importFrom dismo gridSample
 
 final_clean <- function(df, cluster = TRUE, precision = 2, recordBasis = TRUE) {
 
