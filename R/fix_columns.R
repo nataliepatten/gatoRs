@@ -3,7 +3,7 @@
 #' @description
 #' The `fix_columns()` function fills out the taxonomic name columns based on available information in the data set.
 #' For example, if a row has a name provided for the scientificName column, this information will be used
-#' to generate the respective genus, species, and infraspecificEpithet columns for that row.
+#' to generate the respective genus, specificEpithet, and infraspecificEpithet columns for that row.
 #'
 #' @details
 #' This function requires package stringr.
@@ -18,12 +18,12 @@
 fix_columns <- function(df) {
   for (i in 1: nrow(df)) {
     if (is.na(df$scientificName[i])) {
-      if (!is.na(df$infraspecificEpithet[i]) & !is.na(df$genus[i]) & !is.na(df$species[i])) {
-        df$scientificName[i] <- paste0(df$genus[i], " ", df$species[i], " ",
+      if (!is.na(df$infraspecificEpithet[i]) & !is.na(df$genus[i]) & !is.na(df$specificEpithet[i])) {
+        df$scientificName[i] <- paste0(df$genus[i], " ", df$specificEpithet[i], " ",
                                       df$infraspecificEpithet[i])
       }
-      else if (!is.na(df$genus[i]) & !is.na(df$species[i])) {
-        df$scientificName[i] <- paste0(df$genus[i], " ", df$species[i])
+      else if (!is.na(df$genus[i]) & !is.na(df$specificEpithet[i])) {
+        df$scientificName[i] <- paste0(df$genus[i], " ", df$specificEpithet[i])
       }
     }
     else {
@@ -38,11 +38,11 @@ fix_columns <- function(df) {
 
     if (is.na(df$genus[i])) {
       df$genus[i] <- substr(df$scientificName[i], 1, index1 - 1)
-    if (is.na(df$species[i])) {
+    if (is.na(df$specificEpithet[i])) {
       if (!is.null(index2))
-        df$species[i] <- substr(df$scientificName[i], index1 + 1, index2 - 1)
+        df$specificEpithet[i] <- substr(df$scientificName[i], index1 + 1, index2 - 1)
       else
-        df$species[i] <- substr(df$scientificName[i], index1 + 1, stringr::str_length(df$scientificName[i]))
+        df$specificEpithet[i] <- substr(df$scientificName[i], index1 + 1, stringr::str_length(df$scientificName[i]))
     }
     if (is.na(df$infraspecificEpithet[i]) & !is.null(index2))
       df$infraspecificEpithet[i] <- substr(df$scientificName[i], index2 + 1,

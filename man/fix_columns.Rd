@@ -15,7 +15,7 @@ Returns the original data frame with the specified columns.
 \description{
 The \code{fix_columns()} function fills out the taxonomic name columns based on available information in the data set.
 For example, if a row has a name provided for the scientificName column, this information will be used
-to generate the respective genus, species, and infraspecificEpithet columns for that row.
+to generate the respective genus, specificEpithet, and infraspecificEpithet columns for that row.
 }
 \details{
 This function requires package stringr.
