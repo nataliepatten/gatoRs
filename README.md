@@ -7,7 +7,13 @@
 <!-- badges: end -->
 
 ## Overview
-gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools for downloading and processing biodiversity data.
+gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools for downloading and processing biodiversity data. 
+
+## Installation
+```
+install.packages("devtools")
+devtools::install_github("nataliepatten/gatoRs")
+```
 
 ### Suggested Workflow
 #### Download data
