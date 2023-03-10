@@ -24,7 +24,7 @@ correct_class <- function(df){
     df$latitude <- as.numeric(df$latitude)
     df$longitude<- as.numeric(df$longitude)
     df$identificationID <- as.character(df$identificationID)
-    df$coordinateUncertaintyInMeters <- as.character(df$coordinateUncertaintyInMeters)
+    df$coordinateUncertaintyInMeters <- as.numeric(df$coordinateUncertaintyInMeters)
     df$informationWithheld <- as.character(df$informationWithheld)
     df$habitat <- as.character(df$habitat)
 
