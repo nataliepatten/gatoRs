@@ -30,8 +30,8 @@
 #'
 #'
 #' @examples
-#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "newFile.csv", gbif_match = "code")
-#' gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "my_new_file.csv", idigbio_filter = FALSE)
+#' gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "my_new_file.csv", idigbio_filter = FALSE)
+#' gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv", gbif_match = "code")
 #'
 #' @return Writes a csv file as specified in the input. This csv file will contain search results for the desired species
 #' from the GBIF and iDigBio databases.
@@ -40,16 +40,24 @@
 
 
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
+  # check for valid arguments
+  if (gbif_match != "fuzzy" & gbif_match != "code") {
+    stop("Invalid value for argument: gbif_match.")
+  }
+
+  if (idigbio_filter != TRUE & idigbio_filter != FALSE) {
+    stop("Invalid value for argument: idigbio_filter.")
+  }
 
   # initial download, fix capitalization
   query_idigbio <- fix_names(getidigbio(synonyms_list))
   query_gbif <- fix_names(getgbif(synonyms_list, gbif_match))
-  query_bien <- fix_names(getbien(synonyms_list))
+  #query_bien <- fix_names(getbien(synonyms_list))
 
   # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))
   query_idigbio <- fix_names(fix_columns(query_idigbio))
-  query_bien <- fix_names(fix_columns(query_bien))
+  #query_bien <- fix_names(fix_columns(query_bien))
 
   if (idigbio_filter == TRUE) {
     query_idigbio <- filter_fix_names(query_idigbio, synonyms_list)
@@ -60,23 +68,23 @@ gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", id
   }
 
   # all queries contain records
-  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0 & NROW(query_bien) > 0)
-    write.csv(bind_rows(query_idigbio, query_gbif, query_bien), newFileName, row.names = FALSE)
+  #if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0 & NROW(query_bien) > 0)
+  #  write.csv(bind_rows(query_idigbio, query_gbif, query_bien), newFileName, row.names = FALSE)
   # GBIF and BIEN contain records
-  else if (NROW(query_gbif) > 0 & query_bien > 0)
-    write.csv(bind_rows(query_gbif, query_bien), newFileName, row.names = FALSE)
+  #else if (NROW(query_gbif) > 0 & query_bien > 0)
+  #  write.csv(bind_rows(query_gbif, query_bien), newFileName, row.names = FALSE)
   # GBIF and iDigBio contain records
-  else if (NROW(query_gbif) > 0 & query_idigbio > 0)
+  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0)
     write.csv(bind_rows(query_gbif, query_idigbio), newFileName, row.names = FALSE)
   # BIEN and iDigBio contain records
-  else if (NROW(query_bien) > 0 & query_idigbio > 0)
-    write.csv(bind_rows(query_bien, query_idigbio), newFileName, row.names = FALSE)
+  #else if (NROW(query_bien) > 0 & query_idigbio > 0)
+  #  write.csv(bind_rows(query_bien, query_idigbio), newFileName, row.names = FALSE)
   #iDigBio contains records
   else if (NROW(query_idigbio) > 0)
     write.csv(query_idigbio, newFileName, row.names = FALSE)
   # BIEN contains records
-  else if (NROW(query_bien) > 0)
-    write.csv(query_bien, newFileName, row.names = FALSE)
+  #else if (NROW(query_bien) > 0)
+  #  write.csv(query_bien, newFileName, row.names = FALSE)
   #GBIF contains records
   else if (NROW(query_gbif) > 0)
     write.csv(query_gbif, newFileName, row.names = FALSE)

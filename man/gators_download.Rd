@@ -44,7 +44,7 @@ This function uses the \code{getidigbio()}, \code{getgbif()}, \code{fix_columns(
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
-gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "newFile.csv", gbif_match = "code")
-gators_download(c("Asclepias curtissi","Asclepias aceratoides"), "my_new_file.csv", idigbio_filter = FALSE)
+gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "my_new_file.csv", idigbio_filter = FALSE)
+gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv", gbif_match = "code")
 
 }
