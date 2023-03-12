@@ -2,7 +2,7 @@
 % Please edit documentation in R/gators_download.R
 \name{gators_download}
 \alias{gators_download}
-\title{Download data from both iDigBio and GBIF}
+\title{Download specimen data from both iDigBio and GBIF}
 \usage{
 gators_download(
   synonyms_list,
@@ -31,7 +31,28 @@ This parameter is not required and is assigned TRUE by default.}
 }
 \value{
 Writes a csv file as specified in the input. This csv file will contain search results for the desired species
-from the GBIF and iDigBio databases.
+from the GBIF and iDigBio databases. The columns are as follows:
+\itemize{
+\item \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName}
+\item \href{https://dwc.tdwg.org/list/#dwc_genus}{genus}
+\item \href{https://dwc.tdwg.org/list/#dwc_specificEpithet}{specificEpithet}
+\item \href{http://rs.tdwg.org/dwc/terms/infraspecificEpithet}{infraspecificEpithet}
+\item \href{http://rs.tdwg.org/dwc/terms/basisOfRecord}{basisOfRecord}
+\item \href{http://rs.tdwg.org/dwc/terms/eventDate}{eventDate}
+\item \href{http://rs.tdwg.org/dwc/terms/institutionCode}{institutionCode}
+\item \href{http://rs.tdwg.org/dwc/terms/collectionCode}{collectionCode}
+\item \href{http://rs.tdwg.org/dwc/terms/collectionID}{collectionID}
+\item \href{http://rs.tdwg.org/dwc/terms/identificationID}{identificationID}
+\item \href{http://rs.tdwg.org/dwc/terms/informationWithheld}{informationWithheld}
+\item \href{http://rs.tdwg.org/dwc/terms/country}{country}
+\item \href{http://rs.tdwg.org/dwc/terms/county}{county}
+\item \href{http://rs.tdwg.org/dwc/terms/stateProvince}{stateProvince}
+\item \href{http://rs.tdwg.org/dwc/terms/locality}{locality}
+\item \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude}
+\item \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude}
+\item \href{http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters}{coordinateUncertaintyInMeters}
+\item \href{http://rs.tdwg.org/dwc/terms/habitat}{habitat}
+}
 }
 \description{
 The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species. Data returned includes:

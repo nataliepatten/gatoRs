@@ -34,7 +34,7 @@
 #' gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv", gbif_match = "code")
 #'
 #' @return Writes a csv file as specified in the input. This csv file will contain search results for the desired species
-#' from the GBIF and iDigBio databases. The columns are as followed:
+#' from the GBIF and iDigBio databases. The columns are as follows:
 #' * [scientificName](http://rs.tdwg.org/dwc/terms/scientificName)
 #' * [genus](https://dwc.tdwg.org/list/#dwc_genus)
 #' * [specificEpithet](https://dwc.tdwg.org/list/#dwc_specificEpithet)
@@ -61,11 +61,11 @@
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
   # check for valid arguments
   if (gbif_match != "fuzzy" & gbif_match != "code") {
-    stop("Invalid value for argument: gbif_match. Value for gbif_march must equal 'fuzzy' or 'code'.")
+    stop("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'.")
   }
 
   if (idigbio_filter != TRUE & idigbio_filter != FALSE) {
-    stop("Invalid value for argument: idigbio_filter. Value for idigbio_fiter must equal 'TRUE' or 'FALSE'. ")
+    stop("Invalid value for argument: idigbio_filter. Value for idigbio_filter must equal 'TRUE' or 'FALSE'.")
   }
 
   # initial download, fix capitalization
