@@ -1,15 +1,15 @@
 Package: gatoRs
 Type: Package
-Title: gatoRs
+Title: Geographic and Taxonomic Occurrence R-Based Scrubbing
 Version: 0.1.0
-Date: 2022-03-10
-Authors@R: c(person(given = "Natalie", family = "Patten", miiddle = "N", email="natalienpatten@gmail.com", role = c("aut", "cre"),
+Date: 2023-03-11
+Authors@R: c(person(given = "Natalie", family = "Patten", middle = "N.", email="natalienpatten@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8090-1324")),
-           person(given = "Michelle", family = "Gaynor", middle = "L", email="shellyleegaynor@gmail.com", role = "aut",
+           person(given = "Michelle", family = "Gaynor", middle = "L.", email="shellyleegaynor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-3912-6079")), 
            person(given = "Douglas", family = "Soltis", middle="E.", email= "dsoltis@ufl.edu", role = "ctb", 
            comment = c(ORCID = "0000-0001-8638-4137")),  
-            person(given = "Pamela", family = "Soltis", middle="S.", email= "psoltis@flmnh.ufl.edu", role = "ctb", 
+           person(given = "Pamela", family = "Soltis", middle="S.", email= "psoltis@flmnh.ufl.edu", role = "ctb", 
            comment = c(ORCID = "0000-0001-9310-8659")))
 Imports:
     ridigbio,
@@ -34,3 +34,5 @@ Maintainer: ML Gaynor <shellyleegaynor@gmail.com>, Natalie Patten <natalienpatte
 URL: https://nataliepatten.github.io/gatoRs/, https://github.com/nataliepatten/gatoRs
 BugReports: https://github.com/nataliepatten/gatoRs/issues
 Roxygen: list(markdown=TRUE)
+Depends: 
+    R (>= 2.10)
