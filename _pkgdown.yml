@@ -7,3 +7,21 @@ template:
     structure:
       left: [reference]
       right: [search]
+reference:
+- title: Download data
+  desc: Wrapper functions to download data from GBIF and iDigBio.
+- contents:
+  - gators_download
+  - getgbif
+  - getidigbio
+- title: Clean data
+  desc: Various tools to clean downloaded data produced from our download functions.
+- contents:
+  - needed_records
+  - need_to_georeference
+  - filter_select_name
+  - find_flagged
+  - final_clean
+  - filter_fix_names
+  - fix_columns
+  - fix_names
