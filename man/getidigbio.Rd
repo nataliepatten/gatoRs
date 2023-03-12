@@ -20,3 +20,7 @@ Limited to 100,000 record downloads.
 This function uses the \code{correct_class()} function.
 This function requires the packages ridigbio, magrittr, and dplyr.
 }
+\examples{
+df <- getidigbio(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+
+}

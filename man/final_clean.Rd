@@ -29,3 +29,7 @@ This function also provides the option to interactively inspect and remove types
 \details{
 This function requires packages dplyr, magrittr, raster, and dismo.
 }
+\examples{
+data \%>\% final_clean(recordBasis = FALSE)
+
+}

@@ -20,3 +20,7 @@ require a permit. Or, these records can be removed from the data set.
 \details{
 This function requires packages dplyr, and magrittr.
 }
+\examples{
+df <- needed_records(data)
+
+}

@@ -20,3 +20,7 @@ but contain locality information. These records can then be manually georeferenc
 \details{
 This function requires packages dplyr and magrittr.
 }
+\examples{
+df <- need_to_georeference(data)
+
+}

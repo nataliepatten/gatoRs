@@ -10,6 +10,9 @@
 #'
 #' @param synonyms_list A list of affiliated names for your query.
 #'
+#' @examples
+#' df <- getidigbio(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+#'
 #' @return A data frame with desired columns from iDigBio.
 #'
 #' @importFrom dplyr bind_rows rename

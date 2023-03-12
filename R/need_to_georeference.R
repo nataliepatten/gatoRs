@@ -9,6 +9,9 @@
 #'
 #' @param occurrence_records A data frame of occurrence records.
 #'
+#' @examples
+#' df <- need_to_georeference(data)
+#'
 #' @return Returns a data frame of the points that need to be georeferenced.
 #' For more information about this data frame, see `gators_download()`.
 #'

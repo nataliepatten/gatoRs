@@ -14,6 +14,9 @@
 #' @param filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
 #' @param accepted_name The accepted scientific name for the species.
 #'
+#' data %>% filter_select_name(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "exact")
+#' data %>% filter_select_name(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), accepted_name = "Asclepias curtissii")
+#'
 #' @return Returns data frame with filtered results.
 #'
 #' @export
@@ -21,7 +24,7 @@
 #' @importFrom dplyr filter mutate
 #' @importFrom magrittr "%>%"
 
-filter_select_name <- function(df, synonyms_list, filter, accepted_name) {
+filter_select_name <- function(df, synonyms_list, filter = "fuzzy", accepted_name) {
   print(paste0("Current scientific names ", unique(df$scientificName)))
   print(paste0("User selected a ", filter, "match"))
   if (filter == "interactive") {

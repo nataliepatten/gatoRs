@@ -10,6 +10,9 @@
 #'
 #' @param occurrence_records A data frame downloaded with `gators_download()`.
 #'
+#' @examples
+#' df <- needed_records(data)
+#'
 #' @return a data frame with rows that locality was flagged
 #' @importFrom dplyr filter
 #' @importFrom magrittr "%>%"

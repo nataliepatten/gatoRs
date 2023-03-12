@@ -20,3 +20,7 @@ to generate the respective genus, specificEpithet, and infraspecificEpithet colu
 \details{
 This function requires package stringr.
 }
+\examples{
+data \%>\% fix_columns()
+
+}

@@ -10,6 +10,9 @@
 #'
 #' @param df Data frame of occurrence records.
 #'
+#' @examples
+#' data %>% fix_columns()
+#'
 #' @return Returns the original data frame with the specified columns.
 #'
 #' @importFrom stringr str_length

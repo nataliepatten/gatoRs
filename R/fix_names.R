@@ -9,6 +9,9 @@
 #'
 #' @param df Data frame with name column to be fixed.
 #'
+#' @examples
+#' data %>% fix_names()
+#'
 #' @return Returns df with fixed capitalization in name column.
 #'
 #' @importFrom stringr str_to_sentence str_length str_to_lower str_to_title

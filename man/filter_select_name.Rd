@@ -4,7 +4,7 @@
 \alias{filter_select_name}
 \title{Filter data frame for relevant results}
 \usage{
-filter_select_name(df, synonyms_list, filter, accepted_name)
+filter_select_name(df, synonyms_list, filter = "fuzzy", accepted_name)
 }
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
@@ -13,7 +13,10 @@ filter_select_name(df, synonyms_list, filter, accepted_name)
 
 \item{filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 
-\item{accepted_name}{The accepted scientific name for the species.}
+\item{accepted_name}{The accepted scientific name for the species.
+
+data \%>\% filter_select_name(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "exact")
+data \%>\% filter_select_name(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), accepted_name = "Asclepias curtissii")}
 }
 \value{
 Returns data frame with filtered results.

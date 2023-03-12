@@ -22,3 +22,8 @@ Limited to 100,000 record downloads.
 This function uses the \code{correct_class()} function.
 This function requires the packages rgbif, magrittr, and dplyr.
 }
+\examples{
+df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), gbif_match = "code")
+
+}

@@ -16,6 +16,9 @@
 #' @param recordBasis An option (TRUE/FALSE) to interactively remove types of basis of record.
 #' This option is turned on by default.
 #'
+#' @examples
+#' data %>% final_clean(recordBasis = FALSE)
+#'
 #' @return df is a data frame with the cleaned data.
 #'
 #'

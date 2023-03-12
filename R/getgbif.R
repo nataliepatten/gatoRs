@@ -11,6 +11,10 @@
 #' @param synonyms_list A list of affiliated names for your query.
 #' @param gbif_match Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
 #'
+#' @examples
+#' df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+#' df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), gbif_match = "code")
+#'
 #' @return Returns a data frame with desired columns from GBIF.
 #'
 #' @importFrom dplyr bind_rows rename select
