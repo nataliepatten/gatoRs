@@ -1,4 +1,4 @@
-#' @title Filter data frame for relevant results
+#' @title Taxonomic Cleaning - Filter and resolve taxon names
 #'
 #' @description
 #' The `filter_select_name()` function filters a data frame for relevant results, based on the scientific name given.

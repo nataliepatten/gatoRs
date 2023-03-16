@@ -61,11 +61,19 @@
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
   # check for valid arguments
   if (gbif_match != "fuzzy" & gbif_match != "code") {
-    stop("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'.")
+    stop(print("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'."))
   }
 
   if (idigbio_filter != TRUE & idigbio_filter != FALSE) {
-    stop("Invalid value for argument: idigbio_filter. Value for idigbio_filter must equal 'TRUE' or 'FALSE'.")
+    stop(print("Invalid value for argument: idigbio_filter. Value for idigbio_filter must equal 'TRUE' or 'FALSE'."))
+  }
+
+  if (is.na(newFileName) == TRUE) {
+    stop(print("Invalid value for argument: newFileName. The location and name of the output file is not specified."))
+  }
+
+  if (grepl(".csv", newFileName) == FALSE) {
+    stop(print("Invalid value for argument: newFileName. The output file name must end in .csv"))
   }
 
   # initial download, fix capitalization
@@ -93,21 +101,26 @@ gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", id
   #else if (NROW(query_gbif) > 0 & query_bien > 0)
   #  write.csv(bind_rows(query_gbif, query_bien), newFileName, row.names = FALSE)
   # GBIF and iDigBio contain records
-  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0)
-    write.csv(bind_rows(query_gbif, query_idigbio), newFileName, row.names = FALSE)
+  if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0){
+    output <- bind_rows(query_gbif, query_idigbio)
+    write.csv(output, newFileName, row.names = FALSE)
   # BIEN and iDigBio contain records
   #else if (NROW(query_bien) > 0 & query_idigbio > 0)
   #  write.csv(bind_rows(query_bien, query_idigbio), newFileName, row.names = FALSE)
   #iDigBio contains records
-  else if (NROW(query_idigbio) > 0)
+  }else if (NROW(query_idigbio) > 0){
+    output <- query_idigbio
     write.csv(query_idigbio, newFileName, row.names = FALSE)
   # BIEN contains records
   #else if (NROW(query_bien) > 0)
   #  write.csv(query_bien, newFileName, row.names = FALSE)
   #GBIF contains records
-  else if (NROW(query_gbif) > 0)
+  }else if (NROW(query_gbif) > 0){
+    output <- query_gbif
     write.csv(query_gbif, newFileName, row.names = FALSE)
   # no queries contain records
-  else
+  }else{
     print("No records found.")
+  }
+  return(output)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_select_name.R
 \name{filter_select_name}
 \alias{filter_select_name}
-\title{Filter data frame for relevant results}
+\title{Taxonomic Cleaning - Filter and resolve taxon names}
 \usage{
 filter_select_name(df, synonyms_list, filter = "fuzzy", accepted_name)
 }

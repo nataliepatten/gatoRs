@@ -2,15 +2,19 @@
 % Please edit documentation in R/find_flagged.R
 \name{find_flagged}
 \alias{find_flagged}
-\title{Find possibly problematic occurrence records}
+\title{Locality Cleaning - Find possibly problematic occurrence records}
 \usage{
-find_flagged(df)
+find_flagged(df, remove.zero = TRUE, round.to = 2)
 }
 \arguments{
-\item{df}{Data frame of occurrence records.}
+\item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
+
+\item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
+
+\item{round.to}{Indicates digits to round coordinates too. Coordinates should be round to match the cpordinate uncertainty. Default = 2.}
 }
 \value{
-Return a copy of the original dataframe provided as input but without any points the user chose to remove.
+Return cleaned data frame.
 }
 \description{
 The \code{find_flagged()} function allows you to find and map possible problematic points and

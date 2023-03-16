@@ -1,4 +1,4 @@
-#' @title Find possibly problematic occurrence records
+#' @title Locality Cleaning - Find possibly problematic occurrence records
 #'
 #' @description
 #' The `find_flagged()` function allows you to find and map possible problematic points and
@@ -15,9 +15,10 @@
 #' This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
 #' This function requires interactive user input.
 #'
-#' @param df Data frame of occurrence records.
+#' @param df Data frame of occurrence records returned from `gators_download()`.
+#' @inheritParams basic_locality_clean
 #'
-#' @return Return a copy of the original dataframe provided as input but without any points the user chose to remove.
+#' @return Return cleaned data frame.
 #'
 #' @importFrom dplyr filter
 #' @importFrom CoordinateCleaner clean_coordinates
@@ -26,23 +27,10 @@
 #'
 #' @export
 
-find_flagged <- function(df) {
-  # filter for points that have lat/long within a range and that are not 0
-  df <- df %>%
-        dplyr::filter(!is.na(longitude)) %>%
-        dplyr::filter(!is.na(latitude))
-  df <- df %>%
-        dplyr::filter(longitude < 180) %>%
-        dplyr::filter(latitude < 180)
-  df <- df %>%
-        dplyr::filter(longitude > -180) %>%
-        dplyr::filter(latitude > -180)
-  df <- df %>%
-        dplyr::filter(longitude != 0) %>%
-        dplyr::filter(latitude != 0)
-  # round for precision
-  df$latitude <- round(df$latitude, digits = 2)
-  df$longitude <- round(df$longitude, digits = 2)
+find_flagged <- function(df, remove.zero = TRUE, round.to = 2 ) {
+  # Basic coordinate cleaning - removes impossible or missing coordinates and rounding coordinate values
+  df <- basic_locality_clean(df, remove.zero = remove.zero, round.to = round.to)
+
   df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
