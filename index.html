@@ -46,6 +46,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/Introduction.html">Introduction to gatoRs</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -83,168 +89,6 @@
 </h2>
 <pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"nataliepatten/gatoRs"</span><span class="op">)</span></span></code></pre>
-<div class="section level3">
-<h3 id="suggested-workflow">Suggested Workflow<a class="anchor" aria-label="anchor" href="#suggested-workflow"></a>
-</h3>
-<div class="section level4">
-<h4 id="download-data">Download data<a class="anchor" aria-label="anchor" href="#download-data"></a>
-</h4>
-<p>To download data using <code><a href="reference/gators_download.html">gators_download()</a></code>, you will need a list of possible names for your species (including synonyms), with the first name in the list the accepted name if using the species code option for GBIF search. You will also need the path and name of your file, including the “.csv” ending.</p>
-<p>Example:</p>
-<pre><code><span><span class="fu"><a href="reference/gators_download.html">gators_download</a></span><span class="op">(</span>synonyms_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asclepias curtissii"</span>, <span class="st">"Asclepias aceratoides"</span>,</span>
-<span>                                  <span class="st">"Asclepias arenicola"</span>, <span class="st">"Oxypteryx arenicola"</span>, </span>
-<span>                                  <span class="st">"Oxypteryx curtissii"</span><span class="op">)</span>, </span>
-<span>                newFileName <span class="op">=</span> <span class="st">"base_folder/other_folder/my_file.csv"</span><span class="op">)</span></span></code></pre>
-<p>Optional parameters include <code>gbif_match</code> and <code>idigbio_filter</code>. <code>gbif_match</code> allows you to search by fuzzy matching records to the scientific name (default, <code>gbif_match = "fuzzy"</code>) or to search for the associated species key using GBIF’s backbone taxonomy system (<code>gbif_match = "code"</code>).</p>
-<p>If set to TRUE (default, recommended), <code>idigbio_filter</code> fuzzy matches taxonomic columns to provided taxon names. This filters the data set for relevant data.</p>
-<p>The function also generates scientificName, genus, specificEpithet, and infraspecificEpithet columns based on available data and parsing and then fixes incorrect capitalization of species names to give the data a cleaner look.</p>
-<p>An overview of the returned data is summarized in the table below.</p>
-<table class="table">
-<colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
-</colgroup>
-<thead><tr class="header">
-<th>Data returned</th>
-<th>Category</th>
-<th>Darwin Core Link</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>scientificName</td>
-<td>Taxonomic information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/scientificName" class="external-link">http://rs.tdwg.org/dwc/terms/scientificName</a></td>
-</tr>
-<tr class="even">
-<td>genus</td>
-<td>Taxonomic information</td>
-<td><a href="https://dwc.tdwg.org/list/#dwc_genus" class="external-link">https://dwc.tdwg.org/list/#dwc_genus</a></td>
-</tr>
-<tr class="odd">
-<td>specificEpithet</td>
-<td>Taxonomic information</td>
-<td><a href="https://dwc.tdwg.org/list/#dwc_specificEpithet" class="external-link">https://dwc.tdwg.org/list/#dwc_specificEpithet</a></td>
-</tr>
-<tr class="even">
-<td>infraspecificEpithet</td>
-<td>Taxonomic information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/infraspecificEpithet" class="external-link">http://rs.tdwg.org/dwc/terms/infraspecificEpithet</a></td>
-</tr>
-<tr class="odd">
-<td>basisOfRecord</td>
-<td>Event information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/basisOfRecord" class="external-link">http://rs.tdwg.org/dwc/terms/basisOfRecord</a></td>
-</tr>
-<tr class="even">
-<td>eventDate</td>
-<td>Event information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/eventDate" class="external-link">http://rs.tdwg.org/dwc/terms/eventDate</a></td>
-</tr>
-<tr class="odd">
-<td>institutionCode</td>
-<td>Current record storage information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/institutionCode" class="external-link">http://rs.tdwg.org/dwc/terms/institutionCode</a></td>
-</tr>
-<tr class="even">
-<td>collectionCode</td>
-<td>Current record storage information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/collectionCode" class="external-link">http://rs.tdwg.org/dwc/terms/collectionCode</a></td>
-</tr>
-<tr class="odd">
-<td>collectionID</td>
-<td>Current record storage information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/collectionID" class="external-link">http://rs.tdwg.org/dwc/terms/collectionID</a></td>
-</tr>
-<tr class="even">
-<td>identificationID</td>
-<td>Current record storage information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/identificationID" class="external-link">http://rs.tdwg.org/dwc/terms/identificationID</a></td>
-</tr>
-<tr class="odd">
-<td>informationWithheld</td>
-<td>Current record storage information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/informationWithheld" class="external-link">http://rs.tdwg.org/dwc/terms/informationWithheld</a></td>
-</tr>
-<tr class="even">
-<td>country</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/country" class="external-link">http://rs.tdwg.org/dwc/terms/country</a></td>
-</tr>
-<tr class="odd">
-<td>county</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/county" class="external-link">http://rs.tdwg.org/dwc/terms/county</a></td>
-</tr>
-<tr class="even">
-<td>stateProvince</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/stateProvince" class="external-link">http://rs.tdwg.org/dwc/terms/stateProvince</a></td>
-</tr>
-<tr class="odd">
-<td>locality</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/locality" class="external-link">http://rs.tdwg.org/dwc/terms/locality</a></td>
-</tr>
-<tr class="even">
-<td>latitude</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" class="external-link">http://rs.tdwg.org/dwc/terms/decimalLatitude</a></td>
-</tr>
-<tr class="odd">
-<td>longitude</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" class="external-link">http://rs.tdwg.org/dwc/terms/decimalLongitude</a></td>
-</tr>
-<tr class="even">
-<td>coordinateUncertaintyInMeters</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters" class="external-link">http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters</a></td>
-</tr>
-<tr class="odd">
-<td>habitat</td>
-<td>Original record location information</td>
-<td><a href="http://rs.tdwg.org/dwc/terms/habitat" class="external-link">http://rs.tdwg.org/dwc/terms/habitat</a></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section level4">
-<h4 id="find-redacted-data">Find redacted data<a class="anchor" aria-label="anchor" href="#find-redacted-data"></a>
-</h4>
-<p>To find data that needs to be manually received by an institution via a permit (or removed from the data set), use <code><a href="reference/needed_records.html">needed_records()</a></code>. Use your downloaded data from the previous step as input. After receiving the data from herbaria, manually enter into the original data set.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">redacted_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/needed_records.html">needed_records</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="find-data-to-georeference">Find data to georeference<a class="anchor" aria-label="anchor" href="#find-data-to-georeference"></a>
-</h4>
-<p>To find data lacking coordinates but containing locality information, use <code><a href="reference/need_to_georeference.html">need_to_georeference()</a></code>. Use your downloaded data from the first step as input. You should georeference these records and manually enter the information into the data set.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">to_georeference</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/need_to_georeference.html">need_to_georeference</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="filter-for-applicable-taxonomic-names">Filter for applicable taxonomic names<a class="anchor" aria-label="anchor" href="#filter-for-applicable-taxonomic-names"></a>
-</h4>
-<p>To find data containing scientific names corresponding to your desired species, use <code><a href="reference/filter_select_name.html">filter_select_name()</a></code>. Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).</p>
-<p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/filter_select_name.html">filter_select_name</a></span><span class="op">(</span><span class="va">occurrence_records</span>, synonyms_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asclepias curtissii"</span>, <span class="st">"Asclepias aceratoides"</span>, <span class="st">"Asclepias arenicola"</span>, <span class="st">"Oxypteryx arenicola"</span>, <span class="st">"Oxypteryx curtissii"</span><span class="op">)</span>, filter <span class="op">=</span> <span class="st">"interactive"</span>, accepted_name <span class="op">=</span> <span class="st">"Asclepias curtissii"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="find-and-remove-flagged-points">Find and remove flagged points<a class="anchor" aria-label="anchor" href="#find-and-remove-flagged-points"></a>
-</h4>
-<p>To find records that may have problematic coordinates, use <code><a href="reference/find_flagged.html">find_flagged()</a></code>. This will let you interactively manually remove points deemed improper by viewing the points on a graph. Use your downloaded data from the previous step as input.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/find_flagged.html">find_flagged</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="final-cleaning">Final cleaning<a class="anchor" aria-label="anchor" href="#final-cleaning"></a>
-</h4>
-<p>To remove duplicate points and reduce the clustering of points, use our <code><a href="reference/final_clean.html">final_clean()</a></code> function. This function also offers an interactive method to look at (and remove, if desired) types of basis of record.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/final_clean.html">final_clean</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
