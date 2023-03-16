@@ -15,6 +15,7 @@
 #' This option is set to 2 by default. To not use any rounding, choose `precision = NA`.
 #' @param recordBasis An option (TRUE/FALSE) to interactively remove types of basis of record.
 #' This option is turned on by default.
+#' @inheritParams basic_locality_clean
 #'
 #' @examples
 #' data %>% final_clean(recordBasis = FALSE)
@@ -28,17 +29,14 @@
 #'
 #' @export
 
-final_clean <- function(df, cluster = TRUE, precision = 2, recordBasis = TRUE) {
+final_clean <- function(df, cluster = TRUE, remove.zero = TRUE, precision = 2, recordBasis = TRUE) {
 
-  # round for precision
-  if (!is.na(precision)) {
-    df$latitude <- round(df$latitude, digits = precision)
-    df$longitude <- round(df$longitude, digits = precision)
+  df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision)
+  df <- remove_duplicates(df)
 
    # bio1 <- raster::raster("data/CLIMATE/bio1.bil")
 
     # out <- dismo::gridSample(df, bio1, n = 1) # add to function
-  }
 
 
   # remove duplicates

@@ -4,13 +4,21 @@
 \alias{final_clean}
 \title{Perform final cleaning of data}
 \usage{
-final_clean(df, cluster = TRUE, precision = 2, recordBasis = TRUE)
+final_clean(
+  df,
+  cluster = TRUE,
+  remove.zero = TRUE,
+  precision = 2,
+  recordBasis = TRUE
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records.}
 
 \item{cluster}{An option (TRUE/FALSE) to cluster geographically close occurrence records.
 This option is turned on by default.}
+
+\item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
 
 \item{precision}{An option to round coordinates to the specified number of digits.
 This option is set to 2 by default. To not use any rounding, choose \code{precision = NA}.}

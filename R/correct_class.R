@@ -1,4 +1,4 @@
-#' @title Correct classes of data frame columns
+#' @title gatoRs Download - Correct classes of data frame columns
 #'
 #' @description
 #' The `correct_class()` function corrects the classes of each column in a data frame of your queried species.

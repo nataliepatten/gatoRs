@@ -2,7 +2,7 @@
 % Please edit documentation in R/correct_class.R
 \name{correct_class}
 \alias{correct_class}
-\title{Correct classes of data frame columns}
+\title{gatoRs Download - Correct classes of data frame columns}
 \usage{
 correct_class(df)
 }

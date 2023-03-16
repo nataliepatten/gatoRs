@@ -1,4 +1,4 @@
-#' @title Filter iDigBio results by scientific name
+#' @title gatoRs Download -  Filter iDigBio results by scientific name
 #'
 #' @description
 #' The `filter_fix_names()` function filters a data frame for relevant results, based on the scientific name given.

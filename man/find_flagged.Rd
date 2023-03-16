@@ -4,14 +4,14 @@
 \alias{find_flagged}
 \title{Locality Cleaning - Find possibly problematic occurrence records}
 \usage{
-find_flagged(df, remove.zero = TRUE, round.to = 2)
+find_flagged(df, remove.zero = TRUE, precision = 2)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
 \item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
 
-\item{round.to}{Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.}
+\item{precision}{Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.}
 }
 \value{
 Return cleaned data frame.

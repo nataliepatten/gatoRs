@@ -27,11 +27,12 @@
 #'
 #' @export
 
-find_flagged <- function(df, remove.zero = TRUE, round.to = 2 ) {
+find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
   # Basic coordinate cleaning - removes impossible or missing coordinates and rounding coordinate values
   df <- basic_locality_clean(df, remove.zero = remove.zero, round.to = round.to)
 
-  df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
+  df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude",
+                                              species = "scientificName", value = "spatialvalid")
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
   flagged$index <- as.character(1:nrow(flagged))
