@@ -59,7 +59,7 @@
 
 
 gators_download <- function(synonyms_list, newFileName, gbif_match = "fuzzy", idigbio_filter = TRUE) {
-  # check for valid arguments
+  # Check for valid arguments
   if (gbif_match != "fuzzy" & gbif_match != "code") {
     stop(print("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'."))
   }

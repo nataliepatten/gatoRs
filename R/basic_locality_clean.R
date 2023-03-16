@@ -2,12 +2,11 @@
 #'
 #' @description
 #' The `basic_locality_clean()` function cleans locality by removing missing or impossible coordinates and correcting precision.
-#' This function
 #'
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param remove.zero Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.
-#' @param round.to Indicates digits to round coordinates too. Coordinates should be round to match the cpordinate uncertainty. Default = 2.
+#' @param round.to Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.
 #'
 #' @return Return a cleaned data frame.
 #'

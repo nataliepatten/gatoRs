@@ -11,12 +11,11 @@ basic_locality_clean(df, remove.zero = TRUE, round.to = 2)
 
 \item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
 
-\item{round.to}{Indicates digits to round coordinates too. Coordinates should be round to match the cpordinate uncertainty. Default = 2.}
+\item{round.to}{Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.}
 }
 \value{
 Return a cleaned data frame.
 }
 \description{
 The \code{basic_locality_clean()} function cleans locality by removing missing or impossible coordinates and correcting precision.
-This function
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_names.R
 \name{fix_names}
 \alias{fix_names}
-\title{Fix taxonomic name capitalization}
+\title{gatoRs Download - Fix taxonomic name capitalization}
 \usage{
 fix_names(df)
 }
