@@ -18,7 +18,6 @@
 #' @param interactive Default = TRUE. The interactive option allows for a visual display
 #' of possible problematic points and the ability to manually remove these points.
 #' Setting `interactive = FALSE` will automatically remove these points from the data frame.
-#' @inheritParams basic_locality_clean
 #'
 #' @examples
 #' data <- find_flagged(data, interactive = FALSE)
@@ -32,9 +31,7 @@
 #'
 #' @export
 
-find_flagged <- function(df, interactive = TRUE, remove.zero = TRUE, precision = 2) {
-  # Basic coordinate cleaning - removes impossible or missing coordinates and rounding coordinate values
-  df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision)
+find_flagged <- function(df, interactive = TRUE) {
 
   # workaround for clean_coordinates since it relies on rownames:
   # https://github.com/ropensci/CoordinateCleaner/issues/24

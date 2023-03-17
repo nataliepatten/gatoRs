@@ -8,23 +8,16 @@
 #' @details
 #' This function requires packages dplyr, and magrittr.
 #'
-#' @param occurrence_records A data frame downloaded with `gators_download()`.
+#' @param df A data frame downloaded with `gators_download()`.
 #'
 #' @examples
 #' need_info <- needed_records(data)
 #'
-#' @return a data frame with rows that locality was flagged
-#' @importFrom dplyr filter
-#' @importFrom magrittr "%>%"
+#' @return A data frame with only records for which  locality was flagged.
 #'
 #' @export
 
-needed_records <- function(occurrence_records){
-
-  information_needed <- occurrence_records %>%
-                        dplyr::filter(informationWithheld != "NA") # %>%
-                        # dplyr::filter(prov == "idigbio")
-  # uuid_list <- information_needed$ID
-  # idigbio_info <- dplyr::bind_rows(lapply(uuid_list, function(x) ridigbio::idig_search_records(rq = list(uuid = x), fields=c("uuid", "data.dwc:catalogNumber", "scientificname", "collectionname", "data.dwc:datasetName",  "data.dwc:institutionCode"))))
+needed_records <- function(df){
+  information_needed <- df[!is.na(df$informationWithheld), ]
   return(information_needed)
 }

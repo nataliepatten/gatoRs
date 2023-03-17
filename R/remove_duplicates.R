@@ -9,7 +9,7 @@
 #' @examples
 #' data <- remove_duplicates(data)
 #'
-#' @return Return data frame with duplicates removed
+#' @return Return data frame with duplicates removed.
 #'
 #' @importFrom lubridate ymd year month day
 #' @importFrom dplyr distinct

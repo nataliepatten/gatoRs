@@ -39,9 +39,9 @@ After you identify synonyms, create a list of all possible names for your specie
 
 Example:
 ```
-gators_download(synonyms_list = c("Asclepias curtissii", "Asclepias aceratoides",
-                                  "Asclepias arenicola", "Oxypteryx arenicola", 
-                                  "Oxypteryx curtissii"), 
+library(gatoRs)
+galaxdf <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), 
+                write_file = TRUE,
                 newFileName = "base_folder/other_folder/my_file.csv", # Location to save file - must end in .csv
                 gbif_match = "fuzzy",
                 idigbio_filter = TRUE)
@@ -53,38 +53,57 @@ If set to TRUE (default, recommended), `idigbio_filter` fuzzy matches taxonomic 
 
 The function also generates scientificName, genus, specificEpithet, and infraspecificEpithet columns based on available data and parsing and then fixes incorrect capitalization of species names to give the data a cleaner look.
 
+
+
 ## Data Processing    
-### Identify Records Missing Information 
+We downloaded 6885 observations for <i>Galax urceolata</i> in the example above. Of these observations, only those with locality information will be helpful when investigating this species distribution. 
+
+### Identify Records Missing Locality Information
+Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided upon request or can be identified through georeferencing. We created functions to aid in this process.   
+
 #### Redacted Records
-To find data that needs to be manually received by an institution via a permit (or removed from the data set), use `needed_records()`. Use your downloaded data from the previous step as input. After receiving the data from herbaria, manually enter into the original data set.
+Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided to aid research upon request. 
+
+To find data that needs to be manually received by an institution via a permit (or removed from the data set), use `needed_records()`. After receiving the data from herbaria, manually merge the obtain records with your original data set.
 
 Example: 
 ```
-redacted_info <- needed_records(occurrence_records)
+redacted_info <- needed_records(galaxdf)
 ```
 
 #### Records to Georeference
-To find data lacking coordinates but containing locality information, use `need_to_georeference()`. Use your downloaded data from the first step as input. You should georeference these records and manually enter the information into the data set.
+Some records may be missing latitude and longitude values, however locality information can be used to assign coordinates to the record through georeferencing.
+
+To find data lacking coordinates but containing locality information, use `need_to_georeference()`. You should georeference these records and then manually merge the obtain records with your original data set.
 
 Example: 
 ```
-to_georeference <- need_to_georeference(occurrence_records)
+to_georeference <- need_to_georeference(galaxdf)
 ```
 
 ### Occurrence Data Cleaning  
+Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`.    
+
 #### Resolve Taxon Names
-To find data containing scientific names corresponding to your desired species, use `filter_select_name()`. Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).
+To find data containing scientific names corresponding to your desired species, use `taxa_clean()`. Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).
 
 Example:
 ```
-occurrence_records <- filter_select_name(occurrence_records, 
-                                        synonyms_list = c("Asclepias curtissii", "Asclepias aceratoides",
-                                                          "Asclepias arenicola", "Oxypteryx arenicola", 
-                                                          "Oxypteryx curtissii"), 
-                                        filter = "interactive", 
-                                        accepted_name = "Asclepias curtissii")
+galaxdf <- taxa_clean(df = galaxdf,  
+                      synonyms_list = c("Galax urceolata", "Galax aphylla"), 
+                      filter = "fuzzy", 
+                      accepted_name = "Galax urceolata")
 ```
 #### Clean locality  
+##### Basic Locality Clean 
+Here we remove any records with missing coordinates, impossible coordinates, coordinates at (0,0), and any that are flagged as skewed. The skewed records can be identified with the `needed_record()' function and row value for 'InformationWitheld' column. We also round the provided latitude and longitude values to two decimal places.   
+
+```
+galaxdf <- basic_locality_clean(df = galaxdf,  
+                      remove.zero = TRUE, # Records at 0,0 are removed
+                      precision = 2, # Latitude and Longitude are rounded to 2 decimals
+                      remove.skewed = TRUE)
+```
 
 #### Find and remove flagged points
 To find records that may have problematic coordinates, use `find_flagged()`. This will let you interactively manually remove points deemed improper by viewing the points on a graph. Use your downloaded data from the previous step as input.

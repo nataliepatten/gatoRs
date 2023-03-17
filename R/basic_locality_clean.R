@@ -7,15 +7,16 @@
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param remove.zero Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.
 #' @param precision Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.
-#'
+#' @param skewed Default = "TRUE". Utilizes the `remove_skewed()` function to remove skewed coordinate values.
+
 #' @examples
 #' data <- basic_locality_clean(data)
 #'
-#' @return Returns data
+#' @return Return data frame with specimen removed that had missing or improper coordinate values.
 #'
 #' @export
 
-basic_locality_clean <- function(df, remove.zero = TRUE, precision = 2) {
+basic_locality_clean <- function(df, remove.zero = TRUE, precision = 2, remove.skewed = TRUE) {
   # Remove records with missing latitude and longitude
   df <- df[!is.na(df$longitude), ]
   df <- df[!is.na(df$latitude), ]
@@ -33,6 +34,10 @@ basic_locality_clean <- function(df, remove.zero = TRUE, precision = 2) {
   if(is.na(precision) == FALSE){
     df$latitude <- round(df$latitude, digits = precision)
     df$longitude <- round(df$longitude, digits = precision)
+  }
+  # Remove skewed
+  if(remove.skewed == TRUE){
+   df <- remove_skewed(df)
   }
   # Return df
   return(df)
