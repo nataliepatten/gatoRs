@@ -11,7 +11,7 @@
 #' @param synonyms_list A list of affiliated names for your query.
 #'
 #' @examples
-#' df <- getidigbio(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+#' df <- getidigbio(c("Galax urceolata", "Galax aphylla"))
 #'
 #' @return A data frame with desired columns from iDigBio.
 #'
@@ -54,7 +54,11 @@ getidigbio <- function(synonyms_list){
     query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms_list[i])), fields = colNames, limit = 100000))
   }
 
-  if (NROW(query_idigbio) == 0) return(query_idigbio)
+  # if no results found
+  if (NROW(query_idigbio) == 0) {
+    message("No results found in iDigBio.")
+    return(query_idigbio)
+  }
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)

@@ -21,6 +21,6 @@ This function uses the \code{correct_class()} function.
 This function requires the packages ridigbio, magrittr, and dplyr.
 }
 \examples{
-df <- getidigbio(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
+df <- getidigbio(c("Galax urceolata", "Galax aphylla"))
 
 }
