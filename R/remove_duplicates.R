@@ -26,6 +26,6 @@ remove_duplicates <- function(df){
   df <- distinct(df, latitude, longitude, year, month, day, .keep_all = TRUE)
   # Removes extra columns
   df <- df[ , -which(names(df) %in% c("year", "month", "day"))]
-  returns(df)
+  return(df)
 
 }
