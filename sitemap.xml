@@ -28,9 +28,6 @@
     <loc>https://nataliepatten.github.io/gatoRs/reference/filter_fix_names.html</loc>
   </url>
   <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/filter_select_name.html</loc>
-  </url>
-  <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/final_clean.html</loc>
   </url>
   <url>
@@ -47,9 +44,6 @@
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/gators_download.html</loc>
-  </url>
-  <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/getbien.html</loc>
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/getgbif.html</loc>
@@ -71,5 +65,11 @@
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/remove_duplicates.html</loc>
+  </url>
+  <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/taxa_clean.html</loc>
   </url>
 </urlset>

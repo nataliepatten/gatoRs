@@ -200,12 +200,12 @@ manually enter the information into the data set.</p>
 <h4 id="resolve-taxon-names">Resolve Taxon Names<a class="anchor" aria-label="anchor" href="#resolve-taxon-names"></a>
 </h4>
 <p>To find data containing scientific names corresponding to your
-desired species, use <code><a href="../reference/filter_select_name.html">filter_select_name()</a></code>. Use your
+desired species, use <code>filter_select_name()</code>. Use your
 downloaded data from the first step as input, as well as a synonyms
 list, the accepted name, and the filter option (exact, fuzzy, or
 interactive).</p>
 <p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_select_name.html">filter_select_name</a></span><span class="op">(</span><span class="va">occurrence_records</span>, </span>
+<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu">filter_select_name</span><span class="op">(</span><span class="va">occurrence_records</span>, </span>
 <span>                                        synonyms_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asclepias curtissii"</span>, <span class="st">"Asclepias aceratoides"</span>,</span>
 <span>                                                          <span class="st">"Asclepias arenicola"</span>, <span class="st">"Oxypteryx arenicola"</span>, </span>
 <span>                                                          <span class="st">"Oxypteryx curtissii"</span><span class="op">)</span>, </span>
