@@ -2,7 +2,7 @@ Package: gatoRs
 Type: Package
 Title: Geographic and Taxonomic Occurrence R-Based Scrubbing
 Version: 0.1.0
-Date: 2023-03-11
+Date: 2023-03-16
 Authors@R: c(person(given = "Natalie", family = "Patten", middle = "N.", email="natalienpatten@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8090-1324")),
            person(given = "Michelle", family = "Gaynor", middle = "L.", email="shellyleegaynor@gmail.com", role = "aut",
@@ -20,13 +20,16 @@ Imports:
     raster,
     spatstat,
     stringr,
-    BIEN,
     dismo,
-    leaflet
+    leaflet,
+    lubridate
 Encoding: UTF-8
+VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 7.2.3
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat
 License: GPL-3
 Description: A package to aid in downloading and cleaning biodiversity data from iDigBio and GBIF.
