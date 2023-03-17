@@ -13,10 +13,7 @@ taxa_clean(df, synonyms_list, filter = "fuzzy", accepted_name)
 
 \item{filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 
-\item{accepted_name}{The accepted scientific name for the species.
-
-data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
-data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")}
+\item{accepted_name}{The accepted scientific name for the species.}
 }
 \value{
 Returns data frame with filtered results.
@@ -29,4 +26,9 @@ to manually determine whether they wish to keep results containing certain scien
 }
 \details{
 This function requires packages dplyr and magrittr.
+}
+\examples{
+data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
+data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
+
 }

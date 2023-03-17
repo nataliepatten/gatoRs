@@ -21,6 +21,6 @@ The \code{basic_locality_clean()} function cleans locality by removing missing o
 This function requires columns named 'latitude' and 'longitude'.
 }
 \examples{
-data \%>\% basic_locality_clean()
+data <- basic_locality_clean(data)
 
 }

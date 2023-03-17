@@ -18,7 +18,7 @@
 #' @inheritParams basic_locality_clean
 #'
 #' @examples
-#' data %>% final_clean(recordBasis = FALSE)
+#' data <- final_clean(data, recordBasis = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
 #'

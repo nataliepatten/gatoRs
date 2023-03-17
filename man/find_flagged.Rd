@@ -36,6 +36,6 @@ This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
 This function requires interactive user input.
 }
 \examples{
-data \%>\% find_flagged(interactive = FALSE)
+data <- find_flagged(data, interactive = FALSE)
 
 }

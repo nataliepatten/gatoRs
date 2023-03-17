@@ -21,6 +21,6 @@ to generate the respective genus, specificEpithet, and infraspecificEpithet colu
 This function requires package stringr.
 }
 \examples{
-data \%>\% fix_columns()
+data <- fix_columns(data)
 
 }

@@ -14,6 +14,7 @@
 #' @param filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
 #' @param accepted_name The accepted scientific name for the species.
 #'
+#' @examples
 #' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
 #' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
 #'

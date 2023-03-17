@@ -9,7 +9,7 @@
 #' @param precision Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.
 #'
 #' @examples
-#' data %>% basic_locality_clean()
+#' data <- basic_locality_clean(data)
 #'
 #' @return Returns data
 #'

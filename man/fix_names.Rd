@@ -20,6 +20,6 @@ with accepted capitalization standards.
 This function uses the \code{fixAfterPeriod()} function. This function requires package stringr.
 }
 \examples{
-data \%>\% fix_names()
+data <- fix_names(data)
 
 }

@@ -7,7 +7,7 @@
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #'
 #' @examples
-#' data %>% remove_duplicates()
+#' data <- remove_duplicates(data)
 #'
 #' @return Return data frame with duplicates removed
 #'

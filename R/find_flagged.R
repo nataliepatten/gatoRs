@@ -21,7 +21,7 @@
 #' @inheritParams basic_locality_clean
 #'
 #' @examples
-#' data %>% find_flagged(interactive = FALSE)
+#' data <- find_flagged(data, interactive = FALSE)
 #'
 #' @return Return cleaned data frame.
 #'

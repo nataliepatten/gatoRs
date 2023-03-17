@@ -11,7 +11,7 @@
 #' @param df Data frame of occurrence records.
 #'
 #' @examples
-#' data %>% fix_columns()
+#' data <- fix_columns(data)
 #'
 #' @return Returns the original data frame with the specified columns.
 #'

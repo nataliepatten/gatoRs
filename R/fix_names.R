@@ -10,7 +10,7 @@
 #' @param df Data frame with name column to be fixed.
 #'
 #' @examples
-#' data %>% fix_names()
+#' data <- fix_names(data)
 #'
 #' @return Returns df with fixed capitalization in name column.
 #'

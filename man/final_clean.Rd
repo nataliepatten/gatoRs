@@ -38,6 +38,6 @@ This function also provides the option to interactively inspect and remove types
 This function requires packages dplyr, magrittr, raster, and dismo.
 }
 \examples{
-data \%>\% final_clean(recordBasis = FALSE)
+data <- final_clean(data, recordBasis = FALSE)
 
 }
