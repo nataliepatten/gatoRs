@@ -3,16 +3,16 @@
 \docType{data}
 \name{data}
 \alias{data}
-\title{Downloaded data from gators_download() for Asclepias curtissii with default settings:
-gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv")}
+\title{Downloaded data from gators_download() for Galax urceolata with default settings:
+data <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"))}
 \format{
-A data frame with 559 rows and 19 columns
+A data frame with 6885 rows and 19 columns
 }
 \usage{
 data
 }
 \description{
-Downloaded data from gators_download() for Asclepias curtissii with default settings:
-gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv")
+Downloaded data from gators_download() for Galax urceolata with default settings:
+data <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"))
 }
 \keyword{internal}
