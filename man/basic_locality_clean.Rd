@@ -20,3 +20,7 @@ Returns data
 The \code{basic_locality_clean()} function cleans locality by removing missing or impossible coordinates and correcting precision.
 This function requires columns named 'latitude' and 'longitude'.
 }
+\examples{
+data \%>\% basic_locality_clean()
+
+}

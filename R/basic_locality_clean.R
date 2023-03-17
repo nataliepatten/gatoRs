@@ -8,6 +8,9 @@
 #' @param remove.zero Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.
 #' @param precision Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.
 #'
+#' @examples
+#' data %>% basic_locality_clean()
+#'
 #' @return Returns data
 #'
 #' @export
