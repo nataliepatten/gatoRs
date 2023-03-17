@@ -12,8 +12,8 @@
 #' @param gbif_match Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
 #'
 #' @examples
-#' df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"))
-#' df <- getgbif(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), gbif_match = "code")
+#' df <- getgbif(c("Galax urceolata", "Galax aphylla"))
+#' df <- getgbif(c("Galax urceolata", "Galax aphylla"), gbif_match = "code")
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'
@@ -26,7 +26,7 @@
 
 getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
   if (gbif_match != "fuzzy" & gbif_match != "code") {
-    stop("Invalid argument: gbif_match.")
+    stop("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'.")
   }
 
   colNamesFuzzy <- c("data.scientificName",
@@ -85,11 +85,28 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
   else if (gbif_match == "fuzzy") {
     query_gbif <- data.frame(matrix(ncol = length(colNamesFuzzy), nrow = 0))
     colnames(query_gbif) <- colNamesFuzzy
+    # fix columns to be of type character
+    for (i in 1:NCOL(query_gbif)) {
+      if (grepl("Latitude", colNamesFuzzy[i], ignore.case = TRUE) || grepl("Longitude", colNamesFuzzy[i], ignore.case = TRUE)
+          || grepl("meters", colNamesFuzzy[i], ignore.case = TRUE)) {
+        query_gbif[,i] <- as.numeric(query_gbif[,i])
+      }
+      else {
+        query_gbif[,i] <- as.character(query_gbif[,i])
+      }
+    }
     for (i in 1:length(synonyms_list)) {
       temp <- rgbif::occ_data(scientificName = synonyms_list[i], limit = 100000)
       temp <- data.frame(temp[2])
-      query_gbif <- rbind(query_gbif, temp)
+      # use bind_rows() to account for different number of columns
+      query_gbif <- dplyr::bind_rows(query_gbif, temp)
     }
+  }
+
+  # if no results found
+  if (NROW(query_gbif) == 0) {
+    message("No results found in GBIF.")
+    return(query_gbif)
   }
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
@@ -108,13 +125,15 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
      }
   }
 
-  for (i in 1:NCOL(temp)) {
-    if (grepl("Latitude", colNames[i], ignore.case = TRUE) || grepl("Longitude", colNames[i], ignore.case = TRUE)
-        || grepl("meters", colNames[i], ignore.case = TRUE)) {
-      temp[,i] <- as.numeric(temp[,i])
-    }
-    else {
-      temp[,i] <- as.character(temp[,i])
+  if (NCOL(temp) > 0) {
+    for (i in 1:NCOL(temp)) {
+      if (grepl("Latitude", colNames[i], ignore.case = TRUE) || grepl("Longitude", colNames[i], ignore.case = TRUE)
+          || grepl("meters", colNames[i], ignore.case = TRUE)) {
+        temp[,i] <- as.numeric(temp[,i])
+      }
+      else {
+        temp[,i] <- as.character(temp[,i])
+      }
     }
   }
 
