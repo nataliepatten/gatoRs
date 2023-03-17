@@ -4,7 +4,7 @@
 \alias{taxa_clean}
 \title{Taxonomic Cleaning - Filter and resolve taxon names}
 \usage{
-taxa_clean(df, synonyms_list, filter = "fuzzy", accepted_name)
+taxa_clean(df, synonyms_list, filter = "fuzzy", accepted_name = NA)
 }
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
@@ -28,7 +28,7 @@ to manually determine whether they wish to keep results containing certain scien
 This function requires packages dplyr and magrittr.
 }
 \examples{
-data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
-data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
+data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
+data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
 
 }

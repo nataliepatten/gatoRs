@@ -15,8 +15,8 @@
 #' @param accepted_name The accepted scientific name for the species.
 #'
 #' @examples
-#' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
-#' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
+#' data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
+#' data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results.
 #'
@@ -25,9 +25,10 @@
 #' @importFrom dplyr filter mutate
 #' @importFrom magrittr "%>%"
 
-taxa_clean <- function(df, synonyms_list, filter = "fuzzy", accepted_name) {
-  print(paste0("Current scientific names ", unique(df$scientificName)))
-  print(paste0("User selected a ", filter, "match"))
+taxa_clean <- function(df, synonyms_list, filter = "fuzzy", accepted_name = NA) {
+  message("Current scientific names: ")
+  print(unique(df$scientificName))
+  message("User selected a(n) ", filter, " match.")
   if (filter == "interactive") {
       print("List of scientific names in the data set: ")
       print(unique(df$scientificName))
@@ -47,7 +48,7 @@ taxa_clean <- function(df, synonyms_list, filter = "fuzzy", accepted_name) {
           df_taxa <- df[df$scientificName == taxa, ]
           new_df <- rbind(new_df, df_taxa)
       }
-      print("Scientific names kept: ")
+      message("Scientific names kept: ")
       print(unique(df$scientificName))
   } else if (filter == "fuzzy") {
       new_df <- data.frame()
@@ -57,18 +58,18 @@ taxa_clean <- function(df, synonyms_list, filter = "fuzzy", accepted_name) {
             df_taxa <- df[agrepl(taxa, df$scientificName, ignore.case = TRUE), ]
             new_df <- rbind(new_df, df_taxa)
         }
-      print("Scientific names kept: ")
+      message("Scientific names kept: ")
       print(unique(df$scientificName))
   } else {
-    print("Filter option is not avaliable")
+    message("Filter option is not avaliable. Please choose 'fuzzy', 'exact', or 'interactive'.")
   }
 
 
-   if (accepted_name != "") {
+   if (! is.na(accepted_name)) {
       accepted_name <- gsub(accepted_name, pattern = "_", replacement = " ")
       new_df <- dplyr::mutate(new_df, new_name = accepted_name)
    } else {
-      print("No accepted_name indicated!")
+      message("No accepted_name indicated!")
    }
 
   return(new_df)
