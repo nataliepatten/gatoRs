@@ -16,3 +16,7 @@ Return data frame with duplicates removed
 The \code{remove_duplicates()} function removes records with identical event dates and coordinate values.
 Prior to utilizing this function, longitude and latitude columns should be rounded to match the coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
+\examples{
+data \%>\% remove_duplicates()
+
+}

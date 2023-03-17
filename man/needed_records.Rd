@@ -21,6 +21,6 @@ require a permit. Or, these records can be removed from the data set.
 This function requires packages dplyr, and magrittr.
 }
 \examples{
-df <- needed_records(data)
+need_info <- needed_records(data)
 
 }

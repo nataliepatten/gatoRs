@@ -15,8 +15,8 @@ taxa_clean(df, synonyms_list, filter = "fuzzy", accepted_name)
 
 \item{accepted_name}{The accepted scientific name for the species.
 
-data \%>\% taxa_clean(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "exact")
-data \%>\% taxa_clean(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), accepted_name = "Asclepias curtissii")}
+data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
+data \%>\% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")}
 }
 \value{
 Returns data frame with filtered results.

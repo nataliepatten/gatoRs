@@ -14,8 +14,8 @@
 #' @param filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
 #' @param accepted_name The accepted scientific name for the species.
 #'
-#' data %>% taxa_clean(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "exact")
-#' data %>% taxa_clean(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), accepted_name = "Asclepias curtissii")
+#' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), filter = "exact")
+#' data %>% taxa_clean(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results.
 #'

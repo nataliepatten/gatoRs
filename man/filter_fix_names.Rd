@@ -28,7 +28,7 @@ desired species.
 This function requires no additional packages.
 }
 \examples{
-data \%>\% filter_fix_names(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), filter = "exact")
-data \%>\% filter_fix_names(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), accepted_name = "Asclepias curtissii")
+data \%>\% filter_fix_names(c("Galax urceolata", "Galax aphylla"), filter = "exact")
+data \%>\% filter_fix_names(c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
 
 }

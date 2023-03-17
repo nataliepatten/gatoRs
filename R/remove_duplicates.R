@@ -4,8 +4,10 @@
 #' The `remove_duplicates()` function removes records with identical event dates and coordinate values.
 #' Prior to utilizing this function, longitude and latitude columns should be rounded to match the coordinate uncertainty using the `basic_locality_clean()` function.
 #'
-#'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
+#'
+#' @examples
+#' data %>% remove_duplicates()
 #'
 #' @return Return data frame with duplicates removed
 #'
