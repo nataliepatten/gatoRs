@@ -10,28 +10,27 @@
 #'
 #' @return Returns data
 #'
-#'
 #' @export
 
 basic_locality_clean <- function(df, remove.zero = TRUE, precision = 2) {
-      # Remove records with missing latitude and longitude
-      df <-   df[!is.na(df$longitude), ]
-      df <-   df[!is.na(df$latitude), ]
-      # Remove records with impossible latitude and longitude
-      df <- df[!(df$longitude > 180), ]
-      df <- df[!(df$latitude > 180), ]
-      df <- df[!(df$longitude < -180), ]
-      df <- df[!(df$latitude < -180), ]
-      # Removes records where latitude or longitude equals zero
-      if(remove.zero == TRUE){
-        df <- df[!(df$longitude == 0), ]
-        df <- df[!(df$latitude == 0), ]
-      }
-      # Round for precision
-      if(is.na(precision) == FALSE){
-      df$latitude <- round(df$latitude, digits = precision)
-      df$longitude <- round(df$longitude, digits = precision)
-      }
-      # Return df
-      return(df)
+  # Remove records with missing latitude and longitude
+  df <- df[!is.na(df$longitude), ]
+  df <- df[!is.na(df$latitude), ]
+  # Remove records with impossible latitude and longitude
+  df <- df[!(df$longitude > 180), ]
+  df <- df[!(df$latitude > 180), ]
+  df <- df[!(df$longitude < -180), ]
+  df <- df[!(df$latitude < -180), ]
+  # Removes records where latitude or longitude equals zero
+  if(remove.zero == TRUE){
+    df <- df[!(df$longitude == 0), ]
+    df <- df[!(df$latitude == 0), ]
+  }
+  # Round for precision
+  if(is.na(precision) == FALSE){
+    df$latitude <- round(df$latitude, digits = precision)
+    df$longitude <- round(df$longitude, digits = precision)
+  }
+  # Return df
+  return(df)
 }
