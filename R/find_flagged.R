@@ -15,8 +15,13 @@
 #' This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
 #' This function requires interactive user input.
 #'
-#' @param df Data frame of occurrence records returned from `gators_download()`.
+#' @param interactive Default = TRUE. The interactive option allows for a visual display
+#' of possible problematic points and the ability to manually remove these points.
+#' Setting `interactive = FALSE` will automatically remove these points from the data frame.
 #' @inheritParams basic_locality_clean
+#'
+#' @examples
+#' data %>% find_flagged(interactive = FALSE)
 #'
 #' @return Return cleaned data frame.
 #'
@@ -27,12 +32,17 @@
 #'
 #' @export
 
-find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
+find_flagged <- function(df, interactive = TRUE, remove.zero = TRUE, precision = 2) {
   # Basic coordinate cleaning - removes impossible or missing coordinates and rounding coordinate values
-  df <- basic_locality_clean(df, remove.zero = remove.zero, round.to = round.to)
+  df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision)
 
-  df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude",
-                                              species = "scientificName", value = "spatialvalid")
+  # workaround for clean_coordinates since it relies on rownames:
+  # https://github.com/ropensci/CoordinateCleaner/issues/24
+  rownames(df) <- 1:nrow(df)
+  df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
+
+  if (!interactive) return(df2)
+
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
   flagged$index <- as.character(1:nrow(flagged))
@@ -41,7 +51,7 @@ find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
     flagged$coordinates <- paste0("(", flagged$latitude, ", ", flagged$longitude, ")", ", point #", flagged$index)
   }
   else {
-    print("No flagged points found.")
+    message("No flagged points found.")
     return(df)
   }
   # make a map of the flagged points; hovering over points will show lat/long, clicking on points will show species name
@@ -71,7 +81,7 @@ find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
     print(map)
   }
   if (input == "N" | input == 'n') {
-    print("To zoom in and out, you can click on the plus and minus icons, respectively.")
+    message("To zoom in and out, you can click on the plus and minus icons, respectively.")
   }
 
   newdf <- df
@@ -80,7 +90,7 @@ find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
   input <- readline(prompt = "Would you like to remove a rectangular region of points from the dataframe? Enter Y for yes or N for no. ")
   if (input == "Y" | input == 'y') {
     # find the region of points to remove
-    print("To remove points, you will be prompted to enter the region from which to remove points from the dataframe. You may repeat this process as many times as you would like.")
+    message("To remove points, you will be prompted to enter the region from which to remove points from the dataframe. You may repeat this process as many times as you would like.")
     lowlong <- readline(prompt = "Please enter the lower bound for longitude: ")
     lowlong <- as.numeric(lowlong)
     highlong <- readline(prompt = "Please enter the upper bound for longitude: ")
@@ -111,7 +121,7 @@ find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
 
     # find the number of points removed from the original dataframe, and display it
     pointsRemoved = NROW(df) - NROW(newdf)
-    print(paste0(pointsRemoved, " points removed."))
+    message(paste0(pointsRemoved, " points removed."))
 
 
     # prompt user to choose whether to keep removing points
@@ -148,7 +158,7 @@ find_flagged <- function(df, remove.zero = TRUE, precision = 2 ) {
       }
       # find the number of points removed and display it
       pointsRemoved = current - NROW(newdf)
-      print(paste0(pointsRemoved, " points removed."))
+      message(paste0(pointsRemoved, " points removed."))
     }
   }
   input <- readline(prompt = "Would you like to remove any individual points? Enter Y for yes or N for no. ")

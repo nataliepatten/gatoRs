@@ -4,10 +4,14 @@
 \alias{find_flagged}
 \title{Locality Cleaning - Find possibly problematic occurrence records}
 \usage{
-find_flagged(df, remove.zero = TRUE, precision = 2)
+find_flagged(df, interactive = TRUE, remove.zero = TRUE, precision = 2)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
+
+\item{interactive}{Default = TRUE. The interactive option allows for a visual display
+of possible problematic points and the ability to manually remove these points.
+Setting \code{interactive = FALSE} will automatically remove these points from the data frame.}
 
 \item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
 
@@ -30,4 +34,8 @@ Here is an example of the interactive messages displayed by the function for rem
 \details{
 This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
 This function requires interactive user input.
+}
+\examples{
+data \%>\% find_flagged(interactive = FALSE)
+
 }
