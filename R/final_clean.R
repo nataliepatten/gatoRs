@@ -39,12 +39,9 @@ final_clean <- function(df, cluster = TRUE, remove.zero = TRUE, precision = 2, r
     # out <- dismo::gridSample(df, bio1, n = 1) # add to function
 
 
-  # remove duplicates
-  df <- dplyr::distinct(df, longitude, latitude, .keep_all = TRUE)
-
   if (recordBasis) {
     # interactive method for removal of basis of records
-    print("Types of basis of records: ")
+    message("Types of basis of records: ")
     print(unique(df$basisOfRecord))
 
     input <- readline(prompt = "Would you like to remove any types of basis of records? Enter Y for yes or N for no. ")
