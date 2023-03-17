@@ -6,7 +6,8 @@
 \usage{
 gators_download(
   synonyms_list,
-  newFileName,
+  write_file = FALSE,
+  newFileName = NA,
   gbif_match = "fuzzy",
   idigbio_filter = TRUE
 )
@@ -15,10 +16,13 @@ gators_download(
 \item{synonyms_list}{A list of synonyms for your desired species. For example, \code{synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")}.
 This parameter is required.}
 
+\item{write_file}{A parameter to choose whether to produce a .csv file containing search results.
+This parameter is not required and is assigned FALSE by default.}
+
 \item{newFileName}{The path and file name for the retrieved data. Note that this parameter should include the ".csv"
 extension as well. For example, \code{newFileName = "base_folder/other_folder/my_file.csv"}. The file path can be entered
 either as relative to the current working directory (example: "../my_file.csv") or as a full path. This parameter is
-required.}
+required if \code{write_file = TRUE}.}
 
 \item{gbif_match}{A parameter to select either search by fuzzy matching of scientific name or to search by species code.
 For example, \code{gbif_match = "fuzzy"} will search by fuzzy match and \code{gbif_match = "code"} will search by code. This parameter
@@ -30,7 +34,8 @@ Choosing \code{idigbio_filter = TRUE} will return the data frame with rows in wh
 This parameter is not required and is assigned TRUE by default.}
 }
 \value{
-Writes a csv file as specified in the input. This csv file will contain search results for the desired species
+Returns a data frame and writes a csv file as specified in the input.
+This csv file will contain search results for the desired species
 from the GBIF and iDigBio databases. The columns are as follows:
 \itemize{
 \item \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName}
@@ -65,7 +70,7 @@ This function uses the \code{getidigbio()}, \code{getgbif()}, \code{fix_columns(
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
-gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "my_new_file.csv", idigbio_filter = FALSE)
-gators_download(c("Asclepias curtissii", "Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii"), "newFile.csv", gbif_match = "code")
+df <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), write_file = TRUE, newFileName = "galax.csv", idigbio_filter = FALSE)
+df <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), gbif_match = "code")
 
 }
