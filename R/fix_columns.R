@@ -19,6 +19,9 @@
 #' @export
 
 fix_columns <- function(df) {
+  # if the data frame is empty
+  if (NROW(df) == 0) return(df)
+
   for (i in 1: nrow(df)) {
     if (is.na(df$scientificName[i])) {
       if (!is.na(df$infraspecificEpithet[i]) & !is.na(df$genus[i]) & !is.na(df$specificEpithet[i])) {

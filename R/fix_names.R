@@ -18,6 +18,9 @@
 #' @export
 
 fix_names <- function(df) {
+  # if the data frame is empty
+  if (NROW(df) == 0) return(df)
+
   for (i in 1:NROW(df)) {
     if (length(unlist(gregexpr(" ", df$scientificName[i]))) > 1) {
       if (grepl("var.", df$scientificName[i], ignore.case = TRUE)) {
