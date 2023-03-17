@@ -20,7 +20,6 @@ reference:
   - basic_locality_clean
   - remove_duplicates
   - taxa_clean
-  - filter_select_name
   - find_flagged
   - final_clean
 - title: Helper functions
