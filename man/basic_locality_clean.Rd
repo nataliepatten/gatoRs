@@ -4,21 +4,31 @@
 \alias{basic_locality_clean}
 \title{Locality Cleaning - Remove missing and improbable coordinates}
 \usage{
-basic_locality_clean(df, remove.zero = TRUE, precision = 2)
+basic_locality_clean(
+  df,
+  remove.zero = TRUE,
+  precision = TRUE,
+  digits = 2,
+  remove.skewed = TRUE
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{remove.zero}{Default = "TRUE". Indicates that points at (0.00, 0.00) should be removed.}
+\item{remove.zero}{Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.}
 
-\item{precision}{Indicates digits to round coordinates too. Coordinates should be round to match the coordinate uncertainty. Default = 2.}
+\item{precision}{Default = TRUE. Indicates that coordinates should be rounded to match the coordinate uncertainty.}
+
+\item{digits}{Default = 2. Indicates digits to round coordinates to when \code{precision = TRUE}.}
+
+\item{remove.skewed}{Default = TRUE. Utilizes the \code{remove_skewed()} function to remove skewed coordinate values.}
 }
 \value{
-Returns data
+Return data frame with specimen removed that had missing or improper coordinate values.
 }
 \description{
 The \code{basic_locality_clean()} function cleans locality by removing missing or impossible coordinates and correcting precision.
-This function requires columns named 'latitude' and 'longitude'.
+This function requires columns named 'latitude' and 'longitude'. These columns should be of type 'numeric'.
 }
 \examples{
 data <- basic_locality_clean(data)
