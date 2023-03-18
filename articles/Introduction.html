@@ -212,11 +212,11 @@ data set.</p>
 <p>Here we walk through each cleaning function, however we also created
 a simple one-step option <code><a href="../reference/full_clean.html">full_clean()</a></code>.</p>
 <p>Example:</p>
-<pre><code>galaxdf &lt;- full_clean(galaxdf, synonyms.list = synonyms_list = c("Galax urceolata", "Galax aphylla"), 
-                        taxa.filter = "fuzzy",
-                        accepted.name = "Galax urceolata", remove.zero = TRUE,
-                        precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE))</code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/full_clean.html">full_clean</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">galaxdf</span>, synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
+<span>                        taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
+<span>                        accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                        precision <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span>, remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                        basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span>, cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 <div class="section level4">
 <h4 id="remove-duplicate-records">Remove Duplicate Records<a class="anchor" aria-label="anchor" href="#remove-duplicate-records"></a>
 </h4>
@@ -249,7 +249,7 @@ view and inspect the types of basis of record associated with the
 records. Otherwise, this function can automate the process of removing
 particular record bases.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">galaxdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdata</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdf</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="clean-locality">Clean Locality<a class="anchor" aria-label="anchor" href="#clean-locality"></a>
@@ -260,15 +260,15 @@ particular record bases.</p>
 <p>Here we remove any records with missing coordinates, impossible
 coordinates, coordinates at (0,0), and any that are flagged as skewed.
 The skewed records can be identified with the
-<code>needed_records()'</code> function and row value for the
+<code><a href="../reference/remove_skewed.html">remove_skewed()</a></code> function and row value for the
 ‘InformationWitheld’ column. We also provide the option to round the
 provided latitude and longitude values to a specified number of decimal
 places.</p>
-<pre><code>galaxdf &lt;- basic_locality_clean(df = galaxdf,  
-                      remove.zero = TRUE, # Records at (0,0) are removed
-                      precision = TRUE, # latitude and longitude are rounded 
-                      digits = 2 # round to 2 decimal places
-                      remove.skewed = TRUE)</code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basic_locality_clean.html">basic_locality_clean</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">galaxdf</span>,  </span>
+<span>                      remove.zero <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Records at (0,0) are removed</span></span>
+<span>                      precision <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># latitude and longitude are rounded </span></span>
+<span>                      digits <span class="op">=</span> <span class="fl">2</span>, <span class="co"># round to 2 decimal places</span></span>
+<span>                      remove.skewed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level5">
 <h5 id="find-and-remove-flagged-points">Find and Remove Flagged Points<a class="anchor" aria-label="anchor" href="#find-and-remove-flagged-points"></a>
