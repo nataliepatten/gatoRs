@@ -4,16 +4,16 @@
 \alias{filter_fix_names}
 \title{gatoRs Download -  Filter iDigBio results by scientific name}
 \usage{
-filter_fix_names(df, synonyms_list, filter = "fuzzy", accepted_name)
+filter_fix_names(df, synonyms.list, filter = "fuzzy", accepted.name = NA)
 }
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
 
-\item{synonyms_list}{A list of synonyms for a species.}
+\item{synonyms.list}{A list of synonyms for a species.}
 
-\item{filter}{The type of filter to be used--either "exact" or "fuzzy".}
+\item{filter}{Default = "fuzzy". Indicates the type of filter to be used--either "exact" or "fuzzy".}
 
-\item{accepted_name}{The accepted scientific name for the species.}
+\item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 }
 \value{
 Returns data frame with filtered results.
@@ -29,6 +29,6 @@ This function requires no additional packages.
 }
 \examples{
 data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
-data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
+data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
 
 }
