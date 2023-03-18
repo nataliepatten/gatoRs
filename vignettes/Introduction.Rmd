@@ -86,11 +86,11 @@ Here we walk through each cleaning function, however we also created a simple on
 
 Example:
 ```
-galaxdf <- full_clean(galaxdf, synonyms.list = synonyms_list = c("Galax urceolata", "Galax aphylla"), 
+galaxdf <- full_clean(df = galaxdf, synonyms.list = c("Galax urceolata", "Galax aphylla"), 
                         taxa.filter = "fuzzy",
                         accepted.name = "Galax urceolata", remove.zero = TRUE,
                         precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE))
+                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE)
 ```
 #### Remove Duplicate Records
 There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. 
@@ -119,18 +119,18 @@ with the records. Otherwise, this function can automate the process of removing 
 
 Example:
 ```
-galaxdata <- basis_clean(galaxdata, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
+galaxdf <- basis_clean(galaxdf, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
 ```
 
 #### Clean Locality  
 ##### Basic Locality Clean 
-Here we remove any records with missing coordinates, impossible coordinates, coordinates at (0,0), and any that are flagged as skewed. The skewed records can be identified with the `needed_records()'` function and row value for the 'InformationWitheld' column. We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.   
+Here we remove any records with missing coordinates, impossible coordinates, coordinates at (0,0), and any that are flagged as skewed. The skewed records can be identified with the `remove_skewed()` function and row value for the 'InformationWitheld' column. We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.   
 
 ```
 galaxdf <- basic_locality_clean(df = galaxdf,  
                       remove.zero = TRUE, # Records at (0,0) are removed
                       precision = TRUE, # latitude and longitude are rounded 
-                      digits = 2 # round to 2 decimal places
+                      digits = 2, # round to 2 decimal places
                       remove.skewed = TRUE)
 ```
 
