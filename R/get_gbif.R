@@ -1,19 +1,19 @@
 #' @title Download data from the Global Biodiversity Information Facility
 #'
 #' @description
-#' The `getgbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
+#' The `get_gbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.
 #' Limited to 100,000 record downloads.
 #'
 #' @details
 #' This function uses the `correct_class()` function.
 #' This function requires the packages rgbif, magrittr, and dplyr.
 #'
-#' @param synonyms_list A list of affiliated names for your query.
-#' @param gbif_match Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
+#' @param synonyms.list A list of affiliated names for your query.
+#' @param gbif.match Default = "fuzzy". Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
 #'
 #' @examples
-#' df <- getgbif(c("Galax urceolata", "Galax aphylla"))
-#' df <- getgbif(c("Galax urceolata", "Galax aphylla"), gbif_match = "code")
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"))
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code")
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'
@@ -24,9 +24,12 @@
 #' @export
 
 
-getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
-  if (gbif_match != "fuzzy" & gbif_match != "code") {
-    stop("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'.")
+get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
+  if (gbif.match != "fuzzy" & gbif.match != "code") {
+    stop("Invalid value for argument: gbif.match. Value for gbif.match must equal 'fuzzy' or 'code'.")
+  }
+  if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
+    stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
 
   colNamesFuzzy <- c("data.scientificName",
@@ -78,11 +81,11 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
                     "habitat",
                     "geodeticDatum")
 
-  if (gbif_match == "code") {
-    key <- rgbif::name_backbone(name = synonyms_list[1])$speciesKey
+  if (gbif.match == "code") {
+    key <- rgbif::name_backbone(name = synonyms.list[1])$speciesKey
     query_gbif <- rgbif::occ_data(taxonKey = key, limit = 100000)
   }
-  else if (gbif_match == "fuzzy") {
+  else if (gbif.match == "fuzzy") {
     query_gbif <- data.frame(matrix(ncol = length(colNamesFuzzy), nrow = 0))
     colnames(query_gbif) <- colNamesFuzzy
     # fix columns to be of type character
@@ -95,8 +98,8 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
         query_gbif[,i] <- as.character(query_gbif[,i])
       }
     }
-    for (i in 1:length(synonyms_list)) {
-      temp <- rgbif::occ_data(scientificName = synonyms_list[i], limit = 100000)
+    for (i in 1:length(synonyms.list)) {
+      temp <- rgbif::occ_data(scientificName = synonyms.list[i], limit = 100000)
       temp <- data.frame(temp[2])
       # use bind_rows() to account for different number of columns
       query_gbif <- dplyr::bind_rows(query_gbif, temp)
@@ -111,10 +114,10 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)
-  if (gbif_match == "fuzzy") {
+  if (gbif.match == "fuzzy") {
     colNames <- colNamesFuzzy
   }
-  else if (gbif_match == "code") {
+  else if (gbif.match == "code") {
     colNames <- colNamesCode
   }
   for (i in 1:length(colNames)) {
@@ -137,7 +140,7 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
     }
   }
 
-  if (gbif_match == "fuzzy") {
+  if (gbif.match == "fuzzy") {
     query_gbif <- dplyr::bind_rows(temp, query_gbif)
     query_gbif <- query_gbif %>%
                 dplyr::rename(scientificName = "data.scientificName",
@@ -165,7 +168,7 @@ getgbif <- function(synonyms_list, gbif_match = "fuzzy"){
                               habitat = "data.habitat",
                               geodeticDatum = "data.geodeticDatum")
   }
-  else if (gbif_match == "code") {
+  else if (gbif.match == "code") {
     query_gbif <- query_gbif$data
     query_gbif <- dplyr::bind_rows(temp, query_gbif)
     query_gbif <- dplyr::rename(query_gbif, latitude = "decimalLatitude", longitude = "decimalLongitude")

@@ -1,17 +1,17 @@
 #' @title Download data from Integrated Digitized Biocollections
 #'
 #' @description
-#' The `getidigbio()` function queries iDigBio for your desired species.
+#' The `get_idigbio()` function queries iDigBio for your desired species.
 #' Limited to 100,000 record downloads.
 #'
 #' @details
 #' This function uses the `correct_class()` function.
 #' This function requires the packages ridigbio, magrittr, and dplyr.
 #'
-#' @param synonyms_list A list of affiliated names for your query.
+#' @param synonyms.list A list of affiliated names for your query.
 #'
 #' @examples
-#' df <- getidigbio(c("Galax urceolata", "Galax aphylla"))
+#' df <- get_idigbio(c("Galax urceolata", "Galax aphylla"))
 #'
 #' @return A data frame with desired columns from iDigBio.
 #'
@@ -22,7 +22,11 @@
 #' @export
 
 
-getidigbio <- function(synonyms_list){
+get_idigbio <- function(synonyms.list){
+  if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
+    stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
+  }
+
   colNames <- c("data.dwc:scientificName",
                 "data.dwc:genus",
                 "data.dwc:specificEpithet",
@@ -50,8 +54,8 @@ getidigbio <- function(synonyms_list){
   query_idigbio <- data.frame(matrix(ncol = length(colNames), nrow = 0))
   colnames(query_idigbio) <- colNames
 
-  for (i in 1:length(synonyms_list)) {
-    query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms_list[i])), fields = colNames, limit = 100000))
+  for (i in 1:length(synonyms.list)) {
+    query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms.list[i])), fields = colNames, limit = 100000))
   }
 
   # if no results found
