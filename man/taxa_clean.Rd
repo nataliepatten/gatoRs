@@ -4,19 +4,19 @@
 \alias{taxa_clean}
 \title{Taxonomic Cleaning - Filter and resolve taxon names}
 \usage{
-taxa_clean(df, synonyms_list, filter = "fuzzy", accepted_name = NA)
+taxa_clean(df, synonyms.list, taxa.filter = "fuzzy", accepted.name = NA)
 }
 \arguments{
-\item{df}{Data frame with name column to be fixed.}
+\item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{synonyms_list}{A list of synonyms for a species.}
+\item{synonyms.list}{A list of synonyms for a species.}
 
-\item{filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
+\item{taxa.filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 
-\item{accepted_name}{The accepted scientific name for the species.}
+\item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 }
 \value{
-Returns data frame with filtered results.
+Returns data frame with filtered results and new column with the accepted name labeled as "accepted_name".
 }
 \description{
 The \code{taxa_clean()} function filters a data frame for relevant results, based on the scientific name given.
@@ -28,7 +28,7 @@ to manually determine whether they wish to keep results containing certain scien
 This function requires packages dplyr and magrittr.
 }
 \examples{
-data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
-data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), accepted_name = "Galax urceolata")
+clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
+clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
 
 }
