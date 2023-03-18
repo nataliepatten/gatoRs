@@ -7,34 +7,34 @@
 #' coordinateUncertaintyInMeters, informationWithheld, and habitat.
 #'
 #' @details
-#' This function uses the `getidigbio()`, `getgbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
+#' This function uses the `get_idigbio()`, `get_gbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
 #' This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 #'
 #'
-#' @param synonyms_list A list of synonyms for your desired species. For example, `synonyms_list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+#' @param synonyms.list A list of synonyms for your desired species. For example, `synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
 #' This parameter is required.
 #'
-#' @param write_file A parameter to choose whether to produce a .csv file containing search results.
+#' @param write.file A parameter to choose whether to produce a .csv file containing search results.
 #' This parameter is not required and is assigned FALSE by default.
 #'
-#' @param newFileName The path and file name for the retrieved data. Note that this parameter should include the ".csv"
-#' extension as well. For example, `newFileName = "base_folder/other_folder/my_file.csv"`. The file path can be entered
+#' @param filename The path and file name for the retrieved data. Note that this parameter should include the ".csv"
+#' extension as well. For example, `filename = "base_folder/other_folder/my_file.csv"`. The file path can be entered
 #' either as relative to the current working directory (example: "../my_file.csv") or as a full path. This parameter is
-#' required if `write_file = TRUE`.
+#' required if `write.file = TRUE`.
 #'
-#' @param gbif_match A parameter to select either search by fuzzy matching of scientific name or to search by species code.
-#' For example, `gbif_match = "fuzzy"` will search by fuzzy match and `gbif_match = "code"` will search by code. This parameter
+#' @param gbif.match A parameter to select either search by fuzzy matching of scientific name or to search by species code.
+#' For example, `gbif.match = "fuzzy"` will search by fuzzy match and `gbif.match = "code"` will search by code. This parameter
 #' is not required and is assigned "fuzzy" by default.
 #'
-#' @param idigbio_filter A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
+#' @param idigbio.filter A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 #' include data points for a different species that mention the desired species in the locality information, for example.
-#' Choosing `idigbio_filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
+#' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 #' This parameter is not required and is assigned TRUE by default.
 #'
 #'
 #' @examples
-#' df <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), write_file = TRUE, newFileName = "galax.csv", idigbio_filter = FALSE)
-#' df <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), gbif_match = "code")
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv")
+#' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE)
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
 #' This csv file will contain search results for the desired species
@@ -62,42 +62,46 @@
 #' @export
 
 
-gators_download <- function(synonyms_list, write_file = FALSE, newFileName = NA, gbif_match = "fuzzy", idigbio_filter = TRUE) {
+gators_download <- function(synonyms.list, write.file = FALSE, filename = NA, gbif.match = "fuzzy", idigbio.filter = TRUE) {
   # Check for valid arguments
-  if (gbif_match != "fuzzy" & gbif_match != "code") {
-    stop("Invalid value for argument: gbif_match. Value for gbif_match must equal 'fuzzy' or 'code'.")
+  if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
+    stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
 
-  if (idigbio_filter != TRUE & idigbio_filter != FALSE) {
-    stop("Invalid value for argument: idigbio_filter. Value for idigbio_filter must equal 'TRUE' or 'FALSE'.")
+  if (gbif.match != "fuzzy" & gbif.match != "code") {
+    stop("Invalid value for argument: gbif.match. Value for gbif.match must equal 'fuzzy' or 'code'.")
   }
 
-  if (write_file != TRUE & write_file != FALSE) {
-    stop("Invalid value for argument: write_file. Value for write_file must equal 'TRUE' or 'FALSE'.")
+  if (idigbio.filter != TRUE & idigbio.filter != FALSE) {
+    stop("Invalid value for argument: idigbio.filter. Value for idigbio.filter must equal 'TRUE' or 'FALSE'.")
   }
-  else if (write_file) {
-    if (is.na(newFileName)) {
-      stop("Invalid value for argument: newFileName. The location and name of the output file is not specified.")
+
+  if (write.file != TRUE & write.file != FALSE) {
+    stop("Invalid value for argument: write.file. Value for write.file must equal 'TRUE' or 'FALSE'.")
+  }
+  else if (write.file) {
+    if (is.na(filename)) {
+      stop("Invalid value for argument: filename. The location and name of the output file is not specified.")
     }
 
-    if (grepl(".csv", newFileName) == FALSE) {
-      stop("Invalid value for argument: newFileName. The output file name must end in '.csv'.")
+    if (grepl(".csv", filename) == FALSE) {
+      stop("Invalid value for argument: filename. The output file name must end in '.csv'.")
     }
   }
-  else if (! is.na(newFileName)) {
-    message("Warning: No output file will be written; the newFileName argument will be ignored.\nTo write to an output file, set write_file = TRUE.")
+  else if (! is.na(filename)) {
+    message("Warning: No output file will be written; the filename argument will be ignored.\nTo write to an output file, set write.file = TRUE.")
   }
 
   # initial download, fix capitalization
-  query_idigbio <- fix_names(getidigbio(synonyms_list))
-  query_gbif <- fix_names(getgbif(synonyms_list, gbif_match))
+  query_idigbio <- fix_names(get_idigbio(synonyms.list))
+  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match))
 
   # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))
   query_idigbio <- fix_names(fix_columns(query_idigbio))
 
-  if (idigbio_filter) {
-    query_idigbio <- filter_fix_names(query_idigbio, synonyms_list)
+  if (idigbio.filter) {
+    query_idigbio <- filter_fix_names(query_idigbio, synonyms.list)
   }
   else {
     message("Warning: iDigBio search will return all records where any column has a matching string to the provided scientific names.")
@@ -120,8 +124,8 @@ gators_download <- function(synonyms_list, write_file = FALSE, newFileName = NA,
     stop("No records found.")
   }
 
-  if (write_file) {
-    write.csv(output, newFileName, row.names = FALSE)
+  if (write.file) {
+    write.csv(output, filename, row.names = FALSE)
   }
   return(output)
 }
