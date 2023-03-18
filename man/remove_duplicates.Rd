@@ -10,7 +10,7 @@ remove_duplicates(df)
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 }
 \value{
-Return data frame with duplicates removed
+Return data frame with duplicates removed.
 }
 \description{
 The \code{remove_duplicates()} function removes records with identical event dates and coordinate values.

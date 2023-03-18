@@ -4,13 +4,13 @@
 \alias{needed_records}
 \title{Find records with redacted or missing data}
 \usage{
-needed_records(occurrence_records)
+needed_records(df)
 }
 \arguments{
-\item{occurrence_records}{A data frame downloaded with \code{gators_download()}.}
+\item{df}{A data frame downloaded with \code{gators_download()}.}
 }
 \value{
-a data frame with rows that locality was flagged
+A data frame with only records for which  locality was flagged.
 }
 \description{
 The \code{needed_records()} function identifies records with flags. This indicates that information

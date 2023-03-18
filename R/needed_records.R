@@ -18,6 +18,8 @@
 #' @export
 
 needed_records <- function(df){
+  if (NROW(df) == 0) return(df)
+
   information_needed <- df[!is.na(df$informationWithheld), ]
   return(information_needed)
 }

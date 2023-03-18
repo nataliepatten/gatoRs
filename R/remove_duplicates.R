@@ -19,6 +19,8 @@
 #'
 
 remove_duplicates <- function(df){
+  if (NROW(df) == 0) return(df)
+
   # Parse date with Lubridate
   suppressWarnings(df$eventDate <-  lubridate::ymd(df$eventDate))
   df$year <- lubridate::year(df$eventDate)

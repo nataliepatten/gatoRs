@@ -18,6 +18,8 @@
 
 
 need_to_georeference <- function(df){
+  if (NROW(df) == 0) return(df)
+
   for_georeferencing <- df
   # ID records with missing latitude and longitude
   for_georeferencing  <- for_georeferencing[is.na(for_georeferencing$longitude), ]
@@ -25,5 +27,6 @@ need_to_georeference <- function(df){
   # ID records with locality information included
   for_georeferencing <- for_georeferencing[!is.na(for_georeferencing$locality), ]
   for_georeferencing <- for_georeferencing[!grepl("locality:  NA, occurrenceRemarks: NA, verbatimLocality: NA", for_georeferencing$locality), ]
+
   return(for_georeferencing)
 }
