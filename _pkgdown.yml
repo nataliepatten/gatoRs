@@ -17,19 +17,18 @@ reference:
 - contents:
   - needed_records
   - need_to_georeference
+  - full_clean
+  - remove_duplicates
   - taxa_clean
   - basis_clean
   - basic_locality_clean
-  - remove_duplicates
-  - remove_skewed
-  - find_flagged
-  - final_clean
-  - full_clean
+  - process_flagged
 - title: Helper functions
   desc: These functions are used within the download and cleaning functions
 - contents:
-  - getgbif
-  - getidigbio
+  - get_gbif
+  - get_idigbio
   - filter_fix_names
   - fix_columns
   - fix_names
+  - remove_skewed

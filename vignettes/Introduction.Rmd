@@ -40,16 +40,16 @@ After you identify synonyms, create a list of all possible names for your specie
 Example:
 ```
 library(gatoRs)
-galaxdf <- gators_download(synonyms_list = c("Galax urceolata", "Galax aphylla"), 
-                write_file = TRUE,
-                newFileName = "base_folder/other_folder/my_file.csv", # Location to save file - must end in .csv
-                gbif_match = "fuzzy",
-                idigbio_filter = TRUE)
+galaxdf <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), 
+                write.file = TRUE,
+                filename = "base_folder/my_file.csv", # Location to save file - must end in .csv
+                gbif.match = "fuzzy",
+                idigbio.filter = TRUE)
 ```
 
-Optional parameters include `gbif_match` and `idigbio_filter`. `gbif_match` allows you to search by fuzzy matching records to the scientific name (default, `gbif_match = "fuzzy"`) or to search for the associated species key using GBIF’s backbone taxonomy system (`gbif_match = "code"`).
+Optional parameters include `gbif.match` and `idigbio.filter`. `gbif.match` allows you to search by fuzzy matching records to the scientific name (default, `gbif.match = "fuzzy"`) or to search for the associated species key using GBIF’s backbone taxonomy system (`gbif.match = "code"`).
 
-If set to TRUE (default, recommended), `idigbio_filter` fuzzy matches taxonomic columns to provided taxon names. This filters the data set for relevant data.
+If set to TRUE (default, recommended), `idigbio.filter` fuzzy matches taxonomic columns to provided taxon names. This filters the data set for relevant data.
 
 The function also generates scientificName, genus, specificEpithet, and infraspecificEpithet columns based on available data and parsing and then fixes incorrect capitalization of species names to give the data a cleaner look.
 
@@ -62,9 +62,9 @@ We downloaded 6885 observations for <i>Galax urceolata</i> in the example above.
 Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided upon request or can be identified through georeferencing. We created functions to aid in this process.   
 
 #### Redacted Records
-Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided to aid research upon request. 
+Locality information can be redacted or skewed due to protect threatened taxa; often locality information will be provided to aid research upon request. 
 
-To find data that needs to be manually received by an institution via a permit (or removed from the data set), use `needed_records()`. After receiving the data from herbaria, manually merge the obtain records with your original data set.
+To find data that needs to be manually received by an institution via a permit (or removed from the data set), use `needed_records()`. After receiving the data from herbaria, manually merge the obtained records with your original data set.
 
 Example: 
 ```
@@ -82,7 +82,24 @@ to_georeference <- need_to_georeference(galaxdf)
 ```
 
 ### Occurrence Data Cleaning  
-Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`.    
+Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`.  
+
+Example:
+```
+galaxdf <- full_clean(galaxdf, synonyms.list = synonyms_list = c("Galax urceolata", "Galax aphylla"), 
+                        taxa.filter = "fuzzy",
+                        accepted.name = "Galax urceolata", remove.zero = TRUE,
+                        precision = TRUE, digits = 2, remove.skewed = TRUE,
+                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE))
+```
+#### Remove Duplicate Records
+There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. 
+To find and remove these, use `remove_duplicates()`.
+
+Example:
+```
+galaxdf <- remove_duplicates(galaxdf)
+```
 
 #### Resolve Taxon Names
 To find data containing scientific names corresponding to your desired species, use `taxa_clean()`. Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).
@@ -90,32 +107,38 @@ To find data containing scientific names corresponding to your desired species, 
 Example:
 ```
 galaxdf <- taxa_clean(df = galaxdf,  
-                      synonyms_list = c("Galax urceolata", "Galax aphylla"), 
-                      filter = "fuzzy", 
-                      accepted_name = "Galax urceolata")
+                      synonyms.list = c("Galax urceolata", "Galax aphylla"), 
+                      taxa.filter = "fuzzy", 
+                      accepted.name = "Galax urceolata") # creates a new column with accepted name for easy comparison
 ```
-#### Clean locality  
+
+#### Remove Particular Record Bases
+Sometimes, certain bases of records may want to be removed from the data set. To do this, we provide `basis_clean()`. 
+This function can be used interactively (`interactive = TRUE`) to view and inspect the types of basis of record associated
+with the records. Otherwise, this function can automate the process of removing particular record bases.
+
+Example:
+```
+galaxdata <- basis_clean(galaxdata, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
+```
+
+#### Clean Locality  
 ##### Basic Locality Clean 
-Here we remove any records with missing coordinates, impossible coordinates, coordinates at (0,0), and any that are flagged as skewed. The skewed records can be identified with the `needed_record()' function and row value for 'InformationWitheld' column. We also round the provided latitude and longitude values to two decimal places.   
+Here we remove any records with missing coordinates, impossible coordinates, coordinates at (0,0), and any that are flagged as skewed. The skewed records can be identified with the `needed_records()'` function and row value for the 'InformationWitheld' column. We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.   
 
 ```
 galaxdf <- basic_locality_clean(df = galaxdf,  
-                      remove.zero = TRUE, # Records at 0,0 are removed
-                      precision = 2, # Latitude and Longitude are rounded to 2 decimals
+                      remove.zero = TRUE, # Records at (0,0) are removed
+                      precision = TRUE, # latitude and longitude are rounded 
+                      digits = 2 # round to 2 decimal places
                       remove.skewed = TRUE)
 ```
 
-#### Find and remove flagged points
-To find records that may have problematic coordinates, use `find_flagged()`. This will let you interactively manually remove points deemed improper by viewing the points on a graph. Use your downloaded data from the previous step as input.
+##### Find and Remove Flagged Points
+To find records that may have problematic coordinates, use `process_flagged()`. This function can either automate the process of
+finding and removing problematic points (`interactive = FALSE`) or allow for manual inspection. The latter will let you manually remove points deemed improper by viewing the points on a graph.
 
 Example: 
 ```
-occurrence_records <- find_flagged(occurrence_records)
-```
-#### Final cleaning
-To remove duplicate points and reduce the clustering of points, use our `final_clean()` function. This function also offers an interactive method to look at (and remove, if desired) types of basis of record.
-
-Example: 
-```
-occurrence_records <- final_clean(occurrence_records)
+galaxdf <- process_flagged(galaxdf, interactive = TRUE)
 ```
