@@ -19,6 +19,9 @@
     <loc>https://nataliepatten.github.io/gatoRs/reference/basic_locality_clean.html</loc>
   </url>
   <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/basis_clean.html</loc>
+  </url>
+  <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/correct_class.html</loc>
   </url>
   <url>
@@ -26,12 +29,6 @@
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/filter_fix_names.html</loc>
-  </url>
-  <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/final_clean.html</loc>
-  </url>
-  <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/find_flagged.html</loc>
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/fixAfterPeriod.html</loc>
@@ -43,13 +40,16 @@
     <loc>https://nataliepatten.github.io/gatoRs/reference/fix_names.html</loc>
   </url>
   <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/full_clean.html</loc>
+  </url>
+  <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/gators_download.html</loc>
   </url>
   <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/getgbif.html</loc>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/get_gbif.html</loc>
   </url>
   <url>
-    <loc>https://nataliepatten.github.io/gatoRs/reference/getidigbio.html</loc>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/get_idigbio.html</loc>
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/index.html</loc>
@@ -67,7 +67,13 @@
     <loc>https://nataliepatten.github.io/gatoRs/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/process_flagged.html</loc>
+  </url>
+  <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/remove_duplicates.html</loc>
+  </url>
+  <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/remove_skewed.html</loc>
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/taxa_clean.html</loc>

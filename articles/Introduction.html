@@ -144,19 +144,19 @@ name (ex. <code>c("Galax urceolata", "Galax aphylla")</code>). Note, the
 first name in your list will be used to identify the GBIF species code
 when <code>gbif_match = "code"</code>.</p>
 <p>Example:</p>
-<pre><code><span><span class="fu"><a href="../reference/gators_download.html">gators_download</a></span><span class="op">(</span>synonyms_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asclepias curtissii"</span>, <span class="st">"Asclepias aceratoides"</span>,</span>
-<span>                                  <span class="st">"Asclepias arenicola"</span>, <span class="st">"Oxypteryx arenicola"</span>, </span>
-<span>                                  <span class="st">"Oxypteryx curtissii"</span><span class="op">)</span>, </span>
-<span>                newFileName <span class="op">=</span> <span class="st">"base_folder/other_folder/my_file.csv"</span>, <span class="co"># Location to save file - must end in .csv</span></span>
-<span>                gbif_match <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
-<span>                idigbio_filter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-<p>Optional parameters include <code>gbif_match</code> and
-<code>idigbio_filter</code>. <code>gbif_match</code> allows you to
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nataliepatten.github.io/gatoRs/">gatoRs</a></span><span class="op">)</span></span>
+<span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gators_download.html">gators_download</a></span><span class="op">(</span>synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
+<span>                write.file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                filename <span class="op">=</span> <span class="st">"base_folder/my_file.csv"</span>, <span class="co"># Location to save file - must end in .csv</span></span>
+<span>                gbif.match <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
+<span>                idigbio.filter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<p>Optional parameters include <code>gbif.match</code> and
+<code>idigbio.filter</code>. <code>gbif.match</code> allows you to
 search by fuzzy matching records to the scientific name (default,
-<code>gbif_match = "fuzzy"</code>) or to search for the associated
+<code>gbif.match = "fuzzy"</code>) or to search for the associated
 species key using GBIF’s backbone taxonomy system
-(<code>gbif_match = "code"</code>).</p>
-<p>If set to TRUE (default, recommended), <code>idigbio_filter</code>
+(<code>gbif.match = "code"</code>).</p>
+<p>If set to TRUE (default, recommended), <code>idigbio.filter</code>
 fuzzy matches taxonomic columns to provided taxon names. This filters
 the data set for relevant data.</p>
 <p>The function also generates scientificName, genus, specificEpithet,
@@ -168,73 +168,120 @@ cleaner look.</p>
 <div class="section level2">
 <h2 id="data-processing">Data Processing<a class="anchor" aria-label="anchor" href="#data-processing"></a>
 </h2>
+<p>We downloaded 6885 observations for <i>Galax urceolata</i> in the
+example above. Of these observations, only those with locality
+information will be helpful when investigating this species
+distribution.</p>
 <div class="section level3">
-<h3 id="identify-records-missing-information">Identify Records Missing Information<a class="anchor" aria-label="anchor" href="#identify-records-missing-information"></a>
+<h3 id="identify-records-missing-locality-information">Identify Records Missing Locality Information<a class="anchor" aria-label="anchor" href="#identify-records-missing-locality-information"></a>
 </h3>
+<p>Locality information can be redacted or skewed due to protect
+threatened taxa, often locality information will be provided upon
+request or can be identified through georeferencing. We created
+functions to aid in this process.</p>
 <div class="section level4">
 <h4 id="redacted-records">Redacted Records<a class="anchor" aria-label="anchor" href="#redacted-records"></a>
 </h4>
+<p>Locality information can be redacted or skewed due to protect
+threatened taxa; often locality information will be provided to aid
+research upon request.</p>
 <p>To find data that needs to be manually received by an institution via
 a permit (or removed from the data set), use
-<code><a href="../reference/needed_records.html">needed_records()</a></code>. Use your downloaded data from the
-previous step as input. After receiving the data from herbaria, manually
-enter into the original data set.</p>
+<code><a href="../reference/needed_records.html">needed_records()</a></code>. After receiving the data from herbaria,
+manually merge the obtained records with your original data set.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">redacted_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/needed_records.html">needed_records</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">redacted_info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/needed_records.html">needed_records</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="records-to-georeference">Records to Georeference<a class="anchor" aria-label="anchor" href="#records-to-georeference"></a>
 </h4>
+<p>Some records may be missing latitude and longitude values, however
+locality information can be used to assign coordinates to the record
+through georeferencing.</p>
 <p>To find data lacking coordinates but containing locality information,
-use <code><a href="../reference/need_to_georeference.html">need_to_georeference()</a></code>. Use your downloaded data from
-the first step as input. You should georeference these records and
-manually enter the information into the data set.</p>
+use <code><a href="../reference/need_to_georeference.html">need_to_georeference()</a></code>. You should georeference these
+records and then manually merge the obtain records with your original
+data set.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">to_georeference</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/need_to_georeference.html">need_to_georeference</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">to_georeference</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/need_to_georeference.html">need_to_georeference</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
 <h3 id="occurrence-data-cleaning">Occurrence Data Cleaning<a class="anchor" aria-label="anchor" href="#occurrence-data-cleaning"></a>
 </h3>
+<p>Here we walk through each cleaning function, however we also created
+a simple one-step option <code><a href="../reference/full_clean.html">full_clean()</a></code>.</p>
+<p>Example:</p>
+<pre><code>galaxdf &lt;- full_clean(galaxdf, synonyms.list = synonyms_list = c("Galax urceolata", "Galax aphylla"), 
+                        taxa.filter = "fuzzy",
+                        accepted.name = "Galax urceolata", remove.zero = TRUE,
+                        precision = TRUE, digits = 2, remove.skewed = TRUE,
+                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE))</code></pre>
+<div class="section level4">
+<h4 id="remove-duplicate-records">Remove Duplicate Records<a class="anchor" aria-label="anchor" href="#remove-duplicate-records"></a>
+</h4>
+<p>There can be an overlap of records with GBIF and iDigBio. Hence,
+duplicate records may be downloaded. To find and remove these, use
+<code><a href="../reference/remove_duplicates.html">remove_duplicates()</a></code>.</p>
+<p>Example:</p>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
+</div>
 <div class="section level4">
 <h4 id="resolve-taxon-names">Resolve Taxon Names<a class="anchor" aria-label="anchor" href="#resolve-taxon-names"></a>
 </h4>
 <p>To find data containing scientific names corresponding to your
-desired species, use <code>filter_select_name()</code>. Use your
-downloaded data from the first step as input, as well as a synonyms
-list, the accepted name, and the filter option (exact, fuzzy, or
-interactive).</p>
+desired species, use <code><a href="../reference/taxa_clean.html">taxa_clean()</a></code>. Use your downloaded data
+from the first step as input, as well as a synonyms list, the accepted
+name, and the filter option (exact, fuzzy, or interactive).</p>
 <p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu">filter_select_name</span><span class="op">(</span><span class="va">occurrence_records</span>, </span>
-<span>                                        synonyms_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asclepias curtissii"</span>, <span class="st">"Asclepias aceratoides"</span>,</span>
-<span>                                                          <span class="st">"Asclepias arenicola"</span>, <span class="st">"Oxypteryx arenicola"</span>, </span>
-<span>                                                          <span class="st">"Oxypteryx curtissii"</span><span class="op">)</span>, </span>
-<span>                                        filter <span class="op">=</span> <span class="st">"interactive"</span>, </span>
-<span>                                        accepted_name <span class="op">=</span> <span class="st">"Asclepias curtissii"</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/taxa_clean.html">taxa_clean</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">galaxdf</span>,  </span>
+<span>                      synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
+<span>                      taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>, </span>
+<span>                      accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span> <span class="co"># creates a new column with accepted name for easy comparison</span></span></code></pre>
 </div>
 <div class="section level4">
-<h4 id="clean-locality">Clean locality<a class="anchor" aria-label="anchor" href="#clean-locality"></a>
+<h4 id="remove-particular-record-bases">Remove Particular Record Bases<a class="anchor" aria-label="anchor" href="#remove-particular-record-bases"></a>
 </h4>
+<p>Sometimes, certain bases of records may want to be removed from the
+data set. To do this, we provide <code><a href="../reference/basis_clean.html">basis_clean()</a></code>. This
+function can be used interactively (<code>interactive = TRUE</code>) to
+view and inspect the types of basis of record associated with the
+records. Otherwise, this function can automate the process of removing
+particular record bases.</p>
+<p>Example:</p>
+<pre><code><span><span class="va">galaxdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdata</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
-<h4 id="find-and-remove-flagged-points">Find and remove flagged points<a class="anchor" aria-label="anchor" href="#find-and-remove-flagged-points"></a>
+<h4 id="clean-locality">Clean Locality<a class="anchor" aria-label="anchor" href="#clean-locality"></a>
 </h4>
+<div class="section level5">
+<h5 id="basic-locality-clean">Basic Locality Clean<a class="anchor" aria-label="anchor" href="#basic-locality-clean"></a>
+</h5>
+<p>Here we remove any records with missing coordinates, impossible
+coordinates, coordinates at (0,0), and any that are flagged as skewed.
+The skewed records can be identified with the
+<code>needed_records()'</code> function and row value for the
+‘InformationWitheld’ column. We also provide the option to round the
+provided latitude and longitude values to a specified number of decimal
+places.</p>
+<pre><code>galaxdf &lt;- basic_locality_clean(df = galaxdf,  
+                      remove.zero = TRUE, # Records at (0,0) are removed
+                      precision = TRUE, # latitude and longitude are rounded 
+                      digits = 2 # round to 2 decimal places
+                      remove.skewed = TRUE)</code></pre>
+</div>
+<div class="section level5">
+<h5 id="find-and-remove-flagged-points">Find and Remove Flagged Points<a class="anchor" aria-label="anchor" href="#find-and-remove-flagged-points"></a>
+</h5>
 <p>To find records that may have problematic coordinates, use
-<code><a href="../reference/find_flagged.html">find_flagged()</a></code>. This will let you interactively manually
-remove points deemed improper by viewing the points on a graph. Use your
-downloaded data from the previous step as input.</p>
+<code><a href="../reference/process_flagged.html">process_flagged()</a></code>. This function can either automate the
+process of finding and removing problematic points
+(<code>interactive = FALSE</code>) or allow for manual inspection. The
+latter will let you manually remove points deemed improper by viewing
+the points on a graph.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_flagged.html">find_flagged</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/process_flagged.html">process_flagged</a></span><span class="op">(</span><span class="va">galaxdf</span>, interactive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="final-cleaning">Final cleaning<a class="anchor" aria-label="anchor" href="#final-cleaning"></a>
-</h4>
-<p>To remove duplicate points and reduce the clustering of points, use
-our <code><a href="../reference/final_clean.html">final_clean()</a></code> function. This function also offers an
-interactive method to look at (and remove, if desired) types of basis of
-record.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">occurrence_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/final_clean.html">final_clean</a></span><span class="op">(</span><span class="va">occurrence_records</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>

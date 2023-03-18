@@ -85,9 +85,9 @@
         <dd>Find occurrence records which lack coordinate information</dd>
       </dl><dl><dt>
           
-          <code><a href="basic_locality_clean.html">basic_locality_clean()</a></code> 
+          <code><a href="full_clean.html">full_clean()</a></code> 
         </dt>
-        <dd>Locality Cleaning - Remove missing and improbable coordinates</dd>
+        <dd>Full Clean - Wrapper function to speed clean</dd>
       </dl><dl><dt>
           
           <code><a href="remove_duplicates.html">remove_duplicates()</a></code> 
@@ -100,14 +100,19 @@
         <dd>Taxonomic Cleaning - Filter and resolve taxon names</dd>
       </dl><dl><dt>
           
-          <code><a href="find_flagged.html">find_flagged()</a></code> 
+          <code><a href="basis_clean.html">basis_clean()</a></code> 
         </dt>
-        <dd>Locality Cleaning - Find possibly problematic occurrence records</dd>
+        <dd>Basis Cleaning - Removes records based on recordBasis</dd>
       </dl><dl><dt>
           
-          <code><a href="final_clean.html">final_clean()</a></code> 
+          <code><a href="basic_locality_clean.html">basic_locality_clean()</a></code> 
         </dt>
-        <dd>Perform final cleaning of data</dd>
+        <dd>Locality Cleaning - Remove missing and improbable coordinates</dd>
+      </dl><dl><dt>
+          
+          <code><a href="process_flagged.html">process_flagged()</a></code> 
+        </dt>
+        <dd>Locality Cleaning - Find possibly problematic occurrence records</dd>
       </dl></div><div class="section level2">
       <h2 id="helper-functions">Helper functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a></h2>
       
@@ -121,12 +126,12 @@
 
       <dl><dt>
           
-          <code><a href="getgbif.html">getgbif()</a></code> 
+          <code><a href="get_gbif.html">get_gbif()</a></code> 
         </dt>
         <dd>Download data from the Global Biodiversity Information Facility</dd>
       </dl><dl><dt>
           
-          <code><a href="getidigbio.html">getidigbio()</a></code> 
+          <code><a href="get_idigbio.html">get_idigbio()</a></code> 
         </dt>
         <dd>Download data from Integrated Digitized Biocollections</dd>
       </dl><dl><dt>
@@ -144,6 +149,11 @@
           <code><a href="fix_names.html">fix_names()</a></code> 
         </dt>
         <dd>gatoRs Download - Fix taxonomic name capitalization</dd>
+      </dl><dl><dt>
+          
+          <code><a href="remove_skewed.html">remove_skewed()</a></code> 
+        </dt>
+        <dd>Locality Cleaning - Removed skewed locality</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
