@@ -33,6 +33,10 @@ filter_fix_names <- function(df, synonyms.list, filter = "fuzzy", accepted.name 
     stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
 
+  if (filter != "fuzzy" & filter != "exact") {
+    stop("Invalid value for argument: filter. Value for filter must equal 'fuzzy' or 'exact'.")
+  }
+
   if (filter == "exact") {
     new_df <- data.frame()
     for (i in 1:length(synonyms.list)) {
