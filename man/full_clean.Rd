@@ -15,7 +15,9 @@ full_clean(
   remove.skewed = TRUE,
   basis.list = NA,
   remove.flagged = TRUE,
-  cluster = TRUE
+  thin.points = TRUE,
+  distance = 5,
+  reps = 100
 )
 }
 \arguments{
@@ -39,7 +41,11 @@ full_clean(
 
 \item{remove.flagged}{Default = TRUE. An option to remove points with problematic locality information.}
 
-\item{cluster}{Default = TRUE. An option to cluster geographically close occurrence records.}
+\item{thin.points}{Default = TRUE. An option to spatially thin occurrence records.}
+
+\item{distance}{Default = 1000. Distance in km to separate records.}
+
+\item{reps}{Default = 1. Number of times to perform thinning algorithm.}
 }
 \value{
 df is a data frame with the cleaned data.
@@ -47,7 +53,7 @@ df is a data frame with the cleaned data.
 \description{
 The \code{full_clean()} function performs automated cleaning steps, including options for: removing
 duplicate data points, checking locality precision, removing points with skewed coordinates,
-removing plain zero records, removing records based on basis of record, and clustering collection points.
+removing plain zero records, removing records based on basis of record, and spatially thinning collection points.
 This function also provides the option to interactively inspect and remove types of basis of record.
 }
 \details{
@@ -55,6 +61,6 @@ This function requires packages dplyr, magrittr, raster, and dismo.
 }
 \examples{
 data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, accepted.name = "Galax urceolata")
-data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", remove.flagged = FALSE, cluster = FALSE)
+data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", remove.flagged = FALSE, thin.points = FALSE)
 
 }
