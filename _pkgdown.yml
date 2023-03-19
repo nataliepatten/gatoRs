@@ -23,6 +23,7 @@ reference:
   - basis_clean
   - basic_locality_clean
   - process_flagged
+  - thin_points
 - title: Helper functions
   desc: These functions are used within the download and cleaning functions.
 - contents:
