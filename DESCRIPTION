@@ -18,7 +18,7 @@ Imports:
     magrittr,
     CoordinateCleaner,
     raster,
-    spatstat,
+    spThin,
     stringr,
     dismo,
     leaflet,
@@ -38,4 +38,4 @@ URL: https://nataliepatten.github.io/gatoRs/, https://github.com/nataliepatten/g
 BugReports: https://github.com/nataliepatten/gatoRs/issues
 Roxygen: list(markdown=TRUE)
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
