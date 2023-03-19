@@ -24,7 +24,7 @@ reference:
   - basic_locality_clean
   - process_flagged
 - title: Helper functions
-  desc: These functions are used within the download and cleaning functions
+  desc: These functions are used within the download and cleaning functions.
 - contents:
   - get_gbif
   - get_idigbio

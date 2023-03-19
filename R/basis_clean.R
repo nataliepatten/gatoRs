@@ -1,4 +1,4 @@
-#' @title Basis Cleaning - Removes records based on recordBasis
+#' @title Basis Cleaning - Removes records with certain record basis
 #'
 #' @description
 #' The `basis_clean()` function removes records based on basisOfRecord column

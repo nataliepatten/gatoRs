@@ -1,4 +1,4 @@
-#' @title Download data from the Global Biodiversity Information Facility
+#' @title Used in gators_download() - Download data from the Global Biodiversity Information Facility
 #'
 #' @description
 #' The `get_gbif()` function queries the Global Biodiversity Information Facility (GBIF) for your desired species.

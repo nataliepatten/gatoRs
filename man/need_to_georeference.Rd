@@ -2,7 +2,7 @@
 % Please edit documentation in R/need_to_georeference.R
 \name{need_to_georeference}
 \alias{need_to_georeference}
-\title{Find occurrence records which lack coordinate information}
+\title{Identify Missing Information - Find records which lack coordinate information}
 \usage{
 need_to_georeference(df)
 }

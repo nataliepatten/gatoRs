@@ -1,4 +1,4 @@
-#' @title Locality Cleaning - Removed skewed locality
+#' @title Used in basic_locality_clean() - Removed skewed locality
 #'
 #' @description
 #' The `remove_skewed()` function identifies and removes records where locality has been skewed.

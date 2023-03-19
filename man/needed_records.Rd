@@ -2,7 +2,7 @@
 % Please edit documentation in R/needed_records.R
 \name{needed_records}
 \alias{needed_records}
-\title{Find records with redacted or missing data}
+\title{Identify Missing Information - Find records with redacted or missing data}
 \usage{
 needed_records(df)
 }

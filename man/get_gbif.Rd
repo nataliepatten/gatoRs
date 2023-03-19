@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_gbif.R
 \name{get_gbif}
 \alias{get_gbif}
-\title{Download data from the Global Biodiversity Information Facility}
+\title{Used in gators_download() - Download data from the Global Biodiversity Information Facility}
 \usage{
 get_gbif(synonyms.list, gbif.match = "fuzzy")
 }

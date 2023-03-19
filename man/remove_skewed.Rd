@@ -2,7 +2,7 @@
 % Please edit documentation in R/remove_skewed.R
 \name{remove_skewed}
 \alias{remove_skewed}
-\title{Locality Cleaning - Removed skewed locality}
+\title{Used in basic_locality_clean() - Removed skewed locality}
 \usage{
 remove_skewed(df)
 }

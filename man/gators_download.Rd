@@ -2,7 +2,7 @@
 % Please edit documentation in R/gators_download.R
 \name{gators_download}
 \alias{gators_download}
-\title{Download specimen data from both iDigBio and GBIF}
+\title{Download - Download specimen data from both iDigBio and GBIF}
 \usage{
 gators_download(
   synonyms.list,

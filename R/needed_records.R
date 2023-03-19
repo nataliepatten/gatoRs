@@ -1,4 +1,4 @@
-#' @title Find records with redacted or missing data
+#' @title Identify Missing Information - Find records with redacted or missing data
 #'
 #' @description
 #' The `needed_records()` function identifies records with flags. This indicates that information

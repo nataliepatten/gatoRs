@@ -2,7 +2,7 @@
 % Please edit documentation in R/fix_columns.R
 \name{fix_columns}
 \alias{fix_columns}
-\title{Fill out taxonomic name columns}
+\title{Used in gators_download() - Fill out taxonomic name columns}
 \usage{
 fix_columns(df)
 }

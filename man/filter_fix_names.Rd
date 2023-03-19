@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_fix_names.R
 \name{filter_fix_names}
 \alias{filter_fix_names}
-\title{gatoRs Download -  Filter iDigBio results by scientific name}
+\title{Used in gators_download() -  Filter iDigBio results by scientific name}
 \usage{
 filter_fix_names(df, synonyms.list, filter = "fuzzy", accepted.name = NA)
 }

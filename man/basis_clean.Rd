@@ -2,7 +2,7 @@
 % Please edit documentation in R/basis_clean.R
 \name{basis_clean}
 \alias{basis_clean}
-\title{Basis Cleaning - Removes records based on recordBasis}
+\title{Basis Cleaning - Removes records with certain record basis}
 \usage{
 basis_clean(df, basis.list = NA)
 }

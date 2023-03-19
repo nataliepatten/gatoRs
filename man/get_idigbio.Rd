@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_idigbio.R
 \name{get_idigbio}
 \alias{get_idigbio}
-\title{Download data from Integrated Digitized Biocollections}
+\title{Used in gators_download() - Download data from Integrated Digitized Biocollections}
 \usage{
 get_idigbio(synonyms.list)
 }

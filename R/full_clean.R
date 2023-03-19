@@ -1,4 +1,4 @@
-#' @title Full Clean - Wrapper function to speed clean
+#' @title Full Cleaning - Wrapper function to speed clean
 #'
 #' @description
 #' The `full_clean()` function performs automated cleaning steps, including options for: removing

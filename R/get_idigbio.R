@@ -1,4 +1,4 @@
-#' @title Download data from Integrated Digitized Biocollections
+#' @title Used in gators_download() - Download data from Integrated Digitized Biocollections
 #'
 #' @description
 #' The `get_idigbio()` function queries iDigBio for your desired species.

@@ -1,4 +1,4 @@
-#' @title Fill out taxonomic name columns
+#' @title Used in gators_download() - Fill out taxonomic name columns
 #'
 #' @description
 #' The `fix_columns()` function fills out the taxonomic name columns based on available information in the data set.

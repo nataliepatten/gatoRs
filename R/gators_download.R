@@ -1,4 +1,4 @@
-#' @title Download specimen data from both iDigBio and GBIF
+#' @title Download - Download specimen data from both iDigBio and GBIF
 #'
 #' @description
 #' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species. Data returned includes:

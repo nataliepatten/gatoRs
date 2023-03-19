@@ -2,7 +2,7 @@
 % Please edit documentation in R/full_clean.R
 \name{full_clean}
 \alias{full_clean}
-\title{Full Clean - Wrapper function to speed clean}
+\title{Full Cleaning - Wrapper function to speed clean}
 \usage{
 full_clean(
   df,

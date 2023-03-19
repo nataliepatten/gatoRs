@@ -1,4 +1,4 @@
-#' @title gatoRs Download - Fix taxonomic name capitalization
+#' @title Used in gators_download() - Fix taxonomic name capitalization
 #'
 #' @description
 #' The `fix_names()` function fixes the capitalization of species names in the data frame provided to align

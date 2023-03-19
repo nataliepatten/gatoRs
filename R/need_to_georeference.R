@@ -1,4 +1,4 @@
-#' @title Find occurrence records which lack coordinate information
+#' @title Identify Missing Information - Find records which lack coordinate information
 #'
 #' @description
 #' The `need_to_georeference()` function allows you to find records that are missing coordinates
