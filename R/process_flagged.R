@@ -38,9 +38,13 @@ process_flagged <- function(df, interactive = TRUE) {
   # workaround for clean_coordinates since it relies on rownames:
   # https://github.com/ropensci/CoordinateCleaner/issues/24
   rownames(df) <- 1:nrow(df)
-  df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
-
-  if (!interactive) return(df2)
+  if (interactive) {
+    df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
+  }
+  else {
+    df <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "clean")
+    return(df)
+  }
 
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
