@@ -39,10 +39,14 @@ process_flagged <- function(df, interactive = TRUE) {
   # https://github.com/ropensci/CoordinateCleaner/issues/24
   rownames(df) <- 1:nrow(df)
   if (interactive) {
-    df2 <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "spatialvalid")
+    df2 <- suppressWarnings(CoordinateCleaner::clean_coordinates(df,
+                            lon = "longitude", lat = "latitude", species = "scientificName",
+                            value = "spatialvalid"))
   }
   else {
-    df <- CoordinateCleaner::clean_coordinates(df, lon = "longitude", lat = "latitude", species = "scientificName", value = "clean")
+    df <- suppressWarnings(CoordinateCleaner::clean_coordinates(df,
+                           lon = "longitude", lat = "latitude", species = "scientificName",
+                           value = "clean"))
     return(df)
   }
 
