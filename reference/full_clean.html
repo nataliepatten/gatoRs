@@ -127,11 +127,11 @@ This function also provides the option to interactively inspect and remove types
 
 
 <dt>distance</dt>
-<dd><p>Default = 1000. Distance in km to separate records.</p></dd>
+<dd><p>Default = 5. Distance in km to separate records.</p></dd>
 
 
 <dt>reps</dt>
-<dd><p>Default = 1. Number of times to perform thinning algorithm.</p></dd>
+<dd><p>Default = 100. Number of times to perform thinning algorithm.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -177,12 +177,12 @@ This function also provides the option to interactively inspect and remove types
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 52 of 2931 records, EQ = 0.02.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ********************************************** </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Beginning Spatial Thinning.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Script Started at: Sun Mar 19 19:04:19 2023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Script Started at: Sun Mar 19 19:25:51 2023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lat.long.thin.count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 635 636 637 638 639 640 641 642 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3   3  13  25  33  15   6   2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 634 636 637 638 639 640 641 642 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1   6  18  23  26  19   6   1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Maximum number of records after thinning: 642"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Number of data.frames with max records: 2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Number of data.frames with max records: 1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "No files written for this run."</span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.skewed <span class="op">=</span> <span class="cn">FALSE</span>, basis.list <span class="op">=</span> <span class="st">"HUMAN_OBSERVATION"</span>, remove.flagged <span class="op">=</span> <span class="cn">FALSE</span>, thin.points <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Current scientific names: </span>
@@ -192,7 +192,8 @@ This function also provides the option to interactively inspect and remove types
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Scientific names kept: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Galax urceolata (Poir.) Brummitt" "Galax urceolata"                 </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Types of basis of records: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "HUMAN_OBSERVATION"  "PRESERVED_SPECIMEN" "PreservedSpecimen" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "HUMAN_OBSERVATION"  "PRESERVED_SPECIMEN" "MATERIAL_SAMPLE"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "PreservedSpecimen" </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Basis of records kept: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "HUMAN_OBSERVATION"</span>
 <span class="r-in"><span></span></span>

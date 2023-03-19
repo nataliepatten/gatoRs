@@ -69,11 +69,11 @@ if the data frame already contains an accepted_name column.</p></dd>
 
 
 <dt>distance</dt>
-<dd><p>Default = 1000. Distance in km to separate records.</p></dd>
+<dd><p>Default = 5. Distance in km to separate records.</p></dd>
 
 
 <dt>reps</dt>
-<dd><p>Default = 1. Number of times to perform thinning algorithm.</p></dd>
+<dd><p>Default = 100. Number of times to perform thinning algorithm.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -92,12 +92,12 @@ if the data frame already contains an accepted_name column.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">thin_points</span><span class="op">(</span><span class="va">data</span>, accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ********************************************** </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Beginning Spatial Thinning.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Script Started at: Sun Mar 19 19:06:00 2023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Script Started at: Sun Mar 19 19:27:28 2023</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lat.long.thin.count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4044 4045 4046 4047 4048 4049 4050 4051 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1    7   11   14   32   27    6    2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Maximum number of records after thinning: 4051"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Number of data.frames with max records: 2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4044 4045 4046 4047 4048 4049 4050 4052 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1    3   11   20   28   29    7    1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Maximum number of records after thinning: 4052"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Number of data.frames with max records: 1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "No files written for this run."</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
