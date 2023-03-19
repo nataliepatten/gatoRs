@@ -14,6 +14,7 @@ full_clean(
   digits = 2,
   remove.skewed = TRUE,
   basis.list = NA,
+  remove.flagged = TRUE,
   cluster = TRUE
 )
 }
@@ -36,6 +37,8 @@ full_clean(
 
 \item{basis.list}{A list of basis to keep. If a list is not supplied, this filter will not occur.}
 
+\item{remove.flagged}{Default = TRUE. An option to remove points with problematic locality information.}
+
 \item{cluster}{Default = TRUE. An option to cluster geographically close occurrence records.}
 }
 \value{
@@ -52,6 +55,6 @@ This function requires packages dplyr, magrittr, raster, and dismo.
 }
 \examples{
 data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, accepted.name = "Galax urceolata")
-data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", cluster = FALSE)
+data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", remove.flagged = FALSE, cluster = FALSE)
 
 }
