@@ -12,9 +12,9 @@ thin_points(df, accepted.name = NA, distance = 5, reps = 100)
 \item{accepted.name}{Accepted name of your species. This argument is not required
 if the data frame already contains an accepted_name column.}
 
-\item{distance}{Default = 1000. Distance in km to separate records.}
+\item{distance}{Default = 5. Distance in km to separate records.}
 
-\item{reps}{Default = 1. Number of times to perform thinning algorithm.}
+\item{reps}{Default = 100. Number of times to perform thinning algorithm.}
 }
 \value{
 df is a data frame with the cleaned data.

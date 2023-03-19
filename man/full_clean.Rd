@@ -43,9 +43,9 @@ full_clean(
 
 \item{thin.points}{Default = TRUE. An option to spatially thin occurrence records.}
 
-\item{distance}{Default = 1000. Distance in km to separate records.}
+\item{distance}{Default = 5. Distance in km to separate records.}
 
-\item{reps}{Default = 1. Number of times to perform thinning algorithm.}
+\item{reps}{Default = 100. Number of times to perform thinning algorithm.}
 }
 \value{
 df is a data frame with the cleaned data.

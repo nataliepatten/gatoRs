@@ -9,8 +9,8 @@
 #' @param df Data frame of occurrence records.
 #' @param accepted.name Accepted name of your species. This argument is not required
 #' if the data frame already contains an accepted_name column.
-#' @param distance Default = 1000. Distance in km to separate records.
-#' @param reps Default = 1. Number of times to perform thinning algorithm.
+#' @param distance Default = 5. Distance in km to separate records.
+#' @param reps Default = 100. Number of times to perform thinning algorithm.
 #'
 #' @examples
 #' data <- thin_points(data, accepted.name = "Galax urceolata")
