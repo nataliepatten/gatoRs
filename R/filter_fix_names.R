@@ -15,8 +15,8 @@
 #' @param accepted.name The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.
 #'
 #' @examples
-#' data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
-#' data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
+#' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
+#' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results.
 #'

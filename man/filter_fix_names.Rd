@@ -28,7 +28,7 @@ desired species.
 This function requires no additional packages.
 }
 \examples{
-data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
-data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
+clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
+clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
 
 }

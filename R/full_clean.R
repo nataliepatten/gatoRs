@@ -18,8 +18,8 @@
 #' @inheritParams thin_points
 #'
 #' @examples
-#' data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
-#' data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
+#' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
+#' clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
 #'
