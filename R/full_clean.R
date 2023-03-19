@@ -18,8 +18,8 @@
 #' @inheritParams thin_points
 #'
 #' @examples
-#' data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, accepted.name = "Galax urceolata")
-#' data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", remove.flagged = FALSE, thin.points = FALSE)
+#' data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
+#' data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
 #'
@@ -30,22 +30,23 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
                         precision = TRUE, digits = 2, remove.skewed = TRUE,
                         basis.list = NA, remove.flagged = TRUE, thin.points = TRUE, distance = 5, reps = 100) {
 
-  df <- remove_duplicates(df)
-  df <- taxa_clean(df = df,  synonyms.list = synonyms.list, taxa.filter = taxa.filter, accepted.name =  accepted.name)
+  suppress_output(df <- remove_duplicates(df))
+  suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
+               taxa.filter = taxa.filter, accepted.name =  accepted.name))
 
   if(!is.na(basis.list)){
-    df <- basis_clean(df, basis.list = basis.list)
+    suppress_output(df <- basis_clean(df, basis.list = basis.list))
   }
 
-  df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision,
-                             digits = digits, remove.skewed = remove.skewed)
+  suppress_output(df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision,
+                             digits = digits, remove.skewed = remove.skewed))
 
   if (remove.flagged != TRUE & remove.flagged != FALSE) {
     # warning, since the rest of cleaning can occur even if this arg is invalid
     warning("Invalid value for argument: remove.flagged. Value for remove.flagged must equal 'TRUE' or 'FALSE'.")
   }
   else if (remove.flagged == TRUE) {
-    df <- process_flagged(df, interactive = FALSE)
+    suppress_output(df <- process_flagged(df, interactive = FALSE))
   }
 
   if (thin.points != TRUE & thin.points != FALSE) {
@@ -53,7 +54,7 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
     warning("Invalid value for argument: thin.points. Value for thin.points must equal 'TRUE' or 'FALSE'.")
   }
   else if (thin.points == TRUE) {
-   df <- thin_points(df, accepted.name = accepted.name, distance = distance, reps = reps)
+   suppress_output(df <- thin_points(df, accepted.name = accepted.name, distance = distance, reps = reps))
   }
 
   return(df)

@@ -60,7 +60,7 @@ This function also provides the option to interactively inspect and remove types
 This function requires packages dplyr, magrittr, raster, and dismo.
 }
 \examples{
-data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, accepted.name = "Galax urceolata")
-data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, basis.list = "HUMAN_OBSERVATION", remove.flagged = FALSE, thin.points = FALSE)
+data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
+data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
 
 }
