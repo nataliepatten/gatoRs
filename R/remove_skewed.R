@@ -5,6 +5,8 @@
 #'
 #' @param df A data frame downloaded with `gators_download()`.
 #'
+#' @examples
+#' data <- remove_skewed(data)
 #'
 #' @return A data frame with records remove only records for which locality was skewed.
 #'
