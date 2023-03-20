@@ -82,24 +82,7 @@ to_georeference <- need_to_georeference(galaxdf)
 ```
 
 ### Occurrence Data Cleaning  
-Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`.  
-
-Example:
-```
-galaxdf <- full_clean(df = galaxdf, synonyms.list = c("Galax urceolata", "Galax aphylla"), 
-                        taxa.filter = "fuzzy",
-                        accepted.name = "Galax urceolata", remove.zero = TRUE,
-                        precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"), cluster = TRUE)
-```
-#### Remove Duplicate Records
-There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. 
-To find and remove these, use `remove_duplicates()`.
-
-Example:
-```
-galaxdf <- remove_duplicates(galaxdf)
-```
+Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`, see below.   
 
 #### Resolve Taxon Names
 To find data containing scientific names corresponding to your desired species, use `taxa_clean()`. Use your downloaded data from the first step as input, as well as a synonyms list, the accepted name, and the filter option (exact, fuzzy, or interactive).
@@ -141,4 +124,26 @@ finding and removing problematic points (`interactive = FALSE`) or allow for man
 Example: 
 ```
 galaxdf <- process_flagged(galaxdf, interactive = TRUE)
+```
+
+#### Remove Duplicate Records
+There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. To find and remove records with identical event dates and identical coordinates, use `remove_duplicates()`.
+
+Example:
+```
+galaxdf <- remove_duplicates(galaxdf)
+```
+
+#### Full Clean
+
+Example:
+```
+galaxdf <- full_clean(df = galaxdf, 
+                      synonyms.list = c("Galax urceolata", "Galax aphylla"), 
+                      taxa.filter = "fuzzy",
+                      accepted.name = "Galax urceolata", remove.zero = TRUE,
+                      precision = TRUE, digits = 2, remove.skewed = TRUE,
+                      basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"),
+                      remove.flagged = TRUE, thin.points = TRUE, 
+                      distance = 5, reps = 100)
 ```
