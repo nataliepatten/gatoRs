@@ -17,7 +17,10 @@ full_clean(
   remove.flagged = TRUE,
   thin.points = TRUE,
   distance = 5,
-  reps = 100
+  reps = 100,
+  one.point.per.pixel = TRUE,
+  raster = NA,
+  resolution = 0.5
 )
 }
 \arguments{
@@ -46,6 +49,12 @@ full_clean(
 \item{distance}{Default = 5. Distance in km to separate records.}
 
 \item{reps}{Default = 100. Number of times to perform thinning algorithm.}
+
+\item{one.point.per.pixel}{Default = TRUE. An option to only retain one point per pixel.}
+
+\item{raster}{Raster object which will be used for ecological niche comparisons.}
+
+\item{resolution}{Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.}
 }
 \value{
 df is a data frame with the cleaned data.

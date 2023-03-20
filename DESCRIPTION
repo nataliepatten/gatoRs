@@ -22,7 +22,8 @@ Imports:
     stringr,
     dismo,
     leaflet,
-    lubridate
+    lubridate, 
+    spatstat.geom
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyData: true

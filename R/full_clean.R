@@ -15,7 +15,9 @@
 #' @param basis.list A list of basis to keep. If a list is not supplied, this filter will not occur.
 #' @param remove.flagged Default = TRUE. An option to remove points with problematic locality information.
 #' @param thin.points Default = TRUE. An option to spatially thin occurrence records.
+#' @param one.point.per.pixel Default = TRUE. An option to only retain one point per pixel.
 #' @inheritParams thin_points
+#' @inheritParams one_point_per_pixel
 #'
 #' @examples
 #' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
@@ -28,7 +30,10 @@
 full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
                         accepted.name = NA, remove.zero = TRUE,
                         precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = NA, remove.flagged = TRUE, thin.points = TRUE, distance = 5, reps = 100) {
+                        basis.list = NA, remove.flagged = TRUE, thin.points = TRUE, distance = 5, reps = 100,
+                       one.point.per.pixel = TRUE, raster = NA,
+                       resolution = 0.5
+                       ) {
 
   suppress_output(df <- remove_duplicates(df))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
@@ -55,6 +60,12 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
   }
   else if (thin.points == TRUE) {
    suppress_output(df <- thin_points(df, accepted.name = accepted.name, distance = distance, reps = reps))
+  }
+
+  if(one.point.per.pixel == TRUE){
+    df <- one.point.per.pixel(df, raster = raster, resolution = resolution)
+  } else{
+    df <- df
   }
 
   return(df)

@@ -5,6 +5,9 @@ vignette: >
   %\VignetteIndexEntry{"Introduction to gatoRs"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - vignettes/img/map1.png
+  - vignettes/img/map2.png
 ---
 
 gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools to streamline the downloading and processing biodiversity data.
@@ -47,12 +50,7 @@ galaxdf <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla")
                 idigbio.filter = TRUE)
 ```
 
-Optional parameters include `gbif.match` and `idigbio.filter`. `gbif.match` allows you to search by fuzzy matching records to the scientific name (default, `gbif.match = "fuzzy"`) or to search for the associated species key using GBIF’s backbone taxonomy system (`gbif.match = "code"`).
-
-If set to TRUE (default, recommended), `idigbio.filter` fuzzy matches taxonomic columns to provided taxon names. This filters the data set for relevant data.
-
-The function also generates scientificName, genus, specificEpithet, and infraspecificEpithet columns based on available data and parsing and then fixes incorrect capitalization of species names to give the data a cleaner look.
-
+___   
 
 
 ## Data Processing    
@@ -97,12 +95,11 @@ galaxdf <- taxa_clean(df = galaxdf,
 
 #### Remove Particular Record Bases
 Sometimes, certain bases of records may want to be removed from the data set. To do this, we provide `basis_clean()`. 
-This function can be used interactively (`interactive = TRUE`) to view and inspect the types of basis of record associated
-with the records. Otherwise, this function can automate the process of removing particular record bases.
+This function can be used interactively by simply supplying a df, but no basis.list value.If a list of basis is provided, the function will select only records where the basisOfRecord value fuzzy match values in the list provided.
 
 Example:
 ```
-galaxdf <- basis_clean(galaxdf, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
+galaxdf <- basis_clean(galaxdf, basis.list = c("Preserved Specimen","Physical specimen"))
 ```
 
 #### Clean Locality  
@@ -118,13 +115,26 @@ galaxdf <- basic_locality_clean(df = galaxdf,
 ```
 
 ##### Find and Remove Flagged Points
-To find records that may have problematic coordinates, use `process_flagged()`. This function can either automate the process of
-finding and removing problematic points (`interactive = FALSE`) or allow for manual inspection. The latter will let you manually remove points deemed improper by viewing the points on a graph.
+To find records that may have problematic coordinates, use `process_flagged()`. This function can either automate the process of finding and removing problematic points (`interactive = FALSE`) or allow for manual inspection. The latter will let you manually remove points deemed improper by viewing the points on a graph.
+
+This function utilizes `CoordinateCleaner::clean_coordinates()`. 
 
 Example: 
 ```
 galaxdf <- process_flagged(galaxdf, interactive = TRUE)
 ```
+
+```{r echo = FALSE, fig.align='center'}
+knitr::include_graphics("img/map1.png", dpi = 200)
+```
+**Figure 1**: Interactive map that appears when `process_flagged()` is run.    
+
+
+
+```{r echo = FALSE, fig.align='center'}
+knitr::include_graphics("img/map2.png", dpi = 200)
+```
+**Figure 2**: Interactive map that appears after we remove points interactively with `process_flagged()`. Points 1, 3, 5, 6, and 7 were removed.
 
 #### Remove Duplicate Records
 There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. To find and remove records with identical event dates and identical coordinates, use `remove_duplicates()`.
@@ -134,7 +144,29 @@ Example:
 galaxdf <- remove_duplicates(galaxdf)
 ```
 
-#### Full Clean
+#### Spatial Correction
+The last processing step is spatial correction. Collection efforts can lead to the clustering of points and filtering can help reduce this clustering. Here we provide functions to reduce the effects of sampling bias using randomization approach and retain only one point per pixel. 
+
+##### Spatial thining 
+We thin points by utilizing `spThin::thin()`. 
+
+Example:
+```
+galaxdf <- thin_points(galaxdf, 
+                       distance = 5, 
+                       replic)
+```
+
+##### One Point Per Pixel 
+Maxent will only retain one point per pixel. To make the ecological niche analysis comparable, we will retain only one point per pixel.
+
+Example:
+```
+galaxdf <- one_point_per_pixel(galaxdf, 
+                       resolution = 0.5 # for 30 arc sec raster layers)
+```
+
+### Full Clean
 
 Example:
 ```
@@ -143,7 +175,8 @@ galaxdf <- full_clean(df = galaxdf,
                       taxa.filter = "fuzzy",
                       accepted.name = "Galax urceolata", remove.zero = TRUE,
                       precision = TRUE, digits = 2, remove.skewed = TRUE,
-                      basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"),
+                      basis.list = c("Preserved Specimen","Physical specimen"),
                       remove.flagged = TRUE, thin.points = TRUE, 
-                      distance = 5, reps = 100)
+                      distance = 5, reps = 100, 
+                      one.point.per.pixel = TRUE, raster = NA, resolution = 0.5)
 ```
