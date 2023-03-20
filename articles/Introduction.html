@@ -150,19 +150,7 @@ when <code>gbif_match = "code"</code>.</p>
 <span>                filename <span class="op">=</span> <span class="st">"base_folder/my_file.csv"</span>, <span class="co"># Location to save file - must end in .csv</span></span>
 <span>                gbif.match <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
 <span>                idigbio.filter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-<p>Optional parameters include <code>gbif.match</code> and
-<code>idigbio.filter</code>. <code>gbif.match</code> allows you to
-search by fuzzy matching records to the scientific name (default,
-<code>gbif.match = "fuzzy"</code>) or to search for the associated
-species key using GBIF’s backbone taxonomy system
-(<code>gbif.match = "code"</code>).</p>
-<p>If set to TRUE (default, recommended), <code>idigbio.filter</code>
-fuzzy matches taxonomic columns to provided taxon names. This filters
-the data set for relevant data.</p>
-<p>The function also generates scientificName, genus, specificEpithet,
-and infraspecificEpithet columns based on available data and parsing and
-then fixes incorrect capitalization of species names to give the data a
-cleaner look.</p>
+<hr>
 </div>
 </div>
 <div class="section level2">
@@ -229,12 +217,12 @@ name, and the filter option (exact, fuzzy, or interactive).</p>
 </h4>
 <p>Sometimes, certain bases of records may want to be removed from the
 data set. To do this, we provide <code><a href="../reference/basis_clean.html">basis_clean()</a></code>. This
-function can be used interactively (<code>interactive = TRUE</code>) to
-view and inspect the types of basis of record associated with the
-records. Otherwise, this function can automate the process of removing
-particular record bases.</p>
+function can be used interactively by simply supplying a df, but no
+basis.list value.If a list of basis is provided, the function will
+select only records where the basisOfRecord value fuzzy match values in
+the list provided.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdf</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdf</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Preserved Specimen"</span>,<span class="st">"Physical specimen"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="clean-locality">Clean Locality<a class="anchor" aria-label="anchor" href="#clean-locality"></a>
@@ -264,8 +252,15 @@ process of finding and removing problematic points
 (<code>interactive = FALSE</code>) or allow for manual inspection. The
 latter will let you manually remove points deemed improper by viewing
 the points on a graph.</p>
+<p>This function utilizes
+<code><a href="https://ropensci.github.io/CoordinateCleaner/reference/clean_coordinates.html" class="external-link">CoordinateCleaner::clean_coordinates()</a></code>.</p>
 <p>Example:</p>
 <pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/process_flagged.html">process_flagged</a></span><span class="op">(</span><span class="va">galaxdf</span>, interactive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+<p><img src="img/map1.png" width="753" style="display: block; margin: auto;"><strong>Figure 1</strong>: Interactive map that appears when
+<code><a href="../reference/process_flagged.html">process_flagged()</a></code> is run.</p>
+<p><img src="img/map2.png" width="736" style="display: block; margin: auto;"><strong>Figure 2</strong>: Interactive map that appears after we remove
+points interactively with <code><a href="../reference/process_flagged.html">process_flagged()</a></code>. Points 1, 3,
+5, 6, and 7 were removed.</p>
 </div>
 </div>
 <div class="section level4">
@@ -279,18 +274,46 @@ identical event dates and identical coordinates, use
 <pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
-<h4 id="full-clean">Full Clean<a class="anchor" aria-label="anchor" href="#full-clean"></a>
+<h4 id="spatial-correction">Spatial Correction<a class="anchor" aria-label="anchor" href="#spatial-correction"></a>
 </h4>
+<p>The last processing step is spatial correction. Collection efforts
+can lead to the clustering of points and filtering can help reduce this
+clustering. Here we provide functions to reduce the effects of sampling
+bias using randomization approach and retain only one point per
+pixel.</p>
+<div class="section level5">
+<h5 id="spatial-thining">Spatial thining<a class="anchor" aria-label="anchor" href="#spatial-thining"></a>
+</h5>
+<p>We thin points by utilizing <code><a href="https://rdrr.io/pkg/spThin/man/thin.html" class="external-link">spThin::thin()</a></code>.</p>
+<p>Example:</p>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/thin_points.html">thin_points</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
+<span>                       distance <span class="op">=</span> <span class="fl">5</span>, </span>
+<span>                       <span class="va">replic</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level5">
+<h5 id="one-point-per-pixel">One Point Per Pixel<a class="anchor" aria-label="anchor" href="#one-point-per-pixel"></a>
+</h5>
+<p>Maxent will only retain one point per pixel. To make the ecological
+niche analysis comparable, we will retain only one point per pixel.</p>
+<p>Example:</p>
+<pre><code>galaxdf &lt;- one_point_per_pixel(galaxdf, 
+                       resolution = 0.5 # for 30 arc sec raster layers)</code></pre>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="full-clean">Full Clean<a class="anchor" aria-label="anchor" href="#full-clean"></a>
+</h3>
 <p>Example:</p>
 <pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/full_clean.html">full_clean</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">galaxdf</span>, </span>
 <span>                      synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
 <span>                      taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
 <span>                      accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                      precision <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span>, remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                      basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FossilSpecimen"</span>, <span class="st">"FOSSIL_SPECIMEN"</span><span class="op">)</span>,</span>
+<span>                      basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Preserved Specimen"</span>,<span class="st">"Physical specimen"</span><span class="op">)</span>,</span>
 <span>                      remove.flagged <span class="op">=</span> <span class="cn">TRUE</span>, thin.points <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                      distance <span class="op">=</span> <span class="fl">5</span>, reps <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre>
-</div>
+<span>                      distance <span class="op">=</span> <span class="fl">5</span>, reps <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>                      one.point.per.pixel <span class="op">=</span> <span class="cn">TRUE</span>, raster <span class="op">=</span> <span class="cn">NA</span>, resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

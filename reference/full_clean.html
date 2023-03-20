@@ -76,7 +76,10 @@ This function also provides the option to interactively inspect and remove types
 <span>  remove.flagged <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  thin.points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  distance <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>  reps <span class="op">=</span> <span class="fl">100</span></span>
+<span>  reps <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  one.point.per.pixel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  raster <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -133,6 +136,18 @@ This function also provides the option to interactively inspect and remove types
 <dt>reps</dt>
 <dd><p>Default = 100. Number of times to perform thinning algorithm.</p></dd>
 
+
+<dt>one.point.per.pixel</dt>
+<dd><p>Default = TRUE. An option to only retain one point per pixel.</p></dd>
+
+
+<dt>raster</dt>
+<dd><p>Raster object which will be used for ecological niche comparisons.</p></dd>
+
+
+<dt>resolution</dt>
+<dd><p>Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -148,7 +163,9 @@ This function also provides the option to interactively inspect and remove types
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">3</span>, basis.list <span class="op">=</span> <span class="st">"HUMAN_OBSERVATION"</span>, accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in one.point.per.pixel(df, raster = raster, resolution = resolution):</span> could not find function "one.point.per.pixel"</span>
 <span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.skewed <span class="op">=</span> <span class="cn">FALSE</span>, remove.flagged <span class="op">=</span> <span class="cn">FALSE</span>, thin.points <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in one.point.per.pixel(df, raster = raster, resolution = resolution):</span> could not find function "one.point.per.pixel"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
