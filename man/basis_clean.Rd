@@ -4,12 +4,14 @@
 \alias{basis_clean}
 \title{Basis Cleaning - Removes records with certain record basis}
 \usage{
-basis_clean(df, basis.list = NA)
+basis_clean(df, basis.list = NA, basis.of.record = "basisOfRecord")
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
 \item{basis.list}{A list of basis to keep. If a list is not supplied, the filter will be interactive and users must respond to the function.}
+
+\item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
 }
 \description{
 The \code{basis_clean()} function removes records based on basisOfRecord column
