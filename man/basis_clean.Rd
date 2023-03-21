@@ -15,6 +15,6 @@ basis_clean(df, basis.list = NA)
 The \code{basis_clean()} function removes records based on basisOfRecord column
 }
 \examples{
-data <- basis_clean(data, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
+data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 
 }

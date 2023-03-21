@@ -7,7 +7,7 @@
 #' @param basis.list A list of basis to keep. If a list is not supplied, the filter will be interactive and users must respond to the function.
 #'
 #' @examples
-#' data <- basis_clean(data, basis.list = c("FossilSpecimen", "FOSSIL_SPECIMEN"))
+#' data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 #'
 #' @export
 
