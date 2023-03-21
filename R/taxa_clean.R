@@ -12,6 +12,7 @@
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param synonyms.list A list of synonyms for a species.
 #' @param taxa.filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
+#' @param scientific.name Default = "scientificName". The name of the scientific name column in the data frame.
 #' @param accepted.name The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.
 #'
 #' @examples
@@ -25,7 +26,7 @@
 #' @importFrom dplyr filter mutate
 #' @importFrom magrittr "%>%"
 
-taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", accepted.name = NA) {
+taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name = "scientificName", accepted.name = NA) {
   if (NROW(df) == 0) return(df)
 
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
@@ -36,42 +37,41 @@ taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", accepted.name =
   }
 
   message("Current scientific names: ")
-  print(unique(df$scientificName))
+  print(unique(df[[scientific.name]]))
   message("User selected a(n) ", taxa.filter, " match.")
 
   if (taxa.filter == "interactive") {
-      message("List of scientific names in the data set: ")
-      print(unique(df$scientificName))
       input <- readline(prompt = "Would you like to remove any records from the data set? Enter Y for yes or N for no. ")
       new_df <- df
       while (input == "Y" | input == "y") {
           type <- readline(prompt = "Enter the scientific name to remove exactly as it is written. ")
-          new_df <- new_df[new_df$scientificName != as.character(type), ]
+          new_df <- new_df[new_df[[scientific.name]] != as.character(type), ]
           message("Scientific names kept: ")
-          print(unique(new_df$scientificName))
+          print(unique(new_df[[scientific.name]]))
           input <- readline(prompt = "Would you like to remove any additional records based on scientific name? Enter Y for yes or N for no. ")
       }
   } else if (taxa.filter == "exact") {
+      old_df <- df
       new_df <- data.frame()
-
       for (i in 1:length(synonyms.list)) {
           taxa <- synonyms.list[i]
-          df_taxa <- df[df$scientificName == taxa, ]
+          df_taxa <- old_df[old_df[[scientific.name]] == taxa, ]
+          old_df <- old_df[-(which(old_df[[scientific.name]] == taxa)), ]
           new_df <- rbind(new_df, df_taxa)
-
       }
       message("Scientific names kept: ")
-      print(unique(new_df$scientificName))
+      print(unique(new_df[[scientific.name]]))
   } else if (taxa.filter == "fuzzy") {
+      old_df <- df
       new_df <- data.frame()
-
         for (i in 1:length(synonyms.list)) {
             taxa <- synonyms.list[i]
-            df_taxa <- df[agrepl(taxa, df$scientificName, ignore.case = TRUE), ]
+            df_taxa <- old_df[agrepl(taxa, old_df[[scientific.name]], ignore.case = TRUE), ]
+            old_df <- old_df[-(which(agrepl(taxa, old_df[[scientific.name]], ignore.case = TRUE))), ]
             new_df <- rbind(new_df, df_taxa)
         }
       message("Scientific names kept: ")
-      print(unique(new_df$scientificName))
+      print(unique(new_df[[scientific.name]]))
   } else {
     message("Filter option is not avaliable. Please choose 'fuzzy', 'exact', or 'interactive'.")
   }

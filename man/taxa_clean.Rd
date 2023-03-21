@@ -4,7 +4,13 @@
 \alias{taxa_clean}
 \title{Taxonomic Cleaning - Filter and resolve taxon names}
 \usage{
-taxa_clean(df, synonyms.list, taxa.filter = "fuzzy", accepted.name = NA)
+taxa_clean(
+  df,
+  synonyms.list,
+  taxa.filter = "fuzzy",
+  scientific.name = "scientificName",
+  accepted.name = NA
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
@@ -12,6 +18,8 @@ taxa_clean(df, synonyms.list, taxa.filter = "fuzzy", accepted.name = NA)
 \item{synonyms.list}{A list of synonyms for a species.}
 
 \item{taxa.filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
 
 \item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 }
