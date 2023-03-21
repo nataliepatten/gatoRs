@@ -20,7 +20,7 @@
 #' @inheritParams one_point_per_pixel
 #'
 #' @examples
-#' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = "HUMAN_OBSERVATION", accepted.name = "Galax urceolata")
+#' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")
 #' clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
@@ -30,16 +30,15 @@
 full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
                         accepted.name = NA, remove.zero = TRUE,
                         precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = NA, remove.flagged = TRUE, thin.points = TRUE, distance = 5, reps = 100,
-                       one.point.per.pixel = TRUE, raster = NA,
-                       resolution = 0.5
-                       ) {
+                        basis.list = NA, remove.flagged = TRUE, thin.points = TRUE,
+                        distance = 5, reps = 100,
+                        one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
 
   suppress_output(df <- remove_duplicates(df))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
                taxa.filter = taxa.filter, accepted.name =  accepted.name))
 
-  if(!is.na(basis.list)){
+  if(!any(is.na(basis.list))){
     suppress_output(df <- basis_clean(df, basis.list = basis.list))
   }
 
@@ -63,7 +62,7 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
   }
 
   if(one.point.per.pixel == TRUE){
-    df <- one.point.per.pixel(df, raster = raster, resolution = resolution)
+    df <- suppress_output(one_point_per_pixel(df, raster = raster, resolution = resolution))
   } else{
     df <- df
   }
