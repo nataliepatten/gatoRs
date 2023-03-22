@@ -4,7 +4,13 @@
 \alias{process_flagged}
 \title{Locality Cleaning - Find possibly problematic occurrence records}
 \usage{
-process_flagged(df, interactive = TRUE)
+process_flagged(
+  df,
+  interactive = TRUE,
+  latitude = "latitude",
+  longitude = "longitude",
+  scientific.name = "scientificName"
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
@@ -12,6 +18,12 @@ process_flagged(df, interactive = TRUE)
 \item{interactive}{Default = TRUE. The interactive option allows for a visual display
 of possible problematic points and the ability to manually remove these points.
 Setting \code{interactive = FALSE} will automatically remove these points from the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
 }
 \value{
 Return cleaned data frame.

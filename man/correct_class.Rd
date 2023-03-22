@@ -4,10 +4,69 @@
 \alias{correct_class}
 \title{gatoRs Download - Correct classes of data frame columns}
 \usage{
-correct_class(df)
+correct_class(
+  df,
+  scientific.name = "scientificName",
+  genus = "genus",
+  species = "specificEpithet",
+  basis.of.record = "basisOfRecord",
+  event.date = "eventDate",
+  inst.code = "institutionCode",
+  col.code = "collectionCode",
+  country = "country",
+  county = "county",
+  state = "stateProvince",
+  locality = "locality",
+  latitude = "latitude",
+  longitude = "longitude",
+  id = "identificationID",
+  coord.uncertainty = "coordinateUncertaintyInMeters",
+  info.withheld = "informationWithheld",
+  habitat = "habitat",
+  infraspecific.epithet = "infraspecificEpithet",
+  col.id = "collectionID"
+)
 }
 \arguments{
 \item{df}{Data frame returned by \code{gator_download()}.}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+
+\item{genus}{Default = "genus". The name of the genus column in the data frame.}
+
+\item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
+
+\item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
+
+\item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+
+\item{inst.code}{Default = "institutionCode". The name of the institution code column in the data frame.}
+
+\item{col.code}{Default = "collectionCode". The name of the collection code column in the data frame.}
+
+\item{country}{Default = "country". The name of the country column in the data frame.}
+
+\item{county}{Default = "county". The name of the county column in the data frame.}
+
+\item{state}{Default = "stateProvince". The name of the state/province column in the data frame.}
+
+\item{locality}{Default = "locality". The name of the locality column in the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+
+\item{id}{Default = "identificationID". The name of the identification id column in the data frame.}
+
+\item{coord.uncertainty}{Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.}
+
+\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
+
+\item{habitat}{Default = "habitat". The name of the habitat column in the data frame.}
+
+\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
+
+\item{col.id}{Default = "collectionID". The name of the collection id column in the data frame.}
 }
 \value{
 Returns data frame with corrected classes of each column.

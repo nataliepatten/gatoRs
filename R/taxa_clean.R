@@ -12,7 +12,7 @@
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param synonyms.list A list of synonyms for a species.
 #' @param taxa.filter The type of filter to be used--either "exact", "fuzzy", or "interactive".
-#' @param scientific.name Default = "scientificName". The name of the scientific name column in the data frame.
+#' @inheritParams correct_class
 #' @param accepted.name The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.
 #'
 #' @examples

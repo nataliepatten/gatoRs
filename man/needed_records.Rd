@@ -4,10 +4,12 @@
 \alias{needed_records}
 \title{Identify Missing Information - Find records with redacted or missing data}
 \usage{
-needed_records(df)
+needed_records(df, info.withheld = "informationWithheld")
 }
 \arguments{
 \item{df}{A data frame downloaded with \code{gators_download()}.}
+
+\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
 }
 \value{
 A data frame with only records for which  locality was flagged.

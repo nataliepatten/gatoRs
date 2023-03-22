@@ -19,28 +19,31 @@
 #' @param interactive Default = TRUE. The interactive option allows for a visual display
 #' of possible problematic points and the ability to manually remove these points.
 #' Setting `interactive = FALSE` will automatically remove these points from the data frame.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' data <- process_flagged(data, interactive = FALSE)
 #'
 #' @return Return cleaned data frame.
 #'
-#' @importFrom dplyr filter
 #' @importFrom CoordinateCleaner clean_coordinates
 #' @importFrom leaflet leaflet providers awesomeIcons addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker
 #' @importFrom magrittr "%>%"
 #'
 #' @export
 
-process_flagged <- function(df, interactive = TRUE) {
-  df <- basic_locality_clean(df, remove.zero = FALSE, precision = FALSE, remove.skewed = FALSE)
+process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longitude = "longitude",
+                            scientific.name = "scientificName") {
+
+  df <- basic_locality_clean(df, latitude = latitude, longitude = longitude,
+                             remove.zero = FALSE, precision = FALSE, remove.skewed = FALSE)
 
   # workaround for clean_coordinates since it relies on rownames:
   # https://github.com/ropensci/CoordinateCleaner/issues/24
   rownames(df) <- 1:nrow(df)
   if (interactive) {
     df2 <- suppressWarnings(CoordinateCleaner::clean_coordinates(df,
-                            lon = "longitude", lat = "latitude", species = "scientificName",
+                            lon = longitude, lat = latitude, species = scientific.name,
                             value = "spatialvalid"))
   }
   else {
@@ -55,7 +58,7 @@ process_flagged <- function(df, interactive = TRUE) {
   flagged$index <- as.character(1:nrow(flagged))
   # make new column with (latitude, longitude) and point number if there are any flagged points
   if (nrow(flagged) > 0) {
-    flagged$coordinates <- paste0("(", flagged$latitude, ", ", flagged$longitude, ")", ", point #", flagged$index)
+    flagged$coordinates <- paste0("(", flagged[[latitude]], ", ", flagged[[longitude]], ")", ", point #", flagged$index)
   }
   else {
     message("No flagged points found.")
@@ -66,7 +69,7 @@ process_flagged <- function(df, interactive = TRUE) {
   icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#3CB371", library = "fa", squareMarker = TRUE, markerColor = "lightgreen")
   map <- leaflet::leaflet(data = flagged) %>%
     leaflet::addProviderTiles(providers$OpenStreetMap) %>%
-    leaflet::addAwesomeMarkers(lng = ~longitude, lat = ~latitude, icon = icons, popup = ~coordinates, label = ~scientificName, layerId = ~index) %>%
+    leaflet::addAwesomeMarkers(lng = flagged[[longitude]], lat = flagged[[latitude]], icon = icons, popup = ~coordinates, label = flagged[[scientific.name]], layerId = ~index) %>%
     leaflet::addMiniMap(toggleDisplay = TRUE) %>%
   print(map)
 
@@ -107,11 +110,14 @@ process_flagged <- function(df, interactive = TRUE) {
     highlat <- readline(prompt = "Please enter the upper bound for latitude: ")
     highlat <- as.numeric(highlat)
     # find the flagged points in the region entered
-    flaggedFiltered <- flagged %>%
-      dplyr::filter(longitude >= lowlong & longitude <= highlong & latitude >= lowlat & latitude <= highlat)
+    flaggedFiltered <- flagged[ flagged[[longitude]] >= lowlong &
+                                flagged[[longitude]] <= highlong &
+                                flagged[[latitude]] >= lowlat &
+                                flagged[[latitude]] <= highlat , ]
     for (i in 1:nrow(flaggedFiltered)) {
       for (j in 1: nrow(flagged)) {
-        if (flaggedFiltered$identificationID[i] == flagged$identificationID[j]) {
+        if (flaggedFiltered[[latitude]][i] == flagged[[latitude]][j]
+            & flaggedFiltered[[longitude]][i] == flagged[[longitude]][j]) {
           # remove the "removed" points from the map
           map <- map %>%
             removeMarker(flagged$index[j])
@@ -122,8 +128,8 @@ process_flagged <- function(df, interactive = TRUE) {
     print(map)
     # make a copy of the original dataframe, removing any points with the same lat/long as the flagged points in the region
     for(i in 1:NROW(flaggedFiltered)) {
-      newdf <- newdf %>%
-        dplyr::filter(longitude != flaggedFiltered$longitude[i] & latitude != flaggedFiltered$latitude[i])
+      newdf <- newdf[ newdf[[longitude]] != flaggedFiltered[[longitude]][i] &
+                      newdf[[latitude]] != flaggedFiltered[[latitude]][i] , ]
     }
 
     # find the number of points removed from the original dataframe, and display it
@@ -145,11 +151,14 @@ process_flagged <- function(df, interactive = TRUE) {
       # create a variable for the current number of points in the dataframe
       current = NROW(newdf)
       # find the flagged points in the region entered
-      flaggedFiltered <- flagged %>%
-        dplyr::filter(longitude >= lowlong & longitude <= highlong & latitude >= lowlat & latitude <= highlat)
+      flaggedFiltered <- flagged[ flagged[[longitude]] >= lowlong &
+                                    flagged[[longitude]] <= highlong &
+                                    flagged[[latitude]] >= lowlat &
+                                    flagged[[latitude]] <= highlat , ]
       for (i in 1:nrow(flaggedFiltered)) {
         for (j in 1: nrow(flagged)) {
-          if (flaggedFiltered$identificationID[i] == flagged$identificationID[j]) {
+          if (flaggedFiltered[[latitude]][i] == flagged[[latitude]][j]
+              & flaggedFiltered[[longitude]][i] == flagged[[longitude]][j]) {
             # remove the "removed" points from the map
             map <- map %>%
               removeMarker(flagged$index[j])
@@ -160,8 +169,8 @@ process_flagged <- function(df, interactive = TRUE) {
       print(map)
       # remove any points with the same lat/long as the flagged points in the region
       for(i in 1:NROW(flaggedFiltered)) {
-        newdf <- newdf %>%
-                 dplyr::filter(longitude != flaggedFiltered$longitude[i] & latitude != flaggedFiltered$latitude[i])
+        newdf <- newdf[ newdf[[longitude]] != flaggedFiltered[[longitude]][i] &
+                        newdf[[latitude]] != flaggedFiltered[[latitude]][i] , ]
       }
       # find the number of points removed and display it
       pointsRemoved = current - NROW(newdf)
@@ -174,8 +183,8 @@ process_flagged <- function(df, interactive = TRUE) {
     map <- map %>%
            leaflet::removeMarker(point_num)
     print(map)
-    newdf <- newdf %>%
-             dplyr::filter(longitude != flagged$longitude[as.integer(point_num)] & latitude != flagged$latitude[as.integer(point_num)])
+    newdf <- newdf[ newdf[[longitude]] != flagged[[longitude]][as.integer(point_num)] &
+                    newdf[[latitude]] != flagged[[latitude]][as.integer(point_num)] , ]
     input <- readline(prompt = "Would you like to remove additional individual points? Enter Y for yes or N for no. ")
   }
   # return the new dataframe with the removed points

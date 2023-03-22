@@ -8,12 +8,16 @@ full_clean(
   df,
   synonyms.list,
   taxa.filter = "fuzzy",
+  scientific.name = "scientificName",
   accepted.name = NA,
   remove.zero = TRUE,
   precision = TRUE,
   digits = 2,
   remove.skewed = TRUE,
   basis.list = NA,
+  basis.of.record = "basisOfRecord",
+  latitude = "latitude",
+  longitude = "longitude",
   remove.flagged = TRUE,
   thin.points = TRUE,
   distance = 5,
@@ -30,6 +34,8 @@ full_clean(
 
 \item{taxa.filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+
 \item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 
 \item{remove.zero}{Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.}
@@ -41,6 +47,12 @@ full_clean(
 \item{remove.skewed}{Default = TRUE. Utilizes the \code{remove_skewed()} function to remove skewed coordinate values.}
 
 \item{basis.list}{A list of basis to keep. If a list is not supplied, this filter will not occur.}
+
+\item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
 \item{remove.flagged}{Default = TRUE. An option to remove points with problematic locality information.}
 
@@ -70,6 +82,6 @@ This function requires packages dplyr, magrittr, raster, and dismo.
 }
 \examples{
 clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")
-clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
+clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
 
 }

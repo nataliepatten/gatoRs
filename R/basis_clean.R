@@ -5,7 +5,7 @@
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param basis.list A list of basis to keep. If a list is not supplied, the filter will be interactive and users must respond to the function.
-#' @param basis.of.record Default = "basisOfRecord". The name of the basis of record column in the data frame.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))

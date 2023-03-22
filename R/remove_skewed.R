@@ -4,6 +4,7 @@
 #' The `remove_skewed()` function identifies and removes records where locality has been skewed.
 #'
 #' @param df A data frame downloaded with `gators_download()`.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' data <- remove_skewed(data)
@@ -12,8 +13,8 @@
 #'
 #' @export
 
-remove_skewed <- function(df){
-  df <- df[grepl("Coordinate uncertainty increased", df$informationWithheld) == FALSE, ]
+remove_skewed <- function(df, info.withheld = "informationWithheld"){
+  df <- df[grepl("Coordinate uncertainty increased", df[[info.withheld]]) == FALSE, ]
   return(df)
 }
 

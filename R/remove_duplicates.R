@@ -5,6 +5,7 @@
 #' Prior to utilizing this function, longitude and latitude columns should be rounded to match the coordinate uncertainty using the `basic_locality_clean()` function.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' data <- remove_duplicates(data)
@@ -18,16 +19,16 @@
 #'
 #'
 
-remove_duplicates <- function(df){
+remove_duplicates <- function(df, event.date = "eventDate"){
   if (NROW(df) == 0) return(df)
 
   # Parse date with Lubridate
-  suppressWarnings(df$eventDate <-  lubridate::ymd(df$eventDate))
-  df$year <- lubridate::year(df$eventDate)
-  df$month <- lubridate::month(df$eventDate)
-  df$day <- lubridate::day(df$eventDate)
+  suppressWarnings(df[[event.date]] <-  lubridate::ymd(df[[event.date]]))
+  df$year <- lubridate::year(df[[event.date]])
+  df$month <- lubridate::month(df[[event.date]])
+  df$day <- lubridate::day(df[[event.date]])
   # Remove rows with identical latitude, longitude, year, month, and day
-  df <- distinct(df, latitude, longitude, year, month, day, .keep_all = TRUE)
+  df <- dplyr::distinct(df, latitude, longitude, year, month, day, .keep_all = TRUE)
   # Removes extra columns
   df <- df[ , -which(names(df) %in% c("year", "month", "day"))]
   return(df)

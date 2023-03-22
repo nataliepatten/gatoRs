@@ -9,6 +9,7 @@
 #' This function requires packages dplyr, and magrittr.
 #'
 #' @param df A data frame downloaded with `gators_download()`.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' need_info <- needed_records(data)
@@ -17,9 +18,9 @@
 #'
 #' @export
 
-needed_records <- function(df){
+needed_records <- function(df, info.withheld = "informationWithheld"){
   if (NROW(df) == 0) return(df)
 
-  information_needed <- df[!is.na(df$informationWithheld), ]
+  information_needed <- df[!is.na(df[[info.withheld]]), ]
   return(information_needed)
 }

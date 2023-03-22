@@ -10,9 +10,11 @@
 #' This function requires packages dplyr, magrittr, raster, and dismo.
 #'
 #' @param df Data frame of occurrence records.
+#' @inheritParams correct_class
 #' @inheritParams taxa_clean
-#' @inheritParams basic_locality_clean
 #' @param basis.list A list of basis to keep. If a list is not supplied, this filter will not occur.
+#' @inheritParams basis_clean
+#' @inheritParams basic_locality_clean
 #' @param remove.flagged Default = TRUE. An option to remove points with problematic locality information.
 #' @param thin.points Default = TRUE. An option to spatially thin occurrence records.
 #' @param one.point.per.pixel Default = TRUE. An option to only retain one point per pixel.
@@ -21,29 +23,32 @@
 #'
 #' @examples
 #' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")
-#' clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, thin.points = FALSE)
+#' clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
 #'
 #' @export
 
-full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
-                        accepted.name = NA, remove.zero = TRUE,
-                        precision = TRUE, digits = 2, remove.skewed = TRUE,
-                        basis.list = NA, remove.flagged = TRUE, thin.points = TRUE,
-                        distance = 5, reps = 100,
-                        one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
+full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name = "scientificName",
+                       accepted.name = NA, remove.zero = TRUE,
+                       precision = TRUE, digits = 2, remove.skewed = TRUE,
+                       basis.list = NA, basis.of.record = "basisOfRecord",
+                       latitude = "latitude", longitude = "longitude",
+                       remove.flagged = TRUE, thin.points = TRUE,
+                       distance = 5, reps = 100,
+                       one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
 
   suppress_output(df <- remove_duplicates(df))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
-               taxa.filter = taxa.filter, accepted.name =  accepted.name))
+               taxa.filter = taxa.filter, scientific.name, accepted.name =  accepted.name))
 
   if(!any(is.na(basis.list))){
-    suppress_output(df <- basis_clean(df, basis.list = basis.list))
+    suppress_output(df <- basis_clean(df, basis.list = basis.list, basis.of.record = basis.of.record))
   }
 
-  suppress_output(df <- basic_locality_clean(df, remove.zero = remove.zero, precision = precision,
-                             digits = digits, remove.skewed = remove.skewed))
+  suppress_output(df <- basic_locality_clean(df, latitude = latitude, longitude = longitude,
+                                             remove.zero = remove.zero, precision = precision,
+                                             digits = digits, remove.skewed = remove.skewed))
 
   if (remove.flagged != TRUE & remove.flagged != FALSE) {
     # warning, since the rest of cleaning can occur even if this arg is invalid
@@ -62,7 +67,8 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy",
   }
 
   if(one.point.per.pixel == TRUE){
-    df <- suppress_output(one_point_per_pixel(df, raster = raster, resolution = resolution))
+    df <- suppress_output(one_point_per_pixel(df, raster = raster, resolution = resolution,
+                                              longitude = longitude, latitude = latitude))
   } else{
     df <- df
   }

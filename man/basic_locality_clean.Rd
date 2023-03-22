@@ -6,6 +6,8 @@
 \usage{
 basic_locality_clean(
   df,
+  latitude = "latitude",
+  longitude = "longitude",
   remove.zero = TRUE,
   precision = TRUE,
   digits = 2,
@@ -14,6 +16,10 @@ basic_locality_clean(
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
 \item{remove.zero}{Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.}
 

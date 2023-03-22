@@ -6,6 +6,7 @@
 #'
 #'
 #' @param df A data frame downloaded with `gators_download()`.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' need_coords <- need_to_georeference(data)
@@ -17,16 +18,17 @@
 #' @export
 
 
-need_to_georeference <- function(df){
+need_to_georeference <- function(df, longitude = "longitude", latitude = "latitude",
+                                 locality = "locality"){
   if (NROW(df) == 0) return(df)
 
   for_georeferencing <- df
   # ID records with missing latitude and longitude
-  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing$longitude), ]
-  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing$latitude), ]
+  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing[[longitude]]), ]
+  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing[[latitude]]), ]
   # ID records with locality information included
-  for_georeferencing <- for_georeferencing[!is.na(for_georeferencing$locality), ]
-  for_georeferencing <- for_georeferencing[!grepl("locality:  NA, occurrenceRemarks: NA, verbatimLocality: NA", for_georeferencing$locality), ]
+  for_georeferencing <- for_georeferencing[!is.na(for_georeferencing[[locality]]), ]
+  for_georeferencing <- for_georeferencing[!grepl("locality:  NA, occurrenceRemarks: NA, verbatimLocality: NA", for_georeferencing[[locality]]), ]
 
   return(for_georeferencing)
 }

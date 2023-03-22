@@ -4,10 +4,12 @@
 \alias{remove_duplicates}
 \title{Remove Duplicates - Remove records with identical event dates and coordinates}
 \usage{
-remove_duplicates(df)
+remove_duplicates(df, event.date = "eventDate")
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
+
+\item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
 }
 \value{
 Return data frame with duplicates removed.

@@ -4,7 +4,14 @@
 \alias{thin_points}
 \title{Spatial Correction - Spatially thin records}
 \usage{
-thin_points(df, accepted.name = NA, distance = 5, reps = 100)
+thin_points(
+  df,
+  accepted.name = NA,
+  distance = 5,
+  reps = 100,
+  latitude = "latitude",
+  longitude = "longitude"
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records.}
@@ -15,6 +22,10 @@ if the data frame already contains an accepted_name column.}
 \item{distance}{Default = 5. Distance in km to separate records.}
 
 \item{reps}{Default = 100. Number of times to perform thinning algorithm.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 }
 \value{
 df is a data frame with the cleaned data.
