@@ -57,13 +57,110 @@ This function requires no additional packages.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">correct_class</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">correct_class</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  scientific.name <span class="op">=</span> <span class="st">"scientificName"</span>,</span>
+<span>  genus <span class="op">=</span> <span class="st">"genus"</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">"specificEpithet"</span>,</span>
+<span>  basis.of.record <span class="op">=</span> <span class="st">"basisOfRecord"</span>,</span>
+<span>  event.date <span class="op">=</span> <span class="st">"eventDate"</span>,</span>
+<span>  inst.code <span class="op">=</span> <span class="st">"institutionCode"</span>,</span>
+<span>  col.code <span class="op">=</span> <span class="st">"collectionCode"</span>,</span>
+<span>  country <span class="op">=</span> <span class="st">"country"</span>,</span>
+<span>  county <span class="op">=</span> <span class="st">"county"</span>,</span>
+<span>  state <span class="op">=</span> <span class="st">"stateProvince"</span>,</span>
+<span>  locality <span class="op">=</span> <span class="st">"locality"</span>,</span>
+<span>  latitude <span class="op">=</span> <span class="st">"latitude"</span>,</span>
+<span>  longitude <span class="op">=</span> <span class="st">"longitude"</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">"identificationID"</span>,</span>
+<span>  coord.uncertainty <span class="op">=</span> <span class="st">"coordinateUncertaintyInMeters"</span>,</span>
+<span>  info.withheld <span class="op">=</span> <span class="st">"informationWithheld"</span>,</span>
+<span>  habitat <span class="op">=</span> <span class="st">"habitat"</span>,</span>
+<span>  infraspecific.epithet <span class="op">=</span> <span class="st">"infraspecificEpithet"</span>,</span>
+<span>  col.id <span class="op">=</span> <span class="st">"collectionID"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df</dt>
 <dd><p>Data frame returned by <code>gator_download()</code>.</p></dd>
+
+
+<dt>scientific.name</dt>
+<dd><p>Default = "scientificName". The name of the scientific name column in the data frame.</p></dd>
+
+
+<dt>genus</dt>
+<dd><p>Default = "genus". The name of the genus column in the data frame.</p></dd>
+
+
+<dt>species</dt>
+<dd><p>Default = "specificEpithet". The name of the specific epithet column in the data frame.</p></dd>
+
+
+<dt>basis.of.record</dt>
+<dd><p>Default = "basisOfRecord". The name of the basis of record column in the data frame.</p></dd>
+
+
+<dt>event.date</dt>
+<dd><p>Default = "eventDate". The name of the event date column in the data frame.</p></dd>
+
+
+<dt>inst.code</dt>
+<dd><p>Default = "institutionCode". The name of the institution code column in the data frame.</p></dd>
+
+
+<dt>col.code</dt>
+<dd><p>Default = "collectionCode". The name of the collection code column in the data frame.</p></dd>
+
+
+<dt>country</dt>
+<dd><p>Default = "country". The name of the country column in the data frame.</p></dd>
+
+
+<dt>county</dt>
+<dd><p>Default = "county". The name of the county column in the data frame.</p></dd>
+
+
+<dt>state</dt>
+<dd><p>Default = "stateProvince". The name of the state/province column in the data frame.</p></dd>
+
+
+<dt>locality</dt>
+<dd><p>Default = "locality". The name of the locality column in the data frame.</p></dd>
+
+
+<dt>latitude</dt>
+<dd><p>Default = "latitude". The name of the latitude column in the data frame.</p></dd>
+
+
+<dt>longitude</dt>
+<dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
+
+
+<dt>id</dt>
+<dd><p>Default = "identificationID". The name of the identification id column in the data frame.</p></dd>
+
+
+<dt>coord.uncertainty</dt>
+<dd><p>Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.</p></dd>
+
+
+<dt>info.withheld</dt>
+<dd><p>Default = "informationWithheld". The name of the information withheld column in the data frame.</p></dd>
+
+
+<dt>habitat</dt>
+<dd><p>Default = "habitat". The name of the habitat column in the data frame.</p></dd>
+
+
+<dt>infraspecific.epithet</dt>
+<dd><p>Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.</p></dd>
+
+
+<dt>col.id</dt>
+<dd><p>Default = "collectionID". The name of the collection id column in the data frame.</p></dd>
 
 </dl></div>
     <div class="section level2">

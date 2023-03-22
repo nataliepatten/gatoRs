@@ -54,7 +54,15 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">one_point_per_pixel</span><span class="op">(</span><span class="va">df</span>, raster <span class="op">=</span> <span class="cn">NA</span>, resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">one_point_per_pixel</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  raster <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  precision <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  longitude <span class="op">=</span> <span class="st">"longitude"</span>,</span>
+<span>  latitude <span class="op">=</span> <span class="st">"latitude"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -70,6 +78,22 @@
 <dt>resolution</dt>
 <dd><p>Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.</p></dd>
 
+
+<dt>precision</dt>
+<dd><p>Default = TRUE. Indicates that coordinates should be rounded to match the coordinate uncertainty.</p></dd>
+
+
+<dt>digits</dt>
+<dd><p>Default = 2. Indicates digits to round coordinates to when <code>precision = TRUE</code>.</p></dd>
+
+
+<dt>longitude</dt>
+<dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
+
+
+<dt>latitude</dt>
+<dd><p>Default = "latitude". The name of the latitude column in the data frame.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -82,6 +106,12 @@
     <p>This function requires package raster and spatstat.geom.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">one_point_per_pixel</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -67,12 +67,16 @@ This function also provides the option to interactively inspect and remove types
 <span>  <span class="va">df</span>,</span>
 <span>  <span class="va">synonyms.list</span>,</span>
 <span>  taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
+<span>  scientific.name <span class="op">=</span> <span class="st">"scientificName"</span>,</span>
 <span>  accepted.name <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  precision <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  basis.list <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  basis.of.record <span class="op">=</span> <span class="st">"basisOfRecord"</span>,</span>
+<span>  latitude <span class="op">=</span> <span class="st">"latitude"</span>,</span>
+<span>  longitude <span class="op">=</span> <span class="st">"longitude"</span>,</span>
 <span>  remove.flagged <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  thin.points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  distance <span class="op">=</span> <span class="fl">5</span>,</span>
@@ -97,6 +101,10 @@ This function also provides the option to interactively inspect and remove types
 <dd><p>The type of filter to be used--either "exact", "fuzzy", or "interactive".</p></dd>
 
 
+<dt>scientific.name</dt>
+<dd><p>Default = "scientificName". The name of the scientific name column in the data frame.</p></dd>
+
+
 <dt>accepted.name</dt>
 <dd><p>The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.</p></dd>
 
@@ -119,6 +127,18 @@ This function also provides the option to interactively inspect and remove types
 
 <dt>basis.list</dt>
 <dd><p>A list of basis to keep. If a list is not supplied, this filter will not occur.</p></dd>
+
+
+<dt>basis.of.record</dt>
+<dd><p>Default = "basisOfRecord". The name of the basis of record column in the data frame.</p></dd>
+
+
+<dt>latitude</dt>
+<dd><p>Default = "latitude". The name of the latitude column in the data frame.</p></dd>
+
+
+<dt>longitude</dt>
+<dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
 
 
 <dt>remove.flagged</dt>
@@ -163,7 +183,7 @@ This function also provides the option to interactively inspect and remove types
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">3</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Preserved Specimen"</span>,<span class="st">"Physical specimen"</span><span class="op">)</span>, accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.skewed <span class="op">=</span> <span class="cn">FALSE</span>, remove.flagged <span class="op">=</span> <span class="cn">FALSE</span>, thin.points <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">full_clean</span><span class="op">(</span><span class="va">data</span>, synonyms.list <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.skewed <span class="op">=</span> <span class="cn">FALSE</span>, remove.flagged <span class="op">=</span> <span class="cn">FALSE</span>, one.point.per.pixel <span class="op">=</span> <span class="cn">FALSE</span>, thin.points <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
