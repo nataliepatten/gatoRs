@@ -4,7 +4,15 @@
 \alias{one_point_per_pixel}
 \title{Spatial Correction - One point per pixel}
 \usage{
-one_point_per_pixel(df, raster = NA, resolution = 0.5)
+one_point_per_pixel(
+  df,
+  raster = NA,
+  resolution = 0.5,
+  precision = TRUE,
+  digits = 2,
+  longitude = "longitude",
+  latitude = "latitude"
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records.}
@@ -12,6 +20,14 @@ one_point_per_pixel(df, raster = NA, resolution = 0.5)
 \item{raster}{Raster object which will be used for ecological niche comparisons.}
 
 \item{resolution}{Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.}
+
+\item{precision}{Default = TRUE. Indicates that coordinates should be rounded to match the coordinate uncertainty.}
+
+\item{digits}{Default = 2. Indicates digits to round coordinates to when \code{precision = TRUE}.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
 }
 \value{
 df is a data frame with only one point per pixel.
@@ -21,4 +37,8 @@ The \code{one_point_per_pixel} retains only one point per pixel.
 }
 \details{
 This function requires package raster and spatstat.geom.
+}
+\examples{
+data <- one_point_per_pixel(data)
+
 }

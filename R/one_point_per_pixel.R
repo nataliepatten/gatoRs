@@ -9,6 +9,11 @@
 #' @param df Data frame of occurrence records.
 #' @param raster Raster object which will be used for ecological niche comparisons.
 #' @param resolution Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.
+#' @inheritParams correct_class
+#' @inheritParams basic_locality_clean
+#'
+#' @examples
+#' data <- one_point_per_pixel(data)
 #'
 #' @return df is a data frame with only one point per pixel.
 #'
@@ -17,8 +22,12 @@
 #'
 #' @export
 
-one_point_per_pixel <- function(df, raster = NA,
-                                resolution = 0.5){
+one_point_per_pixel <- function(df, raster = NA, resolution = 0.5, precision = TRUE, digits = 2,
+                                longitude = "longitude", latitude = "latitude"){
+
+  df <- basic_locality_clean(df, latitude = latitude, longitude = longitude, remove.zero = FALSE,
+                             precision = precision, digits = digits, remove.skewed = FALSE)
+
   if(is.na(raster) == TRUE){
     if(resolution == 0.5){
       rasterResolution  <- 0.008333333
@@ -33,8 +42,8 @@ one_point_per_pixel <- function(df, raster = NA,
     rasterResolution  <- max(raster::res(raster))
   }
 
-  while(min(spatstat.geom::nndist(df[,15:14])) < rasterResolution){
-    nnD <- spatstat.geom::nndist(df[,15:14])
+  while(min(spatstat.geom::nndist(df[, c(longitude,latitude)])) < rasterResolution){
+    nnD <- spatstat.geom::nndist(df[,c(longitude,latitude)])
     df <- df[-(which(min(nnD) == nnD) [1]), ]
   }
 
