@@ -60,13 +60,35 @@ to generate the respective genus, specificEpithet, and infraspecificEpithet colu
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fix_columns</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fix_columns</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  scientific.name <span class="op">=</span> <span class="st">"scientificName"</span>,</span>
+<span>  genus <span class="op">=</span> <span class="st">"genus"</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">"specificEpithet"</span>,</span>
+<span>  infraspecific.epithet <span class="op">=</span> <span class="st">"infraspecificEpithet"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df</dt>
 <dd><p>Data frame of occurrence records.</p></dd>
+
+
+<dt>scientific.name</dt>
+<dd><p>Default = "scientificName". The name of the scientific name column in the data frame.</p></dd>
+
+
+<dt>genus</dt>
+<dd><p>Default = "genus". The name of the genus column in the data frame.</p></dd>
+
+
+<dt>species</dt>
+<dd><p>Default = "specificEpithet". The name of the specific epithet column in the data frame.</p></dd>
+
+
+<dt>infraspecific.epithet</dt>
+<dd><p>Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.</p></dd>
 
 </dl></div>
     <div class="section level2">
