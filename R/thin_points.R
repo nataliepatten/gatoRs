@@ -37,8 +37,7 @@ thin_points <- function(df, accepted.name = NA, distance = 5, reps = 100, latitu
                      reps = reps, write.files = FALSE, write.log.file = FALSE,
                      locs.thinned.list.return = TRUE))
   thin_data <- thin_data[[reps]]
-  #df <- df[df[[latitude]] %in% thin_data$Latitude & df[[longitude]] %in% thin_data$Longitude, ]
-  df <- df[df$latitude %in% thin_data$Latitude & df$longitude %in% thin_data$Longitude, ]
+  df <- df[df[[latitude]] %in% thin_data$Latitude & df[[longitude]] %in% thin_data$Longitude, ]
 
   return(df)
 }

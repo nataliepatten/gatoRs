@@ -7,6 +7,7 @@
 full_clean(
   df,
   synonyms.list,
+  event.date = "eventDate",
   taxa.filter = "fuzzy",
   scientific.name = "scientificName",
   accepted.name = NA,
@@ -31,6 +32,8 @@ full_clean(
 \item{df}{Data frame of occurrence records.}
 
 \item{synonyms.list}{A list of synonyms for a species.}
+
+\item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
 
 \item{taxa.filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 

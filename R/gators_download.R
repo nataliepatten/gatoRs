@@ -31,6 +31,7 @@
 #' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 #' This parameter is not required and is assigned TRUE by default.
 #'
+#' @inheritParams correct_class
 #'
 #' @examples
 #' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv")
@@ -62,7 +63,11 @@
 #' @export
 
 
-gators_download <- function(synonyms.list, write.file = FALSE, filename = NA, gbif.match = "fuzzy", idigbio.filter = TRUE) {
+gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
+                            gbif.match = "fuzzy", idigbio.filter = TRUE,
+                            scientific.name = "scientificName", genus = "genus",
+                            species = "specificEpithet", infraspecific.epithet = "infraspecificEpithet") {
+
   # Check for valid arguments
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
     stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
@@ -93,15 +98,19 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA, gb
   }
 
   # initial download, fix capitalization
-  query_idigbio <- fix_names(get_idigbio(synonyms.list))
-  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match))
+  query_idigbio <- fix_names(get_idigbio(synonyms.list), scientific.name = scientific.name)
+  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match), scientific.name = scientific.name)
 
   # fill out remaining taxon columns, and fix capitalization again
-  query_gbif <- fix_names(fix_columns(query_gbif))
-  query_idigbio <- fix_names(fix_columns(query_idigbio))
+  query_gbif <- fix_names(fix_columns(query_gbif, scientific.name = scientific.name,
+                                      genus = genus, species = species, infraspecific.epithet = infraspecific.epithet),
+                          scientific.name = scientific.name)
+  query_idigbio <- fix_names(fix_columns(query_idigbio, scientific.name = scientific.name,
+                                         genus = genus, species = species, infraspecific.epithet = infraspecific.epithet),
+                             scientific.name = scientific.name)
 
   if (idigbio.filter) {
-    query_idigbio <- filter_fix_names(query_idigbio, synonyms.list)
+    query_idigbio <- filter_fix_names(query_idigbio, synonyms.list, scientific.name = scientific.name)
   }
   else {
     message("Warning: iDigBio search will return all records where any column has a matching string to the provided scientific names.")

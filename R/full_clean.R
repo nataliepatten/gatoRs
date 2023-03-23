@@ -29,7 +29,8 @@
 #'
 #' @export
 
-full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name = "scientificName",
+full_clean <- function(df, synonyms.list, event.date = "eventDate",
+                       taxa.filter = "fuzzy", scientific.name = "scientificName",
                        accepted.name = NA, remove.zero = TRUE,
                        precision = TRUE, digits = 2, remove.skewed = TRUE,
                        basis.list = NA, basis.of.record = "basisOfRecord",
@@ -38,7 +39,7 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
                        distance = 5, reps = 100,
                        one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
 
-  suppress_output(df <- remove_duplicates(df))
+  suppress_output(df <- remove_duplicates(df, event.date = event.date, latitude = latitude, longitude = longitude))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
                taxa.filter = taxa.filter, scientific.name, accepted.name =  accepted.name))
 
@@ -55,7 +56,9 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
     warning("Invalid value for argument: remove.flagged. Value for remove.flagged must equal 'TRUE' or 'FALSE'.")
   }
   else if (remove.flagged == TRUE) {
-    suppress_output(df <- process_flagged(df, interactive = FALSE))
+    suppress_output(df <- process_flagged(df, interactive = FALSE,
+                                          latitude = latitude, longitude = longitude,
+                                          scientific.name = scientific.name))
   }
 
   if (thin.points != TRUE & thin.points != FALSE) {
@@ -63,7 +66,8 @@ full_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
     warning("Invalid value for argument: thin.points. Value for thin.points must equal 'TRUE' or 'FALSE'.")
   }
   else if (thin.points == TRUE) {
-   suppress_output(df <- thin_points(df, accepted.name = accepted.name, distance = distance, reps = reps))
+   suppress_output(df <- thin_points(df, accepted.name = accepted.name, distance = distance, reps = reps,
+                                     latitude = latitude, longitude = longitude))
   }
 
   if(one.point.per.pixel == TRUE){

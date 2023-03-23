@@ -4,10 +4,12 @@
 \alias{fix_names}
 \title{Used in gators_download() - Fix taxonomic name capitalization}
 \usage{
-fix_names(df)
+fix_names(df, scientific.name = "scientificName")
 }
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
 }
 \value{
 Returns df with fixed capitalization in name column.

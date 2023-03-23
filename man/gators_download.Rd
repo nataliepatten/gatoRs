@@ -9,7 +9,11 @@ gators_download(
   write.file = FALSE,
   filename = NA,
   gbif.match = "fuzzy",
-  idigbio.filter = TRUE
+  idigbio.filter = TRUE,
+  scientific.name = "scientificName",
+  genus = "genus",
+  species = "specificEpithet",
+  infraspecific.epithet = "infraspecificEpithet"
 )
 }
 \arguments{
@@ -32,6 +36,14 @@ is not required and is assigned "fuzzy" by default.}
 include data points for a different species that mention the desired species in the locality information, for example.
 Choosing \code{idigbio.filter = TRUE} will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+
+\item{genus}{Default = "genus". The name of the genus column in the data frame.}
+
+\item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
+
+\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
 }
 \value{
 Returns a data frame and writes a csv file as specified in the input.

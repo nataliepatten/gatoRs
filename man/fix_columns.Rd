@@ -4,10 +4,24 @@
 \alias{fix_columns}
 \title{Used in gators_download() - Fill out taxonomic name columns}
 \usage{
-fix_columns(df)
+fix_columns(
+  df,
+  scientific.name = "scientificName",
+  genus = "genus",
+  species = "specificEpithet",
+  infraspecific.epithet = "infraspecificEpithet"
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records.}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+
+\item{genus}{Default = "genus". The name of the genus column in the data frame.}
+
+\item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
+
+\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
 }
 \value{
 Returns the original data frame with the specified columns.

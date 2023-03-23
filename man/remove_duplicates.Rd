@@ -4,19 +4,29 @@
 \alias{remove_duplicates}
 \title{Remove Duplicates - Remove records with identical event dates and coordinates}
 \usage{
-remove_duplicates(df, event.date = "eventDate")
+remove_duplicates(
+  df,
+  event.date = "eventDate",
+  latitude = "latitude",
+  longitude = "longitude"
+)
 }
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 }
 \value{
 Return data frame with duplicates removed.
 }
 \description{
 The \code{remove_duplicates()} function removes records with identical event dates and coordinate values.
-Prior to utilizing this function, longitude and latitude columns should be rounded to match the coordinate uncertainty using the \code{basic_locality_clean()} function.
+Prior to utilizing this function, longitude and latitude columns should be rounded to match the
+coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
 \examples{
 data <- remove_duplicates(data)

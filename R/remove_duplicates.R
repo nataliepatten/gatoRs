@@ -2,7 +2,8 @@
 #'
 #' @description
 #' The `remove_duplicates()` function removes records with identical event dates and coordinate values.
-#' Prior to utilizing this function, longitude and latitude columns should be rounded to match the coordinate uncertainty using the `basic_locality_clean()` function.
+#' Prior to utilizing this function, longitude and latitude columns should be rounded to match the
+#' coordinate uncertainty using the `basic_locality_clean()` function.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @inheritParams correct_class
@@ -19,7 +20,7 @@
 #'
 #'
 
-remove_duplicates <- function(df, event.date = "eventDate"){
+remove_duplicates <- function(df, event.date = "eventDate", latitude = "latitude", longitude = "longitude"){
   if (NROW(df) == 0) return(df)
 
   # Parse date with Lubridate
@@ -28,7 +29,7 @@ remove_duplicates <- function(df, event.date = "eventDate"){
   df$month <- lubridate::month(df[[event.date]])
   df$day <- lubridate::day(df[[event.date]])
   # Remove rows with identical latitude, longitude, year, month, and day
-  df <- dplyr::distinct(df, latitude, longitude, year, month, day, .keep_all = TRUE)
+  df <- dplyr::distinct(df, .data[[latitude]], .data[[longitude]], year, month, day, .keep_all = TRUE)
   # Removes extra columns
   df <- df[ , -which(names(df) %in% c("year", "month", "day"))]
   return(df)

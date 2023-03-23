@@ -4,7 +4,13 @@
 \alias{filter_fix_names}
 \title{Used in gators_download() -  Filter iDigBio results by scientific name}
 \usage{
-filter_fix_names(df, synonyms.list, filter = "fuzzy", accepted.name = NA)
+filter_fix_names(
+  df,
+  synonyms.list,
+  filter = "fuzzy",
+  scientific.name = "scientificName",
+  accepted.name = NA
+)
 }
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
@@ -12,6 +18,8 @@ filter_fix_names(df, synonyms.list, filter = "fuzzy", accepted.name = NA)
 \item{synonyms.list}{A list of synonyms for a species.}
 
 \item{filter}{Default = "fuzzy". Indicates the type of filter to be used--either "exact" or "fuzzy".}
+
+\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
 
 \item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 }

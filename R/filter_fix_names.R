@@ -13,6 +13,7 @@
 #' @param synonyms.list A list of synonyms for a species.
 #' @param filter Default = "fuzzy". Indicates the type of filter to be used--either "exact" or "fuzzy".
 #' @param accepted.name The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.
+#' @inheritParams correct_class
 #'
 #' @examples
 #' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
@@ -22,7 +23,7 @@
 #'
 #' @export
 
-filter_fix_names <- function(df, synonyms.list, filter = "fuzzy", accepted.name = NA) {
+filter_fix_names <- function(df, synonyms.list, filter = "fuzzy", scientific.name = "scientificName", accepted.name = NA) {
   if (NROW(df) == 0) return(df)
 
   if (!("scientificName" %in% colnames(df))) {
@@ -41,7 +42,7 @@ filter_fix_names <- function(df, synonyms.list, filter = "fuzzy", accepted.name 
     new_df <- data.frame()
     for (i in 1:length(synonyms.list)) {
       taxa <- synonyms.list[i]
-      df_taxa <- df[df$scientificName == taxa, ]
+      df_taxa <- df[df[[scientific.name]] == taxa, ]
       new_df <- rbind(new_df, df_taxa)
     }
   }
@@ -49,7 +50,7 @@ filter_fix_names <- function(df, synonyms.list, filter = "fuzzy", accepted.name 
     new_df <- data.frame()
     for (i in 1:length(synonyms.list)) {
       taxa <- synonyms.list[i]
-      df_taxa <- df[agrepl(taxa, df$scientificName, ignore.case = TRUE), ]
+      df_taxa <- df[agrepl(taxa, df[[scientific.name]], ignore.case = TRUE), ]
       new_df <- rbind(new_df, df_taxa)
     }
   }
