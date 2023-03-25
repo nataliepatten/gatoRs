@@ -1,8 +1,8 @@
 ---
-title: "Introduction to gatoRs"
+title: Introduction to gatoRs
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{"Introduction to gatoRs"}
+  %\VignetteIndexEntry{Introduction to gatoRs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -154,7 +154,7 @@ Example:
 ```
 galaxdf <- thin_points(galaxdf, 
                        distance = 5, 
-                       replic)
+                       reps = 100)
 ```
 
 ##### One Point Per Pixel 
@@ -163,7 +163,8 @@ Maxent will only retain one point per pixel. To make the ecological niche analys
 Example:
 ```
 galaxdf <- one_point_per_pixel(galaxdf, 
-                       resolution = 0.5 # for 30 arc sec raster layers)
+                       resolution = 0.5, # for 30 arc sec raster layers
+                       precision = TRUE, digits = 2) 
 ```
 
 ### Full Clean
