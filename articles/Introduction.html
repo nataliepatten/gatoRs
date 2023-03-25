@@ -288,7 +288,7 @@ pixel.</p>
 <p>Example:</p>
 <pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/thin_points.html">thin_points</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
 <span>                       distance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                       <span class="va">replic</span><span class="op">)</span></span></code></pre>
+<span>                       reps <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level5">
 <h5 id="one-point-per-pixel">One Point Per Pixel<a class="anchor" aria-label="anchor" href="#one-point-per-pixel"></a>
@@ -296,8 +296,9 @@ pixel.</p>
 <p>Maxent will only retain one point per pixel. To make the ecological
 niche analysis comparable, we will retain only one point per pixel.</p>
 <p>Example:</p>
-<pre><code>galaxdf &lt;- one_point_per_pixel(galaxdf, 
-                       resolution = 0.5 # for 30 arc sec raster layers)</code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/one_point_per_pixel.html">one_point_per_pixel</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
+<span>                       resolution <span class="op">=</span> <span class="fl">0.5</span>, <span class="co"># for 30 arc sec raster layers</span></span>
+<span>                       precision <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> </span></code></pre>
 </div>
 </div>
 </div>
