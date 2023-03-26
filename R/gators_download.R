@@ -98,19 +98,15 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   }
 
   # initial download, fix capitalization
-  query_idigbio <- fix_names(get_idigbio(synonyms.list), scientific.name = scientific.name)
-  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match), scientific.name = scientific.name)
+  query_idigbio <- fix_names(get_idigbio(synonyms.list))
+  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match))
 
   # fill out remaining taxon columns, and fix capitalization again
-  query_gbif <- fix_names(fix_columns(query_gbif, scientific.name = scientific.name,
-                                      genus = genus, species = species, infraspecific.epithet = infraspecific.epithet),
-                          scientific.name = scientific.name)
-  query_idigbio <- fix_names(fix_columns(query_idigbio, scientific.name = scientific.name,
-                                         genus = genus, species = species, infraspecific.epithet = infraspecific.epithet),
-                             scientific.name = scientific.name)
+  query_gbif <- fix_names(fix_columns(query_gbif))
+  query_idigbio <- fix_names(fix_columns(query_idigbio))
 
   if (idigbio.filter) {
-    query_idigbio <- filter_fix_names(query_idigbio, synonyms.list, scientific.name = scientific.name)
+    query_idigbio <- filter_fix_names(query_idigbio, synonyms.list)
   }
   else {
     message("Warning: iDigBio search will return all records where any column has a matching string to the provided scientific names.")
