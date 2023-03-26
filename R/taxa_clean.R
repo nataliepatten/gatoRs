@@ -22,9 +22,6 @@
 #' @return Returns data frame with filtered results and new column with the accepted name labeled as "accepted_name".
 #'
 #' @export
-#'
-#' @importFrom dplyr filter mutate
-#' @importFrom magrittr "%>%"
 
 taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name = "scientificName", accepted.name = NA) {
   if (NROW(df) == 0) return(df)

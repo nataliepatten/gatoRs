@@ -20,7 +20,6 @@ Imports:
     raster,
     spThin,
     stringr,
-    dismo,
     leaflet,
     lubridate, 
     spatstat.geom
