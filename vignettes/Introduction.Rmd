@@ -164,10 +164,13 @@ Example:
 ```
 galaxdf <- one_point_per_pixel(galaxdf, 
                        resolution = 0.5, # for 30 arc sec raster layers
-                       precision = TRUE, digits = 2) 
+                       precision = TRUE, 
+                       digits = 2) 
 ```
 
 ### Full Clean
+Finally, instead of step-by-step cleaning, we created a single function to streamline this process. 
+
 
 Example:
 ```
