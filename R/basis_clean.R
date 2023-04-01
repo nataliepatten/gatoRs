@@ -45,11 +45,17 @@ basis_clean <- function(df, basis.list = NA, basis.of.record = "basisOfRecord"){
     for (i in 1:length(basis.list)) {
       type <- basis.list[i]
       df_type <- old_df[agrepl(type, old_df[[basis.of.record]], ignore.case = TRUE), ]
-      old_df <- old_df[-(which(agrepl(type, old_df[[basis.of.record]], ignore.case = TRUE))), ]
+      if(nrow(df_type) > 0){
+        old_df <- old_df[-(which(old_df[[basis.of.record]] %in% unique(df_type[[basis.of.record]]))),]
+      }
       new_df <- rbind(new_df, df_type)
     }
     message("Basis of records kept: ")
-    print(unique(new_df[[basis.of.record]]))
+    if (length(unique(new_df[[basis.of.record]])) == 0) {
+      message("No names kept.")
+    } else{
+      print(unique(new_df[[basis.of.record]]))
+    }
   }
 
   return(new_df)

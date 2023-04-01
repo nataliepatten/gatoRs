@@ -57,18 +57,28 @@ taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
           new_df <- rbind(new_df, df_taxa)
       }
       message("Scientific names kept: ")
-      print(unique(new_df[[scientific.name]]))
+      if (length(unique(new_df[[scientific.name]])) == 0) {
+        message("No names kept.")
+      } else{
+        print(unique(new_df[[scientific.name]]))
+      }
   } else if (taxa.filter == "fuzzy") {
       old_df <- df
       new_df <- data.frame()
         for (i in 1:length(synonyms.list)) {
             taxa <- synonyms.list[i]
             df_taxa <- old_df[agrepl(taxa, old_df[[scientific.name]], ignore.case = TRUE), ]
-            old_df <- old_df[-(which(agrepl(taxa, old_df[[scientific.name]], ignore.case = TRUE))), ]
+            if(nrow(df_taxa) > 0){
+              old_df <- old_df[-(which(old_df[[scientific.name]] %in% unique(df_taxa[[scientific.name]]))),]
+            }
             new_df <- rbind(new_df, df_taxa)
         }
       message("Scientific names kept: ")
+      if (length(unique(new_df[[scientific.name]])) == 0) {
+        message("No names kept.")
+      } else{
       print(unique(new_df[[scientific.name]]))
+      }
   } else {
     message("Filter option is not avaliable. Please choose 'fuzzy', 'exact', or 'interactive'.")
   }
@@ -76,7 +86,9 @@ taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
 
    if (!is.na(accepted.name)) {
       accepted.name <- gsub(accepted.name, pattern = "_", replacement = " ")
-      new_df$accepted_name <- accepted.name
+      if (NROW(new_df) > 0) {
+        new_df$accepted_name <- accepted.name
+      }
    }
 
   return(new_df)
