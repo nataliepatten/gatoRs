@@ -31,42 +31,41 @@
 #' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 #' This parameter is not required and is assigned TRUE by default.
 #'
-#' @inheritParams correct_class
+#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv")
-#' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE)
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv", limit = 1000)
+#' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE, limit = 1000)
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
 #' This csv file will contain search results for the desired species
 #' from the GBIF and iDigBio databases. The columns are as follows:
-#' * [scientificName](http://rs.tdwg.org/dwc/terms/scientificName)
+#' * [scientificName](https://dwc.tdwg.org/list/#dwc_scientificName)
 #' * [genus](https://dwc.tdwg.org/list/#dwc_genus)
 #' * [specificEpithet](https://dwc.tdwg.org/list/#dwc_specificEpithet)
-#' * [infraspecificEpithet](http://rs.tdwg.org/dwc/terms/infraspecificEpithet)
-#' * [basisOfRecord](http://rs.tdwg.org/dwc/terms/basisOfRecord)
-#' * [eventDate](http://rs.tdwg.org/dwc/terms/eventDate)
-#' * [institutionCode](http://rs.tdwg.org/dwc/terms/institutionCode)
-#' * [collectionCode](http://rs.tdwg.org/dwc/terms/collectionCode)
-#' * [collectionID](http://rs.tdwg.org/dwc/terms/collectionID)
-#' * [identificationID](http://rs.tdwg.org/dwc/terms/identificationID)
-#' * [informationWithheld](http://rs.tdwg.org/dwc/terms/informationWithheld)
-#' * [country](http://rs.tdwg.org/dwc/terms/country)
-#' * [county](http://rs.tdwg.org/dwc/terms/county)
-#' * [stateProvince](http://rs.tdwg.org/dwc/terms/stateProvince)
-#' * [locality](http://rs.tdwg.org/dwc/terms/locality)
-#' * [latitude](http://rs.tdwg.org/dwc/terms/decimalLatitude)
-#' * [longitude](http://rs.tdwg.org/dwc/terms/decimalLongitude)
-#' * [coordinateUncertaintyInMeters](http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters)
-#' * [habitat](http://rs.tdwg.org/dwc/terms/habitat)
+#' * [infraspecificEpithet](https://dwc.tdwg.org/list/#dwc_infraspecificEpithet)
+#' * [basisOfRecord](https://dwc.tdwg.org/list/#dwc_basisOfRecord)
+#' * [eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
+#' * [institutionCode](https://dwc.tdwg.org/list/#dwc_institutionCode)
+#' * [collectionCode](https://dwc.tdwg.org/list/#dwc_collectionCode)
+#' * [collectionID](https://dwc.tdwg.org/list/#dwc_collectionID)
+#' * [ID](https://dwc.tdwg.org/list/#dwc_identificationID)
+#' * [informationWithheld](https://dwc.tdwg.org/list/#dwc_informationWithheld)
+#' * [country](https://dwc.tdwg.org/list/#dwc_country)
+#' * [county](https://dwc.tdwg.org/list/#dwc_county)
+#' * [stateProvince](https://dwc.tdwg.org/list/#dwc_stateProvince)
+#' * [locality](https://dwc.tdwg.org/list/#dwc_locality)
+#' * [latitude](https://dwc.tdwg.org/list/#dwc_decimalLatitude)
+#' * [longitude](https://dwc.tdwg.org/list/#dwc_decimalLongitude)
+#' * [coordinateUncertaintyInMeters](https://dwc.tdwg.org/list/#dwc_coordinateUncertaintyInMeters)
+#' * [habitat](https://dwc.tdwg.org/list/#dwc_habitat)
+#' * aggregator (either GBIF or iDigBio)
 #'
 #' @export
 
 
 gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
-                            gbif.match = "fuzzy", idigbio.filter = TRUE,
-                            scientific.name = "scientificName", genus = "genus",
-                            species = "specificEpithet", infraspecific.epithet = "infraspecificEpithet") {
+                            gbif.match = "fuzzy", idigbio.filter = TRUE, limit = 100000) {
 
   # Check for valid arguments
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
@@ -98,8 +97,8 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   }
 
   # initial download, fix capitalization
-  query_idigbio <- fix_names(get_idigbio(synonyms.list))
-  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match))
+  query_idigbio <- fix_names(get_idigbio(synonyms.list, limit = limit))
+  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, limit = limit))
 
   # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))

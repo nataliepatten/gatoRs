@@ -10,10 +10,7 @@ gators_download(
   filename = NA,
   gbif.match = "fuzzy",
   idigbio.filter = TRUE,
-  scientific.name = "scientificName",
-  genus = "genus",
-  species = "specificEpithet",
-  infraspecific.epithet = "infraspecificEpithet"
+  limit = 1e+05
 )
 }
 \arguments{
@@ -37,38 +34,33 @@ include data points for a different species that mention the desired species in 
 Choosing \code{idigbio.filter = TRUE} will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}
 
-\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
-
-\item{genus}{Default = "genus". The name of the genus column in the data frame.}
-
-\item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
-
-\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
+\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.}
 }
 \value{
 Returns a data frame and writes a csv file as specified in the input.
 This csv file will contain search results for the desired species
 from the GBIF and iDigBio databases. The columns are as follows:
 \itemize{
-\item \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName}
+\item \href{https://dwc.tdwg.org/list/#dwc_scientificName}{scientificName}
 \item \href{https://dwc.tdwg.org/list/#dwc_genus}{genus}
 \item \href{https://dwc.tdwg.org/list/#dwc_specificEpithet}{specificEpithet}
-\item \href{http://rs.tdwg.org/dwc/terms/infraspecificEpithet}{infraspecificEpithet}
-\item \href{http://rs.tdwg.org/dwc/terms/basisOfRecord}{basisOfRecord}
-\item \href{http://rs.tdwg.org/dwc/terms/eventDate}{eventDate}
-\item \href{http://rs.tdwg.org/dwc/terms/institutionCode}{institutionCode}
-\item \href{http://rs.tdwg.org/dwc/terms/collectionCode}{collectionCode}
-\item \href{http://rs.tdwg.org/dwc/terms/collectionID}{collectionID}
-\item \href{http://rs.tdwg.org/dwc/terms/identificationID}{identificationID}
-\item \href{http://rs.tdwg.org/dwc/terms/informationWithheld}{informationWithheld}
-\item \href{http://rs.tdwg.org/dwc/terms/country}{country}
-\item \href{http://rs.tdwg.org/dwc/terms/county}{county}
-\item \href{http://rs.tdwg.org/dwc/terms/stateProvince}{stateProvince}
-\item \href{http://rs.tdwg.org/dwc/terms/locality}{locality}
-\item \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude}
-\item \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude}
-\item \href{http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters}{coordinateUncertaintyInMeters}
-\item \href{http://rs.tdwg.org/dwc/terms/habitat}{habitat}
+\item \href{https://dwc.tdwg.org/list/#dwc_infraspecificEpithet}{infraspecificEpithet}
+\item \href{https://dwc.tdwg.org/list/#dwc_basisOfRecord}{basisOfRecord}
+\item \href{https://dwc.tdwg.org/list/#dwc_eventDate}{eventDate}
+\item \href{https://dwc.tdwg.org/list/#dwc_institutionCode}{institutionCode}
+\item \href{https://dwc.tdwg.org/list/#dwc_collectionCode}{collectionCode}
+\item \href{https://dwc.tdwg.org/list/#dwc_collectionID}{collectionID}
+\item \href{https://dwc.tdwg.org/list/#dwc_identificationID}{ID}
+\item \href{https://dwc.tdwg.org/list/#dwc_informationWithheld}{informationWithheld}
+\item \href{https://dwc.tdwg.org/list/#dwc_country}{country}
+\item \href{https://dwc.tdwg.org/list/#dwc_county}{county}
+\item \href{https://dwc.tdwg.org/list/#dwc_stateProvince}{stateProvince}
+\item \href{https://dwc.tdwg.org/list/#dwc_locality}{locality}
+\item \href{https://dwc.tdwg.org/list/#dwc_decimalLatitude}{latitude}
+\item \href{https://dwc.tdwg.org/list/#dwc_decimalLongitude}{longitude}
+\item \href{https://dwc.tdwg.org/list/#dwc_coordinateUncertaintyInMeters}{coordinateUncertaintyInMeters}
+\item \href{https://dwc.tdwg.org/list/#dwc_habitat}{habitat}
+\item aggregator (either GBIF or iDigBio)
 }
 }
 \description{
@@ -82,7 +74,7 @@ This function uses the \code{get_idigbio()}, \code{get_gbif()}, \code{fix_column
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
-df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv")
-df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE)
+df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv", limit = 1000)
+df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE, limit = 1000)
 
 }
