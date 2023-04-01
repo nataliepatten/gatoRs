@@ -71,7 +71,7 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
   }
 
   if(one.point.per.pixel == TRUE){
-    df <- suppress_output(one_point_per_pixel(df, raster = raster, resolution = resolution,
+    suppress_output(df <- one_point_per_pixel(df, raster = raster, resolution = resolution,
                                               longitude = longitude, latitude = latitude))
   } else{
     df <- df
