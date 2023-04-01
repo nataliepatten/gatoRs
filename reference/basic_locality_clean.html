@@ -64,7 +64,8 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 <span>  remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  precision <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  remove.skewed <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  info.withheld <span class="op">=</span> <span class="st">"informationWithheld"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -96,6 +97,10 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 
 <dt>remove.skewed</dt>
 <dd><p>Default = TRUE. Utilizes the <code><a href="remove_skewed.html">remove_skewed()</a></code> function to remove skewed coordinate values.</p></dd>
+
+
+<dt>info.withheld</dt>
+<dd><p>Default = "informationWithheld". The name of the information withheld column in the data frame.</p></dd>
 
 </dl></div>
     <div class="section level2">
