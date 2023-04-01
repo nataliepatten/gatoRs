@@ -9,9 +9,10 @@
 #' This function requires the packages ridigbio, magrittr, and dplyr.
 #'
 #' @param synonyms.list A list of affiliated names for your query.
+#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- get_idigbio(c("Galax urceolata", "Galax aphylla"))
+#' df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 1000)
 #'
 #' @return A data frame with desired columns from iDigBio.
 #'
@@ -22,7 +23,7 @@
 #' @export
 
 
-get_idigbio <- function(synonyms.list){
+get_idigbio <- function(synonyms.list, limit = 100000){
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
     stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
@@ -55,7 +56,7 @@ get_idigbio <- function(synonyms.list){
   colnames(query_idigbio) <- colNames
 
   for (i in 1:length(synonyms.list)) {
-    query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms.list[i])), fields = colNames, limit = 100000))
+    query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms.list[i])), fields = colNames, limit = limit))
   }
 
   # if no results found
@@ -107,10 +108,10 @@ get_idigbio <- function(synonyms.list){
                 verbatimLatitude = "data.dwc:verbatimLatitude",
                 longitude = "data.dwc:decimalLongitude",
                 verbatimLongitude = "data.dwc:verbatimLongitude",
-                identificationID = "uuid",
+                ID = "uuid",
                 coordinateUncertaintyInMeters = "data.dwc:coordinateUncertaintyInMeters",
                 informationWithheld = "data.dwc:informationWithheld",
-                habitat = "data.dwc:habitat")
+                habitat = "data.dwc:habitat") %>% suppressWarnings(correct_class())
 
   # Add occurrenceRemarks, verbatimLocality to locality column
   query_idigbio$locality <- paste0("Locality: ", query_idigbio$locality)
@@ -139,6 +140,16 @@ get_idigbio <- function(synonyms.list){
   query_idigbio <- rbind(query_idigbio, temp)
 
   #Remove these columns: occurrenceRemarks, verbatimLocality, verbatimLatitude, verbatimLongitude, geopoint.lat, geopoint.lon
-  query_idigbio <- query_idigbio[c(-14, -15, -17, -19, -20, -21)] %>% correct_class()
- return(query_idigbio)
+  query_idigbio <- query_idigbio[, -which(names(query_idigbio) %in% c("occurrenceRemarks",
+                                                                      "verbatimLatitude",
+                                                                      "verbatimLongitude",
+                                                                      "geopoint",
+                                                                      "geopoint.lat",
+                                                                      "geopoint.lon",
+                                                                      "verbatimLocality"))]
+
+  query_idigbio$aggregator <- "iDigBio"
+  query_idigbio <- suppressWarnings(correct_class(query_idigbio))
+
+  return(query_idigbio)
 }

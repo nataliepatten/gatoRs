@@ -4,10 +4,12 @@
 \alias{get_idigbio}
 \title{Used in gators_download() - Download data from Integrated Digitized Biocollections}
 \usage{
-get_idigbio(synonyms.list)
+get_idigbio(synonyms.list, limit = 1e+05)
 }
 \arguments{
 \item{synonyms.list}{A list of affiliated names for your query.}
+
+\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.}
 }
 \value{
 A data frame with desired columns from iDigBio.
@@ -21,6 +23,6 @@ This function uses the \code{correct_class()} function.
 This function requires the packages ridigbio, magrittr, and dplyr.
 }
 \examples{
-df <- get_idigbio(c("Galax urceolata", "Galax aphylla"))
+df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 1000)
 
 }
