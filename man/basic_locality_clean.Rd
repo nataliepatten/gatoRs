@@ -11,7 +11,8 @@ basic_locality_clean(
   remove.zero = TRUE,
   precision = TRUE,
   digits = 2,
-  remove.skewed = TRUE
+  remove.skewed = TRUE,
+  info.withheld = "informationWithheld"
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ basic_locality_clean(
 \item{digits}{Default = 2. Indicates digits to round coordinates to when \code{precision = TRUE}.}
 
 \item{remove.skewed}{Default = TRUE. Utilizes the \code{remove_skewed()} function to remove skewed coordinate values.}
+
+\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
 }
 \value{
 Return data frame with specimen removed that had missing or improper coordinate values.

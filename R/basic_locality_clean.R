@@ -5,13 +5,12 @@
 #' This function requires columns named 'latitude' and 'longitude'. These columns should be of type 'numeric'.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
-#' @param latitude Default = "latitude". The name of the latitude column in the data frame.
-#' @param longitude Default = "longitude". The name of the longitude column in the data frame.
 #' @param remove.zero Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.
 #' @param precision Default = TRUE. Indicates that coordinates should be rounded to match the coordinate uncertainty.
 #' @param digits Default = 2. Indicates digits to round coordinates to when `precision = TRUE`.
 #' @param remove.skewed Default = TRUE. Utilizes the `remove_skewed()` function to remove skewed coordinate values.
-
+#' @inheritParams correct_class
+#'
 #' @examples
 #' data <- basic_locality_clean(data)
 #'
@@ -20,7 +19,8 @@
 #' @export
 
 basic_locality_clean <- function(df, latitude = "latitude", longitude = "longitude", remove.zero = TRUE,
-                                 precision = TRUE, digits = 2, remove.skewed = TRUE) {
+                                 precision = TRUE, digits = 2, remove.skewed = TRUE,
+                                 info.withheld = "informationWithheld") {
   if (NROW(df) == 0) return(df)
 
   if (!(longitude %in% colnames(df))) {
@@ -62,7 +62,7 @@ basic_locality_clean <- function(df, latitude = "latitude", longitude = "longitu
   }
   # Remove skewed
   if(remove.skewed){
-   df <- remove_skewed(df)
+   df <- remove_skewed(df, info.withheld = info.withheld)
   }
   # Return df
   return(df)
