@@ -10,10 +10,11 @@
 #'
 #' @param synonyms.list A list of affiliated names for your query.
 #' @param gbif.match Default = "fuzzy". Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
+#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"))
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code")
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 1000)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code", limit = 1000)
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'
@@ -24,7 +25,7 @@
 #' @export
 
 
-get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
+get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
   if (gbif.match != "fuzzy" & gbif.match != "code") {
     stop("Invalid value for argument: gbif.match. Value for gbif.match must equal 'fuzzy' or 'code'.")
   }
@@ -32,31 +33,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
     stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
 
-  colNamesFuzzy <- c("data.scientificName",
-                     "data.genus",
-                     "data.specificEpithet",
-                     "data.infraspecificEpithet",
-                     "data.basisOfRecord",
-                     "data.eventDate",
-                     "data.institutionCode",
-                     "data.collectionCode",
-                     "data.collectionID",
-                     "data.country",
-                     "data.county",
-                     "data.stateProvince",
-                     "data.locality",
-                     "data.occurrenceRemarks",
-                     "data.verbatimLocality",
-                     "data.decimalLatitude",
-                     "data.verbatimLatitude",
-                     "data.decimalLongitude",
-                     "data.verbatimLongitude",
-                     "data.key",
-                     "data.coordinateUncertaintyInMeters",
-                     "data.informationWithheld",
-                     "data.habitat",
-                     "data.geodeticDatum")
-  colNamesCode <- c("scientificName",
+  colNames <- c("scientificName",
                     "genus",
                     "specificEpithet",
                     "infraspecificEpithet",
@@ -75,32 +52,39 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
                     "verbatimLatitude",
                     "decimalLongitude",
                     "verbatimLongitude",
-                    "identificationID",
+                    "key",
                     "coordinateUncertaintyInMeters",
                     "informationWithheld",
                     "habitat",
                     "geodeticDatum")
 
-  if (gbif.match == "code") {
-    key <- rgbif::name_backbone(name = synonyms.list[1])$speciesKey
-    query_gbif <- rgbif::occ_data(taxonKey = key, limit = 100000, curlopts=list(http_version=2))
+  query_gbif <- data.frame(matrix(ncol = length(colNames), nrow = 0))
+  colnames(query_gbif) <- colNames
+  # fix columns to be of type character
+  for (i in 1:NCOL(query_gbif)) {
+    if (grepl("Latitude", colNames[i], ignore.case = TRUE) || grepl("Longitude", colNames[i], ignore.case = TRUE)
+        || grepl("meters", colNames[i], ignore.case = TRUE)) {
+      query_gbif[,i] <- as.numeric(query_gbif[,i])
+    }
+    else {
+      query_gbif[,i] <- as.character(query_gbif[,i])
+    }
   }
-  else if (gbif.match == "fuzzy") {
-    query_gbif <- data.frame(matrix(ncol = length(colNamesFuzzy), nrow = 0))
-    colnames(query_gbif) <- colNamesFuzzy
-    # fix columns to be of type character
-    for (i in 1:NCOL(query_gbif)) {
-      if (grepl("Latitude", colNamesFuzzy[i], ignore.case = TRUE) || grepl("Longitude", colNamesFuzzy[i], ignore.case = TRUE)
-          || grepl("meters", colNamesFuzzy[i], ignore.case = TRUE)) {
-        query_gbif[,i] <- as.numeric(query_gbif[,i])
-      }
-      else {
-        query_gbif[,i] <- as.character(query_gbif[,i])
+
+  if (gbif.match == "code") {
+    for (i in 1:length(synonyms.list)) {
+      key <- suppressWarnings(rgbif::name_backbone(name = synonyms.list[i])$speciesKey)
+      if (!is.null(key)) {
+        temp <- rgbif::occ_data(taxonKey = key, limit = limit)
+        temp <- temp$data
+        query_gbif <- dplyr::bind_rows(query_gbif, temp)
       }
     }
+  }
+  else if (gbif.match == "fuzzy") {
     for (i in 1:length(synonyms.list)) {
-      temp <- rgbif::occ_data(scientificName = synonyms.list[i], limit = 100000, curlopts=list(http_version=2))
-      temp <- data.frame(temp[2])
+      temp <- rgbif::occ_data(scientificName = synonyms.list[i], limit = limit)
+      temp <- temp$data
       # use bind_rows() to account for different number of columns
       query_gbif <- dplyr::bind_rows(query_gbif, temp)
     }
@@ -114,12 +98,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)
-  if (gbif.match == "fuzzy") {
-    colNames <- colNamesFuzzy
-  }
-  else if (gbif.match == "code") {
-    colNames <- colNamesCode
-  }
+
   for (i in 1:length(colNames)) {
     if (!(colNames[i] %in% colnames(query_gbif))) {
       temp <- data.frame(matrix(NA, ncol = NCOL(temp) + 1, nrow = 0))
@@ -140,39 +119,13 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
     }
   }
 
-  if (gbif.match == "fuzzy") {
-    query_gbif <- dplyr::bind_rows(temp, query_gbif)
-    query_gbif <- query_gbif %>%
-                dplyr::rename(scientificName = "data.scientificName",
-                              genus = "data.genus",
-                              specificEpithet = "data.specificEpithet",
-                              infraspecificEpithet = "data.infraspecificEpithet",
-                              basisOfRecord =  "data.basisOfRecord",
-                              eventDate = "data.eventDate",
-                              institutionCode = "data.institutionCode",
-                              collectionCode = "data.collectionCode",
-                              collectionID = "data.collectionID",
-                              country = "data.country",
-                              county = "data.county",
-                              stateProvince = "data.stateProvince",
-                              locality = "data.locality",
-                              occurrenceRemarks = "data.occurrenceRemarks",
-                              verbatimLocality = "data.verbatimLocality",
-                              latitude = "data.decimalLatitude",
-                              verbatimLatitude = "data.verbatimLatitude",
-                              longitude = "data.decimalLongitude",
-                              verbatimLongitude = "data.verbatimLongitude",
-                              identificationID = "data.key",
-                              coordinateUncertaintyInMeters = "data.coordinateUncertaintyInMeters",
-                              informationWithheld = "data.informationWithheld",
-                              habitat = "data.habitat",
-                              geodeticDatum = "data.geodeticDatum")
-  }
-  else if (gbif.match == "code") {
-    query_gbif <- query_gbif$data
-    query_gbif <- dplyr::bind_rows(temp, query_gbif)
-    query_gbif <- dplyr::rename(query_gbif, latitude = "decimalLatitude", longitude = "decimalLongitude")
-  }
+  query_gbif <- dplyr::bind_rows(temp, query_gbif)
+  query_gbif <- dplyr::rename(query_gbif, ID = "key",
+                              latitude = "decimalLatitude",
+                              verbatimLatitude = "verbatimLatitude",
+                              longitude = "decimalLongitude",
+                              verbatimLongitude = "verbatimLongitude")
+  query_gbif <- suppressWarnings(correct_class(query_gbif))
 
   # Add occurrenceRemarks, verbatimLocality to locality column
   query_gbif$locality <- paste("locality: ", query_gbif$locality)
@@ -212,11 +165,13 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy"){
                   "locality",
                   "latitude",
                   "longitude",
-                  "identificationID",
+                  "ID",
                   "coordinateUncertaintyInMeters",
                   "informationWithheld",
                   "habitat") %>%
-                  correct_class()
+                  suppressWarnings(correct_class())
+
+  query_gbif$aggregator <- "GBIF"
 
   return(query_gbif)
 }

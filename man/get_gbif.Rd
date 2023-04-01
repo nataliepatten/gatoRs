@@ -4,12 +4,14 @@
 \alias{get_gbif}
 \title{Used in gators_download() - Download data from the Global Biodiversity Information Facility}
 \usage{
-get_gbif(synonyms.list, gbif.match = "fuzzy")
+get_gbif(synonyms.list, gbif.match = "fuzzy", limit = 1e+05)
 }
 \arguments{
 \item{synonyms.list}{A list of affiliated names for your query.}
 
 \item{gbif.match}{Default = "fuzzy". Either "fuzzy" for fuzzy matching of name or "code" to search by species code.}
+
+\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.}
 }
 \value{
 Returns a data frame with desired columns from GBIF.
@@ -23,7 +25,7 @@ This function uses the \code{correct_class()} function.
 This function requires the packages rgbif, magrittr, and dplyr.
 }
 \examples{
-df <- get_gbif(c("Galax urceolata", "Galax aphylla"))
-df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code")
+df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 1000)
+df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code", limit = 1000)
 
 }
