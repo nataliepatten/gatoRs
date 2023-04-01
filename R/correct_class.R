@@ -18,13 +18,14 @@
 #' @param locality Default = "locality". The name of the locality column in the data frame.
 #' @param latitude Default = "latitude". The name of the latitude column in the data frame.
 #' @param longitude Default = "longitude". The name of the longitude column in the data frame.
-#' @param id Default = "identificationID". The name of the identification id column in the data frame.
+#' @param id Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.
 #' @param coord.uncertainty Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.
 #' @param info.withheld Default = "informationWithheld". The name of the information withheld column in the data frame.
 #' @param habitat Default = "habitat". The name of the habitat column in the data frame.
 #' @param infraspecific.epithet Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.
 #' @param col.id Default = "collectionID". The name of the collection id column in the data frame.
 #'
+#' @importFrom dplyr case_when
 #' @keywords internal
 #' @return Returns data frame with corrected classes of each column.
 
@@ -34,37 +35,37 @@ correct_class <- function(df, scientific.name = "scientificName", genus = "genus
                           col.code = "collectionCode", country = "country",
                           county = "county", state = "stateProvince",
                           locality = "locality", latitude = "latitude",
-                          longitude = "longitude", id = "identificationID",
+                          longitude = "longitude", id = "ID",
                           coord.uncertainty = "coordinateUncertaintyInMeters",
                           info.withheld = "informationWithheld", habitat = "habitat",
                           infraspecific.epithet = "infraspecificEpithet", col.id = "collectionID"){
 
-    df[[scientific.name]] <- as.character(df[[scientific.name]])
-    df[[genus]] <- as.character(df[[genus]])
-    df[[species]] <- as.character(df[[species]])
-    df[[basis.of.record]] <- as.character(df[[basis.of.record]])
-    df[[event.date]] <- as.character(df[[event.date]])
-    df[[inst.code]] <- as.character(df[[inst.code]])
-    df[[col.code]] <- as.character(df[[col.code]])
-    df[[country]] <- as.character(df[[country]])
-    df[[county]] <- as.character(df[[county]])
-    df[[state]] <- as.character(df[[state]])
-    df[[locality]] <- as.character(df[[locality]])
-    df[[latitude]] <- as.numeric(df[[latitude]])
-    df[[longitude]]<- as.numeric(df[[longitude]])
-    df[[id]] <- as.character(df[[id]])
-    df[[coord.uncertainty]] <- as.numeric(df[[coord.uncertainty]])
-    df[[info.withheld]] <- as.character(df[[info.withheld]])
-    df[[habitat]] <- as.character(df[[habitat]])
+    df[[scientific.name]] <- dplyr::case_when(df[[scientific.name]] == "" ~ NA, .default = as.character(df[[scientific.name]]))
+    df[[genus]] <- dplyr::case_when(df[[genus]] == "" ~ NA, .default = as.character(df[[genus]]))
+    df[[species]] <- dplyr::case_when(df[[species]] == "" ~ NA, .default = as.character(df[[species]]))
+    df[[basis.of.record]] <- dplyr::case_when(df[[basis.of.record]] == "" ~ NA, .default = as.character(df[[basis.of.record]]))
+    df[[event.date]] <- dplyr::case_when(df[[event.date]] == "" ~ NA, .default = as.character(df[[event.date]]))
+    df[[inst.code]] <- dplyr::case_when(df[[inst.code]] == "" ~ NA, .default = as.character(df[[inst.code]]))
+    df[[col.code]] <- dplyr::case_when(df[[col.code]] == "" ~ NA, .default = as.character(df[[col.code]]))
+    df[[country]] <- dplyr::case_when(df[[country]] == "" ~ NA, .default = as.character(df[[country]]))
+    df[[county]] <- dplyr::case_when(df[[county]] == "" ~ NA, .default = as.character(df[[county]]))
+    df[[state]] <- dplyr::case_when(df[[state]] == "" ~ NA, .default = as.character(df[[state]]))
+    df[[locality]] <- dplyr::case_when(df[[locality]] == "" ~ NA, .default = as.character(df[[locality]]))
+    df[[latitude]] <- dplyr::case_when(df[[latitude]] == "" ~ NA, .default = as.numeric(df[[latitude]]))
+    df[[longitude]]<- dplyr::case_when(df[[longitude]] == "" ~ NA, .default = as.numeric(df[[longitude]]))
+    df[[id]] <- dplyr::case_when(df[[id]] == "" ~ NA, .default = as.character(df[[id]]))
+    df[[coord.uncertainty]] <- dplyr::case_when(df[[coord.uncertainty]] == "" ~ NA, .default = as.numeric(df[[coord.uncertainty]]))
+    df[[info.withheld]] <- dplyr::case_when(df[[info.withheld]] == "" ~ NA, .default = as.character(df[[info.withheld]]))
+    df[[habitat]] <- dplyr::case_when(df[[habitat]] == "" ~ NA, .default = as.character(df[[habitat]]))
 
     if (infraspecific.epithet %in% colnames(df)){
-      df[[infraspecific.epithet]] <- as.character(df[[infraspecific.epithet]])
+      df[[infraspecific.epithet]] <- dplyr::case_when(df[[infraspecific.epithet]] == "" ~ NA, .default = as.character(df[[infraspecific.epithet]]))
     } else {
       df[[infraspecific.epithet]] <- NA
     }
 
     if (col.id %in% colnames(df)){
-      df[[col.id]] <- as.character(df[[col.id]])
+      df[[col.id]] <- dplyr::case_when(df[[col.id]] == "" ~ NA, .default = as.character(df[[col.id]]))
     } else {
       df[[col.id]] <- NA
     }

@@ -19,7 +19,7 @@ correct_class(
   locality = "locality",
   latitude = "latitude",
   longitude = "longitude",
-  id = "identificationID",
+  id = "ID",
   coord.uncertainty = "coordinateUncertaintyInMeters",
   info.withheld = "informationWithheld",
   habitat = "habitat",
@@ -56,7 +56,7 @@ correct_class(
 
 \item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
-\item{id}{Default = "identificationID". The name of the identification id column in the data frame.}
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
 
 \item{coord.uncertainty}{Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.}
 
