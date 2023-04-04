@@ -62,25 +62,26 @@ This function requires no additional packages.</p>
 <span>  scientific.name <span class="op">=</span> <span class="st">"scientificName"</span>,</span>
 <span>  genus <span class="op">=</span> <span class="st">"genus"</span>,</span>
 <span>  species <span class="op">=</span> <span class="st">"specificEpithet"</span>,</span>
+<span>  infraspecific.epithet <span class="op">=</span> <span class="st">"infraspecificEpithet"</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">"ID"</span>,</span>
+<span>  occ.id <span class="op">=</span> <span class="st">"occurrenceID"</span>,</span>
 <span>  basis.of.record <span class="op">=</span> <span class="st">"basisOfRecord"</span>,</span>
 <span>  event.date <span class="op">=</span> <span class="st">"eventDate"</span>,</span>
 <span>  year <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>  month <span class="op">=</span> <span class="st">"month"</span>,</span>
 <span>  day <span class="op">=</span> <span class="st">"day"</span>,</span>
-<span>  inst.code <span class="op">=</span> <span class="st">"institutionCode"</span>,</span>
 <span>  col.code <span class="op">=</span> <span class="st">"collectionCode"</span>,</span>
+<span>  recorded.by <span class="op">=</span> <span class="st">"recordedBy"</span>,</span>
 <span>  country <span class="op">=</span> <span class="st">"country"</span>,</span>
 <span>  county <span class="op">=</span> <span class="st">"county"</span>,</span>
 <span>  state <span class="op">=</span> <span class="st">"stateProvince"</span>,</span>
 <span>  locality <span class="op">=</span> <span class="st">"locality"</span>,</span>
 <span>  latitude <span class="op">=</span> <span class="st">"latitude"</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="st">"longitude"</span>,</span>
-<span>  id <span class="op">=</span> <span class="st">"ID"</span>,</span>
 <span>  coord.uncertainty <span class="op">=</span> <span class="st">"coordinateUncertaintyInMeters"</span>,</span>
 <span>  info.withheld <span class="op">=</span> <span class="st">"informationWithheld"</span>,</span>
 <span>  habitat <span class="op">=</span> <span class="st">"habitat"</span>,</span>
-<span>  infraspecific.epithet <span class="op">=</span> <span class="st">"infraspecificEpithet"</span>,</span>
-<span>  col.id <span class="op">=</span> <span class="st">"collectionID"</span></span>
+<span>  aggregator <span class="op">=</span> <span class="st">"aggregator"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,6 +101,18 @@ This function requires no additional packages.</p>
 
 <dt>species</dt>
 <dd><p>Default = "specificEpithet". The name of the specific epithet column in the data frame.</p></dd>
+
+
+<dt>infraspecific.epithet</dt>
+<dd><p>Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.</p></dd>
+
+
+<dt>id</dt>
+<dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.</p></dd>
+
+
+<dt>occ.id</dt>
+<dd><p>Default = "occurrenceId". The name of the occurrence ID column in the data frame.</p></dd>
 
 
 <dt>basis.of.record</dt>
@@ -122,12 +135,12 @@ This function requires no additional packages.</p>
 <dd><p>Default = "day". The name of the event date day column in the data frame.</p></dd>
 
 
-<dt>inst.code</dt>
-<dd><p>Default = "institutionCode". The name of the institution code column in the data frame.</p></dd>
-
-
 <dt>col.code</dt>
 <dd><p>Default = "collectionCode". The name of the collection code column in the data frame.</p></dd>
+
+
+<dt>recorded.by</dt>
+<dd><p>Default = "recordedBy". The name of the collector name column in the data frame.</p></dd>
 
 
 <dt>country</dt>
@@ -154,10 +167,6 @@ This function requires no additional packages.</p>
 <dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
 
 
-<dt>id</dt>
-<dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.</p></dd>
-
-
 <dt>coord.uncertainty</dt>
 <dd><p>Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.</p></dd>
 
@@ -170,12 +179,9 @@ This function requires no additional packages.</p>
 <dd><p>Default = "habitat". The name of the habitat column in the data frame.</p></dd>
 
 
-<dt>infraspecific.epithet</dt>
-<dd><p>Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.</p></dd>
-
-
-<dt>col.id</dt>
-<dd><p>Default = "collectionID". The name of the collection id column in the data frame.</p></dd>
+<dt>aggregator</dt>
+<dd><p>Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -183,6 +189,10 @@ This function requires no additional packages.</p>
     
 
 <p>Returns data frame with corrected classes of each column.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>"aggregator", "infraspecific.epithet", and "recorded.by" columns will be skipped if they do not exist.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

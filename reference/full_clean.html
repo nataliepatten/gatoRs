@@ -67,6 +67,8 @@ This function also provides the option to interactively inspect and remove types
 <span>  <span class="va">df</span>,</span>
 <span>  <span class="va">synonyms.list</span>,</span>
 <span>  event.date <span class="op">=</span> <span class="st">"eventDate"</span>,</span>
+<span>  aggregator <span class="op">=</span> <span class="st">"aggregator"</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">"ID"</span>,</span>
 <span>  taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
 <span>  scientific.name <span class="op">=</span> <span class="st">"scientificName"</span>,</span>
 <span>  accepted.name <span class="op">=</span> <span class="cn">NA</span>,</span>
@@ -100,6 +102,15 @@ This function also provides the option to interactively inspect and remove types
 
 <dt>event.date</dt>
 <dd><p>Default = "eventDate". The name of the event date column in the data frame.</p></dd>
+
+
+<dt>aggregator</dt>
+<dd><p>Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.</p></dd>
+
+
+<dt>id</dt>
+<dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.</p></dd>
 
 
 <dt>taxa.filter</dt>
