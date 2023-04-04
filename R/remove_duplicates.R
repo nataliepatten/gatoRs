@@ -20,8 +20,47 @@
 #'
 #'
 
-remove_duplicates <- function(df, event.date = "eventDate", latitude = "latitude", longitude = "longitude"){
+remove_duplicates <- function(df, event.date = "eventDate",
+                              latitude = "latitude", longitude = "longitude", aggregator = "aggregator", ID = "ID"
+                              ){
   if (NROW(df) == 0) return(df)
+
+  # Remove within aggregation duplicates based on ID (UUID or KEY)
+  ag <- unique(df[[aggregator]])
+  tempdf <- c()
+  for(i in 1:length(ag)){
+    tempdf[[i]] <-  df[df[aggregator] == ag[i], ]
+    if(((length(unique(na.omit(tempdf[[i]][[ID]])))) == (nrow(na.omit(tempdf[[i]][ID])))) == FALSE){
+      tempdf[[i]] <- dplyr::distinct(tempdf[[i]], .data[[ID]], .keep_all = TRUE)
+    }
+  }
+  df <- do.call(rbind, tempdf)
+  # Remove specimen duplicates
+  # Format dates
+
+  #for(i in 1:nrow(df)){
+   # if(!is.na(df[[eventDate]])){
+
+  #  dashcount <- stringr::str_count(random, "[-]")
+  #  if(dashcount == 0){
+    #  df$year[i] <- lubridate::year(as.Date(tempdate, "%Y"))
+     # df$month[i] <- NA
+     # df$day[i] <- NA
+   # } else if(dashcount == 1){
+   #   tempdate <- as.Date(tempdate, "%Y-%m")
+   #   df$year[i] <- lubridate::year(tempdate)
+  #    df$month[i] <- lubridate::month(tempdate)
+   #   df$day[i] <- NA
+   # }else if(dashcount == 2){
+  #    tempdate <- as.Date(tempdate, "%Y-%m-%d")
+  #    df$year[i] <- lubridate::year(tempdate)
+   #   df$month[i] <- lubridate::month(tempdate)
+  ##    df$day[i] <- lubridate::day(tempdate)
+  #  }else{
+# #     df$year <- NA
+ #     df$month[i] <- NA
+ #     df$day[i] <- NA}}
+ # }
 
   # Parse date with Lubridate
   suppressWarnings(df[[event.date]] <-  lubridate::ymd(df[[event.date]]))
