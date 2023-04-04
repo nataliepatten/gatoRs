@@ -8,7 +8,9 @@ remove_duplicates(
   df,
   event.date = "eventDate",
   latitude = "latitude",
-  longitude = "longitude"
+  longitude = "longitude",
+  aggregator = "aggregator",
+  id = "ID"
 )
 }
 \arguments{
@@ -19,6 +21,11 @@ remove_duplicates(
 \item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
 
 \item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+
+\item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.}
+
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
 }
 \value{
 Return data frame with duplicates removed.

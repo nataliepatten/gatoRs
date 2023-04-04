@@ -21,8 +21,8 @@
 #'
 
 remove_duplicates <- function(df, event.date = "eventDate",
-                              latitude = "latitude", longitude = "longitude", aggregator = "aggregator", ID = "ID"
-                              ){
+                              latitude = "latitude", longitude = "longitude",
+                              aggregator = "aggregator", id = "ID"){
   if (NROW(df) == 0) return(df)
 
   # Remove within aggregation duplicates based on ID (UUID or KEY)
@@ -30,8 +30,8 @@ remove_duplicates <- function(df, event.date = "eventDate",
   tempdf <- c()
   for(i in 1:length(ag)){
     tempdf[[i]] <-  df[df[aggregator] == ag[i], ]
-    if(((length(unique(na.omit(tempdf[[i]][[ID]])))) == (nrow(na.omit(tempdf[[i]][ID])))) == FALSE){
-      tempdf[[i]] <- dplyr::distinct(tempdf[[i]], .data[[ID]], .keep_all = TRUE)
+    if(((length(unique(na.omit(tempdf[[i]][[id]])))) == (nrow(na.omit(tempdf[[i]][id])))) == FALSE){
+      tempdf[[i]] <- dplyr::distinct(tempdf[[i]], .data[[id]], .keep_all = TRUE)
     }
   }
   df <- do.call(rbind, tempdf)
