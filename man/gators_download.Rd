@@ -45,12 +45,15 @@ from the GBIF and iDigBio databases. The columns are as follows:
 \item \href{https://dwc.tdwg.org/list/#dwc_genus}{genus}
 \item \href{https://dwc.tdwg.org/list/#dwc_specificEpithet}{specificEpithet}
 \item \href{https://dwc.tdwg.org/list/#dwc_infraspecificEpithet}{infraspecificEpithet}
+\item ID (contains unique IDs defined from GBIF or iDigBio)
+\item \href{https://dwc.tdwg.org/list/#dwc_occurrenceID}{occurrenceID}
 \item \href{https://dwc.tdwg.org/list/#dwc_basisOfRecord}{basisOfRecord}
 \item \href{https://dwc.tdwg.org/list/#dwc_eventDate}{eventDate}
-\item \href{https://dwc.tdwg.org/list/#dwc_institutionCode}{institutionCode}
+\item \href{https://dwc.tdwg.org/list/#dwc_year}{year}
+\item \href{https://dwc.tdwg.org/list/#dwc_month}{month}
+\item \href{https://dwc.tdwg.org/list/#dwc_day}{day}
 \item \href{https://dwc.tdwg.org/list/#dwc_collectionCode}{collectionCode}
-\item \href{https://dwc.tdwg.org/list/#dwc_collectionID}{collectionID}
-\item \href{https://dwc.tdwg.org/list/#dwc_identificationID}{ID}
+\item \href{https://dwc.tdwg.org/list/#dwc_recordedBy}{recordedBy}
 \item \href{https://dwc.tdwg.org/list/#dwc_informationWithheld}{informationWithheld}
 \item \href{https://dwc.tdwg.org/list/#dwc_country}{country}
 \item \href{https://dwc.tdwg.org/list/#dwc_county}{county}
@@ -64,10 +67,7 @@ from the GBIF and iDigBio databases. The columns are as follows:
 }
 }
 \description{
-The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
-scientificName, genus, specificEpithet, infraspecificEpithet, basisOfRecord, eventDate, institutionCode, collectionCode,
-collectionID, country, county, stateProvince, locality, latitude, longitude, identificationID,
-coordinateUncertaintyInMeters, informationWithheld, and habitat.
+The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species.
 }
 \details{
 This function uses the \code{get_idigbio()}, \code{get_gbif()}, \code{fix_columns()}, \code{fix_names()}, and \code{filter_fix_names()} functions.

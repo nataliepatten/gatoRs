@@ -30,6 +30,7 @@
 #' @export
 
 full_clean <- function(df, synonyms.list, event.date = "eventDate",
+                       aggregator = "aggregator", id = "ID",
                        taxa.filter = "fuzzy", scientific.name = "scientificName",
                        accepted.name = NA, remove.zero = TRUE,
                        precision = TRUE, digits = 2, remove.skewed = TRUE,
@@ -39,7 +40,8 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
                        distance = 5, reps = 100,
                        one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
 
-  suppress_output(df <- remove_duplicates(df, event.date = event.date, latitude = latitude, longitude = longitude))
+  suppress_output(df <- remove_duplicates(df, event.date = event.date, latitude = latitude,
+                                          longitude = longitude, aggregator = "aggregator", id = "ID"))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
                taxa.filter = taxa.filter, scientific.name, accepted.name =  accepted.name))
 

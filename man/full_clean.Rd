@@ -8,6 +8,8 @@ full_clean(
   df,
   synonyms.list,
   event.date = "eventDate",
+  aggregator = "aggregator",
+  id = "ID",
   taxa.filter = "fuzzy",
   scientific.name = "scientificName",
   accepted.name = NA,
@@ -34,6 +36,11 @@ full_clean(
 \item{synonyms.list}{A list of synonyms for a species.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+
+\item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.}
+
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
 
 \item{taxa.filter}{The type of filter to be used--either "exact", "fuzzy", or "interactive".}
 

@@ -9,25 +9,26 @@ correct_class(
   scientific.name = "scientificName",
   genus = "genus",
   species = "specificEpithet",
+  infraspecific.epithet = "infraspecificEpithet",
+  id = "ID",
+  occ.id = "occurrenceID",
   basis.of.record = "basisOfRecord",
   event.date = "eventDate",
   year = "year",
   month = "month",
   day = "day",
-  inst.code = "institutionCode",
   col.code = "collectionCode",
+  recorded.by = "recordedBy",
   country = "country",
   county = "county",
   state = "stateProvince",
   locality = "locality",
   latitude = "latitude",
   longitude = "longitude",
-  id = "ID",
   coord.uncertainty = "coordinateUncertaintyInMeters",
   info.withheld = "informationWithheld",
   habitat = "habitat",
-  infraspecific.epithet = "infraspecificEpithet",
-  col.id = "collectionID"
+  aggregator = "aggregator"
 )
 }
 \arguments{
@@ -39,6 +40,12 @@ correct_class(
 
 \item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
 
+\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
+
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
+
+\item{occ.id}{Default = "occurrenceId". The name of the occurrence ID column in the data frame.}
+
 \item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
@@ -49,9 +56,9 @@ correct_class(
 
 \item{day}{Default = "day". The name of the event date day column in the data frame.}
 
-\item{inst.code}{Default = "institutionCode". The name of the institution code column in the data frame.}
-
 \item{col.code}{Default = "collectionCode". The name of the collection code column in the data frame.}
+
+\item{recorded.by}{Default = "recordedBy". The name of the collector name column in the data frame.}
 
 \item{country}{Default = "country". The name of the country column in the data frame.}
 
@@ -65,17 +72,14 @@ correct_class(
 
 \item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
-\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
-
 \item{coord.uncertainty}{Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.}
 
 \item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
 
 \item{habitat}{Default = "habitat". The name of the habitat column in the data frame.}
 
-\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
-
-\item{col.id}{Default = "collectionID". The name of the collection id column in the data frame.}
+\item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.}
 }
 \value{
 Returns data frame with corrected classes of each column.
@@ -83,5 +87,8 @@ Returns data frame with corrected classes of each column.
 \description{
 The \code{correct_class()} function corrects the classes of each column in a data frame of your queried species.
 This function requires no additional packages.
+}
+\details{
+"aggregator", "infraspecific.epithet", and "recorded.by" columns will be skipped if they do not exist.
 }
 \keyword{internal}

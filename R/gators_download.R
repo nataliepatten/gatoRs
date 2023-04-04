@@ -1,10 +1,7 @@
 #' @title Download - Download specimen data from both iDigBio and GBIF
 #'
 #' @description
-#' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species. Data returned includes:
-#' scientificName, genus, specificEpithet, infraspecificEpithet, basisOfRecord, eventDate, institutionCode, collectionCode,
-#' collectionID, country, county, stateProvince, locality, latitude, longitude, identificationID,
-#' coordinateUncertaintyInMeters, informationWithheld, and habitat.
+#' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species.
 #'
 #' @details
 #' This function uses the `get_idigbio()`, `get_gbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
@@ -44,12 +41,15 @@
 #' * [genus](https://dwc.tdwg.org/list/#dwc_genus)
 #' * [specificEpithet](https://dwc.tdwg.org/list/#dwc_specificEpithet)
 #' * [infraspecificEpithet](https://dwc.tdwg.org/list/#dwc_infraspecificEpithet)
+#' * ID (contains unique IDs defined from GBIF or iDigBio)
+#' * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
 #' * [basisOfRecord](https://dwc.tdwg.org/list/#dwc_basisOfRecord)
 #' * [eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
-#' * [institutionCode](https://dwc.tdwg.org/list/#dwc_institutionCode)
+#' * [year](https://dwc.tdwg.org/list/#dwc_year)
+#' * [month](https://dwc.tdwg.org/list/#dwc_month)
+#' * [day](https://dwc.tdwg.org/list/#dwc_day)
 #' * [collectionCode](https://dwc.tdwg.org/list/#dwc_collectionCode)
-#' * [collectionID](https://dwc.tdwg.org/list/#dwc_collectionID)
-#' * [ID](https://dwc.tdwg.org/list/#dwc_identificationID)
+#' * [recordedBy](https://dwc.tdwg.org/list/#dwc_recordedBy)
 #' * [informationWithheld](https://dwc.tdwg.org/list/#dwc_informationWithheld)
 #' * [country](https://dwc.tdwg.org/list/#dwc_country)
 #' * [county](https://dwc.tdwg.org/list/#dwc_county)
