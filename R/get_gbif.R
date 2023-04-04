@@ -85,7 +85,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
     for (i in 1:length(synonyms.list)) {
       key <- suppressWarnings(rgbif::name_backbone(name = synonyms.list[i])$speciesKey)
       if (!is.null(key)) {
-        temp <- rgbif::occ_data(taxonKey = key, limit = limit)
+        temp <- rgbif::occ_data(taxonKey = key, limit = limit, curlopts=list(http_version=2))
         temp <- temp$data
         query_gbif <- dplyr::bind_rows(query_gbif, temp)
       }
@@ -93,7 +93,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
   }
   else if (gbif.match == "fuzzy") {
     for (i in 1:length(synonyms.list)) {
-      temp <- rgbif::occ_data(scientificName = synonyms.list[i], limit = limit)
+      temp <- rgbif::occ_data(scientificName = synonyms.list[i], limit = limit, curlopts=list(http_version=2))
       temp <- temp$data
       # use bind_rows() to account for different number of columns
       query_gbif <- dplyr::bind_rows(query_gbif, temp)
