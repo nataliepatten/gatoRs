@@ -39,6 +39,9 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
                     "infraspecificEpithet",
                     "basisOfRecord",
                     "eventDate",
+                    "year",
+                    "month",
+                    "day",
                     "institutionCode",
                     "collectionCode",
                     "collectionID",
@@ -57,13 +60,20 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
                     "informationWithheld",
                     "habitat",
                     "geodeticDatum")
+  numerical <- c("decimalLatitude",
+                 "verbatimLatitude",
+                 "decimalLongitude",
+                 "verbatimLongitude",
+                 "year",
+                 "month",
+                 "day",
+                 "coordinateUncertaintyInMeters")
 
   query_gbif <- data.frame(matrix(ncol = length(colNames), nrow = 0))
   colnames(query_gbif) <- colNames
   # fix columns to be of type character
   for (i in 1:NCOL(query_gbif)) {
-    if (grepl("Latitude", colNames[i], ignore.case = TRUE) || grepl("Longitude", colNames[i], ignore.case = TRUE)
-        || grepl("meters", colNames[i], ignore.case = TRUE)) {
+    if (colNames[i] %in% numerical) {
       query_gbif[,i] <- as.numeric(query_gbif[,i])
     }
     else {
@@ -109,8 +119,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
 
   if (NCOL(temp) > 0) {
     for (i in 1:NCOL(temp)) {
-      if (grepl("Latitude", colNames[i], ignore.case = TRUE) || grepl("Longitude", colNames[i], ignore.case = TRUE)
-          || grepl("meters", colNames[i], ignore.case = TRUE)) {
+      if (colNames[i] %in% numerical) {
         temp[,i] <- as.numeric(temp[,i])
       }
       else {
@@ -156,6 +165,9 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
                   "infraspecificEpithet",
                   "basisOfRecord",
                   "eventDate",
+                  "year",
+                  "month",
+                  "day",
                   "institutionCode",
                   "collectionCode",
                   "collectionID",

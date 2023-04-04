@@ -11,6 +11,9 @@ correct_class(
   species = "specificEpithet",
   basis.of.record = "basisOfRecord",
   event.date = "eventDate",
+  year = "year",
+  month = "month",
+  day = "day",
   inst.code = "institutionCode",
   col.code = "collectionCode",
   country = "country",
@@ -39,6 +42,12 @@ correct_class(
 \item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+
+\item{year}{Default = "year". The name of the event date year column in the data frame.}
+
+\item{month}{Default = "month". The name of the event date month column in the data frame.}
+
+\item{day}{Default = "day". The name of the event date day column in the data frame.}
 
 \item{inst.code}{Default = "institutionCode". The name of the institution code column in the data frame.}
 
