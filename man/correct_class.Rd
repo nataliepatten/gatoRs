@@ -17,7 +17,7 @@ correct_class(
   year = "year",
   month = "month",
   day = "day",
-  col.code = "collectionCode",
+  inst.code = "institutionCode",
   recorded.by = "recordedBy",
   country = "country",
   county = "county",
@@ -56,7 +56,7 @@ correct_class(
 
 \item{day}{Default = "day". The name of the event date day column in the data frame.}
 
-\item{col.code}{Default = "collectionCode". The name of the collection code column in the data frame.}
+\item{inst.code}{Default = "institutionCode". The name of the collection code column in the data frame.}
 
 \item{recorded.by}{Default = "recordedBy". The name of the collector name column in the data frame.}
 
