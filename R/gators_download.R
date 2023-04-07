@@ -48,7 +48,7 @@
 #' * [year](https://dwc.tdwg.org/list/#dwc_year)
 #' * [month](https://dwc.tdwg.org/list/#dwc_month)
 #' * [day](https://dwc.tdwg.org/list/#dwc_day)
-#' * [collectionCode](https://dwc.tdwg.org/list/#dwc_collectionCode)
+#' * [institutionCode](https://dwc.tdwg.org/list/#dwc_institutionCode)
 #' * [recordedBy](https://dwc.tdwg.org/list/#dwc_recordedBy)
 #' * [informationWithheld](https://dwc.tdwg.org/list/#dwc_informationWithheld)
 #' * [country](https://dwc.tdwg.org/list/#dwc_country)

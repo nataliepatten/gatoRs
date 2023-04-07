@@ -19,7 +19,7 @@
 #' @param year Default = "year". The name of the event date year column in the data frame.
 #' @param month Default = "month". The name of the event date month column in the data frame.
 #' @param day Default = "day". The name of the event date day column in the data frame.
-#' @param col.code Default = "collectionCode". The name of the collection code column in the data frame.
+#' @param inst.code Default = "institutionCode". The name of the collection code column in the data frame.
 #' @param recorded.by Default = "recordedBy". The name of the collector name column in the data frame.
 #' @param country Default = "country". The name of the country column in the data frame.
 #' @param county Default = "county". The name of the county column in the data frame.
@@ -42,7 +42,7 @@ correct_class <- function(df, scientific.name = "scientificName", genus = "genus
                           id = "ID", occ.id = "occurrenceID",
                           basis.of.record = "basisOfRecord", event.date = "eventDate",
                           year = "year", month = "month", day = "day",
-                          col.code = "collectionCode", recorded.by = "recordedBy",
+                          inst.code = "institutionCode", recorded.by = "recordedBy",
                           country = "country", county = "county", state = "stateProvince",
                           locality = "locality", latitude = "latitude",
                           longitude = "longitude",
@@ -58,7 +58,7 @@ correct_class <- function(df, scientific.name = "scientificName", genus = "genus
     df[[year]] <- dplyr::case_when(df[[year]] == "" ~ NA, .default = as.character(df[[year]]))
     df[[month]] <- dplyr::case_when(df[[month]] == "" ~ NA, .default = as.character(df[[month]]))
     df[[day]] <- dplyr::case_when(df[[day]] == "" ~ NA, .default = as.character(df[[day]]))
-    df[[col.code]] <- dplyr::case_when(df[[col.code]] == "" ~ NA, .default = as.character(df[[col.code]]))
+    df[[inst.code]] <- dplyr::case_when(df[[inst.code]] == "" ~ NA, .default = as.character(df[[inst.code]]))
     df[[country]] <- dplyr::case_when(df[[country]] == "" ~ NA, .default = as.character(df[[country]]))
     df[[county]] <- dplyr::case_when(df[[county]] == "" ~ NA, .default = as.character(df[[county]]))
     df[[state]] <- dplyr::case_when(df[[state]] == "" ~ NA, .default = as.character(df[[state]]))
