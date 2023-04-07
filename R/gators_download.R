@@ -23,6 +23,9 @@
 #' For example, `gbif.match = "fuzzy"` will search by fuzzy match and `gbif.match = "code"` will search by code. This parameter
 #' is not required and is assigned "fuzzy" by default.
 #'
+#' @param gbif.prov A parameter to obtain the provider/verbatim columns from GBIF. This parameter is optional
+#' and is assigned `FALSE` by default.
+#'
 #' @param idigbio.filter A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 #' include data points for a different species that mention the desired species in the locality information, for example.
 #' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
@@ -32,6 +35,7 @@
 #'
 #' @examples
 #' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv", limit = 1000)
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
 #' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE, limit = 1000)
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
@@ -65,7 +69,8 @@
 
 
 gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
-                            gbif.match = "fuzzy", idigbio.filter = TRUE, limit = 100000) {
+                            gbif.match = "fuzzy", gbif.prov = FALSE,
+                            idigbio.filter = TRUE, limit = 100000) {
 
   # Check for valid arguments
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
@@ -98,7 +103,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
 
   # initial download, fix capitalization
   query_idigbio <- fix_names(get_idigbio(synonyms.list, limit = limit))
-  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, limit = limit))
+  query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, gbif.prov = gbif.prov, limit = limit))
 
   # Remove duplicates - records that share UUIDs or KEYs
   query_idigbio <- dplyr::distinct(query_idigbio, ID, .keep_all = TRUE)

@@ -12,7 +12,7 @@
 #' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 1000)
+#' df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 100)
 #'
 #' @return A data frame with desired columns from iDigBio.
 #'

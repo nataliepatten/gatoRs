@@ -10,11 +10,14 @@
 #'
 #' @param synonyms.list A list of affiliated names for your query.
 #' @param gbif.match Default = "fuzzy". Either "fuzzy" for fuzzy matching of name or "code" to search by species code.
+#' @param gbif.prov Default = FALSE. A parameter to obtain the provider/verbatim columns from GBIF.
 #' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 1000)
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code", limit = 1000)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code", limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, gbif.match = "code", limit = 100)
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'
@@ -25,7 +28,7 @@
 #' @export
 
 
-get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
+get_gbif <- function(synonyms.list, gbif.match = "fuzzy", gbif.prov = FALSE, limit = 100000){
   if (gbif.match != "fuzzy" & gbif.match != "code") {
     stop("Invalid value for argument: gbif.match. Value for gbif.match must equal 'fuzzy' or 'code'.")
   }
@@ -106,6 +109,12 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
     return(query_gbif)
   }
 
+  if (gbif.prov) {
+    query_gbif <- dplyr::distinct(query_gbif, key, .keep_all = TRUE)
+    query_gbif$key <- as.numeric(query_gbif$key)
+    query_gbif <- rgbif::occ_get_verbatim(key = query_gbif$key, fields = colNames)
+  }
+
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
   tempColNames <- colnames(temp)
 
@@ -143,20 +152,24 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", limit = 100000){
 
   # if decimal lat/lon columns are empty, replace with verbatim lat/lon columns
   temp <- query_gbif[is.na(query_gbif$latitude), ]
-  query_gbif <- query_gbif[!(is.na(query_gbif$latitude)), ]
-  for (i in 1:NROW(temp)) {
-    if (!is.na(temp$verbatimLatitude[i]))
-      temp$latitude[i] <- temp$verbatimLatitude[i]
+  if (NROW(temp) > 0) {
+    query_gbif <- query_gbif[!(is.na(query_gbif$latitude)), ]
+    for (i in 1:NROW(temp)) {
+      if (!is.na(temp$verbatimLatitude[i]))
+        temp$latitude[i] <- temp$verbatimLatitude[i]
+    }
+    query_gbif <- rbind(query_gbif, temp)
   }
-  query_gbif <- rbind(query_gbif, temp)
 
   temp <- query_gbif[is.na(query_gbif$longitude), ]
-  query_gbif <- query_gbif[!(is.na(query_gbif$longitude)), ]
-  for (i in 1:NROW(temp)) {
-    if (!is.na(temp$verbatimLongitude[i]))
-      temp$longitude[i] <- temp$verbatimLongitude[i]
+  if (NROW(temp) > 0) {
+    query_gbif <- query_gbif[!(is.na(query_gbif$longitude)), ]
+    for (i in 1:NROW(temp)) {
+      if (!is.na(temp$verbatimLongitude[i]))
+        temp$longitude[i] <- temp$verbatimLongitude[i]
+    }
+    query_gbif <- rbind(query_gbif, temp)
   }
-  query_gbif <- rbind(query_gbif, temp)
 
   query_gbif$aggregator <- "GBIF"
   query_gbif <- query_gbif %>%

@@ -23,6 +23,6 @@ This function uses the \code{correct_class()} function.
 This function requires the packages ridigbio, magrittr, and dplyr.
 }
 \examples{
-df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 1000)
+df <- get_idigbio(c("Galax urceolata", "Galax aphylla"), limit = 100)
 
 }

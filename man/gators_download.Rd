@@ -9,6 +9,7 @@ gators_download(
   write.file = FALSE,
   filename = NA,
   gbif.match = "fuzzy",
+  gbif.prov = FALSE,
   idigbio.filter = TRUE,
   limit = 1e+05
 )
@@ -28,6 +29,9 @@ required if \code{write.file = TRUE}.}
 \item{gbif.match}{A parameter to select either search by fuzzy matching of scientific name or to search by species code.
 For example, \code{gbif.match = "fuzzy"} will search by fuzzy match and \code{gbif.match = "code"} will search by code. This parameter
 is not required and is assigned "fuzzy" by default.}
+
+\item{gbif.prov}{A parameter to obtain the provider/verbatim columns from GBIF. This parameter is optional
+and is assigned \code{FALSE} by default.}
 
 \item{idigbio.filter}{A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 include data points for a different species that mention the desired species in the locality information, for example.
@@ -52,7 +56,7 @@ from the GBIF and iDigBio databases. The columns are as follows:
 \item \href{https://dwc.tdwg.org/list/#dwc_year}{year}
 \item \href{https://dwc.tdwg.org/list/#dwc_month}{month}
 \item \href{https://dwc.tdwg.org/list/#dwc_day}{day}
-\item \href{https://dwc.tdwg.org/list/#dwc_collectionCode}{collectionCode}
+\item \href{https://dwc.tdwg.org/list/#dwc_institutionCode}{institutionCode}
 \item \href{https://dwc.tdwg.org/list/#dwc_recordedBy}{recordedBy}
 \item \href{https://dwc.tdwg.org/list/#dwc_informationWithheld}{informationWithheld}
 \item \href{https://dwc.tdwg.org/list/#dwc_country}{country}
@@ -75,6 +79,7 @@ This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
 df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv", limit = 1000)
+df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
 df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE, limit = 1000)
 
 }
