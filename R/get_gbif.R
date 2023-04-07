@@ -112,7 +112,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", gbif.prov = FALSE, lim
   if (gbif.prov) {
     query_gbif <- dplyr::distinct(query_gbif, key, .keep_all = TRUE)
     query_gbif$key <- as.numeric(query_gbif$key)
-    query_gbif <- rgbif::occ_get_verbatim(key = query_gbif$key, fields = colNames)
+    query_gbif <- rgbif::occ_get_verbatim(key = query_gbif$key, fields = colNames, curlopts=list(http_version=2))
   }
 
   temp <- data.frame(matrix(NA, ncol = 0, nrow = 0))
