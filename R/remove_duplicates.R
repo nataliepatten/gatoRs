@@ -22,10 +22,11 @@
 
 remove_duplicates <- function(df, event.date = "eventDate",
                               latitude = "latitude", longitude = "longitude",
-                              aggregator = "aggregator", id = "ID"){
+                              aggregator = "aggregartior", id = "ID", occurenceID = "occurenceID"){
   if (NROW(df) == 0) return(df)
 
   # Remove within aggregation duplicates based on ID (UUID or KEY)
+  ## This is done within our download function as well
   ag <- unique(df[[aggregator]])
   tempdf <- c()
   for(i in 1:length(ag)){
@@ -35,6 +36,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
     }
   }
   df <- do.call(rbind, tempdf)
+
   # Remove specimen duplicates
   # Format dates
 
