@@ -10,7 +10,8 @@ remove_duplicates(
   latitude = "latitude",
   longitude = "longitude",
   aggregator = "aggregator",
-  id = "ID"
+  id = "ID",
+  occ.id = "occurrenceID"
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ remove_duplicates(
 that provided the record.}
 
 \item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
+
+\item{occ.id}{Default = "occurrenceId". The name of the occurrence ID column in the data frame.}
 }
 \value{
 Return data frame with duplicates removed.
@@ -34,6 +37,9 @@ Return data frame with duplicates removed.
 The \code{remove_duplicates()} function removes records with identical event dates and coordinate values.
 Prior to utilizing this function, longitude and latitude columns should be rounded to match the
 coordinate uncertainty using the \code{basic_locality_clean()} function.
+}
+\details{
+This function requires the lubridate and dplyr packages.
 }
 \examples{
 data <- remove_duplicates(data)

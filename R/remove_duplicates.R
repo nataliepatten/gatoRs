@@ -5,6 +5,9 @@
 #' Prior to utilizing this function, longitude and latitude columns should be rounded to match the
 #' coordinate uncertainty using the `basic_locality_clean()` function.
 #'
+#' @details
+#' This function requires the lubridate and dplyr packages.
+#'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @inheritParams correct_class
 #'
@@ -22,7 +25,7 @@
 
 remove_duplicates <- function(df, event.date = "eventDate",
                               latitude = "latitude", longitude = "longitude",
-                              aggregator = "aggregartior", id = "ID", occurenceID = "occurenceID"){
+                              aggregator = "aggregator", id = "ID", occ.id = "occurrenceID"){
   if (NROW(df) == 0) return(df)
 
   # Remove within aggregation duplicates based on ID (UUID or KEY)
