@@ -11,6 +11,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
+#' data <- data[1800:1900, ]
 #' citations <- citation_bellow(data)
 #'
 #' @return Returns a list with citation information for the GBIF data downloaded.
