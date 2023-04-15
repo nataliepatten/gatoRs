@@ -25,6 +25,8 @@ reference:
   - thin_points
   - one_point_per_pixel
   - full_clean
+  - data_chomp
+  - citation_bellow
 - title: Helper functions
   desc: These functions are used within the download and cleaning functions.
 - contents:
