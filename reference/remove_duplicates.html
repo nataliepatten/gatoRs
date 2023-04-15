@@ -66,7 +66,8 @@ coordinate uncertainty using the <code><a href="basic_locality_clean.html">basic
 <span>  latitude <span class="op">=</span> <span class="st">"latitude"</span>,</span>
 <span>  longitude <span class="op">=</span> <span class="st">"longitude"</span>,</span>
 <span>  aggregator <span class="op">=</span> <span class="st">"aggregator"</span>,</span>
-<span>  id <span class="op">=</span> <span class="st">"ID"</span></span>
+<span>  id <span class="op">=</span> <span class="st">"ID"</span>,</span>
+<span>  occ.id <span class="op">=</span> <span class="st">"occurrenceID"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -96,6 +97,10 @@ that provided the record.</p></dd>
 <dt>id</dt>
 <dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.</p></dd>
 
+
+<dt>occ.id</dt>
+<dd><p>Default = "occurrenceId". The name of the occurrence ID column in the data frame.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -103,11 +108,14 @@ that provided the record.</p></dd>
 
 <p>Return data frame with duplicates removed.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function requires the lubridate and dplyr packages.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">remove_duplicates</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in `[.data.frame`(df, aggregator):</span> undefined columns selected</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
