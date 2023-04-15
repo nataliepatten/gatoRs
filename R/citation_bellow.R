@@ -11,7 +11,6 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- data[1800:1900, ]
 #' citations <- citation_bellow(data)
 #'
 #' @return Returns a list with citation information for the GBIF data downloaded.
@@ -24,7 +23,6 @@ citation_bellow <- function(df, id = "ID", aggregator = "aggregator") {
   gbif <- df[df[[aggregator]] == "GBIF", ]
   citations <- list()
   for (i in 1:NROW(gbif)) {
-    print(i)
     citations[i] <- rgbif::gbif_citation(gbif[[id]][i])$citation$text
   }
   return(citations)

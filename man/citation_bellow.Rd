@@ -25,7 +25,6 @@ for the data provided by GBIF in a data frame.
 This function requires the rgbif package.
 }
 \examples{
-data <- data[1800:1900, ]
 citations <- citation_bellow(data)
 
 }
