@@ -28,6 +28,9 @@ For more information about this data frame, see \code{gators_download()}.
 The \code{need_to_georeference()} function allows you to find records that are missing coordinates
 but contain locality information. These records can then be manually georeferenced.
 }
+\details{
+This function requires no additional packages.
+}
 \examples{
 need_coords <- need_to_georeference(data)
 

@@ -17,6 +17,9 @@ A data frame with records remove only records for which locality was skewed.
 \description{
 The \code{remove_skewed()} function identifies and removes records where locality has been skewed.
 }
+\details{
+This function requires no additional packages.
+}
 \examples{
 data <- remove_skewed(data)
 

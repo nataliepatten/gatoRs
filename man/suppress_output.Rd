@@ -16,4 +16,7 @@ output Output is the output of the passed function call.
 The \code{suppress_output()} function suppresses print statements and messages from a function. This
 does not suppress warnings or errors.
 }
+\details{
+This function requires no additional packages.
+}
 \keyword{internal}

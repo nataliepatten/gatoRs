@@ -88,7 +88,7 @@ removing plain zero records, removing records based on basis of record, and spat
 This function also provides the option to interactively inspect and remove types of basis of record.
 }
 \details{
-This function requires packages dplyr, magrittr, raster, and dismo.
+This function requires packages dplyr, magrittr, and raster.
 }
 \examples{
 clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")

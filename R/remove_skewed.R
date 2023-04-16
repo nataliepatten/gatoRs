@@ -3,6 +3,9 @@
 #' @description
 #' The `remove_skewed()` function identifies and removes records where locality has been skewed.
 #'
+#' @details
+#' This function requires no additional packages.
+#'
 #' @param df A data frame downloaded with `gators_download()`.
 #' @inheritParams correct_class
 #'

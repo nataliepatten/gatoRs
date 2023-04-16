@@ -4,6 +4,8 @@
 #' The `need_to_georeference()` function allows you to find records that are missing coordinates
 #' but contain locality information. These records can then be manually georeferenced.
 #'
+#' @details
+#' This function requires no additional packages.
 #'
 #' @param df A data frame downloaded with `gators_download()`.
 #' @inheritParams correct_class

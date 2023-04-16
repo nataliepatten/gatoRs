@@ -6,6 +6,7 @@
 #'
 #' @details
 #' "aggregator", "infraspecific.epithet", and "recorded.by" columns will be skipped if they do not exist.
+#' This function requires the dplyr package.
 #'
 #' @param df Data frame returned by `gator_download()`.
 #' @param scientific.name Default = "scientificName". The name of the scientific name column in the data frame.

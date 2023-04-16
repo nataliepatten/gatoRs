@@ -40,7 +40,7 @@ Here is an example of the interactive messages displayed by the function for rem
 \figure{find_flagged_interactive_msgs.png}
 }
 \details{
-This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
+This function requires packages CoordinateCleaner, leaflet, and magrittr.
 This function requires interactive user input.
 }
 \examples{

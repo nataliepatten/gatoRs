@@ -20,7 +20,7 @@ is withheld from these records due to endangered species status, for example. Ac
 require a permit. Or, these records can be removed from the data set.
 }
 \details{
-This function requires packages dplyr, and magrittr.
+This function requires no additional packages.
 }
 \examples{
 need_info <- needed_records(data)

@@ -39,6 +39,9 @@ Return data frame with specimen removed that had missing or improper coordinate 
 The \code{basic_locality_clean()} function cleans locality by removing missing or impossible coordinates and correcting precision.
 This function requires columns named 'latitude' and 'longitude'. These columns should be of type 'numeric'.
 }
+\details{
+This function requires no additional packages.
+}
 \examples{
 data <- basic_locality_clean(data)
 

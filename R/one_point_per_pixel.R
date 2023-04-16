@@ -1,7 +1,8 @@
 #' @title Spatial Correction - One point per pixel
 #'
 #' @description
-#' The `one_point_per_pixel` retains only one point per pixel.
+#' The `one_point_per_pixel` function retains only one point per raster pixel. This function is useful
+#' for creating present-absent models.
 #'
 #' @details
 #' This function requires package raster and spatstat.geom.

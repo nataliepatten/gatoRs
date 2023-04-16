@@ -33,7 +33,8 @@ one_point_per_pixel(
 df is a data frame with only one point per pixel.
 }
 \description{
-The \code{one_point_per_pixel} retains only one point per pixel.
+The \code{one_point_per_pixel} function retains only one point per raster pixel. This function is useful
+for creating present-absent models.
 }
 \details{
 This function requires package raster and spatstat.geom.

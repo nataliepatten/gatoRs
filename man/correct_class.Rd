@@ -90,5 +90,6 @@ This function requires no additional packages.
 }
 \details{
 "aggregator", "infraspecific.epithet", and "recorded.by" columns will be skipped if they do not exist.
+This function requires the dplyr package.
 }
 \keyword{internal}

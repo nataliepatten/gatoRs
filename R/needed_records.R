@@ -6,7 +6,7 @@
 #' require a permit. Or, these records can be removed from the data set.
 #'
 #' @details
-#' This function requires packages dplyr, and magrittr.
+#' This function requires no additional packages.
 #'
 #' @param df A data frame downloaded with `gators_download()`.
 #' @inheritParams correct_class

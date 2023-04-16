@@ -12,7 +12,7 @@
 #' \figure{find_flagged_interactive_msgs.png}
 #'
 #' @details
-#' This function requires packages dplyr, CoordinateCleaner, leaflet, and magrittr.
+#' This function requires packages CoordinateCleaner, leaflet, and magrittr.
 #' This function requires interactive user input.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.

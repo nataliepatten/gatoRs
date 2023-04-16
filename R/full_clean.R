@@ -7,7 +7,7 @@
 #' This function also provides the option to interactively inspect and remove types of basis of record.
 #'
 #' @details
-#' This function requires packages dplyr, magrittr, raster, and dismo.
+#' This function requires packages dplyr, magrittr, and raster.
 #'
 #' @param df Data frame of occurrence records.
 #' @inheritParams correct_class

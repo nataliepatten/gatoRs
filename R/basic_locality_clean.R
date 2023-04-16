@@ -4,6 +4,9 @@
 #' The `basic_locality_clean()` function cleans locality by removing missing or impossible coordinates and correcting precision.
 #' This function requires columns named 'latitude' and 'longitude'. These columns should be of type 'numeric'.
 #'
+#' @details
+#' This function requires no additional packages.
+#'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param remove.zero Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.
 #' @param precision Default = TRUE. Indicates that coordinates should be rounded to match the coordinate uncertainty.
