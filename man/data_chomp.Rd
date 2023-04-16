@@ -6,7 +6,7 @@
 \usage{
 data_chomp(
   df,
-  scientific.name = "scientificName",
+  accepted.name = NA,
   longitude = "longitude",
   latitude = "latitude"
 )
@@ -14,7 +14,7 @@ data_chomp(
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+\item{accepted.name}{The accepted species name for the records.}
 
 \item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
@@ -29,9 +29,9 @@ contain the following columns: "species", "longitude", and "latitude". After usi
 function data will be ready for use in Maxent, for example.
 }
 \details{
-This function requires no additional packages.
+This function requires the package dplyr.
 }
 \examples{
-chomped_data <- data_chomp(data)
+chomped_data <- data_chomp(data, accepted.name = "Galax urceolata")
 
 }

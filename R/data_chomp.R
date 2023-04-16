@@ -6,21 +6,28 @@
 #' function data will be ready for use in Maxent, for example.
 #'
 #' @details
-#' This function requires no additional packages.
+#' This function requires the package dplyr.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
+#' @param accepted.name The accepted species name for the records.
 #' @inheritParams correct_class
 #'
 #' @examples
-#' chomped_data <- data_chomp(data)
+#' chomped_data <- data_chomp(data, accepted.name = "Galax urceolata")
 #'
 #' @return Returns data frame with a subset of columns ready for downstream applications such as Maxent.
 #'
+#' @importFrom dplyr select
 #' @export
 
-data_chomp <- function(df, scientific.name = "scientificName",
+data_chomp <- function(df, accepted.name = NA,
                        longitude = "longitude", latitude = "latitude") {
-  df <- df[, which(names(df) %in% c(scientific.name, longitude, latitude))]
-  colnames(df)[1] <- "species"
+
+  if (is.na(accepted.name)) {
+    stop("Value not provided for argument: accepted.name.")
+  }
+  df$species <- accepted.name
+  df <- dplyr::select(df, species, .data[[longitude]], .data[[latitude]])
+
   return(df)
 }
