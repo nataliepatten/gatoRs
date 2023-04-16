@@ -11,7 +11,12 @@ remove_duplicates(
   longitude = "longitude",
   aggregator = "aggregator",
   id = "ID",
-  occ.id = "occurrenceID"
+  occ.id = "occurrenceID",
+  year = "year",
+  month = "month",
+  day = "day",
+  remove.NA.occ.id = FALSE,
+  remove.NA.date = FALSE
 )
 }
 \arguments{
@@ -29,12 +34,22 @@ that provided the record.}
 \item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
 
 \item{occ.id}{Default = "occurrenceId". The name of the occurrence ID column in the data frame.}
+
+\item{year}{Default = "year". The name of the event date year column in the data frame.}
+
+\item{month}{Default = "month". The name of the event date month column in the data frame.}
+
+\item{day}{Default = "day". The name of the event date day column in the data frame.}
+
+\item{remove.NA.occ.id}{Default = FALSE. This will remove records with missing occurrence IDs when set to \code{TRUE}.}
+
+\item{remove.NA.date}{Default = FALSE. This will remove records with missing event dates when set to \code{TRUE}.}
 }
 \value{
 Return data frame with duplicates removed.
 }
 \description{
-The \code{remove_duplicates()} function removes records with identical event dates and coordinate values.
+The \code{remove_duplicates()} function removes records with identical event dates and occurrence IDs.
 Prior to utilizing this function, longitude and latitude columns should be rounded to match the
 coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
