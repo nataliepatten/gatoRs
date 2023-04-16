@@ -6,7 +6,7 @@
 #' coordinate uncertainty using the `basic_locality_clean()` function.
 #'
 #' @details
-#' This function requires the lubridate and dplyr packages.
+#' This function requires the parsedate and dplyr packages.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @inheritParams correct_class
@@ -14,16 +14,17 @@
 #' @param remove.NA.date Default = FALSE. This will remove records with missing event dates when set to `TRUE`.
 #'
 #' @examples
-#' data <- remove_duplicates(data)
+#' cleaned_data <- remove_duplicates(data)
+#' cleaned_data <- remove_duplicates(data, remove.NA.occ.id = TRUE, remove.NA.date = TRUE)
 #'
 #' @return Return data frame with duplicates removed.
 #'
+#' @importFrom parsedate parse_iso_8601 format_iso_8601
 #' @importFrom dplyr distinct
 #'
 #' @export
 
 remove_duplicates <- function(df, event.date = "eventDate",
-                              latitude = "latitude", longitude = "longitude",
                               aggregator = "aggregator", id = "ID", occ.id = "occurrenceID",
                               year = "year", month = "month", day = "day",
                               remove.NA.occ.id = FALSE, remove.NA.date = FALSE){
@@ -52,7 +53,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
   # Remove specimen duplicates
 
   for(i in 1:nrow(df)){
-    # If year, month, day are available, use this to format date into year-month-day
+    # If year, month, day are available, use this to format date into year-month-day format
     if (!is.na(df[[year]][i]) & !is.na(df[[month]][i]) & !is.na(df[[day]][i])) {
       df[[event.date]][i] <- paste(df[[year]][i], df[[month]][i], df[[day]][i], sep="-")
     }
@@ -70,7 +71,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
       df[[event.date]][i] <- temp_date
    }
   }
-  # Remove rows with identical occurrence ID and date
+  # Remove rows with identical occurrence ID and event date
   df <- dplyr::distinct(df, .data[[occ.id]], .data[[event.date]], .keep_all = TRUE)
 
   return(df)

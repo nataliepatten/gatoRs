@@ -21,7 +21,7 @@ Imports:
     spThin,
     stringr,
     leaflet,
-    lubridate, 
+    parsedate, 
     spatstat.geom
 Encoding: UTF-8
 VignetteBuilder: knitr

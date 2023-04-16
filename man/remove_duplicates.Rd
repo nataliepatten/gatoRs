@@ -7,8 +7,6 @@
 remove_duplicates(
   df,
   event.date = "eventDate",
-  latitude = "latitude",
-  longitude = "longitude",
   aggregator = "aggregator",
   id = "ID",
   occ.id = "occurrenceID",
@@ -23,10 +21,6 @@ remove_duplicates(
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
-
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
-
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
 \item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
 that provided the record.}
@@ -54,9 +48,10 @@ Prior to utilizing this function, longitude and latitude columns should be round
 coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
 \details{
-This function requires the lubridate and dplyr packages.
+This function requires the parsedate and dplyr packages.
 }
 \examples{
-data <- remove_duplicates(data)
+cleaned_data <- remove_duplicates(data)
+cleaned_data <- remove_duplicates(data, remove.NA.occ.id = TRUE, remove.NA.date = TRUE)
 
 }
