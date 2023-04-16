@@ -3,6 +3,9 @@
 #' @description
 #' The `basis_clean()` function removes records based on basisOfRecord column
 #'
+#' @details
+#' This function requires no additional packages.
+#'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param basis.list A list of basis to keep. If a list is not supplied, the filter will be interactive and users must respond to the function.
 #' @inheritParams correct_class

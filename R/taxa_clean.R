@@ -7,7 +7,7 @@
 #' to manually determine whether they wish to keep results containing certain scientific names.
 #'
 #' @details
-#' This function requires packages dplyr and magrittr.
+#' This function requires no additional packages.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @param synonyms.list A list of synonyms for a species.

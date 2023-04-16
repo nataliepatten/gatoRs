@@ -33,7 +33,7 @@ provides interactive filtering by providing the user with prompts. The interacti
 to manually determine whether they wish to keep results containing certain scientific names.
 }
 \details{
-This function requires packages dplyr and magrittr.
+This function requires no additional packages.
 }
 \examples{
 clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
