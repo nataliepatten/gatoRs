@@ -11,7 +11,9 @@
 #' @inheritParams correct_class
 #'
 #' @examples
+#' \dontrun{
 #' citations <- citation_bellow(data)
+#' }
 #'
 #' @return Returns a list with citation information for the GBIF data downloaded.
 #'
