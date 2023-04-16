@@ -51,14 +51,23 @@ remove_duplicates <- function(df, event.date = "eventDate",
 
   # Remove specimen duplicates
 
-  # Populate event.date column based on year, month, day columns
-  df[[event.date]] <- dplyr::case_when(is.na(df[[event.date]]) ~ paste(df[[year]], df[[month]], df[[day]], sep="-"),
-                                      .default = as.character(df[[event.date]]))
-
   for(i in 1:nrow(df)){
-   if(!is.na(df[[event.date]][i])){
-     # df[[event.date]][i] <- parse event date
-     #parsedate::parse_iso_8601(parsedate::format_iso_8601(df[[event.date]][i]))
+    # If year, month, day are available, use this to format date into year-month-day
+    if (!is.na(df[[year]][i]) & !is.na(df[[month]][i]) & !is.na(df[[day]][i])) {
+      df[[event.date]][i] <- paste(df[[year]][i], df[[month]][i], df[[day]][i], sep="-")
+    }
+    # If year, month, day are not available, but eventDate is, attempt to parse
+    else if(!is.na(df[[event.date]][i])) {
+      temp_date <- tryCatch (
+        {
+         as.character(parsedate::parse_iso_8601(parsedate::format_iso_8601(df[[event.date]][i])))
+        },
+        error=function(e) {
+          # If it is unrecognized date format, leave as original format
+          as.character(df[[event.date]][i])
+        }
+      )
+      df[[event.date]][i] <- temp_date
    }
   }
   # Remove rows with identical occurrence ID and date
