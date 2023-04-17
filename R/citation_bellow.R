@@ -1,4 +1,4 @@
-#' @title Cite Data - Get species, longitude, and latitude columns
+#' @title Cite Data - Get GBIF citations
 #'
 #' @description
 #' The `citation_bellow` function retrieves and returns the citation information
