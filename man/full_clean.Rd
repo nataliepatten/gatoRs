@@ -8,6 +8,12 @@ full_clean(
   df,
   synonyms.list,
   event.date = "eventDate",
+  year = "year",
+  month = "month",
+  day = "day",
+  occ.id = "occurrenceID",
+  remove.NA.occ.id = FALSE,
+  remove.NA.date = FALSE,
   aggregator = "aggregator",
   id = "ID",
   taxa.filter = "fuzzy",
@@ -36,6 +42,18 @@ full_clean(
 \item{synonyms.list}{A list of synonyms for a species.}
 
 \item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+
+\item{year}{Default = "year". The name of the event date year column in the data frame.}
+
+\item{month}{Default = "month". The name of the event date month column in the data frame.}
+
+\item{day}{Default = "day". The name of the event date day column in the data frame.}
+
+\item{occ.id}{Default = "occurrenceId". The name of the occurrence ID column in the data frame.}
+
+\item{remove.NA.occ.id}{Default = FALSE. This will remove records with missing occurrence IDs when set to \code{TRUE}.}
+
+\item{remove.NA.date}{Default = FALSE. This will remove records with missing event dates when set to \code{TRUE}.}
 
 \item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
 that provided the record.}
