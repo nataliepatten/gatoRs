@@ -2,7 +2,7 @@
 % Please edit documentation in R/citation_bellow.R
 \name{citation_bellow}
 \alias{citation_bellow}
-\title{Cite Data - Get species, longitude, and latitude columns}
+\title{Cite Data - Get GBIF citations}
 \usage{
 citation_bellow(df, id = "ID", aggregator = "aggregator")
 }
