@@ -13,6 +13,8 @@ remove_duplicates(
   year = "year",
   month = "month",
   day = "day",
+  latitude = "latitude",
+  longitude = "longitude",
   remove.NA.occ.id = FALSE,
   remove.NA.date = FALSE,
   remove.unparseable = FALSE
@@ -35,6 +37,10 @@ that provided the record.}
 \item{month}{Default = "month". The name of the event date month column in the data frame.}
 
 \item{day}{Default = "day". The name of the event date day column in the data frame.}
+
+\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+
+\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
 
 \item{remove.NA.occ.id}{Default = FALSE. This will remove records with missing occurrence IDs when set to \code{TRUE}.}
 
