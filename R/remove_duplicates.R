@@ -31,6 +31,7 @@
 remove_duplicates <- function(df, event.date = "eventDate",
                               aggregator = "aggregator", id = "ID", occ.id = "occurrenceID",
                               year = "year", month = "month", day = "day",
+                              latitude = "latitude", longitude = "longitude",
                               remove.NA.occ.id = FALSE, remove.NA.date = FALSE,
                               remove.unparseable = FALSE){
 
@@ -48,7 +49,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
   ag <- unique(df[[aggregator]])
   tempdf <- c()
   for(i in 1:length(ag)){
-    tempdf[[i]] <- df[df[aggregator] == ag[i], ]
+    tempdf[[i]] <- df[df[[aggregator]] == ag[i], ]
     if( (length(unique(na.omit(tempdf[[i]][[id]])))) != nrow(na.omit(tempdf[[i]][id])) ) {
       tempdf[[i]] <- dplyr::distinct(tempdf[[i]], .data[[id]], .keep_all = TRUE)
     }
@@ -130,12 +131,12 @@ remove_duplicates <- function(df, event.date = "eventDate",
     # Create a temporary column with unique values so NAs in dates are kept
     # https://stackoverflow.com/questions/66537554/keeping-all-nas-in-dplyr-distinct-function
     new_df <- dplyr::mutate(new_df, temp = dplyr::row_number() * (is.na(year) & is.na(month) & is.na(day)))
-    new_df <- dplyr::distinct(new_df, .data[[year]], .data[[month]], .data[[day]], temp, .keep_all = TRUE)
+    new_df <- dplyr::distinct(new_df, .data[[year]], .data[[month]], .data[[day]], .data[[latitude]], .data[[longitude]], temp, .keep_all = TRUE)
     new_df <- dplyr::select(new_df, -temp)
   } else if (length(df[[occ.id]]) > 0) {
     new_df <- dplyr::mutate(new_df, temp = row_number() * (is.na(year) & is.na(month) & is.na(day)))
     new_df <- dplyr::distinct(new_df, .data[[year]], .data[[month]],
-                              .data[[day]], .data[[occ.id]], temp, .keep_all = TRUE)
+                              .data[[day]], .data[[occ.id]],  .data[[latitude]], .data[[longitude]], temp, .keep_all = TRUE)
     new_df <- dplyr::select(new_df, -temp)
   }
 
