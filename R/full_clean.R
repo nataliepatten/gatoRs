@@ -47,7 +47,8 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
   suppress_output(df <- remove_duplicates(df, event.date = event.date,
                                           aggregator = aggregator, id = id, occ.id = occ.id,
                                           year = year, month = month, day = day,
-                                          remove.NA.occ.id = remove.NA.occ.id, remove.NA.date = remove.NA.date))
+                                          remove.NA.occ.id = remove.NA.occ.id, remove.NA.date = remove.NA.date,
+                                          remove.unparseable = TRUE))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
                taxa.filter = taxa.filter, scientific.name, accepted.name =  accepted.name))
 

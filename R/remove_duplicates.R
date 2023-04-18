@@ -6,28 +6,33 @@
 #' coordinate uncertainty using the `basic_locality_clean()` function.
 #'
 #' @details
-#' This function requires the parsedate and dplyr packages.
+#' This function requires the parsedate and dplyr packages. This function will ignore missing occurrence ID
+#' and year, month, date columns if not provided in the data set.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
 #' @inheritParams correct_class
 #' @param remove.NA.occ.id Default = FALSE. This will remove records with missing occurrence IDs when set to `TRUE`.
 #' @param remove.NA.date Default = FALSE. This will remove records with missing event dates when set to `TRUE`.
+#' @param remove.unparseable Default = FALSE. If we cannot parse the event date into individual year,
+#' month, day categories the user can manually specify. Otherwise, if set to TRUE, these rows will simply be removed.
 #'
 #' @examples
 #' cleaned_data <- remove_duplicates(data)
 #' cleaned_data <- remove_duplicates(data, remove.NA.occ.id = TRUE, remove.NA.date = TRUE)
+#' cleaned_data <- remove_duplicates(data, remove.unparseable = TRUE)
 #'
 #' @return Return data frame with duplicates removed.
 #'
 #' @importFrom parsedate parse_iso_8601 format_iso_8601
-#' @importFrom dplyr distinct
+#' @importFrom dplyr distinct mutate select row_number filter
 #'
 #' @export
 
 remove_duplicates <- function(df, event.date = "eventDate",
                               aggregator = "aggregator", id = "ID", occ.id = "occurrenceID",
                               year = "year", month = "month", day = "day",
-                              remove.NA.occ.id = FALSE, remove.NA.date = FALSE){
+                              remove.NA.occ.id = FALSE, remove.NA.date = FALSE,
+                              remove.unparseable = FALSE){
 
   if (NROW(df) == 0) return(df)
 
@@ -52,27 +57,87 @@ remove_duplicates <- function(df, event.date = "eventDate",
 
   # Remove specimen duplicates
 
-  for(i in 1:nrow(df)){
-    # If year, month, day are available, use this to format date into year-month-day format
-    if (!is.na(df[[year]][i]) & !is.na(df[[month]][i]) & !is.na(df[[day]][i])) {
-      df[[event.date]][i] <- paste(df[[year]][i], df[[month]][i], df[[day]][i], sep="-")
+  has_date_cols <- function(df, i) {
+    # individual year, month, day columns don't even exist
+    if (length(df[[year]]) == 0 & length(df[[month]]) == 0 & length(df[[day]]) == 0) {
+      return(FALSE)
+    } else if (is.na(df[[year]][i]) | is.na(df[[month]][i])) {
+      return(FALSE)
+    } else {
+      return(TRUE)
     }
-    # If year, month, day are not available, but eventDate is, attempt to parse
-    else if(!is.na(df[[event.date]][i])) {
-      temp_date <- tryCatch (
-        {
-         as.character(parsedate::parse_iso_8601(parsedate::format_iso_8601(df[[event.date]][i])))
-        },
-        error=function(e) {
-          # If it is unrecognized date format, leave as original format
-          as.character(df[[event.date]][i])
-        }
-      )
-      df[[event.date]][i] <- temp_date
-   }
   }
-  # Remove rows with identical occurrence ID and event date
-  df <- dplyr::distinct(df, .data[[occ.id]], .data[[event.date]], .keep_all = TRUE)
 
-  return(df)
+  get_temp_date <- function(date, remove.unparseable) {
+    tryCatch (
+      return(as.character(parsedate::parse_iso_8601(parsedate::format_iso_8601(date)))),
+      error=function(e) {
+        message("Event date cannot be automatically parsed for date: ", date)
+        if (remove.unparseable) {
+          return("remove")
+        } else {
+          temp_year <- readline(prompt = "Please enter the year in YYYY format, or NA if not provided: ")
+          temp_month <- readline(prompt = "Please enter the month in MM format, or NA if not provided: ")
+          temp_day <- readline(prompt = "Please enter the day in DD format or NA if not provided: ")
+          temp_date <- paste(temp_year, temp_month, temp_day, sep="-")
+          return(temp_date)
+        }
+      }
+    )
+  }
+
+  new_df <- df
+  to_remove <- c()
+  for(i in 1:nrow(df)) {
+    # If year, month, day are not available, but eventDate is, attempt to parse
+    if(!is.na(df[[event.date]][i]) & !has_date_cols(df, i)) {
+      temp_date <- get_temp_date(df[[event.date]][i], remove.unparseable)
+
+      if (temp_date == "remove") {
+        to_remove <- append(to_remove, i)
+      } else {
+        if (substr(temp_date, 1, 4) == "NA") {
+          new_df[[year]][i] <- NA
+        } else{
+          new_df[[year]][i] <- substr(temp_date, 1, 4)
+        }
+        if (substr(temp_date, 6, 7) == "NA") {
+          new_df[[month]][i] <- NA
+        } else{
+          new_df[[month]][i] <- substr(temp_date, 6, 7)
+        }
+        if (substr(temp_date, 9, 10) == "NA") {
+          new_df[[day]][i] <- NA
+        } else{
+          new_df[[day]][i] <- substr(temp_date, 9, 10)
+        }
+      }
+    } else {
+      if (length(df[[year]]) == 0) {new_df[[year]][i] <- NA} else {new_df[[year]][i] <- df[[year]][i]}
+      if (length(df[[month]]) == 0) {new_df[[month]][i] <- NA} else {new_df[[month]][i] <- df[[month]][i]}
+      if (length(df[[day]]) == 0) {new_df[[day]][i] <- NA} else {new_df[[day]][i] <- df[[day]][i]}
+    }
+  }
+
+  if (remove.unparseable == TRUE) {new_df <- dplyr::filter(new_df, !(row_number() %in% to_remove))}
+
+  new_df[[year]] <- as.numeric(new_df[[year]])
+  new_df[[month]] <- as.numeric(new_df[[month]])
+  new_df[[day]] <- as.numeric(new_df[[day]])
+
+  # If occurrence ID column exists, remove rows with identical occurrence ID and date
+  if (length(df[[occ.id]]) == 0) {
+    # Create a temporary column with unique values so NAs in dates are kept
+    # https://stackoverflow.com/questions/66537554/keeping-all-nas-in-dplyr-distinct-function
+    new_df <- dplyr::mutate(new_df, temp = dplyr::row_number() * (is.na(year) & is.na(month) & is.na(day)))
+    new_df <- dplyr::distinct(new_df, .data[[year]], .data[[month]], .data[[day]], temp, .keep_all = TRUE)
+    new_df <- dplyr::select(new_df, -temp)
+  } else if (length(df[[occ.id]]) > 0) {
+    new_df <- dplyr::mutate(new_df, temp = row_number() * (is.na(year) & is.na(month) & is.na(day)))
+    new_df <- dplyr::distinct(new_df, .data[[year]], .data[[month]],
+                              .data[[day]], .data[[occ.id]], temp, .keep_all = TRUE)
+    new_df <- dplyr::select(new_df, -temp)
+  }
+
+  return(new_df)
 }

@@ -14,7 +14,8 @@ remove_duplicates(
   month = "month",
   day = "day",
   remove.NA.occ.id = FALSE,
-  remove.NA.date = FALSE
+  remove.NA.date = FALSE,
+  remove.unparseable = FALSE
 )
 }
 \arguments{
@@ -38,6 +39,9 @@ that provided the record.}
 \item{remove.NA.occ.id}{Default = FALSE. This will remove records with missing occurrence IDs when set to \code{TRUE}.}
 
 \item{remove.NA.date}{Default = FALSE. This will remove records with missing event dates when set to \code{TRUE}.}
+
+\item{remove.unparseable}{Default = FALSE. If we cannot parse the event date into individual year,
+month, day categories the user can manually specify. Otherwise, if set to TRUE, these rows will simply be removed.}
 }
 \value{
 Return data frame with duplicates removed.
@@ -48,10 +52,12 @@ Prior to utilizing this function, longitude and latitude columns should be round
 coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
 \details{
-This function requires the parsedate and dplyr packages.
+This function requires the parsedate and dplyr packages. This function will ignore missing occurrence ID
+and year, month, date columns if not provided in the data set.
 }
 \examples{
 cleaned_data <- remove_duplicates(data)
 cleaned_data <- remove_duplicates(data, remove.NA.occ.id = TRUE, remove.NA.date = TRUE)
+cleaned_data <- remove_duplicates(data, remove.unparseable = TRUE)
 
 }
