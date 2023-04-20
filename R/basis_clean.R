@@ -1,7 +1,7 @@
 #' @title Basis Cleaning - Removes records with certain record basis
 #'
 #' @description
-#' The `basis_clean()` function removes records based on basisOfRecord column
+#' The `basis_clean()` function removes records based on basisOfRecord column.
 #'
 #' @details
 #' This function requires no additional packages.

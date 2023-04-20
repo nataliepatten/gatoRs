@@ -1,4 +1,4 @@
-#' @title Fix taxonomic capitalization of a species name when there are periods involved
+#' @title Fix taxonomic capitalization of a species name when there are periods involved.
 #'
 #' @description
 #' The `fixAfterPeriod()` function fixes taxonomic capitalization of a string when there are periods in the species name.

@@ -7,6 +7,8 @@ template:
     structure:
       left: [reference]
       right: [search]
+  params:
+    ganalytics: G-302EP2FLJD
 reference:
 - title: Download data
   desc: Wrapper functions to download data from GBIF and iDigBio.
