@@ -13,7 +13,7 @@ Authors@R: c(person(given = "Natalie", family = "Patten", middle = "N.", email="
            comment = c(ORCID = "0000-0001-9310-8659")))
 Imports:
     ridigbio,
-    dplyr,
+    dplyr (>= 1.1.0),
     rgbif, 
     magrittr,
     CoordinateCleaner,
