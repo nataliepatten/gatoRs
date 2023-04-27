@@ -106,8 +106,8 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, gbif.prov = gbif.prov, limit = limit))
 
   # Remove duplicates - records that share UUIDs or KEYs
-  query_idigbio <- dplyr::distinct(query_idigbio, ID, .keep_all = TRUE)
-  query_gbif <- dplyr::distinct(query_gbif, ID, .keep_all = TRUE)
+  if (NROW(query_idigbio) > 0) query_idigbio <- dplyr::distinct(query_idigbio, ID, .keep_all = TRUE)
+  if (NROW(query_gbif) > 0) query_gbif <- dplyr::distinct(query_gbif, ID, .keep_all = TRUE)
 
   # fill out remaining taxon columns, and fix capitalization again
   query_gbif <- fix_names(fix_columns(query_gbif))
