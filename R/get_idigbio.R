@@ -126,24 +126,28 @@ get_idigbio <- function(synonyms.list, limit = 100000){
 
   # if decimal lat/lon columns are empty, replace with verbatim lat/lon columns or geopoint lat/lon
   temp <- query_idigbio[is.na(query_idigbio$latitude), ]
-  query_idigbio <- query_idigbio[!(is.na(query_idigbio$latitude)), ]
-  for (i in 1:NROW(temp)) {
-    if (!is.na(temp$geopoint.lat[i]))
-        temp$latitude[i] <- temp$geopoint.lat[i]
-    else if (!is.na(temp$verbatimLatitude[i]))
-      temp$latitude[i] <- temp$verbatimLatitude[i]
+  if (NROW(temp) > 0) {
+    query_idigbio <- query_idigbio[!(is.na(query_idigbio$latitude)), ]
+    for (i in 1:NROW(temp)) {
+      if (!is.na(temp$geopoint.lat[i]))
+          temp$latitude[i] <- temp$geopoint.lat[i]
+      else if (!is.na(temp$verbatimLatitude[i]))
+        temp$latitude[i] <- temp$verbatimLatitude[i]
+    }
+    query_idigbio <- rbind(query_idigbio, temp)
   }
-  query_idigbio <- rbind(query_idigbio, temp)
 
   temp <- query_idigbio[is.na(query_idigbio$longitude), ]
-  query_idigbio <- query_idigbio[!(is.na(query_idigbio$longitude)), ]
-  for (i in 1:NROW(temp)) {
-    if (!is.na(temp$geopoint.lon[i]))
-      temp$longitude[i] <- temp$geopoint.lon[i]
-    else if (!is.na(temp$verbatimLongitude[i]))
-        temp$longitude[i] <- temp$verbatimLongitude[i]
+  if (NROW(temp) > 0) {
+    query_idigbio <- query_idigbio[!(is.na(query_idigbio$longitude)), ]
+    for (i in 1:NROW(temp)) {
+      if (!is.na(temp$geopoint.lon[i]))
+        temp$longitude[i] <- temp$geopoint.lon[i]
+      else if (!is.na(temp$verbatimLongitude[i]))
+          temp$longitude[i] <- temp$verbatimLongitude[i]
+    }
+    query_idigbio <- rbind(query_idigbio, temp)
   }
-  query_idigbio <- rbind(query_idigbio, temp)
 
   #Remove these columns: occurrenceRemarks, verbatimLocality, verbatimLatitude, verbatimLongitude, geopoint.lat, geopoint.lon
   query_idigbio <- query_idigbio[, -which(names(query_idigbio) %in% c("occurrenceRemarks",
