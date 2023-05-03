@@ -112,18 +112,13 @@ fix_names <- function(df, scientific.name = "scientificName") {
     else {
       df[[scientific.name]][i] <- stringr::str_to_sentence(df[[scientific.name]][i])
     }
-    if (grepl("ex ", df[[scientific.name]][i], ignore.case = TRUE)) {
-      index1 <- unlist(gregexpr("ex ", df[[scientific.name]][i]))
-      index2 <- unlist(gregexpr("Ex", df[[scientific.name]][i]))
-      if (index1 == -1) {
-        index = index2
-      }
-      else {
-        index = index1
-      }
+
+    if (grepl(" Ex ", df[[scientific.name]][i], ignore.case = FALSE)) {
+      index <- unlist(gregexpr(" Ex ", df[[scientific.name]][i]))
+
       before <- substr(df[[scientific.name]][i], 1, index - 1)
-      exString <- stringr::str_to_lower(substr(df[[scientific.name]][i], index, index + 1))
-      after <- substr(df[[scientific.name]][i], index + 2, stringr::str_length(df[[scientific.name]][i]))
+      exString <- stringr::str_to_lower(substr(df[[scientific.name]][i], index, index + 2))
+      after <- substr(df[[scientific.name]][i], index + 3, stringr::str_length(df[[scientific.name]][i]))
       df[[scientific.name]][i] <- paste0(before, exString, after)
     }
   }
