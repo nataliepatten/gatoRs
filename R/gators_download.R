@@ -65,6 +65,8 @@
 #' * [habitat](https://dwc.tdwg.org/list/#dwc_habitat)
 #' * aggregator (either GBIF or iDigBio)
 #'
+#' @importFrom dplyr distinct bind_rows
+#'
 #' @export
 
 
@@ -122,7 +124,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
 
   # all queries contain records
   if (NROW(query_gbif) > 0 & NROW(query_idigbio) > 0) {
-    output <- bind_rows(query_gbif, query_idigbio)
+    output <- dplyr::bind_rows(query_gbif, query_idigbio)
   }
   # only iDigBio contains records
   else if (NROW(query_idigbio) > 0) {
