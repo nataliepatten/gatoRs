@@ -50,9 +50,9 @@ basic_locality_clean <- function(df, latitude = "latitude", longitude = "longitu
   df <- df[!is.na(df[[latitude]]), ]
   # Remove records with impossible latitude and longitude
   df <- df[!(df[[longitude]] > 180), ]
-  df <- df[!(df[[latitude]] > 180), ]
+  df <- df[!(df[[latitude]] > 90), ]
   df <- df[!(df[[longitude]] < -180), ]
-  df <- df[!(df[[latitude]] < -180), ]
+  df <- df[!(df[[latitude]] < -90), ]
   # Removes records where latitude or longitude equals zero
   if(remove.zero == TRUE){
     df <- df[!(df[[longitude]] == 0), ]
