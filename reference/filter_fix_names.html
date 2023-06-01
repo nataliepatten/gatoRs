@@ -114,7 +114,8 @@ desired species.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">filter_fix_names</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, filter <span class="op">=</span> <span class="st">"exact"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">filter_fix_names</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="fu">filter_fix_names</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
