@@ -23,8 +23,11 @@
 #' @inheritParams one_point_per_pixel
 #'
 #' @examples
-#' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")
-#' clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
+#' clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"),
+#' digits = 3, basis.list = c("Preserved Specimen","Physical specimen"),
+#' accepted.name = "Galax urceolata")
+#' clean_data <- full_clean(data, synonyms.list = "Galax urceolata",
+#' remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
 #'

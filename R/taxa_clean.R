@@ -17,7 +17,8 @@
 #'
 #' @examples
 #' clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
-#' clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
+#' clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"),
+#' accepted.name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results and new column with the accepted name labeled as "accepted_name".
 #'

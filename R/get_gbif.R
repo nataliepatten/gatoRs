@@ -15,9 +15,11 @@
 #'
 #' @examples
 #' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 100)
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.match = "code", limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"),
+#' gbif.match = "code", limit = 100)
 #' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, gbif.match = "code", limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE,
+#' gbif.match = "code", limit = 100)
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'

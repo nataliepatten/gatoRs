@@ -30,14 +30,8 @@ Return cleaned data frame.
 }
 \description{
 The \code{process_flagged()} function allows you to find and map possible problematic points and
-manually inspect and remove these points, if desired. Below is an example of a map
-produced by \code{process_flagged()} which displays possible problematic points. When running the function you can
+manually inspect and remove these points, if desired. When running the function interactively you can
 hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.
-
-\figure{find_flagged_map.png}{options: style="width:500px"}
-
-Here is an example of the interactive messages displayed by the function for removing points:
-\figure{find_flagged_interactive_msgs.png}
 }
 \details{
 This function requires packages CoordinateCleaner, leaflet, and magrittr.

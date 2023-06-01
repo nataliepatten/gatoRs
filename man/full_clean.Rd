@@ -109,7 +109,10 @@ This function also provides the option to interactively inspect and remove types
 This function requires packages dplyr, magrittr, and raster.
 }
 \examples{
-clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"), digits = 3, basis.list = c("Preserved Specimen","Physical specimen"), accepted.name = "Galax urceolata")
-clean_data <- full_clean(data, synonyms.list = "Galax urceolata", remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
+clean_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"),
+digits = 3, basis.list = c("Preserved Specimen","Physical specimen"),
+accepted.name = "Galax urceolata")
+clean_data <- full_clean(data, synonyms.list = "Galax urceolata",
+remove.skewed = FALSE, remove.flagged = FALSE, one.point.per.pixel = FALSE, thin.points = FALSE)
 
 }

@@ -17,7 +17,8 @@
 #'
 #' @examples
 #' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), filter = "exact")
-#' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"), accepted.name = "Galax urceolata")
+#' clean_data <- filter_fix_names(data, c("Galax urceolata", "Galax aphylla"),
+#' accepted.name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results.
 #'

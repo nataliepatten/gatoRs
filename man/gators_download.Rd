@@ -78,8 +78,11 @@ This function uses the \code{get_idigbio()}, \code{get_gbif()}, \code{fix_column
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }
 \examples{
-df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), write.file = TRUE, filename = "galax.csv", limit = 1000)
-df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
-df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code", idigbio.filter = FALSE, limit = 1000)
+df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
+write.file = TRUE, filename = "galax.csv", limit = 1000)
+df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
+gbif.prov = TRUE, limit = 100)
+df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code",
+idigbio.filter = FALSE, limit = 1000)
 
 }
