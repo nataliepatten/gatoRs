@@ -34,8 +34,7 @@
 #' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
-#' write.file = TRUE, filename = "galax.csv", limit = 1000)
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 1000)
 #' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
 #' gbif.prov = TRUE, limit = 100)
 #' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code",
@@ -69,6 +68,7 @@
 #' * aggregator (either GBIF or iDigBio)
 #'
 #' @importFrom dplyr distinct bind_rows
+#' @importFrom utils write.csv
 #'
 #' @export
 
@@ -143,7 +143,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   }
 
   if (write.file) {
-    write.csv(output, filename, row.names = FALSE)
+    utils::write.csv(output, filename, row.names = FALSE)
   }
   return(output)
 }

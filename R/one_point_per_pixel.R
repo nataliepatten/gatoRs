@@ -29,7 +29,7 @@ one_point_per_pixel <- function(df, raster = NA, resolution = 0.5, precision = T
   df <- basic_locality_clean(df, latitude = latitude, longitude = longitude, remove.zero = FALSE,
                              precision = precision, digits = digits, remove.skewed = FALSE)
 
-  if(class(raster) != "RasterLayer"){
+  if(!inherits(raster, "RasterLayer")){
     if(resolution == 0.5){
       rasterResolution  <- 0.008333333
     }else if(resolution == 2.5){

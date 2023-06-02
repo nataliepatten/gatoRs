@@ -25,6 +25,7 @@
 #'
 #' @importFrom parsedate parse_iso_8601 format_iso_8601
 #' @importFrom dplyr distinct mutate select row_number filter
+#' @importFrom stats na.omit
 #'
 #' @export
 
@@ -50,7 +51,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
   tempdf <- c()
   for(i in 1:length(ag)){
     tempdf[[i]] <- df[df[[aggregator]] == ag[i], ]
-    if( (length(unique(na.omit(tempdf[[i]][[id]])))) != nrow(na.omit(tempdf[[i]][id])) ) {
+    if( (length(unique(stats::na.omit(tempdf[[i]][[id]])))) != nrow(stats::na.omit(tempdf[[i]][id])) ) {
       tempdf[[i]] <- dplyr::distinct(tempdf[[i]], .data[[id]], .keep_all = TRUE)
     }
   }

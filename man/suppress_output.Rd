@@ -7,7 +7,7 @@
 suppress_output(input)
 }
 \arguments{
-\item{function}{}
+\item{input}{}
 }
 \value{
 output Output is the output of the passed function call.

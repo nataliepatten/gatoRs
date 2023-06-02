@@ -7,13 +7,13 @@
 #' @details
 #' This function requires no additional packages.
 #'
-#' @param function
+#' @param input
 #'
-#'
+#' @importFrom utils capture.output
 #' @return output Output is the output of the passed function call.
 #'
 #' @keywords internal
 
 suppress_output <- function(input) {
-  return(suppressMessages(invisible(capture.output(input))))
+  return(suppressMessages(invisible(utils::capture.output(input))))
 }

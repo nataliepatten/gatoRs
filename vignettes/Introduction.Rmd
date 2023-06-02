@@ -30,8 +30,8 @@ There are many databases available to compile synonym lists for plant species in
  
   - [taxize](https://docs.ropensci.org/taxize/)
   - [RTNRS](https://github.com/EnquistLab/RTNRS)
-  - [WorldFlora](https://cran.r-project.org/web/packages/WorldFlora/index.html)
-  - [Taxonstand](https://cran.r-project.org/web/packages/Taxonstand/index.html)
+  - [WorldFlora](https://cran.r-project.org/package=WorldFlora)
+  - [Taxonstand](https://cran.r-project.org/package=Taxonstand)
   - [U.Taxonstand](https://github.com/ecoinfor/U.Taxonstand)
      
 
