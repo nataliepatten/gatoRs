@@ -36,8 +36,8 @@ to manually determine whether they wish to keep results containing certain scien
 This function requires no additional packages.
 }
 \examples{
-clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
-clean_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"),
+cleaned_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
+cleaned_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"),
 accepted.name = "Galax urceolata")
 
 }

@@ -10,7 +10,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- remove_skewed(data)
+#' cleaned_data <- remove_skewed(data)
 #'
 #' @return A data frame with records remove only records for which locality was skewed.
 #'

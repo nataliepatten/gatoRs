@@ -34,11 +34,9 @@
 #' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 1000)
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
-#' gbif.prov = TRUE, limit = 100)
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 10)
 #' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code",
-#' idigbio.filter = FALSE, limit = 1000)
+#' idigbio.filter = FALSE, limit = 10)
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
 #' This csv file will contain search results for the desired species

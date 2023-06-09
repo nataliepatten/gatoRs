@@ -21,6 +21,6 @@ The \code{remove_skewed()} function identifies and removes records where localit
 This function requires no additional packages.
 }
 \examples{
-data <- remove_skewed(data)
+cleaned_data <- remove_skewed(data)
 
 }

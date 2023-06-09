@@ -43,6 +43,6 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 This function requires no additional packages.
 }
 \examples{
-data <- basic_locality_clean(data)
+cleaned_data <- basic_locality_clean(data)
 
 }

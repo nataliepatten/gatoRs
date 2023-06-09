@@ -27,11 +27,9 @@ This function uses the \code{correct_class()} function.
 This function requires the packages rgbif, magrittr, and dplyr.
 }
 \examples{
-df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 100)
+df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 5)
 df <- get_gbif(c("Galax urceolata", "Galax aphylla"),
-gbif.match = "code", limit = 100)
-df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
-df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE,
-gbif.match = "code", limit = 100)
+gbif.match = "code", limit = 5)
+df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 5)
 
 }

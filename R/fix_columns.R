@@ -12,7 +12,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- fix_columns(data)
+#' fixed_data <- fix_columns(data)
 #'
 #' @return Returns the original data frame with the specified columns.
 #'

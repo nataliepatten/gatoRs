@@ -11,7 +11,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- fix_names(data)
+#' fixed_data <- fix_names(data)
 #'
 #' @return Returns df with fixed capitalization in name column.
 #'

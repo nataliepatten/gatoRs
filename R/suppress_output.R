@@ -15,5 +15,6 @@
 #' @keywords internal
 
 suppress_output <- function(input) {
+  # https://stackoverflow.com/questions/48499400/suppress-automatic-output-to-console-in-r
   return(suppressMessages(invisible(utils::capture.output(input))))
 }

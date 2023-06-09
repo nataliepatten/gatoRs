@@ -11,7 +11,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
+#' cleaned_data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 #'
 #' @export
 

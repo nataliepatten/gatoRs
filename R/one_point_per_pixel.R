@@ -14,7 +14,7 @@
 #' @inheritParams basic_locality_clean
 #'
 #' @examples
-#' data <- one_point_per_pixel(data)
+#' ready_data <- one_point_per_pixel(data)
 #'
 #' @return df is a data frame with only one point per pixel.
 #'

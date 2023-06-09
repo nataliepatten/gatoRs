@@ -40,6 +40,6 @@ for creating present-absent models.
 This function requires package raster and spatstat.geom.
 }
 \examples{
-data <- one_point_per_pixel(data)
+ready_data <- one_point_per_pixel(data)
 
 }

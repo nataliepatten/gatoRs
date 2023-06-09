@@ -3,16 +3,16 @@
 \docType{data}
 \name{data}
 \alias{data}
-\title{Downloaded data from gators_download() for Galax urceolata with default settings and 'limit' set to 1000:
-data <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 1000)}
+\title{Downloaded data from gators_download() for Galax urceolata with default settings and 'limit' set to 5:
+data <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 5)}
 \format{
-A data frame with 3206 rows and 23 columns
+A data frame with 17 rows and 23 columns
 }
 \usage{
 data
 }
 \description{
-Downloaded data from gators_download() for Galax urceolata with default settings and 'limit' set to 1000:
-data <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 1000)
+Downloaded data from gators_download() for Galax urceolata with default settings and 'limit' set to 5:
+data <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 5)
 }
 \keyword{internal}

@@ -17,7 +17,9 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- process_flagged(data, interactive = FALSE)
+#' \dontrun{
+#' cleaned_data <- process_flagged(data, interactive = FALSE)
+#' }
 #'
 #' @return Return cleaned data frame.
 #'

@@ -20,6 +20,6 @@ The \code{basis_clean()} function removes records based on basisOfRecord column.
 This function requires no additional packages.
 }
 \examples{
-data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
+cleaned_data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 
 }

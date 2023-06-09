@@ -15,7 +15,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- basic_locality_clean(data)
+#' cleaned_data <- basic_locality_clean(data)
 #'
 #' @return Return data frame with specimen removed that had missing or improper coordinate values.
 #'

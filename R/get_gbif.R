@@ -14,12 +14,10 @@
 #' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
 #'
 #' @examples
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 100)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), limit = 5)
 #' df <- get_gbif(c("Galax urceolata", "Galax aphylla"),
-#' gbif.match = "code", limit = 100)
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 100)
-#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE,
-#' gbif.match = "code", limit = 100)
+#' gbif.match = "code", limit = 5)
+#' df <- get_gbif(c("Galax urceolata", "Galax aphylla"), gbif.prov = TRUE, limit = 5)
 #'
 #' @return Returns a data frame with desired columns from GBIF.
 #'

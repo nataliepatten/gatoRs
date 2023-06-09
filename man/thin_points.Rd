@@ -37,6 +37,6 @@ The \code{thin_points} function returns records based on coordinate thinning.
 This function requires package spThin.
 }
 \examples{
-data <- thin_points(data, accepted.name = "Galax urceolata")
+thinned_data <- thin_points(data, accepted.name = "Galax urceolata")
 
 }

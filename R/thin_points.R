@@ -14,7 +14,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' data <- thin_points(data, accepted.name = "Galax urceolata")
+#' thinned_data <- thin_points(data, accepted.name = "Galax urceolata")
 #'
 #' @return df is a data frame with the cleaned data.
 #'
