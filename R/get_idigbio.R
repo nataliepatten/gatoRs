@@ -59,7 +59,9 @@ get_idigbio <- function(synonyms.list, limit = 100000){
   colnames(query_idigbio) <- colNames
 
   for (i in 1:length(synonyms.list)) {
-    query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms.list[i])), fields = colNames, limit = limit))
+    if (synonyms.list[i] != "") {
+      query_idigbio <- rbind(query_idigbio, ridigbio::idig_search_records(rq = list("data" =  list("type" = "fulltext","value" = synonyms.list[i])), fields = colNames, limit = limit))
+    }
   }
 
   # if no results found
