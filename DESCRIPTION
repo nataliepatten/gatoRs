@@ -32,7 +32,7 @@ Suggests:
     rmarkdown,
     testthat
 License: GPL-3
-Description: A package to aid in downloading and cleaning biodiversity data from iDigBio and GBIF.
+Description: Streamlines downloading and cleaning biodiversity data from Integrated Digitized Biocollections (iDigBio) and the Global Biodiversity Information Facility (GBIF).
 Maintainer: Natalie N. Patten <natalienpatten@gmail.com>
 URL: https://nataliepatten.github.io/gatoRs/, https://github.com/nataliepatten/gatoRs
 BugReports: https://github.com/nataliepatten/gatoRs/issues
