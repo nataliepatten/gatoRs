@@ -17,7 +17,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' cleaned_data <- process_flagged(data, interactive = FALSE)
 #' }
 #'
@@ -31,6 +31,8 @@
 
 process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longitude = "longitude",
                             scientific.name = "scientificName") {
+
+  if (NROW(df) == 0) return(df)
 
   df <- basic_locality_clean(df, latitude = latitude, longitude = longitude,
                              remove.zero = FALSE, precision = FALSE, remove.skewed = FALSE)

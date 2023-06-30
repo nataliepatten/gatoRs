@@ -25,7 +25,7 @@ for the data provided by GBIF in a data frame.
 This function requires the rgbif package.
 }
 \examples{
-\dontrun{
+\donttest{
 citations <- citation_bellow(data)
 }
 

@@ -51,7 +51,7 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
                                           remove.NA.occ.id = remove.NA.occ.id, remove.NA.date = remove.NA.date,
                                           remove.unparseable = TRUE))
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
-               taxa.filter = taxa.filter, scientific.name, accepted.name =  accepted.name))
+               taxa.filter = taxa.filter, scientific.name = scientific.name, accepted.name =  accepted.name))
 
   if(!any(is.na(basis.list))){
     suppress_output(df <- basis_clean(df, basis.list = basis.list, basis.of.record = basis.of.record))

@@ -11,7 +11,7 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' citations <- citation_bellow(data)
 #' }
 #'

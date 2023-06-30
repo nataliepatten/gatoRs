@@ -13,6 +13,9 @@ basis_clean(df, basis.list = NA, basis.of.record = "basisOfRecord")
 
 \item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
 }
+\value{
+Returns a data frame with records of desired record basis.
+}
 \description{
 The \code{basis_clean()} function removes records based on basisOfRecord column.
 }

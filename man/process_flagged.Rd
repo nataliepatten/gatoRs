@@ -38,7 +38,7 @@ This function requires packages CoordinateCleaner, leaflet, and magrittr.
 This function requires interactive user input.
 }
 \examples{
-\dontrun{
+\donttest{
 cleaned_data <- process_flagged(data, interactive = FALSE)
 }
 

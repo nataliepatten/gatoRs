@@ -13,6 +13,8 @@
 #' @examples
 #' cleaned_data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 #'
+#' @return Returns a data frame with records of desired record basis.
+#'
 #' @export
 
 
@@ -38,7 +40,7 @@ basis_clean <- function(df, basis.list = NA, basis.of.record = "basisOfRecord"){
       message("Basis of records kept: ")
       print(unique(new_df[[basis.of.record]]))
       input <- readline(prompt = "Would you like to remove any additional types of basis of records? Enter Y for yes or N for no. ")
-    } # HELP HERE
+    }
 
   } else if(record.filter == "list-based"){
     message("Types of basis of records present in data frame: ")

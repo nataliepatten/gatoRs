@@ -26,6 +26,8 @@
 one_point_per_pixel <- function(df, raster = NA, resolution = 0.5, precision = TRUE, digits = 2,
                                 longitude = "longitude", latitude = "latitude"){
 
+  if (NROW(df) == 0) return(df)
+
   df <- basic_locality_clean(df, latitude = latitude, longitude = longitude, remove.zero = FALSE,
                              precision = precision, digits = digits, remove.skewed = FALSE)
 

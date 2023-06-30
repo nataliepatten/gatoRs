@@ -23,6 +23,8 @@
 #' @export
 
 thin_points <- function(df, accepted.name = NA, distance = 5, reps = 100, latitude = "latitude", longitude = "longitude") {
+  if (NROW(df) == 0) return(df)
+
   if (is.na(accepted.name) & !("accepted_name" %in% colnames(df))) {
     stop("The data frame does not already have an accepted_name column. \nPlease provide a value for argument accepted.name.")
   }
