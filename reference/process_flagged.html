@@ -113,9 +113,27 @@ This function requires interactive user input.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">cleaned_data</span> <span class="op">&lt;-</span> <span class="fu">process_flagged</span><span class="op">(</span><span class="va">data</span>, interactive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing coordinate validity</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing equal lat/lon</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing zero coordinates</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing country capitals</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing country centroids</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing sea coordinates</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing geographic outliers</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing GBIF headquarters, flagging records around Copenhagen</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing biodiversity institutions</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 records.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Flagged 0 of 8 records, EQ = 0.</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
