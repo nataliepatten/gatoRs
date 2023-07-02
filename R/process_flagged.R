@@ -54,9 +54,9 @@ process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longi
 
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
-  flagged$index <- as.character(1:nrow(flagged))
   # make new column with (latitude, longitude) and point number if there are any flagged points
   if (nrow(flagged) > 0) {
+    flagged$index <- as.character(1:nrow(flagged))
     flagged$coordinates <- paste0("(", flagged[[latitude]], ", ", flagged[[longitude]], ")", ", point #", flagged$index)
   }
   else {

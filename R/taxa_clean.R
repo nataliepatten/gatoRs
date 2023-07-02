@@ -57,12 +57,6 @@ taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
           old_df <- old_df[-(which(old_df[[scientific.name]] == taxa)), ]
           new_df <- rbind(new_df, df_taxa)
       }
-      message("Scientific names kept: ")
-      if (length(unique(new_df[[scientific.name]])) == 0) {
-        message("No names kept.")
-      } else{
-        print(unique(new_df[[scientific.name]]))
-      }
   } else if (taxa.filter == "fuzzy") {
       old_df <- df
       new_df <- data.frame()
@@ -74,12 +68,6 @@ taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name
             }
             new_df <- rbind(new_df, df_taxa)
         }
-      message("Scientific names kept: ")
-      if (length(unique(new_df[[scientific.name]])) == 0) {
-        message("No names kept.")
-      } else{
-      print(unique(new_df[[scientific.name]]))
-      }
   } else {
     message("Filter option is not avaliable. Please choose 'fuzzy', 'exact', or 'interactive'.")
   }

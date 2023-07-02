@@ -2,7 +2,7 @@ Package: gatoRs
 Type: Package
 Title: Geographic and Taxonomic Occurrence R-Based Scrubbing
 Version: 1.0.0
-Date: 2023-06-09
+Date: 2023-07-02
 Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatten@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8090-1324")),
            person(given = "Michelle L.", family = "Gaynor", email="shellyleegaynor@gmail.com", role = "aut",

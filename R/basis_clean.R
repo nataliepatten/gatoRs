@@ -43,8 +43,6 @@ basis_clean <- function(df, basis.list = NA, basis.of.record = "basisOfRecord"){
     }
 
   } else if(record.filter == "list-based"){
-    message("Types of basis of records present in data frame: ")
-    print(unique(df[[basis.of.record]]))
     old_df <- df
     new_df <- data.frame()
     for (i in 1:length(basis.list)) {
@@ -54,12 +52,6 @@ basis_clean <- function(df, basis.list = NA, basis.of.record = "basisOfRecord"){
         old_df <- old_df[-(which(old_df[[basis.of.record]] %in% unique(df_type[[basis.of.record]]))),]
       }
       new_df <- rbind(new_df, df_type)
-    }
-    message("Basis of records kept: ")
-    if (length(unique(new_df[[basis.of.record]])) == 0) {
-      message("No names kept.")
-    } else{
-      print(unique(new_df[[basis.of.record]]))
     }
   }
 
