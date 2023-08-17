@@ -54,24 +54,58 @@ process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longi
 
   # find the flagged points
   flagged <- df2[df2$.summary == "FALSE", ]
+  non_flagged <- df2[df2$.summary == "TRUE",]
   # make new column with (latitude, longitude) and point number if there are any flagged points
   if (nrow(flagged) > 0) {
     flagged$index <- as.character(1:nrow(flagged))
-    flagged$coordinates <- paste0("(", flagged[[latitude]], ", ", flagged[[longitude]], ")", ", point #", flagged$index)
+    # make a new column with the reason for being flagged
+    flag <- dplyr::case_when(flagged$.val == "FALSE" ~ "coordinate validity", .default = NA)
+    flag <- dplyr::case_when(flagged$.equ == "FALSE" ~ "equal lat/lon", .default = flag)
+    flag <- dplyr::case_when(flagged$.zer == "FALSE" ~ "zero coordinates", .default = flag)
+    flag <- dplyr::case_when(flagged$.cap == "FALSE" ~ "country capital", .default = flag)
+    flag <- dplyr::case_when(flagged$.cen == "FALSE" ~ "country centroid", .default = flag)
+    flag <- dplyr::case_when(flagged$.sea == "FALSE" ~ "sea coordinates", .default = flag)
+    flag <- dplyr::case_when(flagged$.otl == "FALSE" ~ "geographic outlier", .default = flag)
+    flag <- dplyr::case_when(flagged$.gbf == "FALSE" ~ "GBIF headquarters", .default = flag)
+    flag <- dplyr::case_when(flagged$.inst == "FALSE" ~ "biodiversity institution", .default = flag)
+
+    flagged$coordinates <- paste0("(", flagged[[latitude]], ", ", flagged[[longitude]], ")", ", point #", flagged$index, ", ", flag)
   }
   else {
     message("No flagged points found.")
     return(df)
   }
+  if (nrow(non_flagged) > 0) {
+    start <- nrow(flagged) + 1
+    end <- start + nrow(non_flagged) - 1
+    non_flagged$index <- as.character(start:end)
+    non_flagged$coordinates <- paste0("(", non_flagged[[latitude]], ", ", non_flagged[[longitude]], ")", ", point #", non_flagged$index)
+  }
   # make a map of the flagged points; hovering over points will show lat/long, clicking on points will show species name
-  coordinates <- flagged$coordinates
-  icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#3CB371", library = "fa", squareMarker = TRUE, markerColor = "lightgreen")
-  map <- leaflet::leaflet(data = flagged) %>%
+  flagged_index <- flagged$index
+  non_flagged_index <- non_flagged$index
+  flagged_coords <- flagged$coordinates
+  non_flagged_coords <- non_flagged$coordinates
+
+  red_icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#ffffff", library = "fa", squareMarker = TRUE, markerColor = "red")
+  green_icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#ffffff", library = "fa", squareMarker = TRUE, markerColor = "green")
+
+  map <- leaflet::leaflet() %>%
     leaflet::addProviderTiles(providers$OpenStreetMap) %>%
-    leaflet::addAwesomeMarkers(lng = flagged[[longitude]], lat = flagged[[latitude]], icon = icons, popup = ~coordinates, label = flagged[[scientific.name]], layerId = ~index) %>%
+    leaflet::addAwesomeMarkers(lng = flagged[[longitude]], lat = flagged[[latitude]], icon = red_icons,
+                               popup = flagged_coords, label = flagged[[scientific.name]], layerId = flagged_index) %>%
+    leaflet::addAwesomeMarkers(lng = non_flagged[[longitude]], lat = non_flagged[[latitude]], icon = green_icons,
+                               popup = non_flagged_coords, label = non_flagged[[scientific.name]], layerId = non_flagged_index) %>%
+    leaflet::addLegend(position = "bottomleft", colors = c("#d81313", "#4cc410"), labels = c("flagged", "not flagged"), opacity = 1) %>%
     leaflet::addMiniMap(toggleDisplay = TRUE) %>%
   print(map)
 
+  #
+  message("Red icons represent flagged (possibly problematic) points. ",
+  "Green icons represent points that were not flagged. ",
+  "By hovering over each icon you can see the scientific name of each data point. ",
+  "By clicking on each icon you can see the coordinates and point number for each data point. ",
+  "Clicking on red icons will also display the reason the point was flagged.")
   # prompt the user to choose to zoom in or not
   input <- readline(prompt = "Would you like to zoom in to a particular region? Enter Y for yes or N for no. ")
   if (input == "Y" | input == 'y') {
