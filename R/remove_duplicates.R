@@ -79,7 +79,7 @@ remove_duplicates <- function(df, event.date = "eventDate",
         if (remove.unparseable) {
           return("remove")
         } else {
-          temp_message <- paste0("Event date cannot be automatically parsed for date: ", date)
+          temp_message <- paste0("Date cannot be automatically parsed for the eventDate: ", date)
           temp_year <- readline(prompt = paste(temp_message, "Please enter the year in YYYY format, or NA if not provided: ", sep = "\n"))
           temp_month <- readline(prompt = "Please enter the month in MM format, or NA if not provided: ")
           temp_day <- readline(prompt = "Please enter the day in DD format or NA if not provided: ")
