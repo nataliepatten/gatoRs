@@ -25,7 +25,6 @@
 #'
 #' @importFrom CoordinateCleaner clean_coordinates
 #' @importFrom leaflet leaflet providers awesomeIcons addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker addLegend
-#' @importFrom leaflet.extras addDrawToolbar
 #' @importFrom magrittr "%>%"
 #'
 #' @export
@@ -99,7 +98,6 @@ process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longi
                                popup = non_flagged_coords, label = non_flagged[[scientific.name]], layerId = non_flagged_index) %>%
     leaflet::addLegend(position = "bottomleft", colors = c("#d81313", "#4cc410"), labels = c("flagged", "not flagged"), opacity = 1) %>%
     leaflet::addMiniMap(toggleDisplay = TRUE) %>%
-    leaflet.extras::addDrawToolbar() %>%
   print(map)
 
   #
