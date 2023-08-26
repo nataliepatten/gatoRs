@@ -12,12 +12,12 @@ needed_records(df, info.withheld = "informationWithheld")
 \item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
 }
 \value{
-A data frame with only records for which  locality was flagged.
+A data frame with only records for which locality was flagged.
 }
 \description{
 The \code{needed_records()} function identifies records with flags. This indicates that information
 is withheld from these records due to endangered species status, for example. Accessing this information may
-require a permit. Or, these records can be removed from the data set.
+require a permit. Or, these records can be removed from the data set with \code{remove_redacted()}.
 }
 \details{
 This function requires no additional packages.

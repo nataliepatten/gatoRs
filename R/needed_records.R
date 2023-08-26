@@ -3,7 +3,7 @@
 #' @description
 #' The `needed_records()` function identifies records with flags. This indicates that information
 #' is withheld from these records due to endangered species status, for example. Accessing this information may
-#' require a permit. Or, these records can be removed from the data set.
+#' require a permit. Or, these records can be removed from the data set with `remove_redacted()`.
 #'
 #' @details
 #' This function requires no additional packages.
@@ -14,7 +14,7 @@
 #' @examples
 #' need_info <- needed_records(data)
 #'
-#' @return A data frame with only records for which  locality was flagged.
+#' @return A data frame with only records for which locality was flagged.
 #'
 #' @export
 
