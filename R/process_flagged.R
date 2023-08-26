@@ -25,6 +25,7 @@
 #'
 #' @importFrom CoordinateCleaner clean_coordinates
 #' @importFrom leaflet leaflet providers awesomeIcons addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker addLegend
+#' @importFrom leaflet.extras addDrawToolbar
 #' @importFrom magrittr "%>%"
 #'
 #' @export
