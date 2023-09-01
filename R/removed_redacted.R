@@ -1,9 +1,7 @@
-#' @title Remove Missing Information - Remove records with redacted or missing data
+#' @title Remove Redacted Information - Remove protected or private records prior to publication
 #'
 #' @description
-#' The `remove_redacted()` function identifies and removes records with flags. This indicates that information
-#' is withheld from these records due to endangered species status, for example. Accessing this information may
-#' require a permit.
+#' The `remove_redacted()` function identifies and removes records where 'aggregator' is not equal to iDigBio or GBIF.
 #'
 #' @details
 #' This function requires no additional packages.
@@ -18,9 +16,9 @@
 #'
 #' @export
 
-remove_redacted <- function(df, info.withheld = "informationWithheld"){
+remove_redacted <- function(df, aggregator = "aggregator"){
   if (NROW(df) == 0) return(df)
 
-  cleaned <- df[is.na(df[[info.withheld]]), ]
-  return(cleaned)
+  ready <- df[which(df$aggregator %in% c("iDigBio", "GBIF")), ]
+  return(ready)
 }
