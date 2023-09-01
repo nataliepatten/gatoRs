@@ -31,7 +31,7 @@
 #' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 #' This parameter is not required and is assigned TRUE by default.
 #'
-#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.
+#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from each aggregator.
 #'
 #' @examples
 #' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 10)

@@ -19,6 +19,6 @@
 remove_redacted <- function(df, aggregator = "aggregator"){
   if (NROW(df) == 0) return(df)
 
-  ready <- df[which(df$aggregator %in% c("iDigBio", "GBIF")), ]
+  ready <- df[which(df[[aggregator]] %in% c("iDigBio", "GBIF")), ]
   return(ready)
 }
