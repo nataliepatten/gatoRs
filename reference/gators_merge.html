@@ -90,11 +90,9 @@
 <span class="r-in"><span><span class="va">needs_geo</span> <span class="op">&lt;-</span> <span class="fu"><a href="need_to_georeference.html">need_to_georeference</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># fill in manually georeferenced data into needs_geo...</span></span></span>
 <span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu">gators_merge</span><span class="op">(</span><span class="va">removed_missing</span>, <span class="va">needs_geo</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (colnames(df1) == colnames(df2)) {    combined &lt;- rbind(df1, df2)    return(combined)} else {    return(df1)}:</span> the condition has length &gt; 1</span>
 <span class="r-in"><span><span class="va">needs_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="needed_records.html">needed_records</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># fill in missing information with a data request...</span></span></span>
 <span class="r-in"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu">gators_merge</span><span class="op">(</span><span class="va">merged_data</span>, <span class="va">needs_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'merged_data' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
