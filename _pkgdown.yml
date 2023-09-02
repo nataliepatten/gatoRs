@@ -18,8 +18,10 @@ reference:
   desc: Various tools to clean downloaded data produced from our download functions.
 - contents:
   - needed_records
-  - remove_redacted
   - need_to_georeference
+  - remove_redacted
+  - remove_missing
+  - gators_merge
   - remove_duplicates
   - taxa_clean
   - basis_clean

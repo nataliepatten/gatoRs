@@ -2,22 +2,21 @@
 % Please edit documentation in R/removed_redacted.R
 \name{remove_redacted}
 \alias{remove_redacted}
-\title{Remove Missing Information - Remove records with redacted or missing data}
+\title{Remove Redacted Information - Remove protected or private records prior to publication}
 \usage{
-remove_redacted(df, info.withheld = "informationWithheld")
+remove_redacted(df, aggregator = "aggregator")
 }
 \arguments{
 \item{df}{A data frame downloaded with \code{gators_download()}.}
 
-\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
+\item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
+that provided the record.}
 }
 \value{
 A data frame with redacted records removed.
 }
 \description{
-The \code{remove_redacted()} function identifies and removes records with flags. This indicates that information
-is withheld from these records due to endangered species status, for example. Accessing this information may
-require a permit.
+The \code{remove_redacted()} function identifies and removes records where 'aggregator' is not equal to iDigBio or GBIF.
 }
 \details{
 This function requires no additional packages.

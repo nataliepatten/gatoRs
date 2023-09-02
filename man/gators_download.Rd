@@ -38,7 +38,7 @@ include data points for a different species that mention the desired species in 
 Choosing \code{idigbio.filter = TRUE} will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}
 
-\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list.}
+\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from each aggregator.}
 }
 \value{
 Returns a data frame and writes a csv file as specified in the input.

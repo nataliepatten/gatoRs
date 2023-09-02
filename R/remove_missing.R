@@ -1,8 +1,8 @@
 #' @title Remove Missing Information - Prepare to merge a data frame with georeferenced and retrieved records
 #'
 #' @description
-#' The `remove_retained()` function identifies and removes records identified with the `need_to_georeference()`
-#' and `needed_record()` functions. This function should be utilized prior to merging georeferenced or retrieve records.
+#' The `remove_missing()` function identifies and removes records identified with the `need_to_georeference()`
+#' and `needed_records()` functions. This function should be utilized prior to merging georeferenced or retrieved records.
 #'
 #' @details
 #' This function requires no additional packages.
@@ -15,28 +15,20 @@
 #' @inheritParams correct_class
 #'
 #' @examples
-#' cleaned_data <- remove_redacted(data)
+#' cleaned_data <- remove_missing(data)
 #'
-#' @return A data frame with redacted records removed.
+#' @return A data frame with records containing missing information removed.
 #'
 #' @export
 
-remove_retained <- function(df, info.withheld = "informationWithheld",
+remove_missing <- function(df, remove.type = "both", info.withheld = "informationWithheld",
                             longitude = "longitude", latitude = "latitude",
-                            locality = "locality", remove.type = "both"){
+                            locality = "locality", id = "ID"){
   if (NROW(df) == 0) return(df)
 
 
-  for_georeferencing <- df
-  # ID records with missing latitude and longitude
-  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing[[longitude]]), ]
-  for_georeferencing  <- for_georeferencing[is.na(for_georeferencing[[latitude]]), ]
-  # ID records with locality information included
-  for_georeferencing <- for_georeferencing[!is.na(for_georeferencing[[locality]]), ]
-  for_georeferencing <- for_georeferencing[!grepl("locality:  NA, occurrenceRemarks: NA, verbatimLocality: NA", for_georeferencing[[locality]], fixed = TRUE), ]
-
-
-  for_withheld <- df[!is.na(df[[info.withheld]]), ]
+  for_georeferencing <- need_to_georeference(df)
+  for_withheld <- needed_records(df)
 
   if(remove.type == "both"){
     remove_these <- rbind(for_georeferencing, for_withheld)
@@ -47,6 +39,6 @@ remove_retained <- function(df, info.withheld = "informationWithheld",
   }
 
 
-  cleaned <- df[!(df$ID %in% remove_these$ID),]
+  cleaned <- df[!df[[id]] %in% remove_these[[id]],]
   return(cleaned)
 }
