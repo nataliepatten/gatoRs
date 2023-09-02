@@ -52,6 +52,9 @@
     <loc>https://nataliepatten.github.io/gatoRs/reference/gators_download.html</loc>
   </url>
   <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/gators_merge.html</loc>
+  </url>
+  <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/get_gbif.html</loc>
   </url>
   <url>
@@ -80,6 +83,9 @@
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/remove_duplicates.html</loc>
+  </url>
+  <url>
+    <loc>https://nataliepatten.github.io/gatoRs/reference/remove_missing.html</loc>
   </url>
   <url>
     <loc>https://nataliepatten.github.io/gatoRs/reference/remove_redacted.html</loc>
