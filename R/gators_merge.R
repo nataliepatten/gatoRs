@@ -23,9 +23,12 @@
 #' @export
 
 gators_merge <- function(df1, df2){
-  if(colnames(df1) == colnames(df2)){
-  combined <- rbind(df1, df2)
-  return(combined)
+ # If df1 and df2 have the same columns and the same number of columns
+  if(sum(names(df1) %in% names(df2)) == ncol(df1)){
+    # then make sure columns are ordered the same
+    df2reordered <- df2[,c(names(df1))]
+    combined <- rbind(df1, df2reordered)
+    return(combined)
   } else{
     return(df1)
   }
