@@ -4,11 +4,16 @@
 #' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species.
 #'
 #' @details
+#' With `gators_download()` you can obtain biodiversity records for your species of interest from both GBIF and iDigBio.
+#' This function is innovative in how it searches iDigBio. Unlike `spocc::occ()`, we do not query the iDigBio API using
+#' the scientific name field, as this will only return exact matches.
+#' Instead, we designed a “pseudo-fuzzy match” to search all fields for
+#' partial matches to the supplied scientific names.
 #' This function uses the `get_idigbio()`, `get_gbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
 #' This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 #'
 #'
-#' @param synonyms.list A list of synonyms for your desired species. For example, `synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
+#' @param synonyms.list A list of scientific names including the accepted scientific name and any synonyms for your desired species. For example, `synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
 #' This parameter is required.
 #'
 #' @param write.file A parameter to choose whether to produce a .csv file containing search results.
