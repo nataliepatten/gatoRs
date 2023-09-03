@@ -1,7 +1,7 @@
 #' @title Identify Missing Information - Find records with redacted or missing data
 #'
 #' @description
-#' The `needed_records()` function identifies records with flags. This indicates that information
+#' The `needed_records()` function identifies records with flags, therefore withheld. This indicates that information
 #' is withheld from these records due to endangered species status, for example. Accessing this information may
 #' require a permit. Or, these records can be removed from the data set with `remove_redacted()`.
 #'

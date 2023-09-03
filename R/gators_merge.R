@@ -4,9 +4,9 @@
 #' The `gators_merge()` function combines two data sets with identical column names and returns a single data set.
 #'
 #' @details
-#' This function requires no additional packages.
+#' Prior to combining a data set with georeferenced or retrieved data, please use the `remove_missing()` function to limit duplicate records. This function requires no additional packages.
 #'
-#' @param df1 A data frame downloaded with `gators_download()` and prepared using `remove_missing`.
+#' @param df1 A data frame downloaded with `gators_download()` and prepared using `remove_missing()`.
 #' @param df2 A data frame with the same columns as df1, but with observations generated through georeferencing or through data requests.
 #'
 #' @examples

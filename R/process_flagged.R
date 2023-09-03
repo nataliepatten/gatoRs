@@ -7,7 +7,7 @@
 #'
 #'
 #' @details
-#' This function requires packages CoordinateCleaner, leaflet, and magrittr.
+#' The interactive option plots flagged points in red and non-flagged points in green. This function requires packages CoordinateCleaner, leaflet, and magrittr.
 #' This function requires interactive user input.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
