@@ -21,7 +21,7 @@
 #' @param one.point.per.pixel Default = TRUE. An option to only retain one point per pixel.
 #' @inheritParams thin_points
 #' @inheritParams one_point_per_pixel
-#'
+#' @param remove.duplicates Default = TRUE. An option to remove duplicate points.
 #' @examples
 #' cleaned_data <- full_clean(data, synonyms.list = c("Galax urceolata", "Galax aphylla"),
 #' digits = 3, basis.list = c("Preserved Specimen","Physical specimen"),
@@ -43,13 +43,10 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
                        latitude = "latitude", longitude = "longitude",
                        remove.flagged = TRUE, thin.points = TRUE,
                        distance = 5, reps = 100,
-                       one.point.per.pixel = TRUE, raster = NA, resolution = 0.5) {
+                       one.point.per.pixel = TRUE, raster = NA, resolution = 0.5,
+                       remove.duplicates = TRUE) {
 
-  suppress_output(df <- remove_duplicates(df, event.date = event.date,
-                                          aggregator = aggregator, id = id, occ.id = occ.id,
-                                          year = year, month = month, day = day,
-                                          remove.NA.occ.id = remove.NA.occ.id, remove.NA.date = remove.NA.date,
-                                          remove.unparseable = TRUE))
+
   suppress_output(df <- taxa_clean(df = df,  synonyms.list = synonyms.list,
                taxa.filter = taxa.filter, scientific.name = scientific.name, accepted.name =  accepted.name))
 
@@ -84,6 +81,16 @@ full_clean <- function(df, synonyms.list, event.date = "eventDate",
     suppress_output(df <- one_point_per_pixel(df, raster = raster, resolution = resolution,
                                               longitude = longitude, latitude = latitude))
   } else{
+    df <- df
+  }
+
+  if(remove.duplicates == TRUE){
+    suppress_output(df <- remove_duplicates(df, event.date = event.date,
+                                            aggregator = aggregator, id = id, occ.id = occ.id,
+                                            year = year, month = month, day = day,
+                                            remove.NA.occ.id = remove.NA.occ.id, remove.NA.date = remove.NA.date,
+                                            remove.unparseable = TRUE))
+  }else{
     df <- df
   }
 
