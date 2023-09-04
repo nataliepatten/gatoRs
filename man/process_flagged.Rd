@@ -34,7 +34,7 @@ manually inspect and remove these points, if desired. When running the function 
 hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.
 }
 \details{
-This function requires packages CoordinateCleaner, leaflet, and magrittr.
+The interactive option plots flagged points in red and non-flagged points in green. This function requires packages CoordinateCleaner, leaflet, and magrittr.
 This function requires interactive user input.
 }
 \examples{

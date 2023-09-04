@@ -7,7 +7,7 @@
 gators_merge(df1, df2)
 }
 \arguments{
-\item{df1}{A data frame downloaded with \code{gators_download()} and prepared using \code{remove_missing}.}
+\item{df1}{A data frame downloaded with \code{gators_download()} and prepared using \code{remove_missing()}.}
 
 \item{df2}{A data frame with the same columns as df1, but with observations generated through georeferencing or through data requests.}
 }
@@ -18,7 +18,7 @@ A combined data set.
 The \code{gators_merge()} function combines two data sets with identical column names and returns a single data set.
 }
 \details{
-This function requires no additional packages.
+Prior to combining a data set with georeferenced or retrieved data, please use the \code{remove_missing()} function to limit duplicate records. This function requires no additional packages.
 }
 \examples{
 removed_missing <- remove_missing(data)

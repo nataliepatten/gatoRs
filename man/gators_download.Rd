@@ -15,7 +15,7 @@ gators_download(
 )
 }
 \arguments{
-\item{synonyms.list}{A list of synonyms for your desired species. For example, \code{synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")}.
+\item{synonyms.list}{A list of scientific names including the accepted scientific name and any synonyms for your desired species. For example, \code{synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")}.
 This parameter is required.}
 
 \item{write.file}{A parameter to choose whether to produce a .csv file containing search results.
@@ -74,6 +74,11 @@ from the GBIF and iDigBio databases. The columns are as follows:
 The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species.
 }
 \details{
+With \code{gators_download()} you can obtain biodiversity records for your species of interest from both GBIF and iDigBio.
+This function is innovative in how it searches iDigBio. Unlike \code{spocc::occ()}, we do not query the iDigBio API using
+the scientific name field, as this will only return exact matches.
+Instead, we designed a “pseudo-fuzzy match” to search all fields for
+partial matches to the supplied scientific names.
 This function uses the \code{get_idigbio()}, \code{get_gbif()}, \code{fix_columns()}, \code{fix_names()}, and \code{filter_fix_names()} functions.
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
 }

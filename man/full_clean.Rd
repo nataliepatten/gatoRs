@@ -33,7 +33,8 @@ full_clean(
   reps = 100,
   one.point.per.pixel = TRUE,
   raster = NA,
-  resolution = 0.5
+  resolution = 0.5,
+  remove.duplicates = TRUE
 )
 }
 \arguments{
@@ -95,6 +96,8 @@ that provided the record.}
 \item{raster}{Raster object which will be used for ecological niche comparisons.}
 
 \item{resolution}{Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.}
+
+\item{remove.duplicates}{Default = TRUE. An option to remove duplicate points.}
 }
 \value{
 df is a data frame with the cleaned data.

@@ -40,6 +40,12 @@ The \code{basic_locality_clean()} function cleans locality by removing missing o
 This function requires columns named 'latitude' and 'longitude'. These columns should be of type 'numeric'.
 }
 \details{
+This function removes any records with missing coordinates, impossible coordinates,
+coordinates at (0,0), and any that are flagged as skewed.
+These skewed records are identified with the \code{remove_skewed()}
+function which identifies rows where the ‘InformationWitheld’ column
+includes the string "Coordinate uncertainty increased".
+We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.
 This function requires no additional packages.
 }
 \examples{

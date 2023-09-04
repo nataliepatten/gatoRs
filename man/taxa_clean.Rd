@@ -33,7 +33,7 @@ provides interactive filtering by providing the user with prompts. The interacti
 to manually determine whether they wish to keep results containing certain scientific names.
 }
 \details{
-This function requires no additional packages.
+This function relies on the user-provided taxonomy, we do not utilize any taxonomic backbone. Additionally, this function requires no additional packages.
 }
 \examples{
 cleaned_data <- taxa_clean(data, c("Galax urceolata", "Galax aphylla"), taxa.filter = "exact")
