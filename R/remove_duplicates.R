@@ -6,6 +6,13 @@
 #' coordinate uncertainty using the `basic_locality_clean()` function.
 #'
 #' @details
+#' Dates are parsed based on ISO 8601 which only includes time since the Unix epoch, or January 1st, 1970, therefore dates that occur
+#' before 1970 will not be automatically parsed.  If we are unable to parse the included date for particular records,
+#' users can choose to manually enter the year, month, and day for these records when prompted.
+#' If the user chooses to manually enter the event date, the records eventDate will be printed
+#' and the user will be asked to manually enter the year, month, and day of this eventDate into the console.
+#' Users are only prompted to manually parse event dates for records where year, month, and day are absent,
+#' but eventDate is present and cannot be parsed.
 #' This function requires the parsedate and dplyr packages. This function will ignore missing occurrence ID
 #' and year, month, date columns if not provided in the data set.
 #'
