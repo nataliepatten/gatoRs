@@ -25,7 +25,8 @@ citation_bellow <- function(df, id = "ID", aggregator = "aggregator") {
   gbif <- df[df[[aggregator]] == "GBIF", ]
   citations <- list()
   for (i in 1:NROW(gbif)) {
-    citations[i] <- rgbif::gbif_citation(gbif[[id]][i])$citation$text
+    citations[[i]] <- rgbif::gbif_citation(gbif[[id]][i])$citation$text
   }
+  citations <- do.call(rbind, citations)
   return(citations)
 }
