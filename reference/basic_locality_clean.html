@@ -117,7 +117,13 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function requires no additional packages.</p>
+    <p>This function removes any records with missing coordinates, impossible coordinates,
+coordinates at (0,0), and any that are flagged as skewed.
+These skewed records are identified with the <code><a href="remove_skewed.html">remove_skewed()</a></code>
+function which identifies rows where the ‘InformationWitheld’ column
+includes the string "Coordinate uncertainty increased".
+We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.
+This function requires no additional packages.</p>
     </div>
 
     <div class="section level2">

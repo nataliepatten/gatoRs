@@ -74,7 +74,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>synonyms.list</dt>
-<dd><p>A list of synonyms for your desired species. For example, <code>synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")</code>.
+<dd><p>A list of scientific names including the accepted scientific name and any synonyms for your desired species. For example, <code>synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")</code>.
 This parameter is required.</p></dd>
 
 
@@ -144,7 +144,12 @@ from the GBIF and iDigBio databases. The columns are as follows:</p><ul><li><p><
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function uses the <code><a href="get_idigbio.html">get_idigbio()</a></code>, <code><a href="get_gbif.html">get_gbif()</a></code>, <code><a href="fix_columns.html">fix_columns()</a></code>, <code><a href="fix_names.html">fix_names()</a></code>, and <code><a href="filter_fix_names.html">filter_fix_names()</a></code> functions.
+    <p>With <code>gators_download()</code> you can obtain biodiversity records for your species of interest from both GBIF and iDigBio.
+This function is innovative in how it searches iDigBio. Unlike <code>spocc::occ()</code>, we do not query the iDigBio API using
+the scientific name field, as this will only return exact matches.
+Instead, we designed a “pseudo-fuzzy match” to search all fields for
+partial matches to the supplied scientific names.
+This function uses the <code><a href="get_idigbio.html">get_idigbio()</a></code>, <code><a href="get_gbif.html">get_gbif()</a></code>, <code><a href="fix_columns.html">fix_columns()</a></code>, <code><a href="fix_names.html">fix_names()</a></code>, and <code><a href="filter_fix_names.html">filter_fix_names()</a></code> functions.
 This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.</p>
     </div>
 
