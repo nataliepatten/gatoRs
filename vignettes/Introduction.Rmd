@@ -54,7 +54,7 @@ ___
 
 
 ## Data Processing    
-We downloaded 6885 observations for <i>Galax urceolata</i> in the example above. Of these observations, only those with locality information will be helpful when investigating this species distribution. 
+We downloaded 7742 observations for <i>Galax urceolata</i> in the example above. Of these observations, only those with locality information will be helpful when investigating this species distribution. 
 
 ### Identify Records Missing Locality Information
 Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided upon request or can be identified through georeferencing. We created functions to aid in this process.   
@@ -79,6 +79,24 @@ Example:
 to_georeference <- need_to_georeference(galaxdf)
 ```
 
+#### Merging Retained Records   
+After receiving the data from herbaria or through georeferencing, you will want to
+merge the obtained records with your original data set. 
+
+Note, the following steps will only work if columns are equivalent between the two data sets you hope to merge. If the columns are not equivalent, we recommend bcd::bcd_standardize_datasets() 
+
+Example: 
+```
+# Avoid duplicates by removing the records you are about to merge
+dfsub <- remove_missing(galaxdf)
+# Use gator_merge to merge the main data set with retrieved records
+dfnew <- gators_merge(dfsub, retrieved_records)
+# Version control - save a copy prior to any additional processing!!
+write.csv(dfnew, "data/merged_data_Galax_urceolata_YYYYMMDD.csv") ## Version control!
+# Set gatordf equal to the newly merged data set
+gatordf <- dfnew
+```
+
 ### Occurrence Data Cleaning  
 Here we walk through each cleaning function, however we also created a simple one-step option `full_clean()`, see below.   
 
@@ -93,14 +111,6 @@ galaxdf <- taxa_clean(df = galaxdf,
                       accepted.name = "Galax urceolata") # creates a new column with accepted name for easy comparison
 ```
 
-#### Remove Particular Record Bases
-Sometimes, certain bases of records may want to be removed from the data set. To do this, we provide `basis_clean()`. 
-This function can be used interactively by simply supplying a df, but no basis.list value.If a list of basis is provided, the function will select only records where the basisOfRecord value fuzzy match values in the list provided.
-
-Example:
-```
-galaxdf <- basis_clean(galaxdf, basis.list = c("Preserved Specimen","Physical specimen"))
-```
 
 #### Clean Locality  
 ##### Basic Locality Clean 
@@ -136,27 +146,32 @@ knitr::include_graphics("img/map2.png", dpi = 200)
 ```
 **Figure 2**: Interactive map that appears after we remove points interactively with `process_flagged()`. Points 1, 3, 5, 6, and 7 were removed.
 
+
+
 #### Remove Duplicate Records
-There can be an overlap of records with GBIF and iDigBio. Hence, duplicate records may be downloaded. To find and remove records with identical event dates and identical coordinates, use `remove_duplicates()`.
+Here we identify and remove both (1) specimen duplicates and (2) aggregator duplicates based on each specimens coordinates, occurrenceID, and eventDate. To leverage all date information available, set `remove.unparseable = FALSE` to manually populate 
+the year, month, and day columns. Here, we also confirm all ID (UUID and key) are unique to remove any  within-aggregator duplicates that may accumulate due to processing errors.
+
 
 Example:
 ```
-galaxdf <- remove_duplicates(galaxdf)
+galaxdf <- remove_duplicates(galaxdf, remove.unparseable = TRUE)
 ```
 
-#### Spatial Correction
+#### Remove Particular Record Bases
+Sometimes, certain bases of records may want to be removed from the data set. To do this, we provide `basis_clean()`. 
+This function can be used interactively by simply supplying a df, but no basis.list value.If a list of basis is provided, the function will select only records where the basisOfRecord value fuzzy match values in the list provided.
+
+Example:
+```
+galaxdf <- basis_clean(galaxdf, 
+                       basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
+                                      "MATERIAL_SAMPLE", "LIVING_SPECIMEN",  
+                                      "PreservedSpecimen", "Preserved Specimen"))
+```
+
+#### Spatial Correction 
 The last processing step is spatial correction. Collection efforts can lead to the clustering of points and filtering can help reduce this clustering. Here we provide functions to reduce the effects of sampling bias using randomization approach and retain only one point per pixel. 
-
-##### Spatial thining 
-We thin points by utilizing `spThin::thin()`. 
-
-Example:
-```
-galaxdf <- thin_points(galaxdf, 
-                       distance = 5, 
-                       reps = 100)
-```
-
 ##### One Point Per Pixel 
 Maxent will only retain one point per pixel. To make the ecological niche analysis comparable, we will retain only one point per pixel.
 
@@ -168,19 +183,82 @@ galaxdf <- one_point_per_pixel(galaxdf,
                        digits = 2) 
 ```
 
+##### Spatial thining 
+We thin points by utilizing `spThin::thin()`. This step reduces the effects of sampling bias using a randomization approach.
+
+**Step 1**: What should your minimum distance be?    
+Here we first calculate minimum nearest neighbor distance in km:
+
+Example:
+```
+library(fields)
+nnDm <- rdist.earth(as.matrix(data.frame(lon = df$longitude, lat = df$latitude)), miles = FALSE, R = NULL)
+nnDmin <- do.call(rbind, lapply(1:5, function(i) sort(nnDm[,i])[2]))
+min(nnDmin)
+```
+
+Here the current minimum distance is 2.22 km. Based on literature, we find a 2 meters (or 0.002 km) distance was enough to collect unique genets, so we do not need to thin our points. 
+
+**Step 2**: Thin occurrence records using spThin through gatoRs.     
+When you do need to thin your records, here is a great function to do so!
+
+Example:
+```
+df <- thin_points(df, 
+                    distance = 0.002, # in km 
+                    reps = 100)
+```
+
+
 ### Full Clean
 Finally, instead of step-by-step cleaning, we created a single function to streamline this process. 
 
 
 Example:
 ```
-galaxdf <- full_clean(df = galaxdf, 
-                      synonyms.list = c("Galax urceolata", "Galax aphylla"), 
-                      taxa.filter = "fuzzy",
-                      accepted.name = "Galax urceolata", remove.zero = TRUE,
-                      precision = TRUE, digits = 2, remove.skewed = TRUE,
-                      basis.list = c("Preserved Specimen","Physical specimen"),
-                      remove.flagged = TRUE, thin.points = TRUE, 
-                      distance = 5, reps = 100, 
-                      one.point.per.pixel = TRUE, raster = NA, resolution = 0.5)
+## Read raw csv
+rawdf <- read.csv("base_folder/my_file.csv")
+## Set your full clean preferences equal to the above
+df_quick_clean <- full_clean(rawdf,
+                             synonyms.list =  c("Galax urceolata", "Galax aphylla"), 
+  							             remove.NA.occ.id = FALSE,
+  							             remove.NA.date = FALSE,
+  							             accepted.name =  "Galax urceolata",
+  							             remove.zero = TRUE,
+ 							               precision = TRUE,
+  						               digits = 2,
+  							             remove.skewed = TRUE,
+  							             basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
+  							                            "MATERIAL_SAMPLE",  "LIVING_SPECIMEN", 
+  							                            "PreservedSpecimen", "Preserved Specimen"),
+  							             remove.flagged = TRUE,
+ 							               thin.points = TRUE,
+  						               distance = 0.002,
+  							             reps = 100,
+  					                 one.point.per.pixel = TRUE)
+```
+
+## Downstream Data Proccessing
+### Prepared data for MAXENT
+Example:
+```
+maxent_ready <- data_chomp(df, accepted.name = "Galax urceolata" )
+write.csv(maxent_ready, "data/formaxent_Galax_urceolata_YYYYMMDD.csv", 
+          row.names = FALSE)
+```
+
+### Prepared data for publication
+
+Example:
+```
+## Retrieve GBIF citations
+GBIF_citations <- citation_bellow(df) ## Warning, this is very slow
+write.csv(GBIF_citations, "data/GBIF_citations_Galax_urceolata_YYYYMMDD.csv", 
+          row.names = FALSE)
+
+# Remove redacted records
+### If redacted records were retrieved, make sure to remove them before publication! Remove redacted records!
+df_pub_ready <- remove_redacted(df)
+write.csv(df_pub_ready, "data/publication_ready_Galax_urceolata_YYYYMMDD.csv", 
+          row.names = FALSE)
 ```

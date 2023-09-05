@@ -9,30 +9,30 @@
 #' This function requires the dplyr package.
 #'
 #' @param df Data frame returned by `gator_download()`.
-#' @param scientific.name Default = "scientificName". The name of the scientific name column in the data frame.
-#' @param genus Default = "genus". The name of the genus column in the data frame.
-#' @param species Default = "specificEpithet". The name of the specific epithet column in the data frame.
-#' @param infraspecific.epithet Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.
-#' @param id Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.
-#' @param occ.id Default = "occurrenceId". The name of the occurrence ID column in the data frame.
-#' @param basis.of.record Default = "basisOfRecord". The name of the basis of record column in the data frame.
-#' @param event.date Default = "eventDate". The name of the event date column in the data frame.
-#' @param year Default = "year". The name of the event date year column in the data frame.
-#' @param month Default = "month". The name of the event date month column in the data frame.
-#' @param day Default = "day". The name of the event date day column in the data frame.
-#' @param inst.code Default = "institutionCode". The name of the collection code column in the data frame.
-#' @param recorded.by Default = "recordedBy". The name of the collector name column in the data frame.
-#' @param country Default = "country". The name of the country column in the data frame.
-#' @param county Default = "county". The name of the county column in the data frame.
-#' @param state Default = "stateProvince". The name of the state/province column in the data frame.
-#' @param locality Default = "locality". The name of the locality column in the data frame.
-#' @param latitude Default = "latitude". The name of the latitude column in the data frame.
-#' @param longitude Default = "longitude". The name of the longitude column in the data frame.
-#' @param coord.uncertainty Default = "coordinateUncertaintyInMeters". The name of the coordinate uncertainty column in the data frame.
-#' @param info.withheld Default = "informationWithheld". The name of the information withheld column in the data frame.
-#' @param habitat Default = "habitat". The name of the habitat column in the data frame.
+#' @param scientific.name Default = "scientificName". The name of the [scientificName](	http://rs.tdwg.org/dwc/terms/scientificName) column in the data frame.
+#' @param genus Default = "genus". The name of the [genus](http://rs.tdwg.org/dwc/terms/genus) column in the data frame.
+#' @param species Default = "specificEpithet". The name of the [specificEpithet](http://rs.tdwg.org/dwc/terms/specificEpithet) column in the data frame.
+#' @param infraspecific.epithet Default = "infraspecificEpithet". The name of the [infraspecificEpithet](http://rs.tdwg.org/dwc/terms/infraspecificEpithet) column in the data frame.
+#' @param id Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF (keys) or iDigBio (UUID).
+#' @param occ.id Default = "occurrenceID". The name of the [occurrenceID](http://rs.tdwg.org/dwc/terms/occurrenceID) column in the data frame.
+#' @param basis.of.record Default = "basisOfRecord". The name of the [basis of record](http://rs.tdwg.org/dwc/terms/basisOfRecord) column in the data frame.
+#' @param event.date Default = "eventDate". The name of the [event date](http://rs.tdwg.org/dwc/terms/eventDate) column in the data frame.
+#' @param year Default = "year". The name of the [year](http://rs.tdwg.org/dwc/terms/year) column in the data frame.
+#' @param month Default = "month". The name of the [month](http://rs.tdwg.org/dwc/terms/month) column in the data frame.
+#' @param day Default = "day". The name of the [day](http://rs.tdwg.org/dwc/terms/day) column in the data frame.
+#' @param inst.code Default = "institutionCode". The name of the [institution code](http://rs.tdwg.org/dwc/terms/institutionCode) column in the data frame.
+#' @param recorded.by Default = "recordedBy". The [recordedBy](http://rs.tdwg.org/dwc/iri/recordedBy) column in the data frame.
+#' @param country Default = "country". The name of the [country](http://rs.tdwg.org/dwc/terms/country) column in the data frame.
+#' @param county Default = "county". The name of the [county](http://rs.tdwg.org/dwc/terms/county) column in the data frame.
+#' @param state Default = "stateProvince". The name of the [state/province](http://rs.tdwg.org/dwc/terms/stateProvince) column in the data frame.
+#' @param locality Default = "locality". The name of the [locality](http://rs.tdwg.org/dwc/terms/locality) column in the data frame.
+#' @param latitude Default = "latitude". The name of the [latitude](http://rs.tdwg.org/dwc/terms/decimalLatitude) column in the data frame.
+#' @param longitude Default = "longitude". The name of the [longitude](http://rs.tdwg.org/dwc/terms/decimalLongitude) column in the data frame.
+#' @param coord.uncertainty Default = "coordinateUncertaintyInMeters". The name of the [coordinate uncertainty](http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters) column in the data frame.
+#' @param info.withheld Default = "informationWithheld". The name of the [information withheld](http://rs.tdwg.org/dwc/iri/informationWithheld) column in the data frame.
+#' @param habitat Default = "habitat". The name of the [habitat](http://rs.tdwg.org/dwc/terms/habitat) column in the data frame.
 #' @param aggregator Default = "aggregator". The name of the column in the data frame that identifies the aggregator
-#' that provided the record.
+#' that provided the record. This is equal to iDigBio or GBIF.
 #'
 #' @importFrom dplyr case_when
 #' @keywords internal

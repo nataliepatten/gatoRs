@@ -8,7 +8,7 @@
 #' This function removes any records with missing coordinates, impossible coordinates,
 #' coordinates at (0,0), and any that are flagged as skewed.
 #' These skewed records are identified with the `remove_skewed()`
-#' function which identifies rows where the ‘InformationWitheld’ column
+#' function which identifies rows where the [‘InformationWitheld’](http://rs.tdwg.org/dwc/terms/informationWithheld) column
 #' includes the string "Coordinate uncertainty increased".
 #' We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.
 #' This function requires no additional packages.
