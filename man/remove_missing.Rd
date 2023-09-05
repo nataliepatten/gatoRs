@@ -22,15 +22,15 @@ and \code{needed_records()} function are removed from the data frame. If equal t
 identified by the \code{need_to_georeference()} function are removed. If equal to "withheld" then only records identified
 with the \code{needed_records()} function are removed.}
 
-\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
+\item{info.withheld}{Default = "informationWithheld". The name of the \href{http://rs.tdwg.org/dwc/iri/informationWithheld}{information withheld} column in the data frame.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 
-\item{locality}{Default = "locality". The name of the locality column in the data frame.}
+\item{locality}{Default = "locality". The name of the \href{http://rs.tdwg.org/dwc/terms/locality}{locality} column in the data frame.}
 
-\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF (keys) or iDigBio (UUID).}
 }
 \value{
 A data frame with records containing missing information removed.

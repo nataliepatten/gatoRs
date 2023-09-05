@@ -9,7 +9,7 @@ remove_skewed(df, info.withheld = "informationWithheld")
 \arguments{
 \item{df}{A data frame downloaded with \code{gators_download()}.}
 
-\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
+\item{info.withheld}{Default = "informationWithheld". The name of the \href{http://rs.tdwg.org/dwc/iri/informationWithheld}{information withheld} column in the data frame.}
 }
 \value{
 A data frame with records remove only records for which locality was skewed.

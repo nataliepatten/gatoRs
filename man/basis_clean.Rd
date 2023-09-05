@@ -11,15 +11,18 @@ basis_clean(df, basis.list = NA, basis.of.record = "basisOfRecord")
 
 \item{basis.list}{A list of basis to keep. If a list is not supplied, the filter will be interactive and users must respond to the function.}
 
-\item{basis.of.record}{Default = "basisOfRecord". The name of the basis of record column in the data frame.}
+\item{basis.of.record}{Default = "basisOfRecord". The name of the \href{http://rs.tdwg.org/dwc/terms/basisOfRecord}{basis of record} column in the data frame.}
 }
 \value{
 Returns a data frame with records of desired record basis.
 }
 \description{
-The \code{basis_clean()} function removes records based on basisOfRecord column.
+The \code{basis_clean()} function removes records based on \href{http://rs.tdwg.org/dwc/terms/basisOfRecord}{basisOfRecord} column.
 }
 \details{
+With the interactive method, the function will print all unique basisOfRecord values
+in the current data set and then ask the user to respond in the console to prompts
+regarding which records, if any, should be removed based on their basisOfRecord.
 This function requires no additional packages.
 }
 \examples{

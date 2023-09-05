@@ -25,9 +25,9 @@ one_point_per_pixel(
 
 \item{digits}{Default = 2. Indicates digits to round coordinates to when \code{precision = TRUE}.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 }
 \value{
 df is a data frame with only one point per pixel.

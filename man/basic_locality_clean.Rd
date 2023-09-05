@@ -18,9 +18,9 @@ basic_locality_clean(
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
 \item{remove.zero}{Default = TRUE. Indicates that points at (0.00, 0.00) should be removed.}
 
@@ -30,7 +30,7 @@ basic_locality_clean(
 
 \item{remove.skewed}{Default = TRUE. Utilizes the \code{remove_skewed()} function to remove skewed coordinate values.}
 
-\item{info.withheld}{Default = "informationWithheld". The name of the information withheld column in the data frame.}
+\item{info.withheld}{Default = "informationWithheld". The name of the \href{http://rs.tdwg.org/dwc/iri/informationWithheld}{information withheld} column in the data frame.}
 }
 \value{
 Return data frame with specimen removed that had missing or improper coordinate values.
@@ -43,7 +43,7 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 This function removes any records with missing coordinates, impossible coordinates,
 coordinates at (0,0), and any that are flagged as skewed.
 These skewed records are identified with the \code{remove_skewed()}
-function which identifies rows where the ‘InformationWitheld’ column
+function which identifies rows where the \href{http://rs.tdwg.org/dwc/terms/informationWithheld}{‘InformationWitheld’} column
 includes the string "Coordinate uncertainty increased".
 We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.
 This function requires no additional packages.

@@ -16,9 +16,9 @@ data_chomp(
 
 \item{accepted.name}{The accepted species name for the records.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 }
 \value{
 Returns data frame with a subset of columns ready for downstream applications such as Maxent.
@@ -26,7 +26,7 @@ Returns data frame with a subset of columns ready for downstream applications su
 \description{
 The \code{data_chomp()} function "chomps" (subsets) a data frame of occurrence records to only
 contain the following columns: "species", "longitude", and "latitude". After using this
-function data will be ready for use in Maxent, for example.
+function data will be ready for use in \href{https://biodiversityinformatics.amnh.org/open_source/maxent/}{Maxent}, for example.
 }
 \details{
 This function requires the package dplyr.

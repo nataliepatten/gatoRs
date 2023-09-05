@@ -19,7 +19,7 @@ filter_fix_names(
 
 \item{filter}{Default = "fuzzy". Indicates the type of filter to be used--either "exact" or "fuzzy".}
 
-\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+\item{scientific.name}{Default = "scientificName". The name of the \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName} column in the data frame.}
 
 \item{accepted.name}{The accepted scientific name for the species. If provided, an additional column will be added to the data frame with the accepted name for further manual comparison.}
 }

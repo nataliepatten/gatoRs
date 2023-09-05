@@ -14,11 +14,11 @@ need_to_georeference(
 \arguments{
 \item{df}{A data frame downloaded with \code{gators_download()}.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 
-\item{locality}{Default = "locality". The name of the locality column in the data frame.}
+\item{locality}{Default = "locality". The name of the \href{http://rs.tdwg.org/dwc/terms/locality}{locality} column in the data frame.}
 }
 \value{
 Returns a data frame of the points that need to be georeferenced.

@@ -9,7 +9,7 @@ fix_names(df, scientific.name = "scientificName")
 \arguments{
 \item{df}{Data frame with name column to be fixed.}
 
-\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+\item{scientific.name}{Default = "scientificName". The name of the \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName} column in the data frame.}
 }
 \value{
 Returns df with fixed capitalization in name column.

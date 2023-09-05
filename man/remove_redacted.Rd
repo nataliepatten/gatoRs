@@ -10,7 +10,7 @@ remove_redacted(df, aggregator = "aggregator")
 \item{df}{A data frame downloaded with \code{gators_download()}.}
 
 \item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
-that provided the record.}
+that provided the record. This is equal to iDigBio or GBIF.}
 }
 \value{
 A data frame with redacted records removed.

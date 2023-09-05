@@ -15,13 +15,13 @@ fix_columns(
 \arguments{
 \item{df}{Data frame of occurrence records.}
 
-\item{scientific.name}{Default = "scientificName". The name of the scientific name column in the data frame.}
+\item{scientific.name}{Default = "scientificName". The name of the \href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificName} column in the data frame.}
 
-\item{genus}{Default = "genus". The name of the genus column in the data frame.}
+\item{genus}{Default = "genus". The name of the \href{http://rs.tdwg.org/dwc/terms/genus}{genus} column in the data frame.}
 
-\item{species}{Default = "specificEpithet". The name of the specific epithet column in the data frame.}
+\item{species}{Default = "specificEpithet". The name of the \href{http://rs.tdwg.org/dwc/terms/specificEpithet}{specificEpithet} column in the data frame.}
 
-\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the infraspecific epithet column in the data frame.}
+\item{infraspecific.epithet}{Default = "infraspecificEpithet". The name of the \href{http://rs.tdwg.org/dwc/terms/infraspecificEpithet}{infraspecificEpithet} column in the data frame.}
 }
 \value{
 Returns the original data frame with the specified columns.

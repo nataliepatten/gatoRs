@@ -23,24 +23,24 @@ remove_duplicates(
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{event.date}{Default = "eventDate". The name of the event date column in the data frame.}
+\item{event.date}{Default = "eventDate". The name of the \href{http://rs.tdwg.org/dwc/terms/eventDate}{event date} column in the data frame.}
 
 \item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
-that provided the record.}
+that provided the record. This is equal to iDigBio or GBIF.}
 
-\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF (keys) or iDigBio (UUID).}
 
-\item{occ.id}{Default = "occurrenceId". The name of the occurrence ID column in the data frame.}
+\item{occ.id}{Default = "occurrenceID". The name of the \href{http://rs.tdwg.org/dwc/terms/occurrenceID}{occurrenceID} column in the data frame.}
 
-\item{year}{Default = "year". The name of the event date year column in the data frame.}
+\item{year}{Default = "year". The name of the \href{http://rs.tdwg.org/dwc/terms/year}{year} column in the data frame.}
 
-\item{month}{Default = "month". The name of the event date month column in the data frame.}
+\item{month}{Default = "month". The name of the \href{http://rs.tdwg.org/dwc/terms/month}{month} column in the data frame.}
 
-\item{day}{Default = "day". The name of the event date day column in the data frame.}
+\item{day}{Default = "day". The name of the \href{http://rs.tdwg.org/dwc/terms/day}{day} column in the data frame.}
 
-\item{latitude}{Default = "latitude". The name of the latitude column in the data frame.}
+\item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 
-\item{longitude}{Default = "longitude". The name of the longitude column in the data frame.}
+\item{longitude}{Default = "longitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLongitude}{longitude} column in the data frame.}
 
 \item{remove.NA.occ.id}{Default = FALSE. This will remove records with missing occurrence IDs when set to \code{TRUE}.}
 

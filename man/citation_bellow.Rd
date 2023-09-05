@@ -9,10 +9,10 @@ citation_bellow(df, id = "ID", aggregator = "aggregator")
 \arguments{
 \item{df}{Data frame of occurrence records returned from \code{gators_download()}.}
 
-\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.}
+\item{id}{Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF (keys) or iDigBio (UUID).}
 
 \item{aggregator}{Default = "aggregator". The name of the column in the data frame that identifies the aggregator
-that provided the record.}
+that provided the record. This is equal to iDigBio or GBIF.}
 }
 \value{
 Returns a list with citation information for the GBIF data downloaded.
