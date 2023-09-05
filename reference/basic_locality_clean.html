@@ -82,11 +82,11 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 
 
 <dt>latitude</dt>
-<dd><p>Default = "latitude". The name of the latitude column in the data frame.</p></dd>
+<dd><p>Default = "latitude". The name of the <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" class="external-link">latitude</a> column in the data frame.</p></dd>
 
 
 <dt>longitude</dt>
-<dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
+<dd><p>Default = "longitude". The name of the <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" class="external-link">longitude</a> column in the data frame.</p></dd>
 
 
 <dt>remove.zero</dt>
@@ -106,7 +106,7 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
 
 
 <dt>info.withheld</dt>
-<dd><p>Default = "informationWithheld". The name of the information withheld column in the data frame.</p></dd>
+<dd><p>Default = "informationWithheld". The name of the <a href="http://rs.tdwg.org/dwc/iri/informationWithheld" class="external-link">information withheld</a> column in the data frame.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -120,7 +120,7 @@ This function requires columns named 'latitude' and 'longitude'. These columns s
     <p>This function removes any records with missing coordinates, impossible coordinates,
 coordinates at (0,0), and any that are flagged as skewed.
 These skewed records are identified with the <code><a href="remove_skewed.html">remove_skewed()</a></code>
-function which identifies rows where the ‘InformationWitheld’ column
+function which identifies rows where the <a href="http://rs.tdwg.org/dwc/terms/informationWithheld" class="external-link">‘InformationWitheld’</a> column
 includes the string "Coordinate uncertainty increased".
 We also provide the option to round the provided latitude and longitude values to a specified number of decimal places.
 This function requires no additional packages.</p>

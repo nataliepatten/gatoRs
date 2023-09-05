@@ -114,23 +114,23 @@ This function also provides the option to interactively inspect and remove types
 
 
 <dt>event.date</dt>
-<dd><p>Default = "eventDate". The name of the event date column in the data frame.</p></dd>
+<dd><p>Default = "eventDate". The name of the <a href="http://rs.tdwg.org/dwc/terms/eventDate" class="external-link">event date</a> column in the data frame.</p></dd>
 
 
 <dt>year</dt>
-<dd><p>Default = "year". The name of the event date year column in the data frame.</p></dd>
+<dd><p>Default = "year". The name of the <a href="http://rs.tdwg.org/dwc/terms/year" class="external-link">year</a> column in the data frame.</p></dd>
 
 
 <dt>month</dt>
-<dd><p>Default = "month". The name of the event date month column in the data frame.</p></dd>
+<dd><p>Default = "month". The name of the <a href="http://rs.tdwg.org/dwc/terms/month" class="external-link">month</a> column in the data frame.</p></dd>
 
 
 <dt>day</dt>
-<dd><p>Default = "day". The name of the event date day column in the data frame.</p></dd>
+<dd><p>Default = "day". The name of the <a href="http://rs.tdwg.org/dwc/terms/day" class="external-link">day</a> column in the data frame.</p></dd>
 
 
 <dt>occ.id</dt>
-<dd><p>Default = "occurrenceId". The name of the occurrence ID column in the data frame.</p></dd>
+<dd><p>Default = "occurrenceID". The name of the <a href="http://rs.tdwg.org/dwc/terms/occurrenceID" class="external-link">occurrenceID</a> column in the data frame.</p></dd>
 
 
 <dt>remove.NA.occ.id</dt>
@@ -143,11 +143,11 @@ This function also provides the option to interactively inspect and remove types
 
 <dt>aggregator</dt>
 <dd><p>Default = "aggregator". The name of the column in the data frame that identifies the aggregator
-that provided the record.</p></dd>
+that provided the record. This is equal to iDigBio or GBIF.</p></dd>
 
 
 <dt>id</dt>
-<dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF or iDigBio.</p></dd>
+<dd><p>Default = "ID". The name of the id column in the data frame, which contains unique IDs defined from GBIF (keys) or iDigBio (UUID).</p></dd>
 
 
 <dt>taxa.filter</dt>
@@ -155,7 +155,7 @@ that provided the record.</p></dd>
 
 
 <dt>scientific.name</dt>
-<dd><p>Default = "scientificName". The name of the scientific name column in the data frame.</p></dd>
+<dd><p>Default = "scientificName". The name of the <a href="http://rs.tdwg.org/dwc/terms/scientificName" class="external-link">scientificName</a> column in the data frame.</p></dd>
 
 
 <dt>accepted.name</dt>
@@ -183,15 +183,15 @@ that provided the record.</p></dd>
 
 
 <dt>basis.of.record</dt>
-<dd><p>Default = "basisOfRecord". The name of the basis of record column in the data frame.</p></dd>
+<dd><p>Default = "basisOfRecord". The name of the <a href="http://rs.tdwg.org/dwc/terms/basisOfRecord" class="external-link">basis of record</a> column in the data frame.</p></dd>
 
 
 <dt>latitude</dt>
-<dd><p>Default = "latitude". The name of the latitude column in the data frame.</p></dd>
+<dd><p>Default = "latitude". The name of the <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" class="external-link">latitude</a> column in the data frame.</p></dd>
 
 
 <dt>longitude</dt>
-<dd><p>Default = "longitude". The name of the longitude column in the data frame.</p></dd>
+<dd><p>Default = "longitude". The name of the <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" class="external-link">longitude</a> column in the data frame.</p></dd>
 
 
 <dt>remove.flagged</dt>
@@ -234,7 +234,10 @@ that provided the record.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function requires packages dplyr, magrittr, and raster.</p>
+    <p>This function is entirely automated and thus does not take advantage of the interactive options provided in the individual cleaning functions.
+Using this wrapper is recommended for data processing that does not require interactive/manual cleaning and inspection.
+All cleaning steps, except taxonomic harmonization, can be bypassed by setting their associated input variables to FALSE.
+This function requires packages dplyr, magrittr, and raster.</p>
     </div>
 
     <div class="section level2">
