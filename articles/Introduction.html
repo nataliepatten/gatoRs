@@ -162,7 +162,7 @@ when <code>gbif_match = "code"</code>.</p>
 <div class="section level2">
 <h2 id="data-processing">Data Processing<a class="anchor" aria-label="anchor" href="#data-processing"></a>
 </h2>
-<p>We downloaded 6885 observations for <i>Galax urceolata</i> in the
+<p>We downloaded 7742 observations for <i>Galax urceolata</i> in the
 example above. Of these observations, only those with locality
 information will be helpful when investigating this species
 distribution.</p>
@@ -199,6 +199,24 @@ data set.</p>
 <p>Example:</p>
 <pre><code><span><span class="va">to_georeference</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/need_to_georeference.html">need_to_georeference</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
 </div>
+<div class="section level4">
+<h4 id="merging-retained-records">Merging Retained Records<a class="anchor" aria-label="anchor" href="#merging-retained-records"></a>
+</h4>
+<p>After receiving the data from herbaria or through georeferencing, you
+will want to merge the obtained records with your original data set.</p>
+<p>Note, the following steps will only work if columns are equivalent
+between the two data sets you hope to merge. If the columns are not
+equivalent, we recommend bcd::bcd_standardize_datasets()</p>
+<p>Example:</p>
+<pre><code><span><span class="co"># Avoid duplicates by removing the records you are about to merge</span></span>
+<span><span class="va">dfsub</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_missing.html">remove_missing</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span>
+<span><span class="co"># Use gator_merge to merge the main data set with retrieved records</span></span>
+<span><span class="va">dfnew</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gators_merge.html">gators_merge</a></span><span class="op">(</span><span class="va">dfsub</span>, <span class="va">retrieved_records</span><span class="op">)</span></span>
+<span><span class="co"># Version control - save a copy prior to any additional processing!!</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">dfnew</span>, <span class="st">"data/merged_data_Galax_urceolata_YYYYMMDD.csv"</span><span class="op">)</span> <span class="co">## Version control!</span></span>
+<span><span class="co"># Set gatordf equal to the newly merged data set</span></span>
+<span><span class="va">gatordf</span> <span class="op">&lt;-</span> <span class="va">dfnew</span></span></code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="occurrence-data-cleaning">Occurrence Data Cleaning<a class="anchor" aria-label="anchor" href="#occurrence-data-cleaning"></a>
@@ -217,18 +235,6 @@ name, and the filter option (exact, fuzzy, or interactive).</p>
 <span>                      synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
 <span>                      taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>, </span>
 <span>                      accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span><span class="op">)</span> <span class="co"># creates a new column with accepted name for easy comparison</span></span></code></pre>
-</div>
-<div class="section level4">
-<h4 id="remove-particular-record-bases">Remove Particular Record Bases<a class="anchor" aria-label="anchor" href="#remove-particular-record-bases"></a>
-</h4>
-<p>Sometimes, certain bases of records may want to be removed from the
-data set. To do this, we provide <code><a href="../reference/basis_clean.html">basis_clean()</a></code>. This
-function can be used interactively by simply supplying a df, but no
-basis.list value.If a list of basis is provided, the function will
-select only records where the basisOfRecord value fuzzy match values in
-the list provided.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdf</span>, basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Preserved Specimen"</span>,<span class="st">"Physical specimen"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="clean-locality">Clean Locality<a class="anchor" aria-label="anchor" href="#clean-locality"></a>
@@ -272,12 +278,30 @@ points interactively with <code><a href="../reference/process_flagged.html">proc
 <div class="section level4">
 <h4 id="remove-duplicate-records">Remove Duplicate Records<a class="anchor" aria-label="anchor" href="#remove-duplicate-records"></a>
 </h4>
-<p>There can be an overlap of records with GBIF and iDigBio. Hence,
-duplicate records may be downloaded. To find and remove records with
-identical event dates and identical coordinates, use
-<code><a href="../reference/remove_duplicates.html">remove_duplicates()</a></code>.</p>
+<p>Here we identify and remove both (1) specimen duplicates and (2)
+aggregator duplicates based on each specimens coordinates, occurrenceID,
+and eventDate. To leverage all date information available, set
+<code>remove.unparseable = FALSE</code> to manually populate the year,
+month, and day columns. Here, we also confirm all ID (UUID and key) are
+unique to remove any within-aggregator duplicates that may accumulate
+due to processing errors.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="va">galaxdf</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="va">galaxdf</span>, remove.unparseable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level4">
+<h4 id="remove-particular-record-bases">Remove Particular Record Bases<a class="anchor" aria-label="anchor" href="#remove-particular-record-bases"></a>
+</h4>
+<p>Sometimes, certain bases of records may want to be removed from the
+data set. To do this, we provide <code><a href="../reference/basis_clean.html">basis_clean()</a></code>. This
+function can be used interactively by simply supplying a df, but no
+basis.list value.If a list of basis is provided, the function will
+select only records where the basisOfRecord value fuzzy match values in
+the list provided.</p>
+<p>Example:</p>
+<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/basis_clean.html">basis_clean</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
+<span>                       basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HUMAN_OBSERVATION"</span>, <span class="st">"PRESERVED_SPECIMEN"</span>, </span>
+<span>                                      <span class="st">"MATERIAL_SAMPLE"</span>, <span class="st">"LIVING_SPECIMEN"</span>,  </span>
+<span>                                      <span class="st">"PreservedSpecimen"</span>, <span class="st">"Preserved Specimen"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="spatial-correction">Spatial Correction<a class="anchor" aria-label="anchor" href="#spatial-correction"></a>
@@ -285,27 +309,38 @@ identical event dates and identical coordinates, use
 <p>The last processing step is spatial correction. Collection efforts
 can lead to the clustering of points and filtering can help reduce this
 clustering. Here we provide functions to reduce the effects of sampling
-bias using randomization approach and retain only one point per
-pixel.</p>
-<div class="section level5">
-<h5 id="spatial-thining">Spatial thining<a class="anchor" aria-label="anchor" href="#spatial-thining"></a>
-</h5>
-<p>We thin points by utilizing <code><a href="https://rdrr.io/pkg/spThin/man/thin.html" class="external-link">spThin::thin()</a></code>.</p>
-<p>Example:</p>
-<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/thin_points.html">thin_points</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
-<span>                       distance <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>                       reps <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level5">
-<h5 id="one-point-per-pixel">One Point Per Pixel<a class="anchor" aria-label="anchor" href="#one-point-per-pixel"></a>
-</h5>
-<p>Maxent will only retain one point per pixel. To make the ecological
-niche analysis comparable, we will retain only one point per pixel.</p>
+bias using randomization approach and retain only one point per pixel.
+##### One Point Per Pixel Maxent will only retain one point per pixel.
+To make the ecological niche analysis comparable, we will retain only
+one point per pixel.</p>
 <p>Example:</p>
 <pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/one_point_per_pixel.html">one_point_per_pixel</a></span><span class="op">(</span><span class="va">galaxdf</span>, </span>
 <span>                       resolution <span class="op">=</span> <span class="fl">0.5</span>, <span class="co"># for 30 arc sec raster layers</span></span>
 <span>                       precision <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                       digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> </span></code></pre>
+<div class="section level5">
+<h5 id="spatial-thining">Spatial thining<a class="anchor" aria-label="anchor" href="#spatial-thining"></a>
+</h5>
+<p>We thin points by utilizing <code><a href="https://rdrr.io/pkg/spThin/man/thin.html" class="external-link">spThin::thin()</a></code>. This step
+reduces the effects of sampling bias using a randomization approach.</p>
+<p><strong>Step 1</strong>: What should your minimum distance be?<br>
+Here we first calculate minimum nearest neighbor distance in km:</p>
+<p>Example:</p>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dnychka/fieldsRPackage" class="external-link">fields</a></span><span class="op">)</span></span>
+<span><span class="va">nnDm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/fields/man/rdist.earth.html" class="external-link">rdist.earth</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>lon <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">longitude</span>, lat <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span>, miles <span class="op">=</span> <span class="cn">FALSE</span>, R <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="va">nnDmin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">nnDm</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">nnDmin</span><span class="op">)</span></span></code></pre>
+<p>Here the current minimum distance is 2.22 km. Based on literature, we
+find a 2 meters (or 0.002 km) distance was enough to collect unique
+genets, so we do not need to thin our points.</p>
+<p><strong>Step 2</strong>: Thin occurrence records using spThin through
+gatoRs.<br>
+When you do need to thin your records, here is a great function to do
+so!</p>
+<p>Example:</p>
+<pre><code><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/thin_points.html">thin_points</a></span><span class="op">(</span><span class="va">df</span>, </span>
+<span>                    distance <span class="op">=</span> <span class="fl">0.002</span>, <span class="co"># in km </span></span>
+<span>                    reps <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -315,15 +350,53 @@ niche analysis comparable, we will retain only one point per pixel.</p>
 <p>Finally, instead of step-by-step cleaning, we created a single
 function to streamline this process.</p>
 <p>Example:</p>
-<pre><code><span><span class="va">galaxdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/full_clean.html">full_clean</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">galaxdf</span>, </span>
-<span>                      synonyms.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
-<span>                      taxa.filter <span class="op">=</span> <span class="st">"fuzzy"</span>,</span>
-<span>                      accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span>, remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                      precision <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span>, remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                      basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Preserved Specimen"</span>,<span class="st">"Physical specimen"</span><span class="op">)</span>,</span>
-<span>                      remove.flagged <span class="op">=</span> <span class="cn">TRUE</span>, thin.points <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                      distance <span class="op">=</span> <span class="fl">5</span>, reps <span class="op">=</span> <span class="fl">100</span>, </span>
-<span>                      one.point.per.pixel <span class="op">=</span> <span class="cn">TRUE</span>, raster <span class="op">=</span> <span class="cn">NA</span>, resolution <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre>
+<pre><code><span><span class="co">## Read raw csv</span></span>
+<span><span class="va">rawdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"base_folder/my_file.csv"</span><span class="op">)</span></span>
+<span><span class="co">## Set your full clean preferences equal to the above</span></span>
+<span><span class="va">df_quick_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/full_clean.html">full_clean</a></span><span class="op">(</span><span class="va">rawdf</span>,</span>
+<span>                             synonyms.list <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, <span class="st">"Galax aphylla"</span><span class="op">)</span>, </span>
+<span>                                         remove.NA.occ.id <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                         remove.NA.date <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                         accepted.name <span class="op">=</span>  <span class="st">"Galax urceolata"</span>,</span>
+<span>                                         remove.zero <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                           precision <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                       digits <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                                         remove.skewed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                         basis.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HUMAN_OBSERVATION"</span>, <span class="st">"PRESERVED_SPECIMEN"</span>, </span>
+<span>                                                        <span class="st">"MATERIAL_SAMPLE"</span>,  <span class="st">"LIVING_SPECIMEN"</span>, </span>
+<span>                                                        <span class="st">"PreservedSpecimen"</span>, <span class="st">"Preserved Specimen"</span><span class="op">)</span>,</span>
+<span>                                         remove.flagged <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                           thin.points <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                       distance <span class="op">=</span> <span class="fl">0.002</span>,</span>
+<span>                                         reps <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>                                     one.point.per.pixel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="downstream-data-proccessing">Downstream Data Proccessing<a class="anchor" aria-label="anchor" href="#downstream-data-proccessing"></a>
+</h2>
+<div class="section level3">
+<h3 id="prepared-data-for-maxent">Prepared data for MAXENT<a class="anchor" aria-label="anchor" href="#prepared-data-for-maxent"></a>
+</h3>
+<p>Example:</p>
+<pre><code><span><span class="va">maxent_ready</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/data_chomp.html">data_chomp</a></span><span class="op">(</span><span class="va">df</span>, accepted.name <span class="op">=</span> <span class="st">"Galax urceolata"</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">maxent_ready</span>, <span class="st">"data/formaxent_Galax_urceolata_YYYYMMDD.csv"</span>, </span>
+<span>          row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="prepared-data-for-publication">Prepared data for publication<a class="anchor" aria-label="anchor" href="#prepared-data-for-publication"></a>
+</h3>
+<p>Example:</p>
+<pre><code><span><span class="co">## Retrieve GBIF citations</span></span>
+<span><span class="va">GBIF_citations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/citation_bellow.html">citation_bellow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co">## Warning, this is very slow</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">GBIF_citations</span>, <span class="st">"data/GBIF_citations_Galax_urceolata_YYYYMMDD.csv"</span>, </span>
+<span>          row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Remove redacted records</span></span>
+<span><span class="co">### If redacted records were retrieved, make sure to remove them before publication! Remove redacted records!</span></span>
+<span><span class="va">df_pub_ready</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_redacted.html">remove_redacted</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">df_pub_ready</span>, <span class="st">"data/publication_ready_Galax_urceolata_YYYYMMDD.csv"</span>, </span>
+<span>          row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
