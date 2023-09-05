@@ -172,7 +172,9 @@ galaxdf <- basis_clean(galaxdf,
 
 #### Spatial Correction 
 The last processing step is spatial correction. Collection efforts can lead to the clustering of points and filtering can help reduce this clustering. Here we provide functions to reduce the effects of sampling bias using randomization approach and retain only one point per pixel. 
-##### One Point Per Pixel 
+
+
+##### One Point Per Pixel   
 Maxent will only retain one point per pixel. To make the ecological niche analysis comparable, we will retain only one point per pixel.
 
 Example:
@@ -186,7 +188,8 @@ galaxdf <- one_point_per_pixel(galaxdf,
 ##### Spatial thining 
 We thin points by utilizing `spThin::thin()`. This step reduces the effects of sampling bias using a randomization approach.
 
-**Step 1**: What should your minimum distance be?    
+**Step 1**: What should your minimum distance be? 
+    
 Here we first calculate minimum nearest neighbor distance in km:
 
 Example:
@@ -200,6 +203,7 @@ min(nnDmin)
 Here the current minimum distance is 2.22 km. Based on literature, we find a 2 meters (or 0.002 km) distance was enough to collect unique genets, so we do not need to thin our points. 
 
 **Step 2**: Thin occurrence records using spThin through gatoRs.     
+    
 When you do need to thin your records, here is a great function to do so!
 
 Example:
@@ -220,34 +224,38 @@ Example:
 rawdf <- read.csv("base_folder/my_file.csv")
 ## Set your full clean preferences equal to the above
 df_quick_clean <- full_clean(rawdf,
-                             synonyms.list =  c("Galax urceolata", "Galax aphylla"), 
-  							             remove.NA.occ.id = FALSE,
-  							             remove.NA.date = FALSE,
-  							             accepted.name =  "Galax urceolata",
-  							             remove.zero = TRUE,
- 							               precision = TRUE,
-  						               digits = 2,
-  							             remove.skewed = TRUE,
-  							             basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
-  							                            "MATERIAL_SAMPLE",  "LIVING_SPECIMEN", 
-  							                            "PreservedSpecimen", "Preserved Specimen"),
-  							             remove.flagged = TRUE,
- 							               thin.points = TRUE,
-  						               distance = 0.002,
-  							             reps = 100,
-  					                 one.point.per.pixel = TRUE)
+                            synonyms.list =  c("Galax urceolata", "Galax aphylla"), 
+                            remove.NA.occ.id = FALSE,
+                            remove.NA.date = FALSE,
+                            accepted.name =  "Galax urceolata",
+                            remove.zero = TRUE,
+                            precision = TRUE,
+                            digits = 2,
+                            remove.skewed = TRUE,
+                            basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
+                                            "MATERIAL_SAMPLE",  "LIVING_SPECIMEN", 
+                                            "PreservedSpecimen", "Preserved Specimen"),
+                            remove.flagged = TRUE,
+                            thin.points = TRUE,
+                            distance = 0.002,
+                            reps = 100,
+                            one.point.per.pixel = TRUE)
 ```
 
 ## Downstream Data Proccessing
+
 ### Prepared data for MAXENT
+The `data_chomp()` function subsets the data set to include only the columns needed for Maxent: the user-provided accepted name, latitude, and longitude.  
 Example:
 ```
-maxent_ready <- data_chomp(df, accepted.name = "Galax urceolata" )
+maxent_ready <- data_chomp(df, 
+                           accepted.name = "Galax urceolata" )
 write.csv(maxent_ready, "data/formaxent_Galax_urceolata_YYYYMMDD.csv", 
           row.names = FALSE)
 ```
 
 ### Prepared data for publication
+To aid in data preparation for publication and to comply with GBIF’s data use agreement, our `citation_bellow()` function will return the citation information for these records as a list (this function name is based on gators bellowing). Additionally, our `remove_redacted()` will remove records where the aggregator value is not equal to iDigBio or GBIF. The aggregator column can be used to indicate where redacted records were retrieved from and thus used to filter out non-sharable records. 
 
 Example:
 ```
