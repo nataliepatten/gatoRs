@@ -58,15 +58,19 @@ Prior to utilizing this function, longitude and latitude columns should be round
 coordinate uncertainty using the \code{basic_locality_clean()} function.
 }
 \details{
-Dates are parsed based on ISO 8601 which only includes time since the Unix epoch, or January 1st, 1970, therefore dates that occur
+Here we identify and remove both (1) specimen duplicates and (2) aggregator duplicates based on each specimens coordinates,
+occurrenceID, and eventDate. To leverage all date information
+available, set \code{remove.unparseable = FALSE} to manually populate
+the year, month, and day columnsl. Dates are parsed based on ISO 8601 which only includes time since the Unix epoch, or January 1st, 1970, therefore dates that occur
 before 1970 will not be automatically parsed.  If we are unable to parse the included date for particular records,
 users can choose to manually enter the year, month, and day for these records when prompted.
 If the user chooses to manually enter the event date, the records eventDate will be printed
 and the user will be asked to manually enter the year, month, and day of this eventDate into the console.
 Users are only prompted to manually parse event dates for records where year, month, and day are absent,
 but eventDate is present and cannot be parsed.
-This function requires the parsedate and dplyr packages. This function will ignore missing occurrence ID
-and year, month, date columns if not provided in the data set.
+This function also we also confirm all ID (UUID and key) are unique to remove any within-aggregator duplicates that may accumulate due to processing errors.
+This function requires the parsedate and dplyr packages. Warning, this function will ignore missing occurrence ID
+and year, month, day columns if not provided in the data set.
 }
 \examples{
 cleaned_data <- remove_duplicates(data)

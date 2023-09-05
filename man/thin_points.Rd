@@ -31,10 +31,13 @@ if the data frame already contains an accepted_name column.}
 df is a data frame with the cleaned data.
 }
 \description{
-The \code{thin_points} function returns records based on coordinate thinning.
+The \code{thin_points} function returns records based on coordinate thinning based on a minimum nearest neighbor distance approach.
 }
 \details{
-This function requires package spThin.
+This function is a wrapper for spatial thinning using the spThin package (Aiello-Lammens et al., 2015)
+In summary, the thinning algorithm provided by spThin calculates the pairwise distances between data points,
+then randomly samples a single point from all points less than or equal to the set minimum nearest neighbor distance.
+This process is repeated until the pairwise distances among points do not fall below the minimum nearest neighbor distance.
 }
 \examples{
 thinned_data <- thin_points(data, accepted.name = "Galax urceolata")

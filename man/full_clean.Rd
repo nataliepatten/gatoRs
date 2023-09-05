@@ -109,6 +109,9 @@ removing plain zero records, removing records based on basis of record, and spat
 This function also provides the option to interactively inspect and remove types of basis of record.
 }
 \details{
+This function is entirely automated and thus does not take advantage of the interactive options provided in the individual cleaning functions.
+Using this wrapper is recommended for data processing that does not require interactive/manual cleaning and inspection.
+All cleaning steps, except taxonomic harmonization, can be bypassed by setting their associated input variables to FALSE.
 This function requires packages dplyr, magrittr, and raster.
 }
 \examples{

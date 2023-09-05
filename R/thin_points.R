@@ -1,10 +1,13 @@
 #' @title Spatial Correction - Spatially thin records
 #'
 #' @description
-#' The `thin_points` function returns records based on coordinate thinning.
+#' The `thin_points` function returns records based on coordinate thinning based on a minimum nearest neighbor distance approach.
 #'
 #' @details
-#' This function requires package spThin.
+#' This function is a wrapper for spatial thinning using the spThin package (Aiello-Lammens et al., 2015)
+#' In summary, the thinning algorithm provided by spThin calculates the pairwise distances between data points,
+#' then randomly samples a single point from all points less than or equal to the set minimum nearest neighbor distance.
+#' This process is repeated until the pairwise distances among points do not fall below the minimum nearest neighbor distance.
 #'
 #' @param df Data frame of occurrence records.
 #' @param accepted.name Accepted name of your species. This argument is not required

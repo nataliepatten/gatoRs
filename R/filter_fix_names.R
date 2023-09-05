@@ -2,8 +2,9 @@
 #'
 #' @description
 #' The `filter_fix_names()` function filters a data frame for relevant results, based on the scientific name given.
-#' Some downloaded results from iDigBio might contain occurrences of other species that have "notes" mentioning
-#' the desired species. Hence, this function looks for relevant results that are actually occurrences of the
+#' Some downloaded results from iDigBio might contain occurrences of other species that have "notes" or "locality" strings that mentioning
+#' the desired species. Here we only retain those where the scientificName column is found to be a fuzzy match to a value in the user-provided list containing the scientific name and applicable synonym
+#' Hence, this function looks for relevant results that are actually occurrences of the
 #' desired species.
 #'
 #' @details

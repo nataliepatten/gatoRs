@@ -1,7 +1,8 @@
 #' @title Used in basic_locality_clean() - Removed skewed locality
 #'
 #' @description
-#' The `remove_skewed()` function identifies and removes records where locality has been skewed.
+#' The `remove_skewed()` function identifies and removes records where locality has been skewed. Records are considered skewed if informationWithheld contains the string "Coordinate uncertainty increased".
+#'
 #'
 #' @details
 #' This function requires no additional packages.
