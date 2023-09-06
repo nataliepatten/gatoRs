@@ -51,6 +51,7 @@ month, day categories the user can manually specify. Otherwise, if set to TRUE, 
 }
 \value{
 Return data frame with duplicates removed.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{remove_duplicates()} function removes records with identical event dates and occurrence IDs.

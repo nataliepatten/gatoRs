@@ -1,13 +1,17 @@
 #' @title Locality Cleaning - Find possibly problematic occurrence records
 #'
 #' @description
-#' The `process_flagged()` function allows you to find and map possible problematic points and
-#' manually inspect and remove these points, if desired. When running the function interactively you can
-#' hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.
+#' The `process_flagged()` function allows you to visualize and inspect possible problematic points, as well as
+#' manually remove these points, if desired. By default, this function is interactive. When running the function interactively you can
+#' hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.The interactive option plots flagged points in red and non-flagged points in green.
 #'
 #'
 #' @details
-#' The interactive option plots flagged points in red and non-flagged points in green. This function requires packages CoordinateCleaner, leaflet, and magrittr.
+#' This function is a wrapper to visualize results for the `CoordinateCleaner::clean_coordinates()` function.
+#' Briefly, `CoordinateCleaner::clean_coordinates()` flags records with coordinates that are unlikely valid,
+#' spatial outliers, or in certain locations including the ocean, state capitals, country centroids,
+#' the GBIF headquarters, and biodiversity institutions (including botanical gardens, museums, herbaria, etc.).
+#' This function requires packages CoordinateCleaner, leaflet, and magrittr.
 #' This function requires interactive user input.
 #'
 #' @param df Data frame of occurrence records returned from `gators_download()`.
@@ -22,6 +26,7 @@
 #' }
 #'
 #' @return Return cleaned data frame.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #' @importFrom CoordinateCleaner clean_coordinates
 #' @importFrom leaflet leaflet providers awesomeIcons addProviderTiles addAwesomeMarkers addMiniMap fitBounds removeMarker addLegend

@@ -101,6 +101,7 @@ that provided the record. This is equal to iDigBio or GBIF.}
 }
 \value{
 df is a data frame with the cleaned data.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}. An additional column named "accepted_name" will be returned if an accepted.name was provided.
 }
 \description{
 The \code{full_clean()} function performs automated cleaning steps, including options for: removing

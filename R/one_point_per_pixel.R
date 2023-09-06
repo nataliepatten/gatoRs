@@ -2,7 +2,7 @@
 #'
 #' @description
 #' The `one_point_per_pixel` function retains only one point per raster pixel. This function is useful
-#' for creating present-absent models.
+#' when creating present-absent models.
 #'
 #' @details
 #' This function requires package raster and spatstat.geom.
@@ -17,7 +17,8 @@
 #' ready_data <- one_point_per_pixel(data)
 #'
 #' @return df is a data frame with only one point per pixel.
-#'
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
+
 #' @importFrom raster res
 #' @importFrom spatstat.geom nndist
 #'

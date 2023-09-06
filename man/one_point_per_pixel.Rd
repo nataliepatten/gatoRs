@@ -31,10 +31,11 @@ one_point_per_pixel(
 }
 \value{
 df is a data frame with only one point per pixel.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{one_point_per_pixel} function retains only one point per raster pixel. This function is useful
-for creating present-absent models.
+when creating present-absent models.
 }
 \details{
 This function requires package raster and spatstat.geom.

@@ -21,7 +21,7 @@ data_chomp(
 \item{latitude}{Default = "latitude". The name of the \href{http://rs.tdwg.org/dwc/terms/decimalLatitude}{latitude} column in the data frame.}
 }
 \value{
-Returns data frame with a subset of columns ready for downstream applications such as Maxent.
+Returns data frame with three columns: "species", "longitude", and "latitude". The "species" column is set by the accepted.name input. This data frame is ready for downstream applications such as Maxent.
 }
 \description{
 The \code{data_chomp()} function "chomps" (subsets) a data frame of occurrence records to only

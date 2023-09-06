@@ -15,7 +15,7 @@
 #' @examples
 #' chomped_data <- data_chomp(data, accepted.name = "Galax urceolata")
 #'
-#' @return Returns data frame with a subset of columns ready for downstream applications such as Maxent.
+#' @return Returns data frame with three columns: "species", "longitude", and "latitude". The "species" column is set by the accepted.name input. This data frame is ready for downstream applications such as Maxent.
 #'
 #' @importFrom dplyr select
 #' @export

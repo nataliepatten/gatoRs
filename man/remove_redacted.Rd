@@ -14,6 +14,7 @@ that provided the record. This is equal to iDigBio or GBIF.}
 }
 \value{
 A data frame with redacted records removed.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{remove_redacted()} function identifies and removes records where 'aggregator' is not equal to iDigBio or GBIF.

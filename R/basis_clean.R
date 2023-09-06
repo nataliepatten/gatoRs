@@ -17,6 +17,7 @@
 #' cleaned_data <- basis_clean(data, basis.list = c("Preserved Specimen","Physical specimen"))
 #'
 #' @return Returns a data frame with records of desired record basis.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #' @export
 

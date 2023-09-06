@@ -33,6 +33,7 @@
 #' cleaned_data <- remove_duplicates(data, remove.unparseable = TRUE)
 #'
 #' @return Return data frame with duplicates removed.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #' @importFrom parsedate parse_iso_8601 format_iso_8601
 #' @importFrom dplyr distinct mutate select row_number filter

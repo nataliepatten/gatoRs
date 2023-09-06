@@ -15,6 +15,7 @@ basis_clean(df, basis.list = NA, basis.of.record = "basisOfRecord")
 }
 \value{
 Returns a data frame with records of desired record basis.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{basis_clean()} function removes records based on \href{http://rs.tdwg.org/dwc/terms/basisOfRecord}{basisOfRecord} column.

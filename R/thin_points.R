@@ -20,7 +20,7 @@
 #' thinned_data <- thin_points(data, accepted.name = "Galax urceolata")
 #'
 #' @return df is a data frame with the cleaned data.
-#'
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #' @importFrom spThin thin
 #'
 #' @export

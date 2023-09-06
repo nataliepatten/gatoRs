@@ -25,6 +25,7 @@ taxa_clean(
 }
 \value{
 Returns data frame with filtered results and new column with the accepted name labeled as "accepted_name".
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}. An additional column named "accepted_name" will be returned if an accepted.name was provided.
 }
 \description{
 The \code{taxa_clean()} function filters a data frame for relevant results, based on the scientific name given.

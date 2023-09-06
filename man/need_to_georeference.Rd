@@ -22,7 +22,7 @@ need_to_georeference(
 }
 \value{
 Returns a data frame of the points that need to be georeferenced.
-For more information about this data frame, see \code{gators_download()}.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{need_to_georeference()} function allows you to find records that are missing coordinates

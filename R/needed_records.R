@@ -14,8 +14,8 @@
 #' @examples
 #' need_info <- needed_records(data)
 #'
-#' @return A data frame with only records for which locality was flagged.
-#'
+#' @return A data frame with only records for which locality was flagged as redacted or missing.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #' @export
 
 needed_records <- function(df, info.withheld = "informationWithheld"){

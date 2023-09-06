@@ -34,6 +34,7 @@ with the \code{needed_records()} function are removed.}
 }
 \value{
 A data frame with records containing missing information removed.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{remove_missing()} function identifies and removes records identified with the \code{need_to_georeference()}

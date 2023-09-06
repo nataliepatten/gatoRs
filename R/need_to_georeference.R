@@ -14,7 +14,7 @@
 #' need_coords <- need_to_georeference(data)
 #'
 #' @return Returns a data frame of the points that need to be georeferenced.
-#' For more information about this data frame, see `gators_download()`.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #'
 #' @export

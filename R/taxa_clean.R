@@ -26,7 +26,7 @@
 #' accepted.name = "Galax urceolata")
 #'
 #' @return Returns data frame with filtered results and new column with the accepted name labeled as "accepted_name".
-#'
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`. An additional column named "accepted_name" will be returned if an accepted.name was provided.
 #' @export
 
 taxa_clean <- function(df, synonyms.list, taxa.filter = "fuzzy", scientific.name = "scientificName", accepted.name = NA) {

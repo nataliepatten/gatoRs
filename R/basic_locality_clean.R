@@ -24,6 +24,7 @@
 #' cleaned_data <- basic_locality_clean(data)
 #'
 #' @return Return data frame with specimen removed that had missing or improper coordinate values.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #' @export
 

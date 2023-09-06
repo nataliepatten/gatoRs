@@ -19,7 +19,7 @@ Returns a list with citation information for the GBIF data downloaded.
 }
 \description{
 The \code{citation_bellow} function retrieves and returns the citation information
-for the data provided by GBIF in a data frame.
+for records from GBIF, or where aggregator = "GBIF".
 }
 \details{
 This function requires the rgbif package.

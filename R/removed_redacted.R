@@ -13,6 +13,7 @@
 #' cleaned_data <- remove_redacted(data)
 #'
 #' @return A data frame with redacted records removed.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`.
 #'
 #' @export
 

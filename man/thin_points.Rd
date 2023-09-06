@@ -29,6 +29,7 @@ if the data frame already contains an accepted_name column.}
 }
 \value{
 df is a data frame with the cleaned data.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{thin_points} function returns records based on coordinate thinning based on a minimum nearest neighbor distance approach.

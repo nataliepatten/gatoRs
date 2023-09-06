@@ -31,6 +31,7 @@
 #' accepted.name = "Galax urceolata", remove.flagged = FALSE)
 #'
 #' @return df is a data frame with the cleaned data.
+#' Information about the columns in the returned data frame can be found in the documentation for `gators_download()`. An additional column named "accepted_name" will be returned if an accepted.name was provided.
 #'
 #' @export
 

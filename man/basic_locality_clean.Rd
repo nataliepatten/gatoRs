@@ -34,6 +34,7 @@ basic_locality_clean(
 }
 \value{
 Return data frame with specimen removed that had missing or improper coordinate values.
+Information about the columns in the returned data frame can be found in the documentation for \code{gators_download()}.
 }
 \description{
 The \code{basic_locality_clean()} function cleans locality by removing missing or impossible coordinates and correcting precision.
