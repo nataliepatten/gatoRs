@@ -97,40 +97,8 @@ timeout error</a>, if you want to download a bunch of records for a
 bunch of species, you have to you have to add a retry in your download
 loop. Here we demonstrate how to add a retry with the
 <code><a href="../reference/gators_download.html">gatoRs::gators_download()</a></code> function.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nataliepatten.github.io/gatoRs/">gatoRs</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span>
-<span><span class="co">## which was just loaded, will retire in October 2023.</span></span>
-<span><span class="co">## Please refer to R-spatial evolution reports for details, especially</span></span>
-<span><span class="co">## https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span>
-<span><span class="co">## It may be desirable to make the sf package available;</span></span>
-<span><span class="co">## package maintainers should consider adding sf to Suggests:.</span></span>
-<span><span class="co">## The sp package is now running under evolution status 2</span></span>
-<span><span class="co">##      (status 2 uses the sf package in place of rgdal)</span></span></code></pre>
-<pre><code><span><span class="co">## Please note that rgdal will be retired during October 2023,</span></span>
-<span><span class="co">## plan transition to sf/stars/terra functions using GDAL and PROJ</span></span>
-<span><span class="co">## at your earliest convenience.</span></span>
-<span><span class="co">## See https://r-spatial.org/r/2023/05/15/evolution4.html and https://github.com/r-spatial/evolution</span></span>
-<span><span class="co">## rgdal: version: 1.6-7, (SVN revision 1203)</span></span>
-<span><span class="co">## Geospatial Data Abstraction Library extensions to R successfully loaded</span></span>
-<span><span class="co">## Loaded GDAL runtime: GDAL 3.4.1, released 2021/12/27</span></span>
-<span><span class="co">## Path to GDAL shared files: /usr/share/gdal</span></span>
-<span><span class="co">## GDAL binary built with GEOS: TRUE </span></span>
-<span><span class="co">## Loaded PROJ runtime: Rel. 8.2.1, January 1st, 2022, [PJ_VERSION: 821]</span></span>
-<span><span class="co">## Path to PROJ shared files: /home/runner/.local/share/proj:/usr/share/proj</span></span>
-<span><span class="co">## PROJ CDN enabled: TRUE</span></span>
-<span><span class="co">## Linking to sp version:2.0-0</span></span>
-<span><span class="co">## To mute warnings of possible GDAL/OSR exportToProj4() degradation,</span></span>
-<span><span class="co">## use options("rgdal_show_exportToProj4_warnings"="none") before loading sp or rgdal.</span></span></code></pre>
-<pre><code><span><span class="co">## rgeos version: 0.6-4, (SVN revision 699)</span></span>
-<span><span class="co">##  GEOS runtime version: 3.10.2-CAPI-1.16.0 </span></span>
-<span><span class="co">##  Please note that rgeos will be retired during October 2023,</span></span>
-<span><span class="co">## plan transition to sf or terra functions using GEOS at your earliest convenience.</span></span>
-<span><span class="co">## See https://r-spatial.org/r/2023/05/15/evolution4.html for details.</span></span>
-<span><span class="co">##  GEOS using OverlayNG</span></span>
-<span><span class="co">##  Linking to sp version: 2.0-0 </span></span>
-<span><span class="co">##  Polygon checking: TRUE</span></span></code></pre>
+<pre><code><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nataliepatten.github.io/gatoRs/">gatoRs</a></span><span class="op">)</span></span></code></pre>
 <div class="section level2">
 <h2 id="retry-function">Retry Function<a class="anchor" aria-label="anchor" href="#retry-function"></a>
 </h2>
@@ -138,8 +106,7 @@ loop. Here we demonstrate how to add a retry with the
 <code>nameset</code> which is a list of lists (see below), an
 <code>i</code>th value, and the retry count. Note, here
 failed_name_holder must be defined outside of the function.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Build a retry_downloader function that proceeds to try if an API error occurs</span></span>
+<pre><code><span><span class="co"># Build a retry_downloader function that proceeds to try if an API error occurs</span></span>
 <span><span class="va">failed_names_holder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="va">retry_download</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nameset</span>, <span class="va">i</span>, <span class="va">retry_count</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span><span class="op">(</span><span class="va">retry_count</span> <span class="op">&gt;=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">{</span> <span class="co"># Allow up to 11 attempts</span></span>
@@ -150,7 +117,7 @@ failed_name_holder must be defined outside of the function.</p>
 <span>  <span class="op">}</span> </span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>    <span class="va">gators.download</span> <span class="op">&lt;-</span> <span class="fu">gatoRs</span><span class="fu">::</span><span class="fu"><a href="../reference/gators_download.html">gators_download</a></span><span class="op">(</span>synonyms.list <span class="op">=</span> <span class="va">nameset</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, </span>
-<span>                                              write.file <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                                              write.file <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                              filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"data/"</span>, </span>
 <span>                                                                <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">" "</span>, <span class="st">"_"</span>, <span class="va">nameset</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="st">".csv"</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">gators.download</span><span class="op">)</span> <span class="co"># Return the gators.download</span></span>
@@ -167,7 +134,7 @@ failed_name_holder must be defined outside of the function.</p>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
-<span><span class="op">}</span></span></code></pre></div>
+<span><span class="op">}</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="use-the-retry-function">Use the Retry Function<a class="anchor" aria-label="anchor" href="#use-the-retry-function"></a>
@@ -175,6 +142,28 @@ failed_name_holder must be defined outside of the function.</p>
 <p>Here we define a namelist where the 1st object is the accepted name.
 We then use the retry function to download. If the failed_name_holder
 includes any lines, we then inspect this list.</p>
+<pre><code><span><span class="va">name_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Shortia_galacifolia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Shortia galacifolia"</span>, </span>
+<span>                                            <span class="st">"Sherwoodia galacifolia"</span><span class="op">)</span>,</span>
+<span>                  Galax_urceolata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Galax urceolata"</span>, </span>
+<span>                                      <span class="st">"Galax aphylla"</span><span class="op">)</span>,</span>
+<span>                  Pyxidanthera_barbulata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pyxidanthera barbulata"</span>,</span>
+<span>                                             <span class="st">"Pyxidanthera barbulata var. barbulata"</span><span class="op">)</span>,</span>
+<span>                  Pyxidanthera_brevifolia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pyxidanthera brevifolia"</span>, </span>
+<span>                                              <span class="st">"Pyxidanthera barbulata var. brevifolia"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">name_list</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>   <span class="fu">retry_download</span><span class="op">(</span><span class="va">name_list</span>, <span class="va">i</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># 0 initializes the download count</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">## Inspect failed names</span></span>
+<span><span class="va">failed_names_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">failed_names_holder</span><span class="op">)</span><span class="op">)</span> <span class="co"># unpack the f</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">failed_names_table</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">failed_names_table</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"name"</span> <span class="co"># Assign column headers</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">failed_names_table</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"errorType"</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">failed_names_table</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"systemTime"</span></span>
+<span><span class="op">}</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
