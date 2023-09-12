@@ -1,0 +1,85 @@
+---
+title: Many Downloads with gatoRs
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Many Downloads with gatoRs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+
+---
+
+Due to [GBIF's API timeout error](https://github.com/gbif/portal-feedback/issues/4136), if you want to download a bunch of records for a bunch of species, you have to you have to add a retry in your download loop. Here we demonstrate how to add a retry with the `gatoRs::gators_download()` function.     
+
+```{r}
+# Load packages
+library(gatoRs)
+```
+
+## Retry Function
+This is a modified function from JT Miller. Here you have a `nameset` which is a list of lists (see below), an `i`th value, and the retry count. Note, here failed_name_holder must be defined outside of the function. 
+
+```{r}
+# Build a retry_downloader function that proceeds to try if an API error occurs
+failed_names_holder <- list() 
+retry_download <- function(nameset, i, retry_count) {
+  if(retry_count >= 11) { # Allow up to 11 attempts
+    failed_names_holder[[i]] <<- c(nameset[[i]][1], 
+                                   "Maximum retries exceeded", 
+                                   format(Sys.time(), "%a %b %d %X %Y")) 
+    return(NULL) # Null otherwise 
+  } 
+  tryCatch({
+    gators.download <- gatoRs::gators_download(synonyms.list = nameset[[i]], 
+                                              write.file = FALSE, 
+                                              filename = paste0("data/", 
+                                                                gsub(" ", "_", nameset[[i]][1]), ".csv"))
+    return(gators.download) # Return the gators.download
+  },
+  error = function(e) { # create error report
+    if (e$message != "No records found.") { # If errors besides the following occurs, retry
+      Sys.sleep(retry_count*30)  
+      print(paste("Download attempt", retry_count + 1, "for", nameset[[i]][1], 
+                  "failed. Retrying with delay", print(retry_count*30), "second delay"))
+      return(retry_download(nameset, i, retry_count + 1))  # Retry the download
+    } else {
+     failed_names_holder[[i]] <<- c(nameset[[i]][1], e, format(Sys.time(), "%a %b %d %X %Y"))
+      return(NULL)
+    }
+  })
+  
+}
+
+```
+
+## Use the Retry Function
+Here we define a namelist where the 1st object is the accepted name. We then use the retry function to download. If the failed_name_holder includes any lines, we then inspect this list. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+name_list <- list(Shortia_galacifolia = c("Shortia galacifolia", 
+                                            "Sherwoodia galacifolia"),
+                  Galax_urceolata = c("Galax urceolata", 
+                                      "Galax aphylla"),
+                  Pyxidanthera_barbulata = c("Pyxidanthera barbulata",
+                                             "Pyxidanthera barbulata var. barbulata"),
+                  Pyxidanthera_brevifolia = c("Pyxidanthera brevifolia", 
+                                              "Pyxidanthera barbulata var. brevifolia"))
+
+
+
+for(i in 1:length(name_list)){
+   retry_download(name_list, i, 0) # 0 intializes the download count
+}
+
+## Inspect failed names
+if(length(failed_names_table) > 0){
+  failed_names_table <- as.data.frame(do.call(rbind, failed_names_holder)) # unpack the f
+  colnames(failed_names_table)[1] <- "name" # Assign column headers
+  colnames(failed_names_table)[2] <- "errorType"
+  colnames(failed_names_table)[3] <- "systemTime"
+}
+  
+```
+
+
+
