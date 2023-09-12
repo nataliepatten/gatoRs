@@ -68,12 +68,12 @@ name_list <- list(Shortia_galacifolia = c("Shortia galacifolia",
 
 
 for(i in 1:length(name_list)){
-   retry_download(name_list, i, 0) # 0 intializes the download count
+   retry_download(name_list, i, 0) # 0 initializes the download count
 }
 
 ## Inspect failed names
+failed_names_table <- as.data.frame(do.call(rbind, failed_names_holder)) # unpack the f
 if(length(failed_names_table) > 0){
-  failed_names_table <- as.data.frame(do.call(rbind, failed_names_holder)) # unpack the f
   colnames(failed_names_table)[1] <- "name" # Assign column headers
   colnames(failed_names_table)[2] <- "errorType"
   colnames(failed_names_table)[3] <- "systemTime"
