@@ -32,7 +32,7 @@ Information about the columns in the returned data frame can be found in the doc
 \description{
 The \code{process_flagged()} function allows you to visualize and inspect possible problematic points, as well as
 manually remove these points, if desired. By default, this function is interactive. When running the function interactively you can
-hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.The interactive option plots flagged points in red and non-flagged points in green.
+hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.The interactive option plots flagged points in red and non-flagged points in blue.
 }
 \details{
 This function is a wrapper to visualize results for the \code{CoordinateCleaner::clean_coordinates()} function.

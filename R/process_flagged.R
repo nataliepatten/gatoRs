@@ -3,7 +3,7 @@
 #' @description
 #' The `process_flagged()` function allows you to visualize and inspect possible problematic points, as well as
 #' manually remove these points, if desired. By default, this function is interactive. When running the function interactively you can
-#' hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.The interactive option plots flagged points in red and non-flagged points in green.
+#' hover over a point to see the record's scientific name, and click on a point to see the record's coordinates.The interactive option plots flagged points in red and non-flagged points in blue.
 #'
 #'
 #' @details
@@ -93,21 +93,21 @@ process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longi
   non_flagged_coords <- non_flagged$coordinates
 
   red_icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#ffffff", library = "fa", squareMarker = TRUE, markerColor = "red")
-  green_icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#ffffff", library = "fa", squareMarker = TRUE, markerColor = "green")
+  blue_icons <- leaflet::awesomeIcons(icon = "fa-leaf", iconColor = "#ffffff", library = "fa", squareMarker = TRUE, markerColor = "blue")
 
   map <- leaflet::leaflet() %>%
     leaflet::addProviderTiles(providers$OpenStreetMap) %>%
     leaflet::addAwesomeMarkers(lng = flagged[[longitude]], lat = flagged[[latitude]], icon = red_icons,
                                popup = flagged_coords, label = flagged[[scientific.name]], layerId = flagged_index) %>%
-    leaflet::addAwesomeMarkers(lng = non_flagged[[longitude]], lat = non_flagged[[latitude]], icon = green_icons,
+    leaflet::addAwesomeMarkers(lng = non_flagged[[longitude]], lat = non_flagged[[latitude]], icon = blue_icons,
                                popup = non_flagged_coords, label = non_flagged[[scientific.name]], layerId = non_flagged_index) %>%
-    leaflet::addLegend(position = "bottomleft", colors = c("#d81313", "#4cc410"), labels = c("flagged", "not flagged"), opacity = 1) %>%
+    leaflet::addLegend(position = "bottomleft", colors = c("red", "blue"), labels = c("flagged", "not flagged"), opacity = 1) %>%
     leaflet::addMiniMap(toggleDisplay = TRUE) %>%
   print(map)
 
   #
   message("Red icons represent flagged (possibly problematic) points. ",
-  "Green icons represent points that were not flagged. ",
+  "Blue icons represent points that were not flagged. ",
   "By hovering over each icon you can see the scientific name of each data point. ",
   "By clicking on each icon you can see the coordinates and point number for each data point. ",
   "Clicking on red icons will also display the reason the point was flagged.")
