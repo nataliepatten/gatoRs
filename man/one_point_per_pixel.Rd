@@ -17,7 +17,7 @@ one_point_per_pixel(
 \arguments{
 \item{df}{Data frame of occurrence records.}
 
-\item{raster}{Raster object which will be used for ecological niche comparisons.}
+\item{raster}{Raster object which will be used for ecological niche comparisons. A SpatRaster should be used.}
 
 \item{resolution}{Default = 0.5. Options - 0.5, 2.5, 5, and 10 (in min of a degree). 0.5 min of a degree is equal to 30 arc sec.}
 
