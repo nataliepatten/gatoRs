@@ -39,4 +39,4 @@ clean_data <- full_clean(galaxdf,
                          accepted.name = "Galax urceolata")
 ```
 
-
+The gatoRs logo was created using the hexSticker package (https://github.com/GuangchuangYu/hexSticker).
