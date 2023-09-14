@@ -17,7 +17,7 @@ Imports:
     rgbif, 
     magrittr,
     CoordinateCleaner,
-    raster,
+    terra,
     spThin,
     stringr,
     leaflet,

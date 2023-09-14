@@ -11,7 +11,8 @@ resource_files:
 
 Due to [GBIF's API timeout error](https://github.com/gbif/portal-feedback/issues/4136), if you want to download a bunch of records for a bunch of species, you have to you have to add a retry in your download loop. Here we demonstrate how to add a retry with the `gatoRs::gators_download()` function.     
 
-```{r}
+
+```
 # Load packages
 library(gatoRs)
 ```
@@ -19,7 +20,7 @@ library(gatoRs)
 ## Retry Function
 This is a modified function from JT Miller. Here you have a `nameset` which is a list of lists (see below), an `i`th value, and the retry count. Note, here failed_name_holder must be defined outside of the function. 
 
-```{r}
+```
 # Build a retry_downloader function that proceeds to try if an API error occurs
 failed_names_holder <- list() 
 retry_download <- function(nameset, i, retry_count) {
@@ -31,7 +32,7 @@ retry_download <- function(nameset, i, retry_count) {
   } 
   tryCatch({
     gators.download <- gatoRs::gators_download(synonyms.list = nameset[[i]], 
-                                              write.file = FALSE, 
+                                              write.file = TRUE, 
                                               filename = paste0("data/", 
                                                                 gsub(" ", "_", nameset[[i]][1]), ".csv"))
     return(gators.download) # Return the gators.download
@@ -55,7 +56,7 @@ retry_download <- function(nameset, i, retry_count) {
 ## Use the Retry Function
 Here we define a namelist where the 1st object is the accepted name. We then use the retry function to download. If the failed_name_holder includes any lines, we then inspect this list. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```
 name_list <- list(Shortia_galacifolia = c("Shortia galacifolia", 
                                             "Sherwoodia galacifolia"),
                   Galax_urceolata = c("Galax urceolata", 
@@ -78,7 +79,6 @@ if(length(failed_names_table) > 0){
   colnames(failed_names_table)[2] <- "errorType"
   colnames(failed_names_table)[3] <- "systemTime"
 }
-  
 ```
 
 
