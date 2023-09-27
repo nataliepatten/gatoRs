@@ -52,7 +52,7 @@ process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longi
   }
   else {
     df <- suppressWarnings(CoordinateCleaner::clean_coordinates(df,
-                           lon = "longitude", lat = "latitude", species = "scientificName",
+                           lon = longitude, lat = latitude, species = scientific.name,
                            value = "clean"))
     return(df)
   }
