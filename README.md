@@ -15,7 +15,7 @@ install.packages("devtools")
 devtools::install_github("nataliepatten/gatoRs")
 ```
 
-**Due to our dependency on the package CoordinateCleaner, installation and loading of this package includes an R-spatial error message.  We are hopeful that the package maintainer for CoordinateCleaner will remove their dependency on rgdal prior to October 2023. However, if  CoordinateCleaner is not updated, we will revise our `process_flagged()` function and remove this error message.**
+**Due to our dependency on the package CoordinateCleaner, installation and loading of this package includes an R-spatial error message. This error message will be removed as soon as version 3.0.0 of CoordinateCleaner is avaliable on CRAN, since this version removed their dependency on rgdal!! Thank you to the CoordinateCleaner team for updating their package!**
 
 ## Quick Start  
 Our package aims to streamline downloading and processing of biodiversity specimen data. Here is a quick example of how to download and clean with our package.
