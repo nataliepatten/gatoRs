@@ -10,12 +10,13 @@
 gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools for downloading and processing biodiversity data. Click [here](https://nataliepatten.github.io/gatoRs/) for the full user guide.
 
 ## Installation
+
 ```
 install.packages("devtools")
 devtools::install_github("nataliepatten/gatoRs")
 ```
 
-**Due to our dependency on the package CoordinateCleaner, installation and loading of this package includes an R-spatial error message. This error message will be removed as soon as version 3.0.0 of CoordinateCleaner is avaliable on CRAN, since this version removed their dependency on rgdal!! Thank you to the CoordinateCleaner team for updating their package! Our package will modify our dependency for version 3.0 when [an issue is addressed](https://github.com/ropensci/CoordinateCleaner/issues/89). **
+**Thank you to the CoordinateCleaner team for updating their package! We no longer have a spatial error associated with our package! **
 
 ## Quick Start  
 Our package aims to streamline downloading and processing of biodiversity specimen data. Here is a quick example of how to download and clean with our package.
