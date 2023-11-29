@@ -16,7 +16,7 @@ Imports:
     dplyr (>= 1.1.0),
     rgbif, 
     magrittr,
-    CoordinateCleaner (>= 3.0),
+    CoordinateCleaner (>= 3.0.1),
     terra,
     spThin,
     stringr,
