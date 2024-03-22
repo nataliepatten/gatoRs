@@ -1,10 +1,10 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Introduction: Introduction.html
   ManyDownloads: ManyDownloads.html
-last_built: 2023-11-30T14:50Z
+last_built: 2024-03-22T18:52Z
 urls:
   reference: https://nataliepatten.github.io/gatoRs/reference
   article: https://nataliepatten.github.io/gatoRs/articles
