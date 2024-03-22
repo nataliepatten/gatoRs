@@ -45,3 +45,8 @@ clean_data <- full_clean(galaxdf,
 
 
 The gatoRs logo was created using the hexSticker package (https://github.com/GuangchuangYu/hexSticker).
+
+## Reference  
+
+Patten N, Gaynor M, Soltis D, Soltis P (2024). “Geographic And Taxonomic Occurrence R-based Scrubbing (gatoRs): An R package and workflow for processing biodiversity data.” Applications in Plant Sciences. [doi:10.1002/aps3.11575](https://doi.org/10.1002/aps3.11575). 
+
