@@ -12,5 +12,7 @@ bibentry(bibtype    = "Article",
                                family = "Soltis"),
                         person(given  = "Pamela S.",
                                family = "Soltis")
-                       )
-)
+                       ),
+          volume = "12",
+          number = "2",
+          pages = "e11575")
