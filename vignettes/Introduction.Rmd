@@ -19,7 +19,7 @@ Historically, many names may have been used to refer to your taxa of interest. F
 
 There are many databases available to compile synonym lists for plant species including:
 
-  - [World Flora Online - WFO Plant List](https://wfoplantlist.org/plant-list)
+  - [World Flora Online - WFO Plant List](https://wfoplantlist.org/)
   - [TROPICOS](https://www.tropicos.org/)
   - [World Checklist of Vascular Plants](https://powo.science.kew.org/)
   - [USDA PLANTS Database](https://plants.usda.gov/home)
