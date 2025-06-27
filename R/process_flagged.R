@@ -35,7 +35,7 @@
 #' @export
 
 process_flagged <- function(df, interactive = TRUE, latitude = "latitude", longitude = "longitude",
-                            scientific.name = "scientificName") {
+                            scientific.name = "accepted_name") {
 
   if (NROW(df) == 0) return(df)
 
