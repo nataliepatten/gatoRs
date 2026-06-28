@@ -35,7 +35,7 @@ get_idigbio_arc <- function(synonyms.list, idigbio.match = "fuzzy", fuzzy.ratio 
     stop("Invalid argument: synonyms.list. The argument synonyms.list must be non-empty.")
   }
 
-  message(setupduckDB())
+  setupduckDB()
 
   dbdir <- tools::R_user_dir("gatoRs", which = "data")
   dbfile <- file.path(dbdir, "iMFGduckdb.duckdb")
