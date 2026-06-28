@@ -10,8 +10,8 @@
 In 2026, [iDigBio moved to a GBIF hosted portal](https://idigbio.gbif.us/en/faq/) due 
 to the end of their funding. A small subset of data providers did not move their recordsets 
 over to the new hosted portal. This includes about 1.7 million records. Therefore, we modified 
-`gators_downloads()` to pull these records from a github-stored archived
-download of these recordsets (downloaded on June 28th, 2026). The full archived 
+`gators_download()` to pull these records from a GitHub-hosted archived
+download of these recordsets (downloaded on June 28, 2026). The full archived 
 data set can be found on [mgaynor1/OccurrenceArchive](https://github.com/mgaynor1/OccurrenceArchive). 
 
 We hope you can continue to use gatoRs. 
