@@ -1,8 +1,8 @@
 Package: gatoRs
 Type: Package
 Title: Geographic and Taxonomic Occurrence R-Based Scrubbing
-Version: 1.0.2
-Date: 2024-05-16
+Version: 2.0.2
+Date: 2026-06-28
 Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatten@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8090-1324")),
            person(given = "Michelle L.", family = "Gaynor", email="shellyleegaynor@gmail.com", role = "aut",
@@ -12,7 +12,9 @@ Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatt
            person(given = "Pamela S.", family = "Soltis", email= "psoltis@flmnh.ufl.edu", role = "ctb", 
            comment = c(ORCID = "0000-0001-9310-8659")))
 Imports:
-    ridigbio,
+    duckdb,
+    arrow,
+    DBI,
     dplyr (>= 1.1.0),
     rgbif, 
     magrittr,
@@ -26,14 +28,14 @@ Imports:
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,
     testthat
 License: GPL-3
 Description: Streamlines downloading and cleaning biodiversity data from Integrated Digitized Biocollections (iDigBio) and the Global Biodiversity Information Facility (GBIF).
-Maintainer: Natalie N. Patten <natalienpatten@gmail.com>
+Maintainer: Michelle L. Gaynor <shellyleegaynor@gmail.com>
 URL: https://nataliepatten.github.io/gatoRs/, https://github.com/nataliepatten/gatoRs
 BugReports: https://github.com/nataliepatten/gatoRs/issues
 Roxygen: list(markdown=TRUE)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gators_download.R
 \name{gators_download}
 \alias{gators_download}
-\title{Download - Download specimen data from both iDigBio and GBIF}
+\title{Download - Download specimen data from both GBIF and the iDigBio archive}
 \usage{
 gators_download(
   synonyms.list,
@@ -10,7 +10,9 @@ gators_download(
   filename = NA,
   gbif.match = "fuzzy",
   gbif.prov = FALSE,
+  idigbio.match = "fuzzy",
   idigbio.filter = TRUE,
+  fuzzy.ratio = 50,
   limit = 1e+05
 )
 }
@@ -33,12 +35,19 @@ is not required and is assigned "fuzzy" by default.}
 \item{gbif.prov}{A parameter to obtain the provider/verbatim columns from GBIF. This parameter is optional
 and is assigned \code{FALSE} by default.}
 
+\item{idigbio.match}{Default = "fuzzy". Options are "fuzzy" or "exact".
+The fuzzy match uses \href{https://github.com/rapidfuzz/RapidFuzz}{rapidfuzz} to calculate
+a rapidfuzz_partial_token_set_ratio or similarity ratio between the two strings. This option
+is helpful when word order differs or our strings are partial matches.}
+
 \item{idigbio.filter}{A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 include data points for a different species that mention the desired species in the locality information, for example.
 Choosing \code{idigbio.filter = TRUE} will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 This parameter is not required and is assigned TRUE by default.}
 
-\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from each aggregator.}
+\item{fuzzy.ratio}{Default = 50\%. We let more match than probably are helpful, and return all ratios greater than 50\%.}
+
+\item{limit}{Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from GBIF.}
 }
 \value{
 Returns a data frame and writes a csv file as specified in the input.
@@ -72,6 +81,11 @@ from the GBIF and iDigBio databases. The columns are as follows:
 }
 \description{
 The \code{gators_download()} function downloads data from GBIF and iDigBio for your desired species.
+In June 2026, we modified this function to queries an archive of iDigBio
+that contains only recordsets that were not uploaded to GBIF by June 2026.
+Since funding ended for iDigBio in 2026, iDigBio no longer has the resources to host data.
+Though the vast majority of recordsets migrated to GBIF, we wanted to make sure we had
+information available for the remaining few who have not migrated.
 }
 \details{
 With \code{gators_download()} you can obtain biodiversity records for your species of interest from both GBIF and iDigBio.
@@ -79,12 +93,15 @@ This function is innovative in how it searches iDigBio. Unlike \code{spocc::occ(
 the scientific name field, as this will only return exact matches.
 Instead, we designed a “pseudo-fuzzy match” to search all fields for
 partial matches to the supplied scientific names.
-This function uses the \code{get_idigbio()}, \code{get_gbif()}, \code{fix_columns()}, \code{fix_names()}, and \code{filter_fix_names()} functions.
-This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
+This function uses the \code{correct_class()}, \code{setupduckDB()},  \code{get_idigbio_arc()}, \code{get_gbif()}, \code{fix_columns()}, \code{fix_names()}, and \code{filter_fix_names()}.
+This function requires the packages magrittr, dplyr, duckDB, arrow, DBI,  rgbif, and stringr.
 }
 \examples{
-df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 10)
-df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code",
+\dontrun{
+df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
+df <- gators_download(synonyms.list = "Galax urceolata",
+gbif.match = "code",
 idigbio.filter = FALSE, limit = 10)
+}
 
 }

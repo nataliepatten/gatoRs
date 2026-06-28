@@ -36,7 +36,7 @@ reference:
   desc: These functions are used within the download and cleaning functions.
 - contents:
   - get_gbif
-  - get_idigbio
+  - get_idigbio_arc
   - filter_fix_names
   - fix_columns
   - fix_names

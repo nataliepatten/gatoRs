@@ -1,7 +1,13 @@
-#' @title Download - Download specimen data from both iDigBio and GBIF
+#' @title Download - Download specimen data from both GBIF and the iDigBio archive
 #'
 #' @description
 #' The `gators_download()` function downloads data from GBIF and iDigBio for your desired species.
+#' In June 2026, we modified this function to queries an archive of iDigBio
+#' that contains only recordsets that were not uploaded to GBIF by June 2026.
+#' Since funding ended for iDigBio in 2026, iDigBio no longer has the resources to host data.
+#' Though the vast majority of recordsets migrated to GBIF, we wanted to make sure we had
+#' information available for the remaining few who have not migrated.
+#'
 #'
 #' @details
 #' With `gators_download()` you can obtain biodiversity records for your species of interest from both GBIF and iDigBio.
@@ -9,8 +15,9 @@
 #' the scientific name field, as this will only return exact matches.
 #' Instead, we designed a “pseudo-fuzzy match” to search all fields for
 #' partial matches to the supplied scientific names.
-#' This function uses the `get_idigbio()`, `get_gbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()` functions.
-#' This function requires packages magrittr, rgbif, dplyr, ridigbio, and stringr.
+
+#' This function uses the `correct_class()`, `setupduckDB()`,  `get_idigbio_arc()`, `get_gbif()`, `fix_columns()`, `fix_names()`, and `filter_fix_names()`.
+#' This function requires the packages magrittr, dplyr, duckDB, arrow, DBI,  rgbif, and stringr.
 #'
 #'
 #' @param synonyms.list A list of scientific names including the accepted scientific name and any synonyms for your desired species. For example, `synonyms.list = c("Asclepias curtissii","Asclepias aceratoides", "Asclepias arenicola", "Oxypteryx arenicola", "Oxypteryx curtissii")`.
@@ -30,18 +37,21 @@
 #'
 #' @param gbif.prov A parameter to obtain the provider/verbatim columns from GBIF. This parameter is optional
 #' and is assigned `FALSE` by default.
-#'
+#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from GBIF.
 #' @param idigbio.filter A parameter to remove less relevant search results from iDigBio. Based on the search input, results may
 #' include data points for a different species that mention the desired species in the locality information, for example.
 #' Choosing `idigbio.filter = TRUE` will return the data frame with rows in which the name column fuzzy matches a name on the synonym list.
 #' This parameter is not required and is assigned TRUE by default.
 #'
-#' @param limit Default = 100,000 (maximum). Set limit to the number of records requested for each element in synonyms.list from each aggregator.
+#' @inheritParams get_idigbio_arc
 #'
 #' @examples
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), limit = 10)
-#' df <- gators_download(synonyms.list = "Galax urceolata", gbif.match = "code",
+#' \dontrun{
+#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
+#' df <- gators_download(synonyms.list = "Galax urceolata",
+#' gbif.match = "code",
 #' idigbio.filter = FALSE, limit = 10)
+#' }
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
 #' This csv file will contain search results for the desired species
@@ -77,8 +87,12 @@
 
 
 gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
-                            gbif.match = "fuzzy", gbif.prov = FALSE,
-                            idigbio.filter = TRUE, limit = 100000) {
+                            gbif.match = "fuzzy",
+                            gbif.prov = FALSE,
+                            idigbio.match = "fuzzy",
+                            idigbio.filter = TRUE,
+                            fuzzy.ratio = 50,
+                            limit = 100000) {
 
   # Check for valid arguments
   if (length(synonyms.list) == 0 | any(is.na(synonyms.list))) {
@@ -92,7 +106,13 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   if (idigbio.filter != TRUE & idigbio.filter != FALSE) {
     stop("Invalid value for argument: idigbio.filter. Value for idigbio.filter must equal 'TRUE' or 'FALSE'.")
   }
+  if (idigbio.match != "fuzzy" & idigbio.match != "exact") {
+    stop("Invalid value for argument: idigbio.match. Value for idigbio.match must equal 'fuzzy' or 'exact'.")
+  }
 
+  if (fuzzy.ratio > 100 & fuzzy.ratio < 0) {
+    stop("Invalid value for argument: fuzzy.ratio. Value for fuzzy.ratio must be a number between 0 and 100.")
+  }
   if (write.file != TRUE & write.file != FALSE) {
     stop("Invalid value for argument: write.file. Value for write.file must equal 'TRUE' or 'FALSE'.")
   }
@@ -109,10 +129,13 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
     message("Warning: No output file will be written; the filename argument will be ignored.\nTo write to an output file, set write.file = TRUE.")
   }
 
+  message("Initial download began from the iDigBio Archive!")
   # initial download, fix capitalization
-  query_idigbio <- fix_names(get_idigbio(synonyms.list, limit = limit))
+  query_idigbio <- fix_names(get_idigbio_arc(synonyms.list, idigbio.match, fuzzy.ratio))
+  message("Downloading records from GBIF!")
   query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, gbif.prov = gbif.prov, limit = limit))
 
+  message("Cleaning up record from both aggregators now!")
   # Remove duplicates - records that share UUIDs or KEYs
   if (NROW(query_idigbio) > 0) query_idigbio <- dplyr::distinct(query_idigbio, ID, .keep_all = TRUE)
   if (NROW(query_gbif) > 0) query_gbif <- dplyr::distinct(query_gbif, ID, .keep_all = TRUE)
@@ -122,6 +145,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   query_idigbio <- fix_names(fix_columns(query_idigbio))
 
   if (idigbio.filter) {
+    message("Currently filtering iDigBio records!")
     query_idigbio <- filter_fix_names(query_idigbio, synonyms.list)
   }
   else {
