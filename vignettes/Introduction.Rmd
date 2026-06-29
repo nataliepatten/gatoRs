@@ -54,7 +54,7 @@ ___
 
 
 ## Data Processing    
-We downloaded 7742 observations for <i>Galax urceolata</i> in the example above. Of these observations, only those with locality information will be helpful when investigating this species distribution. 
+We downloaded 12173 observations for <i>Galax urceolata</i> in the example above. Of these observations, only those with locality information will be helpful when investigating this species distribution. 
 
 ### Identify Records Missing Locality Information
 Locality information can be redacted or skewed due to protect threatened taxa, often locality information will be provided upon request or can be identified through georeferencing. We created functions to aid in this process.   
@@ -195,12 +195,14 @@ Here we first calculate minimum nearest neighbor distance in km:
 Example:
 ```
 library(fields)
-nnDm <- rdist.earth(as.matrix(data.frame(lon = df$longitude, lat = df$latitude)), miles = FALSE, R = NULL)
+nnDm <- rdist.earth(as.matrix(data.frame(lon = galaxdf$longitude, lat = galaxdf$latitude)),
+                            miles = FALSE, 
+                            R = NULL)
 nnDmin <- do.call(rbind, lapply(1:5, function(i) sort(nnDm[,i])[2]))
 min(nnDmin)
 ```
 
-Here the current minimum distance is 2.22 km. Based on literature, we find a 2 meters (or 0.002 km) distance was enough to collect unique genets, so we do not need to thin our points. 
+Here the current minimum distance is 1.11 km. Based on literature, we find a 2 meters (or 0.002 km) distance was enough to collect unique genets, so we do need to thin our points. 
 
 **Step 2**: Thin occurrence records using spThin through gatoRs.     
     
@@ -208,7 +210,7 @@ When you do need to thin your records, here is a great function to do so!
 
 Example:
 ```
-df <- thin_points(df, 
+galaxdf <- thin_points(galaxdf, 
                     distance = 0.002, # in km 
                     reps = 100)
 ```
@@ -248,7 +250,7 @@ df_quick_clean <- full_clean(rawdf,
 The `data_chomp()` function subsets the data set to include only the columns needed for Maxent: the user-provided accepted name, latitude, and longitude.  
 Example:
 ```
-maxent_ready <- data_chomp(df, 
+maxent_ready <- data_chomp(galaxdf, 
                            accepted.name = "Galax urceolata" )
 write.csv(maxent_ready, "data/formaxent_Galax_urceolata_YYYYMMDD.csv", 
           row.names = FALSE)
@@ -260,13 +262,13 @@ To aid in data preparation for publication and to comply with GBIF’s data use 
 Example:
 ```
 ## Retrieve GBIF citations
-GBIF_citations <- citation_bellow(df) ## Warning, this is very slow
+GBIF_citations <- citation_bellow(galaxdf) ## Warning, this is very slow
 write.csv(GBIF_citations, "data/GBIF_citations_Galax_urceolata_YYYYMMDD.csv", 
           row.names = FALSE)
 
 # Remove redacted records
 ### If redacted records were retrieved, make sure to remove them before publication! Remove redacted records!
-df_pub_ready <- remove_redacted(df)
+df_pub_ready <- remove_redacted(galaxdf)
 write.csv(df_pub_ready, "data/publication_ready_Galax_urceolata_YYYYMMDD.csv", 
           row.names = FALSE)
 ```

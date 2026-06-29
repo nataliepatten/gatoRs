@@ -27,7 +27,7 @@ we wanted to make sure we had information available for the remaining.
 }
 \details{
 This function uses the \code{correct_class()} function and \code{setupduckDB()}.
-This function requires the packages ridigbio, magrittr, dplyr, duckDB, arrow, and DBI.
+This function requires the packages magrittr, dplyr, duckDB, arrow, and DBI.
 }
 \examples{
 \dontrun{
