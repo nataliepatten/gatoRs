@@ -8,7 +8,7 @@
 #'
 #' @details
 #' This function uses the `correct_class()` function and `setupduckDB()`.
-#' This function requires the packages ridigbio, magrittr, dplyr, duckDB, arrow, and DBI.
+#' This function requires the packages magrittr, dplyr, duckDB, arrow, and DBI.
 #'
 #' @param synonyms.list A list of affiliated names for your query.
 #' @param idigbio.match Default = "fuzzy". Options are "fuzzy" or "exact".
@@ -40,6 +40,8 @@ get_idigbio_arc <- function(synonyms.list, idigbio.match = "fuzzy", fuzzy.ratio 
   dbdir <- tools::R_user_dir("gatoRs", which = "data")
   dbfile <- file.path(dbdir, "iMFGduckdb.duckdb")
   con <-  duckdb::dbConnect(duckdb::duckdb(), dbdir = dbfile, read_only = TRUE)
+  suppressWarnings(DBI::dbExecute(con, "INSTALL rapidfuzz FROM community;"))
+  DBI::dbExecute(con, "LOAD rapidfuzz;")
 
   allquery <- c()
   for(x in 1:length(synonyms.list)){

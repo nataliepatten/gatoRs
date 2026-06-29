@@ -110,7 +110,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
     stop("Invalid value for argument: idigbio.match. Value for idigbio.match must equal 'fuzzy' or 'exact'.")
   }
 
-  if (fuzzy.ratio > 100 & fuzzy.ratio < 0) {
+  if (fuzzy.ratio > 100 | fuzzy.ratio < 0) {
     stop("Invalid value for argument: fuzzy.ratio. Value for fuzzy.ratio must be a number between 0 and 100.")
   }
   if (write.file != TRUE & write.file != FALSE) {
@@ -135,7 +135,7 @@ gators_download <- function(synonyms.list, write.file = FALSE, filename = NA,
   message("Downloading records from GBIF!")
   query_gbif <- fix_names(get_gbif(synonyms.list, gbif.match = gbif.match, gbif.prov = gbif.prov, limit = limit))
 
-  message("Cleaning up record from both aggregators now!")
+  message("Cleaning up records from both aggregators now!")
   # Remove duplicates - records that share UUIDs or KEYs
   if (NROW(query_idigbio) > 0) query_idigbio <- dplyr::distinct(query_idigbio, ID, .keep_all = TRUE)
   if (NROW(query_gbif) > 0) query_gbif <- dplyr::distinct(query_gbif, ID, .keep_all = TRUE)
