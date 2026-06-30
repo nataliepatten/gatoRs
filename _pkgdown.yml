@@ -37,7 +37,6 @@ reference:
 - contents:
   - get_gbif
   - get_idigbio_arc
-  - setupduckDB
   - filter_fix_names
   - fix_columns
   - fix_names
