@@ -1,0 +1,352 @@
+# Introduction to gatoRs
+
+gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides
+users with tools to streamline the downloading and processing
+biodiversity data.
+
+## Data Downloading
+
+### Identifying Synonyms
+
+Historically, many names may have been used to refer to your taxa of
+interest. For example, specimen representing *Galax urceolata*
+(Diapensiaceae) can be found under the scientific name *Galax aphylla*,
+despite the latter being invalidated over 50 years ago ([see more
+here](https://en.wikipedia.org/wiki/Galax)). Since synonyms are common,
+we designed gatoRs retrieve biodiversity records based on a list of
+names, however the user must supply the synonym list.
+
+There are many databases available to compile synonym lists for plant
+species including:
+
+- [World Flora Online - WFO Plant List](https://wfoplantlist.org/)
+- [TROPICOS](https://www.tropicos.org/)
+- [World Checklist of Vascular Plants](https://powo.science.kew.org/)
+- [USDA PLANTS Database](https://plants.usda.gov/home)
+- [International Plant Names Index](https://www.ipni.org/)
+- [World
+  Plants](https://www.worldplants.de/world-plants-complete-list/complete-plant-list)
+
+Many R packages have been developed to access these databases including:
+
+- [taxize](https://docs.ropensci.org/taxize/)
+- [RTNRS](https://github.com/EnquistLab/RTNRS)
+- [WorldFlora](https://cran.r-project.org/package=WorldFlora)
+- [Taxonstand](https://cran.r-project.org/package=Taxonstand)
+- [U.Taxonstand](https://github.com/ecoinfor/U.Taxonstand)
+
+### Download with gatoRs
+
+With
+[`gators_download()`](https://nataliepatten.github.io/gatoRs/reference/gators_download.md)
+you can obtain biodiversity records for your species of interest from
+both GBIF and iDigBio. This function is innovative in how it searches
+iDigBio. Unlike `spocc::occ()`, we do not query the iDigBio API using
+the scientific name field, as this will only return exact matches.
+Instead, we designed a “pseudo-fuzzy match” to search all fields for
+partial matches to the supplied scientific names. Additionally, the
+columns returned have been handpicked to aid in processing records for
+investigations of species distributions (see more
+[`gators_download()`](https://nataliepatten.github.io/gatoRs/reference/gators_download.md)).
+
+After you identify synonyms, create a list of all possible names for
+your species of interest with the first name in the list as the accepted
+name (ex. `c("Galax urceolata", "Galax aphylla")`). Note, the first name
+in your list will be used to identify the GBIF species code when
+`gbif_match = "code"`.
+
+Example:
+
+    library(gatoRs)
+    galaxdf <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"), 
+                    write.file = TRUE,
+                    filename = "base_folder/my_file.csv", # Location to save file - must end in .csv
+                    gbif.match = "fuzzy",
+                    idigbio.filter = TRUE)
+
+------------------------------------------------------------------------
+
+## Data Processing
+
+We downloaded 12173 observations for *Galax urceolata* in the example
+above. Of these observations, only those with locality information will
+be helpful when investigating this species distribution.
+
+### Identify Records Missing Locality Information
+
+Locality information can be redacted or skewed due to protect threatened
+taxa, often locality information will be provided upon request or can be
+identified through georeferencing. We created functions to aid in this
+process.
+
+#### Redacted Records
+
+Locality information can be redacted or skewed due to protect threatened
+taxa; often locality information will be provided to aid research upon
+request.
+
+To find data that needs to be manually received by an institution via a
+permit (or removed from the data set), use
+[`needed_records()`](https://nataliepatten.github.io/gatoRs/reference/needed_records.md).
+After receiving the data from herbaria, manually merge the obtained
+records with your original data set.
+
+Example:
+
+    redacted_info <- needed_records(galaxdf)
+
+#### Records to Georeference
+
+Some records may be missing latitude and longitude values, however
+locality information can be used to assign coordinates to the record
+through georeferencing.
+
+To find data lacking coordinates but containing locality information,
+use
+[`need_to_georeference()`](https://nataliepatten.github.io/gatoRs/reference/need_to_georeference.md).
+You should georeference these records and then manually merge the obtain
+records with your original data set.
+
+Example:
+
+    to_georeference <- need_to_georeference(galaxdf)
+
+#### Merging Retained Records
+
+After receiving the data from herbaria or through georeferencing, you
+will want to merge the obtained records with your original data set.
+
+Note, the following steps will only work if columns are equivalent
+between the two data sets you hope to merge. If the columns are not
+equivalent, we recommend bcd::bcd_standardize_datasets()
+
+Example:
+
+    # Avoid duplicates by removing the records you are about to merge
+    dfsub <- remove_missing(galaxdf)
+    # Use gator_merge to merge the main data set with retrieved records
+    dfnew <- gators_merge(dfsub, retrieved_records)
+    # Version control - save a copy prior to any additional processing!!
+    write.csv(dfnew, "data/merged_data_Galax_urceolata_YYYYMMDD.csv") ## Version control!
+    # Set gatordf equal to the newly merged data set
+    gatordf <- dfnew
+
+### Occurrence Data Cleaning
+
+Here we walk through each cleaning function, however we also created a
+simple one-step option
+[`full_clean()`](https://nataliepatten.github.io/gatoRs/reference/full_clean.md),
+see below.
+
+#### Resolve Taxon Names
+
+To find data containing scientific names corresponding to your desired
+species, use
+[`taxa_clean()`](https://nataliepatten.github.io/gatoRs/reference/taxa_clean.md).
+Use your downloaded data from the first step as input, as well as a
+synonyms list, the accepted name, and the filter option (exact, fuzzy,
+or interactive).
+
+Example:
+
+    galaxdf <- taxa_clean(df = galaxdf,  
+                          synonyms.list = c("Galax urceolata", "Galax aphylla"), 
+                          taxa.filter = "fuzzy", 
+                          accepted.name = "Galax urceolata") # creates a new column with accepted name for easy comparison
+
+#### Clean Locality
+
+##### Basic Locality Clean
+
+Here we remove any records with missing coordinates, impossible
+coordinates, coordinates at (0,0), and any that are flagged as skewed.
+The skewed records can be identified with the
+[`remove_skewed()`](https://nataliepatten.github.io/gatoRs/reference/remove_skewed.md)
+function and row value for the ‘InformationWitheld’ column. We also
+provide the option to round the provided latitude and longitude values
+to a specified number of decimal places.
+
+    galaxdf <- basic_locality_clean(df = galaxdf,  
+                          remove.zero = TRUE, # Records at (0,0) are removed
+                          precision = TRUE, # latitude and longitude are rounded 
+                          digits = 2, # round to 2 decimal places
+                          remove.skewed = TRUE)
+
+##### Find and Remove Flagged Points
+
+To find records that may have problematic coordinates, use
+[`process_flagged()`](https://nataliepatten.github.io/gatoRs/reference/process_flagged.md).
+This function can either automate the process of finding and removing
+problematic points (`interactive = FALSE`) or allow for manual
+inspection. The latter will let you manually remove points deemed
+improper by viewing the points on a graph.
+
+This function utilizes
+[`CoordinateCleaner::clean_coordinates()`](https://ropensci.github.io/CoordinateCleaner/reference/clean_coordinates.html).
+
+Example:
+
+    galaxdf <- process_flagged(galaxdf, interactive = TRUE)
+
+![](img/map1.png)**Figure 1**: Interactive map that appears when
+[`process_flagged()`](https://nataliepatten.github.io/gatoRs/reference/process_flagged.md)
+is run.
+
+![](img/map2.png)**Figure 2**: Interactive map that appears after we
+remove points interactively with
+[`process_flagged()`](https://nataliepatten.github.io/gatoRs/reference/process_flagged.md).
+Points 1, 3, 5, 6, and 7 were removed.
+
+#### Remove Duplicate Records
+
+Here we identify and remove both (1) specimen duplicates and (2)
+aggregator duplicates based on each specimens coordinates, occurrenceID,
+and eventDate. To leverage all date information available, set
+`remove.unparseable = FALSE` to manually populate the year, month, and
+day columns. Here, we also confirm all ID (UUID and key) are unique to
+remove any within-aggregator duplicates that may accumulate due to
+processing errors.
+
+Example:
+
+    galaxdf <- remove_duplicates(galaxdf, remove.unparseable = TRUE)
+
+#### Remove Particular Record Bases
+
+Sometimes, certain bases of records may want to be removed from the data
+set. To do this, we provide
+[`basis_clean()`](https://nataliepatten.github.io/gatoRs/reference/basis_clean.md).
+This function can be used interactively by simply supplying a df, but no
+basis.list value.If a list of basis is provided, the function will
+select only records where the basisOfRecord value fuzzy match values in
+the list provided.
+
+Example:
+
+    galaxdf <- basis_clean(galaxdf, 
+                           basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
+                                          "MATERIAL_SAMPLE", "LIVING_SPECIMEN",  
+                                          "PreservedSpecimen", "Preserved Specimen"))
+
+#### Spatial Correction
+
+The last processing step is spatial correction. Collection efforts can
+lead to the clustering of points and filtering can help reduce this
+clustering. Here we provide functions to reduce the effects of sampling
+bias using randomization approach and retain only one point per pixel.
+
+##### One Point Per Pixel
+
+Maxent will only retain one point per pixel. To make the ecological
+niche analysis comparable, we will retain only one point per pixel.
+
+Example:
+
+    galaxdf <- one_point_per_pixel(galaxdf, 
+                           resolution = 0.5, # for 30 arc sec raster layers
+                           precision = TRUE, 
+                           digits = 2) 
+
+##### Spatial thining
+
+We thin points by utilizing
+[`spThin::thin()`](https://rdrr.io/pkg/spThin/man/thin.html). This step
+reduces the effects of sampling bias using a randomization approach.
+
+**Step 1**: What should your minimum distance be?
+
+Here we first calculate minimum nearest neighbor distance in km:
+
+Example:
+
+    library(fields)
+    nnDm <- rdist.earth(as.matrix(data.frame(lon = galaxdf$longitude, lat = galaxdf$latitude)),
+                                miles = FALSE, 
+                                R = NULL)
+    nnDmin <- do.call(rbind, lapply(1:5, function(i) sort(nnDm[,i])[2]))
+    min(nnDmin)
+
+Here the current minimum distance is 1.11 km. Based on literature, we
+find a 2 meters (or 0.002 km) distance was enough to collect unique
+genets, so we do need to thin our points.
+
+**Step 2**: Thin occurrence records using spThin through gatoRs.
+
+When you do need to thin your records, here is a great function to do
+so!
+
+Example:
+
+    galaxdf <- thin_points(galaxdf, 
+                        distance = 0.002, # in km 
+                        reps = 100)
+
+### Full Clean
+
+Finally, instead of step-by-step cleaning, we created a single function
+to streamline this process.
+
+Example:
+
+    ## Read raw csv
+    rawdf <- read.csv("base_folder/my_file.csv")
+    ## Set your full clean preferences equal to the above
+    df_quick_clean <- full_clean(rawdf,
+                                synonyms.list =  c("Galax urceolata", "Galax aphylla"), 
+                                remove.NA.occ.id = FALSE,
+                                remove.NA.date = FALSE,
+                                accepted.name =  "Galax urceolata",
+                                remove.zero = TRUE,
+                                precision = TRUE,
+                                digits = 2,
+                                remove.skewed = TRUE,
+                                basis.list = c("HUMAN_OBSERVATION", "PRESERVED_SPECIMEN", 
+                                                "MATERIAL_SAMPLE",  "LIVING_SPECIMEN", 
+                                                "PreservedSpecimen", "Preserved Specimen"),
+                                remove.flagged = TRUE,
+                                thin.points = TRUE,
+                                distance = 0.002,
+                                reps = 100,
+                                one.point.per.pixel = TRUE)
+
+## Downstream Data Proccessing
+
+### Prepared data for MAXENT
+
+The
+[`data_chomp()`](https://nataliepatten.github.io/gatoRs/reference/data_chomp.md)
+function subsets the data set to include only the columns needed for
+Maxent: the user-provided accepted name, latitude, and longitude.  
+Example:
+
+    maxent_ready <- data_chomp(galaxdf, 
+                               accepted.name = "Galax urceolata" )
+    write.csv(maxent_ready, "data/formaxent_Galax_urceolata_YYYYMMDD.csv", 
+              row.names = FALSE)
+
+### Prepared data for publication
+
+To aid in data preparation for publication and to comply with GBIF’s
+data use agreement, our
+[`citation_bellow()`](https://nataliepatten.github.io/gatoRs/reference/citation_bellow.md)
+function will return the citation information for these records as a
+list (this function name is based on gators bellowing). Additionally,
+our
+[`remove_redacted()`](https://nataliepatten.github.io/gatoRs/reference/remove_redacted.md)
+will remove records where the aggregator value is not equal to iDigBio
+or GBIF. The aggregator column can be used to indicate where redacted
+records were retrieved from and thus used to filter out non-sharable
+records.
+
+Example:
+
+    ## Retrieve GBIF citations
+    GBIF_citations <- citation_bellow(galaxdf) ## Warning, this is very slow
+    write.csv(GBIF_citations, "data/GBIF_citations_Galax_urceolata_YYYYMMDD.csv", 
+              row.names = FALSE)
+
+    # Remove redacted records
+    ### If redacted records were retrieved, make sure to remove them before publication! Remove redacted records!
+    df_pub_ready <- remove_redacted(galaxdf)
+    write.csv(df_pub_ready, "data/publication_ready_Galax_urceolata_YYYYMMDD.csv", 
+              row.names = FALSE)

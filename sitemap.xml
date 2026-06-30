@@ -19,7 +19,7 @@
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/gators_download.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/gators_merge.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/get_gbif.html</loc></url>
-<url><loc>https://nataliepatten.github.io/gatoRs/reference/get_idigbio.html</loc></url>
+<url><loc>https://nataliepatten.github.io/gatoRs/reference/get_idigbio_arc.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/index.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/matchColClasses.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/need_to_georeference.html</loc></url>
@@ -31,6 +31,7 @@
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/remove_missing.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/remove_redacted.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/remove_skewed.html</loc></url>
+<url><loc>https://nataliepatten.github.io/gatoRs/reference/setupduckDB.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/suppress_output.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/taxa_clean.html</loc></url>
 <url><loc>https://nataliepatten.github.io/gatoRs/reference/thin_points.html</loc></url>

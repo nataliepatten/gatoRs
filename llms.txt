@@ -1,0 +1,126 @@
+# gatoRs: Geographic and Taxonomic Occurrence R-Based Scrubbing
+
+**Natalie N. Patten, Michelle L. Gaynor, Douglas E. Soltis, and Pamela
+S. Soltis**
+
+## Overview
+
+gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides
+users with tools for downloading and processing biodiversity data. Click
+[here](https://nataliepatten.github.io/gatoRs/articles/Introduction.html)
+for more information.
+
+## Installation
+
+    install.packages("devtools")
+    devtools::install_github("nataliepatten/gatoRs")
+
+## Quick Start
+
+Our package aims to streamline downloading and processing of
+biodiversity specimen data. Here is a quick example of how to download
+and clean with our package.
+
+Step 1: Download
+
+    library(gatoRs)
+    galaxdf <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"),
+                    write.file = FALSE,
+                    gbif.match = "fuzzy",
+                    idigbio.filter = TRUE)
+
+Step 2: Clean  
+- We do not recommend jumping to our full clean function. See our
+extended introduction [here](https://nataliepatten.github.io/gatoRs/)!
+
+    clean_data <- full_clean(galaxdf,
+                             synonyms.list = c("Galax urceolata", "Galax aphylla"),
+                             digits = 3,
+                             basis.list = c("Preserved Specimen","Physical specimen"),
+                             accepted.name = "Galax urceolata")
+
+The gatoRs logo was created using the hexSticker package
+(<https://github.com/GuangchuangYu/hexSticker>).
+
+# Package index
+
+## Download data
+
+Wrapper functions to download data from GBIF and iDigBio.
+
+- [`gators_download()`](https://nataliepatten.github.io/gatoRs/reference/gators_download.md)
+  : Download - Download specimen data from both GBIF and the iDigBio
+  archive
+
+## Clean data
+
+Various tools to clean downloaded data produced from our download
+functions.
+
+- [`needed_records()`](https://nataliepatten.github.io/gatoRs/reference/needed_records.md)
+  : Identify Missing Information - Find records with redacted or missing
+  data
+- [`need_to_georeference()`](https://nataliepatten.github.io/gatoRs/reference/need_to_georeference.md)
+  : Identify Missing Information - Find records which lack coordinate
+  information
+- [`remove_redacted()`](https://nataliepatten.github.io/gatoRs/reference/remove_redacted.md)
+  : Remove Redacted Information - Remove protected or private records
+  prior to publication
+- [`remove_missing()`](https://nataliepatten.github.io/gatoRs/reference/remove_missing.md)
+  : Remove Missing Information - Prepare to merge a data frame with
+  georeferenced and retrieved records
+- [`gators_merge()`](https://nataliepatten.github.io/gatoRs/reference/gators_merge.md)
+  : Merge Retained Data - Combined original data set with georeferenced
+  or retained records.
+- [`remove_duplicates()`](https://nataliepatten.github.io/gatoRs/reference/remove_duplicates.md)
+  : Remove Duplicates - Remove records with identical event dates and
+  coordinates
+- [`taxa_clean()`](https://nataliepatten.github.io/gatoRs/reference/taxa_clean.md)
+  : Taxonomic Cleaning - Filter and resolve taxon names
+- [`basis_clean()`](https://nataliepatten.github.io/gatoRs/reference/basis_clean.md)
+  : Basis Cleaning - Removes records with certain record basis
+- [`basic_locality_clean()`](https://nataliepatten.github.io/gatoRs/reference/basic_locality_clean.md)
+  : Locality Cleaning - Remove missing and improbable coordinates
+- [`process_flagged()`](https://nataliepatten.github.io/gatoRs/reference/process_flagged.md)
+  : Locality Cleaning - Find possibly problematic occurrence records
+- [`thin_points()`](https://nataliepatten.github.io/gatoRs/reference/thin_points.md)
+  : Spatial Correction - Spatially thin records
+- [`one_point_per_pixel()`](https://nataliepatten.github.io/gatoRs/reference/one_point_per_pixel.md)
+  : Spatial Correction - One point per pixel
+- [`full_clean()`](https://nataliepatten.github.io/gatoRs/reference/full_clean.md)
+  : Full Cleaning - Wrapper function to speed clean
+- [`data_chomp()`](https://nataliepatten.github.io/gatoRs/reference/data_chomp.md)
+  : Subset Data - Get species, longitude, and latitude columns
+- [`citation_bellow()`](https://nataliepatten.github.io/gatoRs/reference/citation_bellow.md)
+  : Cite Data - Get GBIF citations
+
+## Helper functions
+
+These functions are used within the download and cleaning functions.
+
+- [`get_gbif()`](https://nataliepatten.github.io/gatoRs/reference/get_gbif.md)
+  : Used in gators_download() - Download data from the Global
+  Biodiversity Information Facility
+- [`setupduckDB()`](https://nataliepatten.github.io/gatoRs/reference/setupduckDB.md)
+  : Used in gators_download() - Setting up local query
+- [`get_idigbio_arc()`](https://nataliepatten.github.io/gatoRs/reference/get_idigbio_arc.md)
+  : Used in gators_download() - Download data from Integrated Digitized
+  Biocollections that are not on GBIF
+- [`filter_fix_names()`](https://nataliepatten.github.io/gatoRs/reference/filter_fix_names.md)
+  : Used in gators_download() - Filter iDigBio results by scientific
+  name
+- [`fix_columns()`](https://nataliepatten.github.io/gatoRs/reference/fix_columns.md)
+  : Used in gators_download() - Fill out taxonomic name columns
+- [`fix_names()`](https://nataliepatten.github.io/gatoRs/reference/fix_names.md)
+  : Used in gators_download() - Fix taxonomic name capitalization
+- [`remove_skewed()`](https://nataliepatten.github.io/gatoRs/reference/remove_skewed.md)
+  : Used in basic_locality_clean() - Removed skewed locality
+
+# Articles
+
+### All vignettes
+
+- [Introduction to
+  gatoRs](https://nataliepatten.github.io/gatoRs/articles/Introduction.md):
+- [Many Downloads with
+  gatoRs](https://nataliepatten.github.io/gatoRs/articles/ManyDownloads.md):
