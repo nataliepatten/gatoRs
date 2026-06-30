@@ -30,7 +30,7 @@ This function uses the \code{correct_class()} function and \code{setupduckDB()}.
 This function requires the packages magrittr, dplyr, duckDB, arrow, and DBI.
 }
 \examples{
-\dontrun{
+if(exists("crazy")){
 df <- get_idigbio_arc("Galax")
 }
 }
