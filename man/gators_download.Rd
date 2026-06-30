@@ -97,11 +97,12 @@ This function uses the \code{correct_class()}, \code{setupduckDB()},  \code{get_
 This function requires the packages magrittr, dplyr, duckDB, arrow, DBI,  rgbif, and stringr.
 }
 \examples{
-\dontrun{
-df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
-df <- gators_download(synonyms.list = "Galax urceolata",
-gbif.match = "code",
-idigbio.filter = FALSE, limit = 10)
+if(exists("crazy")){
+  df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
+  df <- gators_download(synonyms.list = "Galax urceolata",
+                        gbif.match = "code",
+                        idigbio.filter = FALSE,
+                        limit = 10)
 }
 
 }

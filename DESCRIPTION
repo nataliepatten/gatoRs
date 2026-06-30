@@ -12,19 +12,19 @@ Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatt
            person(given = "Pamela S.", family = "Soltis", email= "psoltis@flmnh.ufl.edu", role = "ctb", 
            comment = c(ORCID = "0000-0001-9310-8659")))
 Imports:
-    duckdb,
-    arrow,
-    DBI,
     dplyr (>= 1.1.0),
-    rgbif, 
+    rgbif,
     magrittr,
     CoordinateCleaner (>= 3.0.1),
     terra,
     spThin,
     stringr,
     leaflet,
-    parsedate, 
-    spatstat.geom
+    parsedate,
+    spatstat.geom,
+    DBI,
+    arrow,
+    duckdb
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyData: true

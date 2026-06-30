@@ -46,11 +46,12 @@
 #' @inheritParams get_idigbio_arc
 #'
 #' @examples
-#' \dontrun{
-#' df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
-#' df <- gators_download(synonyms.list = "Galax urceolata",
-#' gbif.match = "code",
-#' idigbio.filter = FALSE, limit = 10)
+#' if(exists("crazy")){
+#'   df <- gators_download(synonyms.list = c("Galax urceolata", "Galax aphylla"))
+#'   df <- gators_download(synonyms.list = "Galax urceolata",
+#'                         gbif.match = "code",
+#'                         idigbio.filter = FALSE,
+#'                         limit = 10)
 #' }
 #'
 #' @return Returns a data frame and writes a csv file as specified in the input.
