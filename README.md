@@ -6,8 +6,20 @@
 [![R-CMD-check](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nataliepatten/gatoRs/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
+## Update - June 2026
+In 2026, [iDigBio moved to a GBIF hosted portal](https://idigbio.gbif.us/en/faq/) due 
+to the end of their funding. A small subset of data providers did not move their recordsets 
+over to the new hosted portal. This includes about 1.7 million records. Therefore, we modified 
+`gators_download()` to pull these records from a GitHub-hosted archived
+download of these recordsets (downloaded on June 28, 2026). The full archived 
+data set can be found on [mgaynor1/OccurrenceArchive](https://github.com/mgaynor1/OccurrenceArchive). 
+
+We hope you can continue to use gatoRs. 
+
 ## Overview
-gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides users with tools for downloading and processing biodiversity data. Click [here](https://nataliepatten.github.io/gatoRs/) for the full user guide.
+gatoRs (Geographic and Taxonomic Occurrence R-Based Scrubbing) provides 
+users with tools for downloading and processing biodiversity data. 
+Click [here](https://nataliepatten.github.io/gatoRs/) for the full user guide.
 
 ## Installation
 
