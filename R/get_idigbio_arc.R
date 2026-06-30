@@ -17,9 +17,9 @@
 #' is helpful when word order differs or our strings are partial matches.
 #' @param fuzzy.ratio Default = 50%. We let more match than probably are helpful, and return all ratios greater than 50%.
 #' @examples
-#' \dontrun{
+#' if(exists("crazy")){
 #' df <- get_idigbio_arc("Galax")
-#'}
+#' }
 #' @return A data frame with desired columns from iDigBio.
 #'
 #' @importFrom dplyr select distinct
