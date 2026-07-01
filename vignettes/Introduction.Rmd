@@ -21,7 +21,7 @@ There are many databases available to compile synonym lists for plant species in
 
   - World Flora Online - WFO Plant List
   - [TROPICOS](https://www.tropicos.org/)
-  - [World Checklist of Vascular Plants](https://powo.science.kew.org/)
+  - World Checklist of Vascular Plants
   - [USDA PLANTS Database](https://plants.sc.egov.usda.gov:443/home)
   - [International Plant Names Index](https://www.ipni.org/)
   - [World Plants](https://www.worldplants.de/world-plants-complete-list/complete-plant-list)

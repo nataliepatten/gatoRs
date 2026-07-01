@@ -26,7 +26,7 @@ Returns data frame with three columns: "species", "longitude", and "latitude". T
 \description{
 The \code{data_chomp()} function "chomps" (subsets) a data frame of occurrence records to only
 contain the following columns: "species", "longitude", and "latitude". After using this
-function data will be ready for use in \href{https://biodiversityinformatics.amnh.org/open_source/maxent/}{Maxent}, for example.
+function data will be ready for use in Maxent, for example.
 }
 \details{
 This function requires the package dplyr.
