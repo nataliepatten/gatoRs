@@ -1,0 +1,44 @@
+basic_locality_clean    Locality Cleaning - Remove missing and
+                        improbable coordinates
+basis_clean             Basis Cleaning - Removes records with certain
+                        record basis
+citation_bellow         Cite Data - Get GBIF citations
+data_chomp              Subset Data - Get species, longitude, and
+                        latitude columns
+filter_fix_names        Used in gators_download() - Filter iDigBio
+                        results by scientific name
+fix_columns             Used in gators_download() - Fill out taxonomic
+                        name columns
+fix_names               Used in gators_download() - Fix taxonomic name
+                        capitalization
+full_clean              Full Cleaning - Wrapper function to speed clean
+gators_download         Download - Download specimen data from both
+                        GBIF and the iDigBio archive
+gators_merge            Merge Retained Data - Combined original data
+                        set with georeferenced or retained records.
+get_gbif                Used in gators_download() - Download data from
+                        the Global Biodiversity Information Facility
+get_idigbio_arc         Used in gators_download() - Download data from
+                        Integrated Digitized Biocollections that are
+                        not on GBIF
+need_to_georeference    Identify Missing Information - Find records
+                        which lack coordinate information
+needed_records          Identify Missing Information - Find records
+                        with redacted or missing data
+one_point_per_pixel     Spatial Correction - One point per pixel
+process_flagged         Locality Cleaning - Find possibly problematic
+                        occurrence records
+remove_duplicates       Remove Duplicates - Remove records with
+                        identical event dates and coordinates
+remove_missing          Remove Missing Information - Prepare to merge a
+                        data frame with georeferenced and retrieved
+                        records
+remove_redacted         Remove Redacted Information - Remove protected
+                        or private records prior to publication
+remove_skewed           Used in basic_locality_clean() - Removed skewed
+                        locality
+setupduckDB             Used in gators_download() - Setting up local
+                        query
+taxa_clean              Taxonomic Cleaning - Filter and resolve taxon
+                        names
+thin_points             Spatial Correction - Spatially thin records
