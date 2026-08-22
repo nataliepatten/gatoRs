@@ -86,7 +86,7 @@ get_gbif <- function(synonyms.list, gbif.match = "fuzzy", gbif.prov = FALSE, lim
 
   if (gbif.match == "code") {
     for (i in 1:length(synonyms.list)) {
-      key <- suppressWarnings(rgbif::name_backbone(name = synonyms.list[i])$speciesKey)
+      key <- suppressWarnings(rgbif::name_backbone(name = synonyms.list[i])$usageKey)
       if (!is.null(key)) {
         temp <- rgbif::occ_data(taxonKey = key, limit = limit, curlopts=list(http_version=2))
         temp <- temp$data
