@@ -22,7 +22,7 @@ species including:
 - [World Flora Online - WFO Plant List](https://wfoplantlist.org/)
 - [TROPICOS](https://www.tropicos.org/)
 - [World Checklist of Vascular Plants](https://powo.science.kew.org/)
-- [USDA PLANTS Database](https://plants.usda.gov/home)
+- [USDA PLANTS Database](https://plants.sc.egov.usda.gov:443/home)
 - [International Plant Names Index](https://www.ipni.org/)
 - [World
   Plants](https://www.worldplants.de/world-plants-complete-list/complete-plant-list)

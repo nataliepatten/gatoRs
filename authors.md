@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Natalie N. Patten**. Author, maintainer.
+- **Natalie N. Patten**. Maintainer.
   [](https://orcid.org/0000-0001-8090-1324)
 
 - **Michelle L. Gaynor**. Author.
