@@ -3,9 +3,9 @@ Type: Package
 Title: Geographic and Taxonomic Occurrence R-Based Scrubbing
 Version: 2.0.1
 Date: 2026-08-24
-Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatten@gmail.com", role = "cre",
+Authors@R: c(person(given = "Natalie N.", family = "Patten", email="natalienpatten@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-8090-1324")),
-           person(given = "Michelle L.", family = "Gaynor", email="shellyleegaynor@gmail.com", role = "aut",
+           person(given = "Michelle L.", family = "Gaynor", email="shellyleegaynor@gmail.com", role = "cre",
            comment = c(ORCID = "0000-0002-3912-6079")), 
            person(given = "Douglas E.", family = "Soltis", email= "dsoltis@ufl.edu", role = "ctb", 
            comment = c(ORCID = "0000-0001-8638-4137")),  
