@@ -17,7 +17,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/nataliepatten/gatoRs/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/nataliepatten/gatoRs/blob/2.0.1/inst/CITATION)
 
 Patten N, Gaynor M, Soltis D, Soltis P (2024). “Geographic And Taxonomic
 Occurrence R-based Scrubbing (gatoRs): An R package and workflow for
