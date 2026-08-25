@@ -2,10 +2,10 @@
 
 ## Authors
 
-- **Natalie N. Patten**. Maintainer.
+- **Natalie N. Patten**. Author.
   [](https://orcid.org/0000-0001-8090-1324)
 
-- **Michelle L. Gaynor**. Author.
+- **Michelle L. Gaynor**. Maintainer.
   [](https://orcid.org/0000-0002-3912-6079)
 
 - **Douglas E. Soltis**. Contributor.
