@@ -65,4 +65,4 @@ Patten N, Gaynor M, Soltis D, Soltis P (2024). “Geographic And Taxonomic Occur
 
 ## Support
 
-MLG was funded through a NSF Postdoctoral Research Fellowship in Biology (DBI2410238). 
+MLG was funded through a NSF Postdoctoral Research Fellowship in Biology (DBI-2410238). 
